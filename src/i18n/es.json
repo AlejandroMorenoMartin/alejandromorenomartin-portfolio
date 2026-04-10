@@ -1,0 +1,138 @@
+{
+  "meta": {
+    "title": "Alejandro Moreno Martín — Product Designer",
+    "description": "Product Designer especializado en interfaces digitales, sistemas de diseño y experiencia de usuario. Disponible para nuevas oportunidades.",
+    "ogImage": "/og-es.png"
+  },
+  "nav": {
+    "about":      "Sobre mí",
+    "craft":      "Habilidades",
+    "work":       "Proyectos",
+    "experience": "Experiencia",
+    "contact":    "Contacto",
+    "resume":     "CV",
+    "langSwitch": "English"
+  },
+  "hero": {
+    "greeting":   "Hola, soy",
+    "name":       "Alejandro Moreno",
+    "role":       "Product Designer",
+    "tagline":    "Diseño productos digitales que equilibran negocio, tecnología y personas.",
+    "cta":        "Ver mi trabajo",
+    "ctaSecondary": "Sobre mí"
+  },
+  "about": {
+    "label":      "Sobre mí",
+    "heading":    "Diseño desde la intención",
+    "p1":         "Soy Product Designer con formación en diseño UX/UI y visión de negocio. Me muevo bien en el espacio entre lo que el usuario necesita, lo que el equipo puede construir y lo que la empresa quiere conseguir.",
+    "p2":         "Me apasiona crear productos que tengan sentido: interfaces claras, flujos bien pensados y sistemas de diseño que escalan. Trabajo de forma colaborativa y tengo facilidad para comunicar decisiones de diseño a perfiles técnicos y no técnicos.",
+    "p3":         "Busco incorporarme a un equipo donde el diseño sea parte integral del proceso de producto, no un paso final de maquetación.",
+    "available":  "Disponible para nuevas oportunidades"
+  },
+  "craft": {
+    "label":   "Habilidades",
+    "heading": "Cómo trabajo",
+    "skills": [
+      {
+        "title":       "UX Design",
+        "description": "Investigación de usuarios, arquitectura de información, wireframing y validación de hipótesis. Diseño centrado en personas con criterio de negocio."
+      },
+      {
+        "title":       "UI Design",
+        "description": "Interfaces visuales de alta calidad con sistemas de diseño robustos. Obsesionado con los detalles: tipografía, espaciado, motion."
+      },
+      {
+        "title":       "Product Thinking",
+        "description": "Capacidad para priorizar, definir métricas de éxito y tomar decisiones de diseño alineadas con los objetivos del producto."
+      },
+      {
+        "title":       "Prototipado",
+        "description": "Prototipos interactivos en Figma para validar flujos antes de desarrollo. Desde exploración rápida hasta entrega a ingeniería."
+      },
+      {
+        "title":       "Design Systems",
+        "description": "Creación y mantenimiento de sistemas de diseño escalables con tokens, componentes y documentación para equipos multidisciplinares."
+      },
+      {
+        "title":       "Colaboración",
+        "description": "Experiencia trabajando con developers, PMs y stakeholders. Facilito dinámicas de descubrimiento y traducción de negocio a diseño."
+      }
+    ]
+  },
+  "work": {
+    "label":   "Proyectos",
+    "heading": "Trabajo seleccionado",
+    "projects": [
+      {
+        "title":       "Sistema de diseño kako-ai",
+        "category":    "Design System · Side project",
+        "description": "Sistema de diseño completo para un workspace de proyectos AI. Tokens de color, tipografía, espaciado, sombras y temas claro/oscuro. Construido sobre Tailwind CSS y consumido por múltiples aplicaciones.",
+        "tags":        ["Figma", "Tailwind CSS", "TypeScript", "Tokens"],
+        "year":        "2025"
+      },
+      {
+        "title":       "Portfolio personal",
+        "category":    "Web Design · Side project",
+        "description": "Diseño y desarrollo del portfolio que estás viendo ahora. Stack moderno con Astro, bilingüe (ES/EN), SEO completo y analítica de visitas.",
+        "tags":        ["Astro", "TypeScript", "Tailwind CSS", "Vercel"],
+        "year":        "2025"
+      },
+      {
+        "title":       "CV Tracker",
+        "category":    "Product Design · Side project",
+        "description": "Herramienta para gestionar el proceso de búsqueda de empleo: seguimiento de aplicaciones, estados, empresas y notas. Diseñada para uso propio durante mi búsqueda activa.",
+        "tags":        ["UX", "Product", "Dashboard"],
+        "year":        "2025"
+      },
+      {
+        "title":       "Próximo proyecto",
+        "category":    "En construcción",
+        "description": "Actualmente trabajando en un nuevo proyecto. Aquí pronto.",
+        "tags":        ["Próximamente"],
+        "year":        "2025"
+      }
+    ]
+  },
+  "experience": {
+    "label":   "Experiencia",
+    "heading": "Trayectoria profesional",
+    "items": [
+      {
+        "role":        "Product Designer",
+        "company":     "Búsqueda activa",
+        "period":      "2025 — presente",
+        "description": "Explorando oportunidades en diseño de producto digital. Mientras tanto, construyo proyectos propios para aplicar y demostrar mis habilidades."
+      },
+      {
+        "role":        "Diseño UX/UI & Proyectos",
+        "company":     "Formación y proyectos propios",
+        "period":      "2023 — 2025",
+        "description": "Formación intensiva en diseño de producto, herramientas (Figma, Prototyping), sistemas de diseño y fundamentos de front-end (HTML, CSS, JavaScript, TypeScript)."
+      }
+    ],
+    "education": {
+      "heading": "Formación",
+      "items": [
+        {
+          "title":       "Diseño UX/UI",
+          "institution": "Formación especializada",
+          "period":      "2023 — 2024"
+        }
+      ]
+    }
+  },
+  "contact": {
+    "label":       "Contacto",
+    "heading":     "Hablemos",
+    "description": "Estoy buscando incorporarme a un equipo donde el diseño tenga impacto real. Si tienes un proyecto interesante o una oportunidad que encaje, escríbeme.",
+    "email":       "Enviar email",
+    "linkedin":    "LinkedIn",
+    "github":      "GitHub",
+    "availableFor": "Disponible para: posición en empresa · freelance · colaboraciones"
+  },
+  "footer": {
+    "made":      "Diseñado y construido por",
+    "name":      "Alejandro Moreno",
+    "rights":    "Todos los derechos reservados."
+  }
+}

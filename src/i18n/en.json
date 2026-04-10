@@ -1,0 +1,138 @@
+{
+  "meta": {
+    "title": "Alejandro Moreno Martín — Product Designer",
+    "description": "Product Designer specialising in digital interfaces, design systems, and user experience. Open to new opportunities.",
+    "ogImage": "/og-en.png"
+  },
+  "nav": {
+    "about":      "About",
+    "craft":      "Skills",
+    "work":       "Work",
+    "experience": "Experience",
+    "contact":    "Contact",
+    "resume":     "Resume",
+    "langSwitch": "Español"
+  },
+  "hero": {
+    "greeting":    "Hi, I'm",
+    "name":        "Alejandro Moreno",
+    "role":        "Product Designer",
+    "tagline":     "I design digital products that balance business, technology, and people.",
+    "cta":         "See my work",
+    "ctaSecondary":"About me"
+  },
+  "about": {
+    "label":   "About",
+    "heading": "Design with intention",
+    "p1":      "I'm a Product Designer with a background in UX/UI design and business thinking. I navigate the space between what users need, what teams can build, and what companies want to achieve.",
+    "p2":      "I care about making products that make sense: clear interfaces, well-thought-out flows, and design systems that scale. I work collaboratively and can communicate design decisions to both technical and non-technical stakeholders.",
+    "p3":      "I'm looking to join a team where design is part of the product process from the start, not just a final layer.",
+    "available":"Available for new opportunities"
+  },
+  "craft": {
+    "label":   "Skills",
+    "heading": "How I work",
+    "skills": [
+      {
+        "title":       "UX Design",
+        "description": "User research, information architecture, wireframing, and hypothesis validation. Human-centred design with business acumen."
+      },
+      {
+        "title":       "UI Design",
+        "description": "High-quality visual interfaces with robust design systems. Detail-obsessed: typography, spacing, motion."
+      },
+      {
+        "title":       "Product Thinking",
+        "description": "Ability to prioritise, define success metrics, and make design decisions aligned with product goals."
+      },
+      {
+        "title":       "Prototyping",
+        "description": "Interactive prototypes in Figma to validate flows before development. From rapid exploration to engineering handoff."
+      },
+      {
+        "title":       "Design Systems",
+        "description": "Building and maintaining scalable design systems with tokens, components, and documentation for cross-functional teams."
+      },
+      {
+        "title":       "Collaboration",
+        "description": "Experience working with developers, PMs, and stakeholders. I facilitate discovery sessions and translate business goals into design."
+      }
+    ]
+  },
+  "work": {
+    "label":   "Work",
+    "heading": "Selected work",
+    "projects": [
+      {
+        "title":       "kako-ai design system",
+        "category":    "Design System · Side project",
+        "description": "A complete design system for an AI projects workspace. Color tokens, typography, spacing, shadows, and light/dark themes. Built on Tailwind CSS and consumed by multiple apps.",
+        "tags":        ["Figma", "Tailwind CSS", "TypeScript", "Tokens"],
+        "year":        "2025"
+      },
+      {
+        "title":       "Personal portfolio",
+        "category":    "Web Design · Side project",
+        "description": "Design and development of the portfolio you're reading now. Modern stack with Astro, bilingual (ES/EN), full SEO, and visit analytics.",
+        "tags":        ["Astro", "TypeScript", "Tailwind CSS", "Vercel"],
+        "year":        "2025"
+      },
+      {
+        "title":       "CV Tracker",
+        "category":    "Product Design · Side project",
+        "description": "A tool to manage the job search process: tracking applications, statuses, companies, and notes. Designed for personal use during my active job search.",
+        "tags":        ["UX", "Product", "Dashboard"],
+        "year":        "2025"
+      },
+      {
+        "title":       "Next project",
+        "category":    "Coming soon",
+        "description": "Currently working on a new project. More soon.",
+        "tags":        ["Coming soon"],
+        "year":        "2025"
+      }
+    ]
+  },
+  "experience": {
+    "label":   "Experience",
+    "heading": "Professional background",
+    "items": [
+      {
+        "role":        "Product Designer",
+        "company":     "Actively looking",
+        "period":      "2025 — present",
+        "description": "Exploring opportunities in digital product design. In the meantime, building my own projects to apply and demonstrate my skills."
+      },
+      {
+        "role":        "UX/UI Design & Projects",
+        "company":     "Training and personal projects",
+        "period":      "2023 — 2025",
+        "description": "Intensive training in product design, tools (Figma, Prototyping), design systems, and front-end fundamentals (HTML, CSS, JavaScript, TypeScript)."
+      }
+    ],
+    "education": {
+      "heading": "Education",
+      "items": [
+        {
+          "title":       "UX/UI Design",
+          "institution": "Specialised training",
+          "period":      "2023 — 2024"
+        }
+      ]
+    }
+  },
+  "contact": {
+    "label":       "Contact",
+    "heading":     "Let's talk",
+    "description": "I'm looking to join a team where design has real impact. If you have an interesting project or an opportunity that fits, reach out.",
+    "email":       "Send email",
+    "linkedin":    "LinkedIn",
+    "github":      "GitHub",
+    "availableFor":"Available for: full-time role · freelance · collaborations"
+  },
+  "footer": {
+    "made":   "Designed and built by",
+    "name":   "Alejandro Moreno",
+    "rights": "All rights reserved."
+  }
+}

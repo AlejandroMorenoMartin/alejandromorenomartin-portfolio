@@ -1,0 +1,41 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Nav        from "@/components/Nav.astro";
+import Hero       from "@/components/sections/Hero.astro";
+import About      from "@/components/sections/About.astro";
+import Craft      from "@/components/sections/Craft.astro";
+import Work       from "@/components/sections/Work.astro";
+import Experience from "@/components/sections/Experience.astro";
+import Contact    from "@/components/sections/Contact.astro";
+import Footer     from "@/components/Footer.astro";
+import { useTranslations } from "@/i18n/utils";
+
+const lang = "en" as const;
+const t    = useTranslations(lang);
+
+const siteURL       = "https://alejandromorenomartin.com";
+const canonicalURL  = `${siteURL}/en`;
+const alternateLang = "es" as const;
+const alternateURL  = siteURL;
+---
+
+<BaseLayout
+  title={t.meta.title}
+  description={t.meta.description}
+  lang={lang}
+  ogImage={t.meta.ogImage}
+  canonicalURL={canonicalURL}
+  alternateURL={alternateURL}
+  alternateLang={alternateLang}
+>
+  <Nav        lang={lang} />
+  <main>
+    <Hero       lang={lang} />
+    <About      lang={lang} />
+    <Craft      lang={lang} />
+    <Work       lang={lang} />
+    <Experience lang={lang} />
+    <Contact    lang={lang} />
+  </main>
+  <Footer     lang={lang} />
+</BaseLayout>

@@ -1,0 +1,52 @@
+---
+import type { Lang } from "@/i18n/utils";
+import { useTranslations } from "@/i18n/utils";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t        = useTranslations(lang);
+const year     = new Date().getFullYear();
+---
+
+<footer class="section-padding py-8 border-t border-border" role="contentinfo">
+  <div class="container-wide flex flex-col sm:flex-row items-center justify-between gap-4">
+    <p class="text-label-sm text-text-6">
+      {t.footer.made}{" "}
+      <span class="text-text-4 font-medium">{t.footer.name}</span>.
+      {" "}{year}.
+    </p>
+
+    <p class="text-label-sm text-text-7">
+      Built with{" "}
+      <a
+        href="https://astro.build"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-text-5 hover:text-primary-500 transition-colors duration-fast"
+      >
+        Astro
+      </a>
+      {" "}+{" "}
+      <a
+        href="https://tailwindcss.com"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-text-5 hover:text-primary-500 transition-colors duration-fast"
+      >
+        Tailwind
+      </a>
+      . Hosted on{" "}
+      <a
+        href="https://vercel.com"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="text-text-5 hover:text-primary-500 transition-colors duration-fast"
+      >
+        Vercel
+      </a>.
+    </p>
+  </div>
+</footer>

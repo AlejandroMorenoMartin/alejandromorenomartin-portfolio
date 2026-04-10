@@ -1,0 +1,90 @@
+---
+import { ViewTransitions } from "astro:transitions";
+import Analytics from "@vercel/analytics/astro";
+import "@/styles/global.css";
+import type { Lang } from "@/i18n/utils";
+
+interface Props {
+  title:       string;
+  description: string;
+  lang:        Lang;
+  ogImage?:    string;
+  canonicalURL?: string;
+  alternateURL?: string;
+  alternateLang?: Lang;
+}
+
+const {
+  title,
+  description,
+  lang,
+  ogImage       = "/og-es.png",
+  canonicalURL  = Astro.url.href,
+  alternateURL,
+  alternateLang,
+} = Astro.props;
+
+const siteURL = "https://alejandromorenomartin.com";
+
+const jsonLd = {
+  "@context":  "https://schema.org",
+  "@type":     "Person",
+  name:        "Alejandro Moreno Martín",
+  jobTitle:    "Product Designer",
+  url:         siteURL,
+  sameAs: [
+    "https://www.linkedin.com/in/alejandromorenomartin",
+    "https://github.com/kakomoma",
+  ],
+  knowsLanguage: ["es", "en"],
+};
+---
+
+<!doctype html>
+<html lang={lang} data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- Primary -->
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- hreflang -->
+    {alternateURL && alternateLang && (
+      <link rel="alternate" hreflang={alternateLang} href={alternateURL} />
+    )}
+    <link rel="alternate" hreflang={lang} href={canonicalURL} />
+    <link rel="alternate" hreflang="x-default" href={siteURL} />
+
+    <!-- Open Graph -->
+    <meta property="og:type"        content="website" />
+    <meta property="og:url"         content={canonicalURL} />
+    <meta property="og:title"       content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image"       content={`${siteURL}${ogImage}`} />
+    <meta property="og:locale"      content={lang === "es" ? "es_ES" : "en_US"} />
+
+    <!-- Twitter -->
+    <meta name="twitter:card"        content="summary_large_image" />
+    <meta name="twitter:title"       content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image"       content={`${siteURL}${ogImage}`} />
+
+    <!-- Favicon -->
+    <link rel="icon"             type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon"             type="image/png" sizes="32x32" href="/favicon-32.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+
+    <!-- JSON-LD -->
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+    <ViewTransitions />
+  </head>
+  <body>
+    <slot />
+    <Analytics />
+  </body>
+</html>

@@ -1,0 +1,87 @@
+---
+import type { Lang } from "@/i18n/utils";
+import { useTranslations } from "@/i18n/utils";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t        = useTranslations(lang);
+---
+
+<section id="experience" class="section-padding bg-surface-raised" aria-labelledby="experience-heading">
+  <div class="container-wide">
+    <p class="text-label-sm text-primary-500 font-display font-medium tracking-widest uppercase mb-3">
+      {t.experience.label}
+    </p>
+    <h2 id="experience-heading" class="text-display-lg font-display font-bold text-text-1 mb-12">
+      {t.experience.heading}
+    </h2>
+
+    <div class="grid md:grid-cols-[2fr_1fr] gap-16">
+      <!-- Experience timeline -->
+      <div>
+        <ol class="relative flex flex-col gap-0" role="list">
+          <!-- Vertical line -->
+          <div class="absolute left-[7px] top-2 bottom-2 w-px bg-border" aria-hidden="true" />
+
+          {t.experience.items.map((item) => (
+            <li class="relative pl-8 pb-10 last:pb-0">
+              <!-- Dot -->
+              <div class="absolute left-0 top-1.5 w-3.5 h-3.5 rounded-full border-2 border-primary-500 bg-surface" aria-hidden="true" />
+
+              <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 mb-2">
+                <div>
+                  <h3 class="text-label-lg font-display font-semibold text-text-1">
+                    {item.role}
+                  </h3>
+                  <p class="text-label-sm text-primary-500 font-display font-medium">
+                    {item.company}
+                  </p>
+                </div>
+                <span class="text-label-sm text-text-6 font-body whitespace-nowrap">
+                  {item.period}
+                </span>
+              </div>
+
+              <p class="text-body-sm text-text-4 leading-relaxed">
+                {item.description}
+              </p>
+            </li>
+          ))}
+        </ol>
+      </div>
+
+      <!-- Education -->
+      <div>
+        <h3 class="text-label-lg font-display font-semibold text-text-2 mb-6 pb-4 border-b border-border">
+          {t.experience.education.heading}
+        </h3>
+        <ul class="flex flex-col gap-5" role="list">
+          {t.experience.education.items.map((item) => (
+            <li class="flex flex-col gap-1">
+              <p class="text-label-lg font-display font-semibold text-text-1">{item.title}</p>
+              <p class="text-body-sm text-text-4">{item.institution}</p>
+              <p class="text-label-sm text-text-6">{item.period}</p>
+            </li>
+          ))}
+        </ul>
+
+        <!-- Tools -->
+        <div class="mt-10">
+          <h3 class="text-label-lg font-display font-semibold text-text-2 mb-6 pb-4 border-b border-border">
+            Stack
+          </h3>
+          <ul class="flex flex-wrap gap-2" role="list">
+            {["Figma", "FigJam", "Notion", "TypeScript", "Tailwind CSS", "Astro", "Git"].map((tool) => (
+              <li class="text-label-sm text-text-4 bg-surface border border-border rounded-md px-3 py-1">
+                {tool}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

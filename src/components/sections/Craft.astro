@@ -1,0 +1,63 @@
+---
+import type { Lang } from "@/i18n/utils";
+import { useTranslations } from "@/i18n/utils";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t        = useTranslations(lang);
+
+const icons = [
+  /* UX */
+  `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>`,
+  /* UI */
+  `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>`,
+  /* Product */
+  `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>`,
+  /* Proto */
+  `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="5 3 19 12 5 21 5 3"/></svg>`,
+  /* Design System */
+  `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>`,
+  /* Collab */
+  `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>`,
+];
+---
+
+<section id="craft" class="section-padding bg-surface-raised" aria-labelledby="craft-heading">
+  <div class="container-wide">
+    <p class="text-label-sm text-primary-500 font-display font-medium tracking-widest uppercase mb-3">
+      {t.craft.label}
+    </p>
+    <h2 id="craft-heading" class="text-display-lg font-display font-bold text-text-1 mb-12">
+      {t.craft.heading}
+    </h2>
+
+    <ul
+      class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4"
+      role="list"
+    >
+      {t.craft.skills.map((skill, i) => (
+        <li class="group relative p-6 rounded-xl border border-border bg-surface hover:border-primary-500/40 hover:shadow-ds-md transition-all duration-normal cursor-default">
+          <!-- Icon -->
+          <div
+            class="w-10 h-10 rounded-lg bg-surface-overlay flex items-center justify-center text-primary-500 mb-5 group-hover:bg-primary-500/10 transition-colors duration-fast"
+            aria-hidden="true"
+            set:html={icons[i]}
+          />
+
+          <h3 class="text-label-lg font-display font-semibold text-text-1 mb-2">
+            {skill.title}
+          </h3>
+          <p class="text-body-sm text-text-4 leading-relaxed">
+            {skill.description}
+          </p>
+
+          <!-- Hover line accent -->
+          <div class="absolute bottom-0 left-6 right-6 h-px bg-primary-500/0 group-hover:bg-primary-500/30 transition-all duration-normal rounded-full" aria-hidden="true" />
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>

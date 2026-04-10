@@ -1,0 +1,63 @@
+---
+import type { Lang } from "@/i18n/utils";
+import { useTranslations } from "@/i18n/utils";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t        = useTranslations(lang);
+---
+
+<section id="work" class="section-padding" aria-labelledby="work-heading">
+  <div class="container-wide">
+    <p class="text-label-sm text-primary-500 font-display font-medium tracking-widest uppercase mb-3">
+      {t.work.label}
+    </p>
+    <h2 id="work-heading" class="text-display-lg font-display font-bold text-text-1 mb-12">
+      {t.work.heading}
+    </h2>
+
+    <ol class="grid md:grid-cols-2 gap-6" role="list">
+      {t.work.projects.map((project, i) => (
+        <li class="group relative flex flex-col p-7 rounded-xl border border-border bg-surface hover:border-primary-500/40 hover:shadow-ds-lg transition-all duration-normal">
+          <!-- Number + year -->
+          <div class="flex items-start justify-between mb-6">
+            <span class="text-display-md font-display font-bold text-text-8 group-hover:text-primary-500/30 transition-colors duration-fast select-none" aria-hidden="true">
+              {String(i + 1).padStart(2, "0")}
+            </span>
+            <span class="text-label-sm text-text-6 font-body">{project.year}</span>
+          </div>
+
+          <!-- Category -->
+          <p class="text-label-sm text-primary-500 font-display font-medium tracking-wide uppercase mb-2">
+            {project.category}
+          </p>
+
+          <!-- Title -->
+          <h3 class="text-display-sm font-display font-semibold text-text-1 mb-3">
+            {project.title}
+          </h3>
+
+          <!-- Description -->
+          <p class="text-body-sm text-text-4 leading-relaxed flex-1">
+            {project.description}
+          </p>
+
+          <!-- Tags -->
+          <ul class="flex flex-wrap gap-2 mt-6" role="list" aria-label="Technologies">
+            {project.tags.map((tag) => (
+              <li class="text-label-sm text-text-5 bg-surface-overlay border border-border rounded-full px-3 py-1">
+                {tag}
+              </li>
+            ))}
+          </ul>
+
+          <!-- Hover top accent line -->
+          <div class="absolute top-0 left-7 right-7 h-px bg-primary-500/0 group-hover:bg-primary-500/40 transition-all duration-normal rounded-full" aria-hidden="true" />
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>

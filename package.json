@@ -1,0 +1,23 @@
+{
+  "name": "@kako-ai/portfolio",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "lint": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "3.2.1",
+    "@astrojs/tailwind": "^5.1.4",
+    "@vercel/analytics": "^1.3.2",
+    "astro": "^4.16.0"
+  },
+  "devDependencies": {
+    "@kako-ai/design-system": "workspace:*",
+    "tailwindcss": "^3.4.0",
+    "typescript": "^5.4.0"
+  }
+}
