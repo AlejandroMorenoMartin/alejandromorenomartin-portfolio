@@ -1,8 +1,15 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Roboto:wght@400;500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap");
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* ─── Gradient tokens ─────────────────────────────────────── */
+:root {
+  --gradient-text-light:   linear-gradient(90deg, #f0cf7d 0%, #fde68a 25%, #fef3c7 50%, #fde68a 75%, #f0cf7d 100%);
+  --gradient-text-default: linear-gradient(90deg, #E4A711 0%, #f0cf7d 25%, #fde68a 50%, #f0cf7d 75%, #E4A711 100%);
+  --gradient-text-dark:    linear-gradient(90deg, #c27d00 0%, #E4A711 25%, #f0cf7d 50%, #E4A711 75%, #c27d00 100%);
+}
 
 /* ─── Light theme ─────────────────────────────────────────── */
 :root,
@@ -26,6 +33,13 @@
   --shadow-md:   0 2px 8px rgba(0,0,0,.08), 0 4px 16px rgba(228,167,17,.06);
   --shadow-lg:   0 4px 24px rgba(0,0,0,.10), 0 8px 32px rgba(228,167,17,.08);
   --shadow-glow: 0 0 0 1px rgba(228,167,17,.20), 0 4px 24px rgba(228,167,17,.20);
+
+  --color-primary:             #E4A711;
+  --color-btn-secondary-hover: #faf9f7;
+  --color-border-subtle:       color-mix(in srgb, var(--color-text-8) 50%, transparent);
+  --color-btn-hover-subtle:    color-mix(in srgb, var(--color-btn-secondary-hover) 50%, transparent);
+  --color-scrollbar:       #f2f0ed;
+  --color-scrollbar-hover: #e5e2dd;
 }
 
 /* ─── Dark theme (default) ────────────────────────────────── */
@@ -49,6 +63,13 @@
   --shadow-md:   0 2px 8px rgba(0,0,0,.40), 0 4px 16px rgba(228,167,17,.10);
   --shadow-lg:   0 4px 24px rgba(0,0,0,.50), 0 8px 32px rgba(228,167,17,.12);
   --shadow-glow: 0 0 0 1px rgba(228,167,17,.25), 0 4px 32px rgba(228,167,17,.25);
+
+  --color-primary:             #E4A711;
+  --color-btn-secondary-hover: #1a1916;
+  --color-border-subtle:       color-mix(in srgb, var(--color-text-8) 50%, transparent);
+  --color-btn-hover-subtle:    color-mix(in srgb, var(--color-btn-secondary-hover) 50%, transparent);
+  --color-scrollbar:       #1a1916;
+  --color-scrollbar-hover: #2e2b26;
 }
 
 /* ─── Base ────────────────────────────────────────────────── */
@@ -82,30 +103,37 @@
   /* Scrollbar */
   ::-webkit-scrollbar        { width: 6px; }
   ::-webkit-scrollbar-track  { background: var(--color-surface); }
-  ::-webkit-scrollbar-thumb  { background: var(--color-border-strong); border-radius: 3px; }
-  ::-webkit-scrollbar-thumb:hover { background: #E4A711; }
+  ::-webkit-scrollbar-thumb  { background: var(--color-scrollbar); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--color-scrollbar-hover); }
 }
 
 /* ─── Utilities ───────────────────────────────────────────── */
 @layer utilities {
   .text-gradient {
-    background: linear-gradient(135deg, #E4A711 0%, #f0cf7d 50%, #E4A711 100%);
+    background: var(--gradient-text-default);
+    background-size: 200% auto;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
+    animation: gradient-slide 2s linear infinite;
+  }
+
+  @keyframes gradient-slide {
+    from { background-position: 0% center; }
+    to   { background-position: 200% center; }
   }
 
   .section-padding {
-    @apply px-6 py-24 md:px-12 lg:px-24 xl:px-32;
+    @apply px-8 py-48;
   }
 
   .container-narrow {
-    max-width: 720px;
+    max-width: 640px;
     margin-inline: auto;
   }
 
   .container-wide {
-    max-width: 1200px;
+    max-width: 960px;
     margin-inline: auto;
   }
 }

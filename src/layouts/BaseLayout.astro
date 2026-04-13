@@ -33,8 +33,9 @@ const jsonLd = {
   jobTitle:    "Product Designer",
   url:         siteURL,
   sameAs: [
-    "https://www.linkedin.com/in/alejandromorenomartin",
-    "https://github.com/kakomoma",
+    "https://www.linkedin.com/in/alejandromorenoproductdesigner/",
+    "https://x.com/AMor3noM",
+    "https://github.com/AlejandroMorenoMartin",
   ],
   knowsLanguage: ["es", "en"],
 };
@@ -73,15 +74,36 @@ const jsonLd = {
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image"       content={`${siteURL}${ogImage}`} />
 
-    <!-- Favicon -->
-    <link rel="icon"             type="image/svg+xml" href="/favicon.svg" />
-    <link rel="icon"             type="image/png" sizes="32x32" href="/favicon-32.png" />
-    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <!-- Favicon — adaptive by system theme -->
+    <link rel="icon" type="image/svg+xml" href="/favicon-dark.svg" media="(prefers-color-scheme: dark)" />
+    <link rel="icon" type="image/svg+xml" href="/favicon-light.svg" media="(prefers-color-scheme: light)" />
+    <link rel="icon" type="image/svg+xml" href="/favicon-dark.svg" />
 
     <!-- JSON-LD -->
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
 
     <ViewTransitions />
+
+    <!-- System preference detection — runs before paint to avoid flash -->
+    <script is:inline define:vars={{ lang }}>
+      // ── Theme ──────────────────────────────────────────────────
+      (function () {
+        const saved = localStorage.getItem("theme");
+        const theme = saved ?? "dark";
+        document.documentElement.setAttribute("data-theme", theme);
+      })();
+
+      // ── Language redirect (only from root "/") ─────────────────
+      (function () {
+        if (lang !== "es") return;
+        if (localStorage.getItem("lang-redirected")) return;
+        localStorage.setItem("lang-redirected", "1");
+        const browserLang = (navigator.language || "").toLowerCase();
+        if (!browserLang.startsWith("es")) {
+          window.location.replace("/en");
+        }
+      })();
+    </script>
   </head>
   <body>
     <slot />

@@ -35,7 +35,8 @@ const config: Config = {
       },
       fontFamily: {
         display: ["Poppins", "sans-serif"],
-        body:    ["Roboto", "sans-serif"],
+        body:    ["Poppins", "sans-serif"],
+        data:    ["Roboto Mono", "monospace"],
       },
       fontSize: {
         "display-2xl": ["4rem",    { lineHeight: "1.1" }],

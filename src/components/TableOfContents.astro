@@ -1,0 +1,106 @@
+---
+import type { Lang } from "@/i18n/utils";
+import { useTranslations } from "@/i18n/utils";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t        = useTranslations(lang);
+
+const sections = [
+  { id: "work",       label: t.work.label },
+  { id: "about",      label: t.about.label },
+  { id: "experience", label: t.experience.label },
+  { id: "education",  label: t.education.label },
+  { id: "craft",      label: t.craft.label },
+];
+---
+
+<nav
+  id="toc"
+  class="fixed right-8 top-1/2 -translate-y-1/2 z-40 hidden lg:flex flex-col gap-5"
+  aria-label="Table of contents"
+>
+  {sections.map((s) => (
+    <a
+      href={`#${s.id}`}
+      data-toc={s.id}
+      class="toc-item group flex items-center justify-end gap-3"
+      aria-label={s.label}
+    >
+      <span class="toc-label self-center font-display text-label-sm text-text-7 text-right leading-snug transition-colors duration-fast group-hover:text-text-5 max-w-[140px]">
+        {s.label}
+      </span>
+      <span class="toc-dot self-center w-1.5 h-1.5 rounded-full bg-text-8 flex-shrink-0 transition-all duration-normal group-hover:bg-text-6" aria-hidden="true"></span>
+    </a>
+  ))}
+</nav>
+
+<style>
+  /* ── Contenedor ───────────────────────── */
+  #toc {
+    pointer-events: none;
+  }
+  #toc.is-visible {
+    pointer-events: auto;
+  }
+
+  /* ── Animación de entrada por item ───── */
+  .toc-item {
+    text-decoration: none;
+    opacity: 0;
+    transform: translateX(10px);
+    transition:
+      opacity   0.69s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.69s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  #toc.is-visible .toc-item:nth-child(1) { opacity: 1; transform: none; transition-delay:   0ms; }
+  #toc.is-visible .toc-item:nth-child(2) { opacity: 1; transform: none; transition-delay:  88ms; }
+  #toc.is-visible .toc-item:nth-child(3) { opacity: 1; transform: none; transition-delay: 175ms; }
+  #toc.is-visible .toc-item:nth-child(4) { opacity: 1; transform: none; transition-delay: 263ms; }
+  #toc.is-visible .toc-item:nth-child(5) { opacity: 1; transform: none; transition-delay: 350ms; }
+
+  /* ── Sección activa ───────────────────── */
+  .toc-item.is-active .toc-label {
+    color: var(--color-text-4);
+    font-weight: 600;
+  }
+  .toc-item.is-active .toc-dot {
+    background: #E4A711;
+    box-shadow: 0 0 0 3px rgba(228, 167, 17, 0.2);
+    width: 8px;
+    height: 8px;
+  }
+</style>
+
+<script>
+  const toc   = document.getElementById("toc")!;
+  const items = toc.querySelectorAll<HTMLAnchorElement>("[data-toc]");
+
+  // Aparece al terminar la animación del Hero
+  document.addEventListener("hero:done", () => {
+    toc.classList.add("is-visible");
+  }, { once: true });
+
+  // Resalta la sección activa
+  const sectionObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        const id = entry.target.id;
+        items.forEach((item) => {
+          item.classList.toggle("is-active", item.dataset.toc === id);
+        });
+      });
+    },
+    { rootMargin: "-40% 0px -55% 0px" }
+  );
+
+  items.forEach((item) => {
+    const section = document.getElementById(item.dataset.toc!);
+    if (section) sectionObserver.observe(section);
+  });
+</script>

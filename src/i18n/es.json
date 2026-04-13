@@ -5,119 +5,208 @@
     "ogImage": "/og-es.png"
   },
   "nav": {
-    "about":      "Sobre mí",
-    "craft":      "Habilidades",
     "work":       "Proyectos",
+    "about":      "Sobre mí",
     "experience": "Experiencia",
-    "contact":    "Contacto",
+    "education":  "Educación",
+    "craft":      "Stack",
     "resume":     "CV",
     "langSwitch": "English"
   },
   "hero": {
-    "greeting":   "Hola, soy",
-    "name":       "Alejandro Moreno",
-    "role":       "Product Designer",
-    "tagline":    "Diseño productos digitales que equilibran negocio, tecnología y personas.",
-    "cta":        "Ver mi trabajo",
-    "ctaSecondary": "Sobre mí"
+    "name":          "Alejandro Moreno",
+    "rolePrefix":    "Product ",
+    "roleHighlight": "Designer",
+    "greeting":      "Hola, bienvenido!",
+    "tagline":       "Diseñando y desarrollando productos digitales.",
+    "location":      "Madrid, España",
+    "cta":           "Ver mi trabajo",
+    "ctaSecondary":  "Sobre mí"
   },
   "about": {
-    "label":      "Sobre mí",
-    "heading":    "Diseño desde la intención",
-    "p1":         "Soy Product Designer con formación en diseño UX/UI y visión de negocio. Me muevo bien en el espacio entre lo que el usuario necesita, lo que el equipo puede construir y lo que la empresa quiere conseguir.",
-    "p2":         "Me apasiona crear productos que tengan sentido: interfaces claras, flujos bien pensados y sistemas de diseño que escalan. Trabajo de forma colaborativa y tengo facilidad para comunicar decisiones de diseño a perfiles técnicos y no técnicos.",
-    "p3":         "Busco incorporarme a un equipo donde el diseño sea parte integral del proceso de producto, no un paso final de maquetación.",
-    "available":  "Disponible para nuevas oportunidades"
+    "label":   "Sobre mí",
+    "heading": "Sobre mí",
+    "p1":      "Soy un perfil multidisciplinar: diseño interfaces, construyo sistemas de diseño, escribo código y pienso en producto. No encajo bien en una sola caja, y no creo que tenga que hacerlo.",
+    "p2":      "Lo que más me define es una curiosidad que no tiene punto de cierre. Aprendo rápido, me adapto a entornos muy distintos y encuentro el camino incluso cuando la situación es compleja.",
+    "p3":      "Trabajo mejor cuando diseño y desarrollo conviven desde el principio. Más criterio en las decisiones, menos fricción entre equipos y mejores resultados en el producto final.",
+    "stats": [
+      { "value": "+20", "label": "Proyectos entregados" },
+      { "value": "+5",  "label": "Años en diseño de producto" },
+      { "value": "+15", "label": "Años de trayectoria" }
+    ]
   },
   "craft": {
-    "label":   "Habilidades",
-    "heading": "Cómo trabajo",
-    "skills": [
+    "label":   "Stack Tecnológico",
+    "heading": "Stack Tecnológico",
+    "tools": [
       {
-        "title":       "UX Design",
-        "description": "Investigación de usuarios, arquitectura de información, wireframing y validación de hipótesis. Diseño centrado en personas con criterio de negocio."
+        "title":       "Figma",
+        "url":         "https://figma.com",
+        "description": "Herramienta central de diseño UI/UX. Todo el ciclo: wireframes, componentes, sistemas de diseño y handoff a desarrollo.",
+        "comment":     "Llevo años usándola y sigue siendo la referencia. La velocidad de iteración no tiene rival."
       },
       {
-        "title":       "UI Design",
-        "description": "Interfaces visuales de alta calidad con sistemas de diseño robustos. Obsesionado con los detalles: tipografía, espaciado, motion."
+        "title":       "FigJam",
+        "url":         "https://figma.com/figjam",
+        "description": "Pizarra colaborativa del ecosistema Figma. Para talleres de descubrimiento, mapas de flujo y alinear equipos.",
+        "comment":     "Es donde el pensamiento desordenado se vuelve estructura antes de abrir Figma."
       },
       {
-        "title":       "Product Thinking",
-        "description": "Capacidad para priorizar, definir métricas de éxito y tomar decisiones de diseño alineadas con los objetivos del producto."
+        "title":       "Astro",
+        "url":         "https://astro.build",
+        "description": "Framework web orientado a contenido con salida estática por defecto. Rápido, limpio y con TypeScript nativo.",
+        "comment":     "Redescubrí el placer de hacer webs cuando lo probé. Sin overhead, sin magia innecesaria."
       },
       {
-        "title":       "Prototipado",
-        "description": "Prototipos interactivos en Figma para validar flujos antes de desarrollo. Desde exploración rápida hasta entrega a ingeniería."
+        "title":       "Tailwind CSS",
+        "url":         "https://tailwindcss.com",
+        "description": "Framework de utilidades CSS. Implementa tokens de diseño directamente en el markup con consistencia total.",
+        "comment":     "Cuando tienes un design system, Tailwind lo convierte en código sin capa intermedia."
       },
       {
-        "title":       "Design Systems",
-        "description": "Creación y mantenimiento de sistemas de diseño escalables con tokens, componentes y documentación para equipos multidisciplinares."
+        "title":       "TypeScript",
+        "url":         "https://www.typescriptlang.org",
+        "description": "Superset tipado de JavaScript. Obligatorio en todos mis proyectos: reduce errores y hace el código mantenible.",
+        "comment":     "Los tipos no son burocracia — son documentación viva que el editor entiende."
       },
       {
-        "title":       "Colaboración",
-        "description": "Experiencia trabajando con developers, PMs y stakeholders. Facilito dinámicas de descubrimiento y traducción de negocio a diseño."
+        "title":       "React Native",
+        "url":         "https://reactnative.dev",
+        "description": "Aplicaciones móviles nativas con JavaScript. Una sola base de código para iOS y Android con Expo.",
+        "comment":     "El ecosistema de Expo lo hace accesible sin sacrificar la experiencia nativa."
+      },
+      {
+        "title":       "VS Code",
+        "url":         "https://code.visualstudio.com",
+        "description": "Mi editor principal. Extensible, rápido y con soporte nativo para todo el stack que uso.",
+        "comment":     "Con las extensiones correctas deja de ser un editor y se convierte en un entorno."
+      },
+      {
+        "title":       "Claude Code",
+        "url":         "https://claude.ai/code",
+        "description": "CLI de IA integrada en el terminal y el editor. Razona código, refactoriza y propone soluciones con contexto completo.",
+        "comment":     "Cambió cómo trabajo. No es autocompletado — es un colaborador que entiende contexto."
+      },
+      {
+        "title":       "GitHub",
+        "url":         "https://github.com",
+        "description": "Control de versiones, revisiones de código y pipelines de despliegue integrados con cada repositorio.",
+        "comment":     "Todo proyecto empieza con un repo. Es el hilo que conecta diseño, código y despliegue."
+      },
+      {
+        "title":       "Vercel",
+        "url":         "https://vercel.com",
+        "description": "Plataforma de despliegue para proyectos web. Integración con GitHub, previews por rama y analítica incluida.",
+        "comment":     "Desplegar no debería ser trabajo. Con Vercel no lo es."
+      },
+      {
+        "title":       "Notion",
+        "url":         "https://notion.so",
+        "description": "Para documentación de proyectos, notas de investigación y briefs de cliente. Flexible en solitario y en equipo.",
+        "comment":     "El lugar donde los proyectos tienen contexto antes de tener código."
       }
     ]
   },
   "work": {
     "label":   "Proyectos",
-    "heading": "Trabajo seleccionado",
+    "heading": "Proyectos",
     "projects": [
       {
-        "title":       "Sistema de diseño kako-ai",
-        "category":    "Design System · Side project",
-        "description": "Sistema de diseño completo para un workspace de proyectos AI. Tokens de color, tipografía, espaciado, sombras y temas claro/oscuro. Construido sobre Tailwind CSS y consumido por múltiples aplicaciones.",
-        "tags":        ["Figma", "Tailwind CSS", "TypeScript", "Tokens"],
+        "title":       "Casa del Aire",
+        "slug":        "casa-del-aire",
+        "category":    "Web Design · Desarrollo",
+        "description": "Diseño y desarrollo de la web de una casa rural en Extremadura. Identidad visual, experiencia de reserva y UX orientada a la conversión.",
+        "tags":        ["Astro", "Tailwind CSS", "Figma", "Web"],
         "year":        "2025"
       },
       {
-        "title":       "Portfolio personal",
-        "category":    "Web Design · Side project",
-        "description": "Diseño y desarrollo del portfolio que estás viendo ahora. Stack moderno con Astro, bilingüe (ES/EN), SEO completo y analítica de visitas.",
-        "tags":        ["Astro", "TypeScript", "Tailwind CSS", "Vercel"],
+        "title":       "Senzo Studio",
+        "slug":        "senzo-studio",
+        "category":    "Web Design · Desarrollo",
+        "description": "Diseño y desarrollo de la presencia digital de una agencia de VFX en Madrid. Portfolio de trabajos, identidad de marca y site orientado al cliente.",
+        "tags":        ["Astro", "Tailwind CSS", "Figma", "VFX"],
         "year":        "2025"
       },
       {
-        "title":       "CV Tracker",
-        "category":    "Product Design · Side project",
-        "description": "Herramienta para gestionar el proceso de búsqueda de empleo: seguimiento de aplicaciones, estados, empresas y notas. Diseñada para uso propio durante mi búsqueda activa.",
-        "tags":        ["UX", "Product", "Dashboard"],
+        "title":       "Forma",
+        "slug":        "forma",
+        "category":    "Product Design · App",
+        "description": "App para el seguimiento del peso, composición corporal y progreso físico. Diseñada para usuarios que quieren un control preciso y visual de su evolución.",
+        "tags":        ["Product Design", "Figma", "React Native"],
         "year":        "2025"
       },
       {
-        "title":       "Próximo proyecto",
-        "category":    "En construcción",
-        "description": "Actualmente trabajando en un nuevo proyecto. Aquí pronto.",
-        "tags":        ["Próximamente"],
+        "title":       "Sazón",
+        "slug":        "sazon",
+        "category":    "Product Design · App",
+        "description": "Recetario personal y comunidad de recetas. Anota tus platos favoritos, organízalos y descubre las recetas de otros usuarios.",
+        "tags":        ["Product Design", "Figma", "React Native"],
         "year":        "2025"
       }
     ]
   },
   "experience": {
     "label":   "Experiencia",
-    "heading": "Trayectoria profesional",
+    "heading": "Experiencia",
     "items": [
       {
-        "role":        "Product Designer",
-        "company":     "Búsqueda activa",
-        "period":      "2025 — presente",
-        "description": "Explorando oportunidades en diseño de producto digital. Mientras tanto, construyo proyectos propios para aplicar y demostrar mis habilidades."
+        "role":        "Product Designer · Web Designer Freelance",
+        "company":     "Freelance",
+        "period":      "2021 — presente",
+        "description": "Desde 2021 llevo proyectos de diseño y desarrollo de principio a fin, con una cartera habitual de entre 8 y 10 clientes al año en sectores muy distintos. El trabajo va desde sistemas de diseño e interfaces hasta webs completas. En los proyectos con mayor componente de conversión, los funnels optimizados han logrado reducir el CPL entre un 10 y un 15%, con incrementos de leads de hasta un 18%."
       },
       {
-        "role":        "Diseño UX/UI & Proyectos",
-        "company":     "Formación y proyectos propios",
-        "period":      "2023 — 2025",
-        "description": "Formación intensiva en diseño de producto, herramientas (Figma, Prototyping), sistemas de diseño y fundamentos de front-end (HTML, CSS, JavaScript, TypeScript)."
+        "role":        "Co-Fundador & Operador de Negocio",
+        "company":     "Dako",
+        "period":      "2020 — 2021",
+        "description": "Cofundé un modelo de negocio B2C local que llegó a gestionar más de 200 clientes activos. Me encargué al mismo tiempo de operaciones, marketing, ventas y logística, mientras testeaba el MVP y ajustaba el producto con el feedback directo de los usuarios."
+      },
+      {
+        "role":        "Responsable de Marketing y Estrategia Comercial",
+        "company":     "Promam",
+        "period":      "2018 — 2021",
+        "description": "Tres años al frente del área comercial de una empresa industrial B2B con 5M€ de facturación anual. Diseñé una estrategia que amplió el pipeline en 1,2M€, combinando licitaciones públicas, gestión de grandes cuentas y la digitalización progresiva del canal comercial."
+      },
+      {
+        "role":        "Community Manager Digital",
+        "company":     "BrainPrise",
+        "period":      "2016",
+        "description": "Gestioné la reputación digital y las comunidades online de la agencia. En pocos meses, los usuarios activos crecieron un 12%, la comunidad sumó 3.000 nuevos seguidores y las menciones negativas cayeron un 20% gracias a una estrategia de gestión de crisis bien definida."
       }
-    ],
-    "education": {
-      "heading": "Formación",
+    ]
+  },
+  "education": {
+    "label":   "Educación",
+    "heading": "Educación",
+    "tabs": {
+      "degrees":        "Titulaciones",
+      "certifications": "Certificaciones"
+    },
+    "degrees": {
+      "heading": "Titulaciones",
       "items": [
         {
-          "title":       "Diseño UX/UI",
-          "institution": "Formación especializada",
-          "period":      "2023 — 2024"
+          "title":       "Grado en Marketing",
+          "institution": "Universidad Rey Juan Carlos",
+          "period":      "2010 — 2015",
+          "description": "Formación en estrategia comercial, comportamiento del consumidor, comunicación y marketing digital."
         }
+      ]
+    },
+    "certifications": {
+      "heading": "Certificaciones",
+      "items": [
+        { "title": "User Experience: The Definitive Guide",       "issuer": "Interaction Design Foundation", "year": "2023" },
+        { "title": "UI Pattern Design for Successful Software",   "issuer": "Interaction Design Foundation", "year": "2023" },
+        { "title": "Information Visualization",                   "issuer": "Interaction Design Foundation", "year": "2023" },
+        { "title": "Emotional Design: How to Create Products That Are Loved", "issuer": "Interaction Design Foundation", "year": "2023" },
+        { "title": "Design for the 21st Century with Don Norman", "issuer": "Interaction Design Foundation", "year": "2023" },
+        { "title": "Human-Computer Interaction",                  "issuer": "Interaction Design Foundation", "year": "2023" },
+        { "title": "Mobile User Experience (UX)",                 "issuer": "Interaction Design Foundation", "year": "2023" },
+        { "title": "Visual Design: The Ultimate Guide",           "issuer": "Interaction Design Foundation", "year": "2023" },
+        { "title": "User Research: Methods and Good Practices",   "issuer": "Interaction Design Foundation", "year": "2023" },
+        { "title": "Gestalt Psychology and Web Design",           "issuer": "Interaction Design Foundation", "year": "2023" },
+        { "title": "Fundamentals of User Experience",             "issuer": "Interaction Design Foundation", "year": "2023" }
       ]
     }
   },
@@ -131,6 +220,9 @@
     "availableFor": "Disponible para: posición en empresa · freelance · colaboraciones"
   },
   "footer": {
+    "thanks":    "Gracias por pasarte.",
+    "connect":   "Si quieres conectar, aquí me tienes:",
+    "visitors":  "Visitas totales",
     "made":      "Diseñado y construido por",
     "name":      "Alejandro Moreno",
     "rights":    "Todos los derechos reservados."

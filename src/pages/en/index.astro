@@ -1,13 +1,14 @@
 ---
-import BaseLayout from "@/layouts/BaseLayout.astro";
-import Nav        from "@/components/Nav.astro";
-import Hero       from "@/components/sections/Hero.astro";
-import About      from "@/components/sections/About.astro";
-import Craft      from "@/components/sections/Craft.astro";
-import Work       from "@/components/sections/Work.astro";
-import Experience from "@/components/sections/Experience.astro";
-import Contact    from "@/components/sections/Contact.astro";
-import Footer     from "@/components/Footer.astro";
+import BaseLayout  from "@/layouts/BaseLayout.astro";
+import Nav         from "@/components/Nav.astro";
+import Hero        from "@/components/sections/Hero.astro";
+import Work        from "@/components/sections/Work.astro";
+import About       from "@/components/sections/About.astro";
+import Experience  from "@/components/sections/Experience.astro";
+import Education   from "@/components/sections/Education.astro";
+import Craft       from "@/components/sections/Craft.astro";
+import Footer           from "@/components/Footer.astro";
+import TableOfContents  from "@/components/TableOfContents.astro";
 import { useTranslations } from "@/i18n/utils";
 
 const lang = "en" as const;
@@ -28,14 +29,15 @@ const alternateURL  = siteURL;
   alternateURL={alternateURL}
   alternateLang={alternateLang}
 >
-  <Nav        lang={lang} />
+  <Nav               lang={lang} />
+  <TableOfContents   lang={lang} />
   <main>
     <Hero       lang={lang} />
-    <About      lang={lang} />
-    <Craft      lang={lang} />
     <Work       lang={lang} />
+    <About      lang={lang} />
     <Experience lang={lang} />
-    <Contact    lang={lang} />
+    <Education  lang={lang} />
+    <Craft      lang={lang} />
   </main>
   <Footer     lang={lang} />
 </BaseLayout>

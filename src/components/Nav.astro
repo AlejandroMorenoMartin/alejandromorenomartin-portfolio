@@ -1,62 +1,43 @@
 ---
 import type { Lang } from "@/i18n/utils";
-import { useTranslations, getLocalizedPath, getAlternateLang } from "@/i18n/utils";
+import { useTranslations, getLocalizedPath } from "@/i18n/utils";
 
 interface Props {
   lang: Lang;
 }
 
 const { lang } = Astro.props;
-const t         = useTranslations(lang);
-const altLang   = getAlternateLang(lang);
-const altPath   = lang === "es" ? "/en" : "/";
-
-const links = [
-  { href: "#about",      label: t.nav.about },
-  { href: "#craft",      label: t.nav.craft },
-  { href: "#work",       label: t.nav.work },
-  { href: "#experience", label: t.nav.experience },
-  { href: "#contact",    label: t.nav.contact },
-];
+const t        = useTranslations(lang);
+const altPath  = lang === "es" ? "/en" : "/";
 ---
 
 <header
   id="nav"
-  class="fixed top-0 inset-x-0 z-50 transition-all duration-normal"
+  class="fixed top-0 inset-x-0 z-50 border-b border-transparent transition-colors duration-normal"
   aria-label="Main navigation"
 >
-  <div class="container-wide section-padding py-0">
+  <div class="px-4">
     <nav class="flex items-center justify-between h-16">
-      <!-- Logo / Name -->
+
+      <!-- Logo -->
       <a
         href={getLocalizedPath(lang)}
-        class="font-display font-semibold text-label-lg text-text-1 hover:text-primary-500 transition-colors duration-fast focus-visible:outline-none"
+        class="logo-link focus-visible:outline-none"
         aria-label="Inicio"
       >
-        AM
+        <svg width="32" height="32" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" class="logo-svg">
+          <rect width="48" height="48" rx="10" fill="var(--color-surface)"/>
+          <circle cx="24" cy="24" r="14" fill="var(--color-text-1)" class="logo-circle" />
+        </svg>
       </a>
 
-      <!-- Links — desktop -->
-      <ul class="hidden md:flex items-center gap-6" role="list">
-        {links.map((link) => (
-          <li>
-            <a
-              href={link.href}
-              class="text-label-sm text-text-4 hover:text-text-1 transition-colors duration-fast focus-visible:outline-none relative group"
-            >
-              {link.label}
-              <span class="absolute -bottom-0.5 left-0 w-0 h-px bg-primary-500 transition-all duration-fast group-hover:w-full" />
-            </a>
-          </li>
-        ))}
-      </ul>
+      <!-- Right: lang + theme -->
+      <div class="flex items-center gap-2">
 
-      <!-- Right side: lang + theme -->
-      <div class="flex items-center gap-3">
         <!-- Language switch -->
         <a
           href={altPath}
-          class="text-label-sm text-text-5 hover:text-text-1 transition-colors duration-fast px-2 py-1 rounded-md border border-border hover:border-border-strong"
+          class="text-label-sm text-text-1 border-[var(--color-border-subtle)] hover:bg-[var(--color-btn-hover-subtle)] transition-all duration-fast px-3 py-2 rounded-lg border-[0.5px]"
           aria-label={`Switch to ${t.nav.langSwitch}`}
         >
           {t.nav.langSwitch}
@@ -67,10 +48,9 @@ const links = [
           id="theme-toggle"
           type="button"
           aria-label="Toggle theme"
-          class="w-9 h-9 rounded-md border border-border hover:border-border-strong flex items-center justify-center text-text-4 hover:text-text-1 transition-all duration-fast active:scale-95"
+          class="w-9 h-9 rounded-lg border-[0.5px] border-[var(--color-border-subtle)] flex items-center justify-center text-text-1 hover:bg-[var(--color-btn-hover-subtle)] transition-all duration-fast active:scale-95"
         >
           <span id="icon-light" class="hidden">
-            <!-- Sun -->
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <circle cx="12" cy="12" r="5"/>
               <line x1="12" y1="1" x2="12" y2="3"/>
@@ -84,71 +64,50 @@ const links = [
             </svg>
           </span>
           <span id="icon-dark">
-            <!-- Moon -->
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
             </svg>
           </span>
         </button>
 
-        <!-- Mobile menu button -->
-        <button
-          id="mobile-menu-btn"
-          type="button"
-          aria-label="Toggle menu"
-          aria-expanded="false"
-          class="md:hidden w-9 h-9 rounded-md border border-border hover:border-border-strong flex items-center justify-center text-text-4 hover:text-text-1 transition-all duration-fast"
-        >
-          <svg id="icon-menu" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <line x1="3" y1="6"  x2="21" y2="6"/>
-            <line x1="3" y1="12" x2="21" y2="12"/>
-            <line x1="3" y1="18" x2="21" y2="18"/>
-          </svg>
-          <svg id="icon-close" class="hidden" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <line x1="18" y1="6" x2="6" y2="18"/>
-            <line x1="6" y1="6" x2="18" y2="18"/>
-          </svg>
-        </button>
       </div>
     </nav>
   </div>
-
-  <!-- Mobile menu -->
-  <div
-    id="mobile-menu"
-    class="hidden md:hidden border-t border-border bg-surface"
-  >
-    <ul class="container-wide section-padding py-4 flex flex-col gap-4" role="list">
-      {links.map((link) => (
-        <li>
-          <a
-            href={link.href}
-            class="text-body-md text-text-3 hover:text-text-1 transition-colors duration-fast block py-1"
-          >
-            {link.label}
-          </a>
-        </li>
-      ))}
-    </ul>
-  </div>
 </header>
+
+<style>
+  .logo-svg {
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  .logo-link:hover .logo-svg {
+    transform: scale(1.08);
+  }
+
+  .logo-circle {
+    fill: var(--color-text-1);
+    transition: fill 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .logo-link:hover .logo-circle {
+    fill: #E4A711;
+  }
+</style>
 
 <script>
   // ─── Scroll behaviour ──────────────────────────────────────
   const nav = document.getElementById("nav")!;
   window.addEventListener("scroll", () => {
     if (window.scrollY > 20) {
-      nav.classList.add("bg-surface/90", "backdrop-blur-sm", "border-b", "border-border");
+      nav.classList.add("bg-surface/90", "backdrop-blur-xl", "!border-border");
     } else {
-      nav.classList.remove("bg-surface/90", "backdrop-blur-sm", "border-b", "border-border");
+      nav.classList.remove("bg-surface/90", "backdrop-blur-xl", "!border-border");
     }
   }, { passive: true });
 
   // ─── Theme toggle ──────────────────────────────────────────
-  const html        = document.documentElement;
-  const iconLight   = document.getElementById("icon-light")!;
-  const iconDark    = document.getElementById("icon-dark")!;
-  const themeBtn    = document.getElementById("theme-toggle")!;
+  const html      = document.documentElement;
+  const iconLight = document.getElementById("icon-light")!;
+  const iconDark  = document.getElementById("icon-dark")!;
+  const themeBtn  = document.getElementById("theme-toggle")!;
 
   function applyTheme(theme: string) {
     html.setAttribute("data-theme", theme);
@@ -162,34 +121,12 @@ const links = [
     }
   }
 
-  const savedTheme = localStorage.getItem("theme") ?? "dark";
+  const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  const savedTheme  = localStorage.getItem("theme") ?? systemTheme;
   applyTheme(savedTheme);
 
   themeBtn.addEventListener("click", () => {
     const current = html.getAttribute("data-theme") ?? "dark";
     applyTheme(current === "dark" ? "light" : "dark");
-  });
-
-  // ─── Mobile menu ───────────────────────────────────────────
-  const mobileBtn   = document.getElementById("mobile-menu-btn")!;
-  const mobileMenu  = document.getElementById("mobile-menu")!;
-  const iconMenu    = document.getElementById("icon-menu")!;
-  const iconClose   = document.getElementById("icon-close")!;
-
-  mobileBtn.addEventListener("click", () => {
-    const isOpen = mobileMenu.classList.toggle("hidden") === false;
-    mobileBtn.setAttribute("aria-expanded", String(isOpen));
-    iconMenu.classList.toggle("hidden", isOpen);
-    iconClose.classList.toggle("hidden", !isOpen);
-  });
-
-  // Close on link click
-  mobileMenu.querySelectorAll("a").forEach((a) => {
-    a.addEventListener("click", () => {
-      mobileMenu.classList.add("hidden");
-      mobileBtn.setAttribute("aria-expanded", "false");
-      iconMenu.classList.remove("hidden");
-      iconClose.classList.add("hidden");
-    });
   });
 </script>
