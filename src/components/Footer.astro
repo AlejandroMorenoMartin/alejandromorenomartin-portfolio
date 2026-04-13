@@ -1,14 +1,12 @@
 ---
 import type { Lang } from "@/i18n/utils";
 import { useTranslations } from "@/i18n/utils";
-import NumberRoller from "@/components/NumberRoller.astro";
 
 interface Props {
-  lang:       Lang;
-  countOnly?: boolean;
+  lang: Lang;
 }
 
-const { lang, countOnly = false } = Astro.props;
+const { lang } = Astro.props;
 const t        = useTranslations(lang);
 const year     = new Date().getFullYear();
 
@@ -56,12 +54,6 @@ const socials = [
       ))}
     </ul>
 
-    <!-- Visitor counter -->
-    <div class="flex flex-col items-center gap-1" data-count-only={countOnly ? "1" : "0"} id="visitor-wrapper">
-      <NumberRoller id="visitor-count" class="font-data text-body-lg text-primary-500 leading-none" />
-      <span class="text-label-sm text-text-6">{t.footer.visitors}</span>
-    </div>
-
     <!-- Meta -->
     <p class="text-label-sm text-text-6 text-center">
       {t.footer.made}{" "}
@@ -72,18 +64,3 @@ const socials = [
   </div>
 </footer>
 
-<script>
-  const wrapper   = document.getElementById("visitor-wrapper");
-  const countOnly = wrapper?.dataset.countOnly === "1";
-  const apiURL    = countOnly ? "/api/visitors?count_only=1" : "/api/visitors";
-
-  fetch(apiURL)
-    .then((r) => r.json())
-    .then((data: { count: number | null }) => {
-      if (data.count !== null) {
-        (window as unknown as Record<string, (id: string, n: number) => void>)
-          .rollNumber("visitor-count", data.count);
-      }
-    })
-    .catch(() => {});
-</script>

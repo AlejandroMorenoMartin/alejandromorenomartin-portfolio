@@ -1,11 +1,11 @@
 import { defineConfig } from "astro/config";
 import tailwind from "@astrojs/tailwind";
 import sitemap from "@astrojs/sitemap";
-import vercel from "@astrojs/vercel/serverless";
+import vercel from "@astrojs/vercel/static";
 
 export default defineConfig({
-  output: "hybrid",
-  adapter: vercel({ nodeVersion: "20.x" }),
+  output: "static",
+  adapter: vercel(),
   site: "https://alejandromorenomartin.com",
   integrations: [
     tailwind({ applyBaseStyles: false }),
