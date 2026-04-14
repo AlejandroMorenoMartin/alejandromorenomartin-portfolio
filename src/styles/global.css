@@ -6,9 +6,9 @@
 
 /* ─── Gradient tokens ─────────────────────────────────────── */
 :root {
-  --gradient-text-light:   linear-gradient(90deg, #f0cf7d 0%, #fde68a 25%, #fef3c7 50%, #fde68a 75%, #f0cf7d 100%);
-  --gradient-text-default: linear-gradient(90deg, #E4A711 0%, #f0cf7d 25%, #fde68a 50%, #f0cf7d 75%, #E4A711 100%);
-  --gradient-text-dark:    linear-gradient(90deg, #c27d00 0%, #E4A711 25%, #f0cf7d 50%, #E4A711 75%, #c27d00 100%);
+  --gradient-text-light:   linear-gradient(90deg, #f0cf7d 0%, #fde68a 20%, #fef3c7 40%, #f0abfc 65%, #e879f9 80%, #f0cf7d 100%);
+  --gradient-text-default: linear-gradient(90deg, #E4A711 0%, #f0cf7d 20%, #fde68a 38%, #e879f9 62%, #d946ef 80%, #E4A711 100%);
+  --gradient-text-dark:    linear-gradient(90deg, #c27d00 0%, #E4A711 20%, #f0cf7d 38%, #d946ef 62%, #c026d3 80%, #c27d00 100%);
 }
 
 /* ─── Light theme ─────────────────────────────────────────── */
@@ -135,5 +135,39 @@
   .container-wide {
     max-width: 960px;
     margin-inline: auto;
+  }
+
+  /* ── btn-icon — icon-only button, ghost style ─────────
+     Default : muted opacity, neutral color
+     Hover   : full opacity, primary gold (TOC active)
+     Active  : gold + glow ring (TOC active dot)
+  ─────────────────────────────────────────────────────── */
+  .btn-icon {
+    display:         inline-flex;
+    align-items:     center;
+    justify-content: center;
+    color:           var(--color-text-1);
+    opacity:         0.35;
+    border-radius:   0.5rem;
+    transition:
+      opacity    0.25s ease,
+      color      0.25s ease,
+      box-shadow 0.25s ease;
+  }
+
+  .btn-icon:hover {
+    opacity: 1;
+    color:   #E4A711;
+  }
+
+  .btn-icon:active {
+    opacity:    1;
+    color:      #E4A711;
+    box-shadow: 0 0 0 3px rgba(228, 167, 17, 0.2);
+  }
+
+  .btn-icon:focus-visible {
+    outline:        2px solid #E4A711;
+    outline-offset: 3px;
   }
 }

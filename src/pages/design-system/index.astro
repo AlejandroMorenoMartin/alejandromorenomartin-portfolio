@@ -1,0 +1,367 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Nav        from "@/components/Nav.astro";
+
+const lang = "es" as const;
+
+// Token reference data — single source of truth aligned with global.css + tailwind.config.ts
+const textTokens = [
+  { token: "text-1", hex_dark: "#ffffff", hex_light: "#0a0a0a", use: "H1, H2 — section headings" },
+  { token: "text-2", hex_dark: "#e8e8e8", hex_light: "#1f1f1f", use: "H3 — card headlines" },
+  { token: "text-3", hex_dark: "#c8c8c8", hex_light: "#3d3d3d", use: "Body principal" },
+  { token: "text-4", hex_dark: "#a8a8a8", hex_light: "#5c5c5c", use: "Body secundario, descripciones" },
+  { token: "text-5", hex_dark: "#909090", hex_light: "#757575", use: "Labels, meta, company names" },
+  { token: "text-6", hex_dark: "#787878", hex_light: "#8f8f8f", use: "Labels mínimos, fechas, subtexto" },
+  { token: "text-7", hex_dark: "#606060", hex_light: "#a3a3a3", use: "TOC inactivo, placeholder" },
+  { token: "text-8", hex_dark: "#505050", hex_light: "#b8b8b8", use: "Dots inactivos, disabled" },
+];
+
+const surfaceTokens = [
+  { token: "surface",         dark: "#0f0e0c", light: "#ffffff",  label: "Fondo base" },
+  { token: "surface-raised",  dark: "#1a1813", light: "#f8f6f2",  label: "Fondo elevado" },
+  { token: "surface-overlay", dark: "#242019", light: "#f0ece4",  label: "Fondo overlay / icon bg" },
+  { token: "border",          dark: "#2a2620", light: "#e8e3d8",  label: "Borde estándar" },
+  { token: "border-strong",   dark: "#3d3828", light: "#d4ccba",  label: "Borde reforzado" },
+];
+
+const typoScale = [
+  { token: "display-2xl", size: "4rem",     lh: "1.1",  use: "Nombre / H1 hero" },
+  { token: "display-xl",  size: "3rem",     lh: "1.15", use: "Título grande" },
+  { token: "display-lg",  size: "2.25rem",  lh: "1.2",  use: "H2 — headings de sección" },
+  { token: "display-md",  size: "1.875rem", lh: "1.25", use: "H3 — card headline, KPI valor" },
+  { token: "display-sm",  size: "1.5rem",   lh: "1.3",  use: "Subtitle, greeting" },
+  { token: "body-lg",     size: "1.125rem", lh: "1.6",  use: "Body destacado, tagline" },
+  { token: "body-md",     size: "1rem",     lh: "1.6",  use: "Body principal (about)" },
+  { token: "body-sm",     size: "0.875rem", lh: "1.5",  use: "Body secundario, descripciones" },
+  { token: "label-lg",    size: "1rem",     lh: "1.4",  use: "Labels UI, roles (experience)" },
+  { token: "label-sm",    size: "0.75rem",  lh: "1.4",  use: "Meta, fechas, company, tags" },
+  { token: "label-xs",    size: "0.625rem", lh: "1.4",  use: "TOC labels, micro labels" },
+];
+---
+
+<BaseLayout
+  title="Design System — Alejandro Moreno"
+  description="Sistema de diseño del portfolio. Tokens, tipografía, componentes y patrones."
+  lang={lang}
+>
+  <Nav lang={lang} />
+
+  <main class="pt-32 pb-48 px-8">
+    <div class="container-wide">
+
+      <!-- Header -->
+      <div class="mb-20 pb-10 border-b-[0.5px] border-[var(--color-border-subtle)]">
+        <p class="font-data text-label-sm text-primary-500 mb-3 tracking-widest uppercase">Portfolio</p>
+        <h1 class="text-display-2xl font-display font-bold text-text-1 leading-[1.05] mb-4">Design System</h1>
+        <p class="text-body-lg text-text-4 max-w-xl">
+          Tokens, tipografía, componentes y patrones usados en el portfolio. Esta página vive dentro del proyecto y se mantiene alineada automáticamente con los estilos reales.
+        </p>
+      </div>
+
+      <!-- ── 1. COLOR ──────────────────────────────────────────── -->
+      <section class="mb-24" aria-labelledby="color-heading">
+        <h2 id="color-heading" class="text-display-lg font-display font-bold text-text-1 mb-10">Color</h2>
+
+        <!-- Primary -->
+        <h3 class="text-display-sm font-display font-semibold text-text-2 mb-5">Primary — #E4A711</h3>
+        <div class="flex flex-wrap gap-2 mb-12">
+          {[50,100,200,300,400,500,600,700,800,900,950].map(n => (
+            <div class="flex flex-col items-center gap-1.5">
+              <div class={`w-12 h-12 rounded-lg bg-primary-${n} border-[0.5px] border-[var(--color-border-subtle)]`} />
+              <span class="font-data text-label-xs text-text-6">{n}</span>
+            </div>
+          ))}
+        </div>
+
+        <!-- Text hierarchy -->
+        <h3 class="text-display-sm font-display font-semibold text-text-2 mb-2">Jerarquía de texto</h3>
+        <p class="text-body-sm text-text-5 mb-6">Regla: a mayor tamaño tipográfico → color más puro. Nunca usar text-1 en un nivel inferior al que ya lo usa.</p>
+        <div class="flex flex-col gap-3 mb-12">
+          {textTokens.map(t => (
+            <div class="flex items-center gap-4">
+              <code class="font-data text-label-sm text-primary-500 w-20 shrink-0">{t.token}</code>
+              <div class="flex gap-2 shrink-0">
+                <div class="w-6 h-6 rounded" style={`background: ${t.hex_dark}; border: 0.5px solid rgba(255,255,255,0.1)`} title={`dark: ${t.hex_dark}`}/>
+                <div class="w-6 h-6 rounded border-[0.5px] border-[var(--color-border)]" style={`background: ${t.hex_light}`} title={`light: ${t.hex_light}`}/>
+              </div>
+              <span class={`text-body-sm text-${t.token} flex-1`}>{t.use}</span>
+            </div>
+          ))}
+        </div>
+
+        <!-- Surfaces -->
+        <h3 class="text-display-sm font-display font-semibold text-text-2 mb-5">Superficies y bordes</h3>
+        <div class="flex flex-col gap-3">
+          {surfaceTokens.map(s => (
+            <div class="flex items-center gap-4">
+              <code class="font-data text-label-sm text-primary-500 w-36 shrink-0">{s.token}</code>
+              <div class="flex gap-2 shrink-0">
+                <div class="w-6 h-6 rounded" style={`background: ${s.dark}; border: 0.5px solid rgba(255,255,255,0.15)`}/>
+                <div class="w-6 h-6 rounded" style={`background: ${s.light}; border: 0.5px solid #d4ccba`}/>
+              </div>
+              <span class="text-body-sm text-text-4">{s.label}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- ── 2. TIPOGRAFÍA ─────────────────────────────────────── -->
+      <section class="mb-24" aria-labelledby="type-heading">
+        <h2 id="type-heading" class="text-display-lg font-display font-bold text-text-1 mb-4">Tipografía</h2>
+        <div class="flex gap-8 mb-10 text-body-sm text-text-5">
+          <span><strong class="text-text-3 font-semibold">Display / Body:</strong> Poppins 400–700</span>
+          <span><strong class="text-text-3 font-semibold">Data / Mono:</strong> DM Mono 400–500</span>
+        </div>
+
+        <div class="flex flex-col gap-6 mb-12">
+          {typoScale.map(t => (
+            <div class="flex items-baseline gap-6 py-3 border-b-[0.5px] border-[var(--color-border-subtle)]">
+              <code class="font-data text-label-sm text-primary-500 w-28 shrink-0">{t.token}</code>
+              <span class="font-data text-label-xs text-text-6 w-20 shrink-0">{t.size} / {t.lh}</span>
+              <span class={`font-display text-${t.token} text-text-1 leading-none`}>Aa</span>
+              <span class="text-body-sm text-text-5 ml-auto">{t.use}</span>
+            </div>
+          ))}
+        </div>
+
+        <!-- Data type -->
+        <h3 class="text-display-sm font-display font-semibold text-text-2 mb-4">Tipografía de datos</h3>
+        <div class="flex items-baseline gap-8">
+          <span class="font-data text-display-md font-bold text-primary-500">+82%</span>
+          <span class="font-data text-display-md font-bold text-primary-500">€1.2M</span>
+          <span class="font-data text-display-md font-bold text-primary-500">3×</span>
+          <code class="font-data text-label-sm text-text-5 ml-4">font-data text-display-md font-bold text-primary-500</code>
+        </div>
+      </section>
+
+      <!-- ── 3. GRADIENTES ─────────────────────────────────────── -->
+      <section class="mb-24" aria-labelledby="gradient-heading">
+        <h2 id="gradient-heading" class="text-display-lg font-display font-bold text-text-1 mb-8">Gradiente de texto</h2>
+        <p class="text-body-sm text-text-5 mb-6">Animado — usado en el roleHighlight del Hero. Fluye de oro a fucsia-rosa.</p>
+        <div class="flex flex-col gap-4">
+          <div>
+            <span class="text-gradient font-display text-display-lg font-bold">Designer</span>
+            <code class="font-data text-label-sm text-text-5 ml-4">.text-gradient</code>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── 4. SOMBRAS ────────────────────────────────────────── -->
+      <section class="mb-24" aria-labelledby="shadow-heading">
+        <h2 id="shadow-heading" class="text-display-lg font-display font-bold text-text-1 mb-8">Sombras</h2>
+        <p class="text-body-sm text-text-5 mb-8">Multicapa con tinte dorado. Nunca usar shadow-md plana.</p>
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {[
+            { name: "ds-sm",   label: "shadow-ds-sm",   desc: "Cards en reposo" },
+            { name: "ds-md",   label: "shadow-ds-md",   desc: "Hover, modales" },
+            { name: "ds-lg",   label: "shadow-ds-lg",   desc: "Dropdowns, popovers" },
+            { name: "ds-glow", label: "shadow-ds-glow", desc: "Focus ring dorado" },
+          ].map(s => (
+            <div class={`p-6 rounded-xl bg-surface-raised shadow-${s.name}`}>
+              <code class="font-data text-label-sm text-primary-500 block mb-1">{s.label}</code>
+              <span class="text-body-sm text-text-5">{s.desc}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- ── 5. TRANSICIONES ───────────────────────────────────── -->
+      <section class="mb-24" aria-labelledby="transition-heading">
+        <h2 id="transition-heading" class="text-display-lg font-display font-bold text-text-1 mb-8">Transiciones</h2>
+        <div class="flex gap-8 flex-wrap">
+          {[
+            { token: "duration-fast",   ms: "100ms", use: "Hover, color changes" },
+            { token: "duration-normal", ms: "200ms", use: "Layouts, theme toggle" },
+            { token: "duration-slow",   ms: "350ms", use: "Expansiones, modales" },
+          ].map(t => (
+            <div class="flex items-center gap-3">
+              <code class="font-data text-label-sm text-primary-500">{t.token}</code>
+              <span class="font-data text-label-sm text-text-5">{t.ms}</span>
+              <span class="text-body-sm text-text-6">— {t.use}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- ── 6. COMPONENTES ────────────────────────────────────── -->
+      <section class="mb-24" aria-labelledby="components-heading">
+        <h2 id="components-heading" class="text-display-lg font-display font-bold text-text-1 mb-12">Componentes</h2>
+
+        <!-- Links -->
+        <div class="mb-14">
+          <h3 class="text-display-sm font-display font-semibold text-text-2 mb-2">Links</h3>
+          <p class="text-body-sm text-text-5 mb-6">Dos variantes según contexto. Sin subrayado por defecto.</p>
+          <div class="flex flex-col gap-4">
+            <div class="flex items-center gap-6">
+              <a href="#" class="text-primary-500 hover:text-primary-400 transition-colors duration-fast font-data text-label-sm">← Volver a proyectos</a>
+              <code class="font-data text-label-xs text-text-6">text-primary-500 hover:text-primary-400 — links de navegación / CTA</code>
+            </div>
+            <div class="flex items-center gap-6">
+              <a href="#" class="text-text-4 font-medium hover:text-text-2 transition-colors duration-fast text-body-sm">Alejandro Moreno</a>
+              <code class="font-data text-label-xs text-text-6">text-text-4 font-medium hover:text-text-2 — links en prosa / footer</code>
+            </div>
+          </div>
+        </div>
+
+        <!-- btn-secondary -->
+        <div class="mb-14">
+          <h3 class="text-display-sm font-display font-semibold text-text-2 mb-2">Botón secundario</h3>
+          <p class="text-body-sm text-text-5 mb-6">Usado en Nav (idioma), carousel (prev/next).</p>
+          <div class="flex items-center gap-4">
+            <button class="text-label-sm text-text-1 border-[var(--color-border-subtle)] hover:bg-[var(--color-btn-hover-subtle)] transition-colors duration-fast px-3 py-2 rounded-lg border-[0.5px] font-display">
+              Español
+            </button>
+            <button class="flex items-center justify-center w-9 h-9 rounded-lg border-[0.5px] border-[var(--color-border-subtle)] text-text-4 hover:bg-[var(--color-btn-hover-subtle)] hover:text-text-2 transition-colors duration-fast">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="15 18 9 12 15 6"/>
+              </svg>
+            </button>
+            <code class="font-data text-label-xs text-text-6">border-[0.5px] border-border-subtle hover:bg-btn-hover-subtle transition-colors duration-fast</code>
+          </div>
+        </div>
+
+        <!-- btn-icon -->
+        <div class="mb-14">
+          <h3 class="text-display-sm font-display font-semibold text-text-2 mb-2">btn-icon</h3>
+          <p class="text-body-sm text-text-5 mb-6">Ghost — opacity 0.35 en reposo → 1 + gold en hover → glow en active. Usado en Footer social links.</p>
+          <div class="flex items-center gap-6">
+            <div class="flex gap-3">
+              <a href="#" class="btn-icon w-10 h-10">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+              </a>
+              <a href="#" class="btn-icon w-10 h-10">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>
+              </a>
+            </div>
+            <code class="font-data text-label-xs text-text-6">.btn-icon — definido en global.css</code>
+          </div>
+        </div>
+
+        <!-- Dots -->
+        <div class="mb-14">
+          <h3 class="text-display-sm font-display font-semibold text-text-2 mb-2">Dots — indicadores</h3>
+          <p class="text-body-sm text-text-5 mb-6">Patrón unificado en TOC, carousel de proyectos y timeline de experiencia.</p>
+          <div class="flex flex-col gap-6">
+            <div class="flex items-center gap-6">
+              <div class="flex items-center gap-3">
+                <span class="block w-1.5 h-1.5 rounded-full bg-text-8"></span>
+                <span class="block w-1.5 h-1.5 rounded-full bg-text-8"></span>
+                <span class="block w-2 h-2 rounded-full" style="background:#E4A711; box-shadow: 0 0 0 3px rgba(228,167,17,0.2)"></span>
+                <span class="block w-1.5 h-1.5 rounded-full bg-text-8"></span>
+              </div>
+              <code class="font-data text-label-xs text-text-6">reposo: 6×6 bg-text-8 — activo: 8×8 #E4A711 + glow ring</code>
+            </div>
+            <div class="flex items-center gap-6">
+              <div class="flex items-center gap-3">
+                <span class="block w-3.5 h-3.5 rounded-full bg-text-8" style="border: 0.5px solid var(--color-border-subtle)"></span>
+                <span class="block w-3.5 h-3.5 rounded-full" style="background:#E4A711; box-shadow: 0 0 0 3px rgba(228,167,17,0.2)"></span>
+              </div>
+              <code class="font-data text-label-xs text-text-6">Timeline dot: 3.5px → activo gold + glow</code>
+            </div>
+          </div>
+        </div>
+
+        <!-- KPI -->
+        <div class="mb-14">
+          <h3 class="text-display-sm font-display font-semibold text-text-2 mb-2">KPI</h3>
+          <p class="text-body-sm text-text-5 mb-6">Componente <code class="font-data text-primary-500">&lt;Kpi value="+82%" label="Task completion" /&gt;</code>. Anima al entrar en viewport con counter de 1200ms ease-out. Separadores con divisor 1px.</p>
+          <div class="flex items-start gap-8 p-6 rounded-xl border-[0.5px] border-[var(--color-border-subtle)] bg-surface-raised">
+            <div>
+              <p class="font-data text-display-md font-bold text-primary-500 leading-none">+82%</p>
+              <p class="text-label-sm text-text-6 mt-1">Task completion</p>
+            </div>
+            <div class="w-px h-8 self-center bg-[var(--color-border-subtle)]"></div>
+            <div>
+              <p class="font-data text-display-md font-bold text-primary-500 leading-none">€1.2M</p>
+              <p class="text-label-sm text-text-6 mt-1">Pipeline growth</p>
+            </div>
+            <div class="w-px h-8 self-center bg-[var(--color-border-subtle)]"></div>
+            <div>
+              <p class="font-data text-display-md font-bold text-primary-500 leading-none">3×</p>
+              <p class="text-label-sm text-text-6 mt-1">Client inquiries</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tag / pill -->
+        <div class="mb-14">
+          <h3 class="text-display-sm font-display font-semibold text-text-2 mb-2">Tag / Pill</h3>
+          <p class="text-body-sm text-text-5 mb-6">Usado en stack de proyectos.</p>
+          <div class="flex gap-2">
+            {["Astro", "Tailwind CSS", "Figma", "React Native"].map(tag => (
+              <span class="text-label-sm text-text-5 bg-surface-overlay border-[0.5px] border-[var(--color-border-subtle)] rounded-full px-3 py-1">{tag}</span>
+            ))}
+          </div>
+        </div>
+
+        <!-- Card work -->
+        <div class="mb-14">
+          <h3 class="text-display-sm font-display font-semibold text-text-2 mb-2">Card — Proyecto</h3>
+          <p class="text-body-sm text-text-5 mb-6">Layout horizontal: contenido (flex-1) + imagen (42%). En carousel, una card a la vez.</p>
+          <div class="rounded-xl border-[0.5px] border-[var(--color-border-subtle)] bg-surface overflow-hidden flex flex-col md:flex-row">
+            <div class="flex flex-col flex-1 p-8">
+              <span class="font-display text-label-sm font-semibold tracking-widest uppercase text-text-5 mb-5 block">Casa del Aire</span>
+              <h4 class="font-display text-display-md font-bold text-text-2 leading-[1.1] mb-4">A booking-focused site that cut direct enquiry time by 60%</h4>
+              <p class="text-body-sm text-text-4 leading-relaxed flex-1 max-w-lg">Designed and developed the full website for a rural house in Extremadura, replacing a generic listing with a conversion-first experience owned by the client.</p>
+              <div class="flex items-start gap-8 mt-8">
+                <div><p class="font-data text-display-md font-bold text-primary-500 leading-none">–60%</p><p class="text-label-sm text-text-6 mt-1">Enquiry time</p></div>
+                <div class="w-px h-8 self-center bg-[var(--color-border-subtle)]"></div>
+                <div><p class="font-data text-display-md font-bold text-primary-500 leading-none">+40%</p><p class="text-label-sm text-text-6 mt-1">Direct bookings</p></div>
+                <div class="w-px h-8 self-center bg-[var(--color-border-subtle)]"></div>
+                <div><p class="font-data text-display-md font-bold text-primary-500 leading-none">100%</p><p class="text-label-sm text-text-6 mt-1">Brand ownership</p></div>
+              </div>
+            </div>
+            <div class="md:w-[42%] shrink-0 min-h-[180px] bg-surface-overlay border-t-[0.5px] md:border-t-0 md:border-l-[0.5px] border-[var(--color-border-subtle)]"></div>
+          </div>
+        </div>
+
+        <!-- Card craft -->
+        <div class="mb-14">
+          <h3 class="text-display-sm font-display font-semibold text-text-2 mb-2">Card — Herramienta (Craft)</h3>
+          <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-2xl">
+            {[
+              { title: "Figma", desc: "Core UI/UX design tool. Full cycle: wireframes, components, design systems and dev handoff." },
+              { title: "Hotjar", desc: "User behaviour analytics: heatmaps, session recordings and conversion funnels." },
+            ].map(tool => (
+              <div class="flex flex-col p-7 rounded-xl border-[0.5px] border-[var(--color-border-subtle)] bg-surface hover:bg-[var(--color-btn-hover-subtle)] transition-colors duration-fast">
+                <div class="w-10 h-10 rounded-lg bg-surface-overlay flex items-center justify-center text-primary-500 mb-5 text-label-lg font-bold">T</div>
+                <div class="flex items-center gap-1.5 mb-2">
+                  <h4 class="text-label-lg font-display font-semibold text-text-2">{tool.title}</h4>
+                  <svg class="w-[15px] h-[15px] text-text-5 opacity-50" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.22 14.78a.75.75 0 0 0 1.06 0l7.22-7.22v5.69a.75.75 0 0 0 1.5 0v-7.5a.75.75 0 0 0-.75-.75h-7.5a.75.75 0 0 0 0 1.5h5.69l-7.22 7.22a.75.75 0 0 0 0 1.06Z" clip-rule="evenodd" /></svg>
+                </div>
+                <p class="text-body-sm text-text-4 leading-relaxed">{tool.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+      </section>
+
+      <!-- ── 7. JERARQUÍA TIPOGRÁFICA — REGLA ──────────────────── -->
+      <section class="mb-24" aria-labelledby="rule-heading">
+        <h2 id="rule-heading" class="text-display-lg font-display font-bold text-text-1 mb-6">Regla de jerarquía</h2>
+        <p class="text-body-sm text-text-5 mb-8">A mayor tamaño → color más puro. Nunca reutilizar text-1 en un nivel inmediatamente inferior que ya lo usa.</p>
+        <div class="p-8 rounded-xl border-[0.5px] border-[var(--color-border-subtle)] bg-surface-raised flex flex-col gap-4">
+          {[
+            { label: "H1 / Nombre",       size: "display-2xl", color: "text-1" },
+            { label: "H2 / Sección",      size: "display-lg",  color: "text-1" },
+            { label: "H3 / Card title",   size: "display-md",  color: "text-2" },
+            { label: "Subtítulo",         size: "display-sm",  color: "text-3" },
+            { label: "Body principal",    size: "body-md",     color: "text-3" },
+            { label: "Body secundario",   size: "body-sm",     color: "text-4" },
+            { label: "Label / meta",      size: "label-sm",    color: "text-5" },
+            { label: "Micro label",       size: "label-xs",    color: "text-6" },
+          ].map(row => (
+            <div class="flex items-center gap-4">
+              <span class="text-body-sm text-text-5 w-40 shrink-0">{row.label}</span>
+              <code class="font-data text-label-xs text-primary-500 w-28 shrink-0">{row.size}</code>
+              <code class="font-data text-label-xs text-text-6 w-16 shrink-0">{row.color}</code>
+              <span class={`font-display text-${row.size} text-${row.color} leading-none`}>Ejemplo</span>
+            </div>
+          ))}
+        </div>
+      </section>
+
+    </div>
+  </main>
+</BaseLayout>

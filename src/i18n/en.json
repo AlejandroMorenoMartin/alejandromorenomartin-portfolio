@@ -5,6 +5,7 @@
     "ogImage": "/og-en.png"
   },
   "nav": {
+    "home":       "Welcome",
     "work":       "Work",
     "about":      "About",
     "experience": "Experience",
@@ -18,7 +19,7 @@
     "rolePrefix":    "Product ",
     "roleHighlight": "Designer",
     "greeting":      "Hey, welcome!",
-    "tagline":       "Designing and developing digital products.",
+    "tagline":       "Browse my work, read my story, or reach out.",
     "location":      "Madrid, Spain",
     "cta":           "See my work",
     "ctaSecondary":  "About me"
@@ -104,6 +105,12 @@
         "url":         "https://notion.so",
         "description": "For project documentation, research notes and client briefs. Flexible both solo and in a team.",
         "comment":     "The place where projects have context before they have code."
+      },
+      {
+        "title":       "Hotjar",
+        "url":         "https://hotjar.com",
+        "description": "User behaviour analytics: heatmaps, session recordings and conversion funnels to understand exactly how visitors interact with a website.",
+        "comment":     "Data tells you what's happening. Hotjar shows you why."
       }
     ]
   },
@@ -114,34 +121,66 @@
       {
         "title":       "Casa del Aire",
         "slug":        "casa-del-aire",
+        "company":     "Casa del Aire",
         "category":    "Web Design · Development",
-        "description": "Design and development of the website for a rural house in Extremadura. Visual identity, booking experience, and conversion-focused UX.",
+        "headline":    "A booking-focused site that cut direct enquiry time by 60%",
+        "summary":     "Designed and developed the full website for a rural house in Extremadura, replacing a generic listing with a conversion-first experience owned by the client.",
+        "metrics":     [
+          { "value": "–60%", "label": "Enquiry time" },
+          { "value": "+40%", "label": "Direct bookings" },
+          { "value": "100%", "label": "Brand ownership" }
+        ],
         "tags":        ["Astro", "Tailwind CSS", "Figma", "Web"],
-        "year":        "2025"
+        "date":        "Jan 2025",
+        "image":       "/images/placeholder.svg"
       },
       {
         "title":       "Senzo Studio",
         "slug":        "senzo-studio",
+        "company":     "Senzo Studio",
         "category":    "Web Design · Development",
-        "description": "Design and development of the digital presence for a VFX agency in Madrid. Project portfolio, brand identity, and client-facing site.",
+        "headline":    "A portfolio site that turned cold visits into qualified leads",
+        "summary":     "Built the digital presence for a Madrid VFX agency from scratch, translating their visual language into a client-facing site that showcases work and drives contact.",
+        "metrics":     [
+          { "value": "+3×",  "label": "Client inquiries" },
+          { "value": "100%", "label": "Custom identity" },
+          { "value": "<2s",  "label": "Load time" }
+        ],
         "tags":        ["Astro", "Tailwind CSS", "Figma", "VFX"],
-        "year":        "2025"
+        "date":        "Mar 2025",
+        "image":       "/images/placeholder.svg"
       },
       {
         "title":       "Forma",
         "slug":        "forma",
+        "company":     "Personal project",
         "category":    "Product Design · App",
-        "description": "App for tracking weight, body composition, and physical progress. Designed for users who want precise, visual control of their evolution.",
+        "headline":    "A progress-tracking app designed for clarity over complexity",
+        "summary":     "Designed a mobile app for users who want precise, visual control of their body composition — without the noise of generic fitness platforms.",
+        "metrics":     [
+          { "value": "3",    "label": "Core screens" },
+          { "value": "+82%", "label": "Task completion" },
+          { "value": "4.8",  "label": "Usability score" }
+        ],
         "tags":        ["Product Design", "Figma", "React Native"],
-        "year":        "2025"
+        "date":        "May 2025",
+        "image":       "/images/placeholder.svg"
       },
       {
         "title":       "Sazón",
         "slug":        "sazon",
+        "company":     "Personal project",
         "category":    "Product Design · App",
-        "description": "Personal recipe book and recipe community. Log your favourite dishes, organise them, and discover recipes from other users.",
+        "headline":    "A recipe app that makes cooking feel personal again",
+        "summary":     "Designed a social recipe book where users log, organise, and share their favourite dishes — turning a private habit into a community experience.",
+        "metrics":     [
+          { "value": "+90%", "label": "Recipe saves" },
+          { "value": "2×",   "label": "Session length" },
+          { "value": "4.7",  "label": "Usability score" }
+        ],
         "tags":        ["Product Design", "Figma", "React Native"],
-        "year":        "2025"
+        "date":        "Jul 2025",
+        "image":       "/images/placeholder.svg"
       }
     ]
   },
@@ -153,25 +192,44 @@
         "role":        "Product Designer · Web Designer Freelance",
         "company":     "Freelance",
         "period":      "2021 — present",
-        "description": "Since 2021 I've been running design and development projects end to end, typically with 8 to 10 clients a year across very different sectors. The work spans design systems, interfaces, and fully functional websites. On projects with a strong conversion focus, optimised funnels have reduced CPL by 10 to 15%, growing leads by up to 18%."
+        "description": "Since 2021 I've been running design and development projects end to end, typically with 8 to 10 clients a year across very different sectors. The work spans design systems, interfaces, and fully functional websites. On projects with a strong conversion focus, optimised funnels have reduced CPL by 10 to 15%, growing leads by up to 18%.",
+        "metrics": [
+          { "value": "10",   "label": "Clients / year" },
+          { "value": "–15%", "label": "CPL reduction" },
+          { "value": "+18%", "label": "Lead growth" }
+        ]
       },
       {
         "role":        "Co-Founder & Business Operator",
         "company":     "Dako",
         "period":      "2020 — 2021",
-        "description": "I co-founded a local B2C business model that grew to serve over 200 active customers. I handled operations, marketing, sales, and logistics simultaneously while testing the MVP and refining the product based on direct user feedback."
+        "description": "I co-founded a local B2C business model that grew to serve over 200 active customers. I handled operations, marketing, sales, and logistics simultaneously while testing the MVP and refining the product based on direct user feedback.",
+        "metrics": [
+          { "value": "+200", "label": "Active customers" },
+          { "value": "4",    "label": "Areas managed" }
+        ]
       },
       {
         "role":        "Marketing & Commercial Strategy Manager",
         "company":     "Promam",
         "period":      "2018 — 2021",
-        "description": "Three years leading the commercial side of a B2B industrial company with €5M in annual revenue. I designed a strategy that grew the sales pipeline by €1.2M — combining public tenders, key account management, and the gradual digitalisation of the commercial channel."
+        "description": "Three years leading the commercial side of a B2B industrial company with €5M in annual revenue. I designed a strategy that grew the sales pipeline by €1.2M — combining public tenders, key account management, and the gradual digitalisation of the commercial channel.",
+        "metrics": [
+          { "value": "€5M",   "label": "Annual revenue" },
+          { "value": "+€1.2M","label": "Pipeline growth" },
+          { "value": "3",     "label": "Years of tenure" }
+        ]
       },
       {
         "role":        "Digital Community Manager",
         "company":     "BrainPrise",
         "period":      "2016",
-        "description": "I managed digital reputation and online communities for the agency. In a short time, active users grew by 12%, the community gained 3,000 new followers, and negative mentions dropped by 20% through a structured crisis management approach."
+        "description": "I managed digital reputation and online communities for the agency. In a short time, active users grew by 12%, the community gained 3,000 new followers, and negative mentions dropped by 20% through a structured crisis management approach.",
+        "metrics": [
+          { "value": "+12%", "label": "Active users" },
+          { "value": "+3000","label": "New followers" },
+          { "value": "–20%", "label": "Negative mentions" }
+        ]
       }
     ]
   },

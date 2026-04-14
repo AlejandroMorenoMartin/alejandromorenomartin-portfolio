@@ -27,7 +27,8 @@ const altPath  = lang === "es" ? "/en" : "/";
       >
         <svg width="32" height="32" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" class="logo-svg">
           <rect width="48" height="48" rx="10" fill="var(--color-surface)"/>
-          <circle cx="24" cy="24" r="14" fill="var(--color-text-1)" class="logo-circle" />
+          <circle cx="24" cy="24" r="14" fill="none" stroke-width="1.5" class="logo-ring"/>
+          <circle cx="24" cy="24" r="8" class="logo-dot"/>
         </svg>
       </a>
 
@@ -83,11 +84,19 @@ const altPath  = lang === "es" ? "/en" : "/";
     transform: scale(1.08);
   }
 
-  .logo-circle {
-    fill: var(--color-text-1);
-    transition: fill 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  .logo-ring {
+    stroke: var(--color-border-subtle);
+    transition: stroke 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   }
-  .logo-link:hover .logo-circle {
+  .logo-link:hover .logo-ring {
+    stroke: #E4A711;
+  }
+
+  .logo-dot {
+    fill: var(--color-text-1);
+    transition: fill 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .logo-link:hover .logo-dot {
     fill: #E4A711;
   }
 </style>

@@ -10,6 +10,7 @@ const { lang } = Astro.props;
 const t        = useTranslations(lang);
 
 const sections = [
+  { id: "hero",       label: t.nav.home },
   { id: "work",       label: t.work.label },
   { id: "about",      label: t.about.label },
   { id: "experience", label: t.experience.label },
@@ -28,7 +29,7 @@ const sections = [
       href={`#${s.id}`}
       data-toc={s.id}
       class="toc-item group flex items-center justify-end gap-3"
-      aria-label={s.label}
+      aria-label={s.label || "Welcome"}
     >
       <span class="toc-label self-center font-display text-label-sm text-text-7 text-right leading-snug transition-colors duration-fast group-hover:text-text-5 max-w-[140px]">
         {s.label}
@@ -62,6 +63,7 @@ const sections = [
   #toc.is-visible .toc-item:nth-child(3) { opacity: 1; transform: none; transition-delay: 175ms; }
   #toc.is-visible .toc-item:nth-child(4) { opacity: 1; transform: none; transition-delay: 263ms; }
   #toc.is-visible .toc-item:nth-child(5) { opacity: 1; transform: none; transition-delay: 350ms; }
+  #toc.is-visible .toc-item:nth-child(6) { opacity: 1; transform: none; transition-delay: 438ms; }
 
   /* ── Sección activa ───────────────────── */
   .toc-item.is-active .toc-label {
@@ -85,7 +87,7 @@ const sections = [
     toc.classList.add("is-visible");
   }, { once: true });
 
-  // Resalta la sección activa
+  // Resalta la sección activa y actualiza el título
   const sectionObserver = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {

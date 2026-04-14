@@ -1,7 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <rect width="32" height="32" rx="8" fill="#0f0e0c"/>
-  <text x="50%" y="50%" dominant-baseline="central" text-anchor="middle"
-        font-family="Poppins, sans-serif" font-size="16" font-weight="700" fill="#E4A711">
-    AM
-  </text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+  <rect width="48" height="48" rx="10" fill="#0a0a0a"/>
+  <circle cx="24" cy="24" r="14" fill="none" stroke="rgba(255,255,255,0.22)" stroke-width="1.5"/>
+  <circle cx="24" cy="24" r="8" fill="#ffffff"/>
 </svg>

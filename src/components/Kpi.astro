@@ -1,0 +1,85 @@
+---
+/**
+ * Kpi — reusable KPI stat with animated counter on viewport entry.
+ *
+ * Usage:
+ *   <Kpi value="+82%" label="Task completion" />
+ *
+ * Parsing rules:
+ *   "+82%"  → prefix "+", number 82, suffix "%"
+ *   "–60%"  → prefix "–", number 60, suffix "%"
+ *   "<2s"   → prefix "<", number 2,  suffix "s"
+ *   "4.8"   → prefix "",  number 4.8, suffix ""
+ *   "100%"  → prefix "",  number 100, suffix "%"
+ */
+interface Props {
+  value: string;
+  label: string;
+  class?: string;
+}
+
+const { value, label, class: className = "" } = Astro.props;
+
+// Parse: leading symbol | number | trailing symbol
+const match = value.match(/^([^\d]*)(\d[\d.]*)(.*)$/);
+const prefix  = match?.[1] ?? "";
+const numeric = match?.[2] ?? "0";
+const suffix  = match?.[3] ?? "";
+const decimals = numeric.includes(".") ? numeric.split(".")[1].length : 0;
+---
+
+<div class:list={["kpi", className]}>
+  <p
+    class="kpi-value font-data text-display-md font-bold text-primary-500 leading-none"
+    data-kpi-prefix={prefix}
+    data-kpi-target={numeric}
+    data-kpi-suffix={suffix}
+    data-kpi-decimals={String(decimals)}
+    aria-label={value}
+  >
+    {prefix}0{decimals > 0 ? "." + "0".repeat(decimals) : ""}{suffix}
+  </p>
+  <p class="kpi-label text-label-sm text-text-6 mt-1">{label}</p>
+</div>
+
+<script>
+  const DURATION_MS = 1200;
+  const EASING = (t: number) => 1 - Math.pow(1 - t, 3); // ease-out cubic
+
+  function animateKpi(el: HTMLElement): void {
+    const target   = parseFloat(el.dataset.kpiTarget   ?? "0");
+    const decimals = parseInt(el.dataset.kpiDecimals   ?? "0", 10);
+    const prefix   = el.dataset.kpiPrefix ?? "";
+    const suffix   = el.dataset.kpiSuffix ?? "";
+
+    const start    = performance.now();
+
+    function frame(now: number): void {
+      const elapsed  = now - start;
+      const progress = Math.min(elapsed / DURATION_MS, 1);
+      const eased    = EASING(progress);
+      const current  = target * eased;
+
+      el.textContent = `${prefix}${current.toFixed(decimals)}${suffix}`;
+
+      if (progress < 1) requestAnimationFrame(frame);
+    }
+
+    requestAnimationFrame(frame);
+  }
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        animateKpi(entry.target as HTMLElement);
+        observer.unobserve(entry.target);
+      });
+    },
+    { threshold: 0.5 }
+  );
+
+  document.querySelectorAll<HTMLElement>(".kpi-value").forEach((el) => {
+    observer.observe(el);
+  });
+</script>

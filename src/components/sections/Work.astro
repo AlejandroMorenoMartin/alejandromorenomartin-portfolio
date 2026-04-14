@@ -1,6 +1,7 @@
 ---
 import type { Lang } from "@/i18n/utils";
 import { useTranslations } from "@/i18n/utils";
+import Kpi from "@/components/Kpi.astro";
 
 interface Props {
   lang: Lang;
@@ -18,36 +19,180 @@ const workBase = lang === "en" ? "/en/work" : "/work";
       {t.work.heading}
     </h2>
 
-    <ol class="grid md:grid-cols-2 gap-4" role="list">
-      {t.work.projects.map((project) => (
-        <li>
-          <a
-            href={`${workBase}/${project.slug}`}
-            class="group flex flex-col h-full p-7 rounded-xl border-[0.5px] border-[var(--color-border-subtle)] bg-surface hover:bg-[var(--color-btn-hover-subtle)] transition-all duration-fast active:scale-[0.99] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500/40"
-          >
-            <!-- Title -->
-            <h3 class="font-display text-display-sm font-semibold text-text-1 leading-snug mb-1">
-              {project.title}
-            </h3>
-            <!-- Year -->
-            <span class="font-display text-label-sm text-text-5 italic mb-3 block">{project.year}</span>
+    <!-- Carousel wrapper -->
+    <div id="work-carousel" class="overflow-hidden rounded-xl">
+      <div id="work-track" class="flex" style="transition: transform 0.85s cubic-bezier(0.76, 0, 0.24, 1);">
+        {t.work.projects.map((project) => (
+          <div class="work-slide w-full shrink-0" aria-hidden="false">
+            <a
+              href={`${workBase}/${project.slug}`}
+              class="group flex flex-col md:flex-row h-full rounded-xl border-[0.5px] border-[var(--color-border-subtle)] bg-surface hover:bg-[var(--color-btn-hover-subtle)] transition-colors duration-fast active:scale-[0.995] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500/40 overflow-hidden"
+              tabindex="0"
+            >
+              <!-- Left: content -->
+              <div class="flex flex-col flex-1 p-8 md:p-10">
 
-            <!-- Description -->
-            <p class="text-body-sm text-text-4 leading-relaxed flex-1">
-              {project.description}
-            </p>
+                <!-- Company -->
+                <span class="font-display text-label-sm font-semibold tracking-widest uppercase text-text-5 mb-1 block">
+                  {project.company}
+                </span>
 
-            <!-- Tags -->
-            <ul class="flex flex-wrap gap-2 mt-6" role="list" aria-label="Technologies">
-              {project.tags.map((tag) => (
-                <li class="text-label-sm text-text-5 bg-surface-overlay border-[0.5px] border-[var(--color-border-subtle)] rounded-full px-3 py-1">
-                  {tag}
-                </li>
-              ))}
-            </ul>
-          </a>
-        </li>
-      ))}
-    </ol>
+                <!-- Headline -->
+                <h3 class="font-display text-display-md font-bold text-text-2 leading-[1.1] mb-4">
+                  {project.headline}
+                </h3>
+
+                <!-- Summary -->
+                <p class="text-body-sm text-text-4 leading-relaxed flex-1 max-w-lg">
+                  {project.summary}
+                </p>
+
+                <!-- Metrics -->
+                <div class="flex items-start gap-8 mt-8">
+                  {project.metrics.map((metric, i) => (
+                    <>
+                      <Kpi value={metric.value} label={metric.label} />
+                      {i < project.metrics.length - 1 && (
+                        <div class="w-px h-8 self-center bg-[var(--color-border-subtle)]" aria-hidden="true" />
+                      )}
+                    </>
+                  ))}
+                </div>
+
+              </div>
+
+              <!-- Right: image -->
+              <div class="md:w-[42%] shrink-0 min-h-[200px] md:min-h-0 overflow-hidden border-t-[0.5px] md:border-t-0 md:border-l-[0.5px] border-[var(--color-border-subtle)] bg-surface-overlay">
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+                  loading="lazy"
+                  decoding="async"
+                />
+              </div>
+
+            </a>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- Controls -->
+    <div class="flex items-center justify-center gap-5 mt-7">
+
+      <!-- Prev -->
+      <button
+        id="work-prev"
+        type="button"
+        aria-label="Previous project"
+        class="carousel-btn flex items-center justify-center w-9 h-9 rounded-lg border-[0.5px] border-[var(--color-border-subtle)] text-text-4 hover:bg-[var(--color-btn-hover-subtle)] hover:text-text-2 transition-colors duration-fast focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500/40"
+      >
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="15 18 9 12 15 6"/>
+        </svg>
+      </button>
+
+      <!-- Dots -->
+      <div class="flex items-center gap-3" role="tablist" aria-label="Projects">
+        {t.work.projects.map((project, i) => (
+          <button
+            type="button"
+            role="tab"
+            class="work-dot"
+            data-index={String(i)}
+            aria-label={project.title}
+            aria-selected={i === 0 ? "true" : "false"}
+          />
+        ))}
+      </div>
+
+      <!-- Next -->
+      <button
+        id="work-next"
+        type="button"
+        aria-label="Next project"
+        class="carousel-btn flex items-center justify-center w-9 h-9 rounded-lg border-[0.5px] border-[var(--color-border-subtle)] text-text-4 hover:bg-[var(--color-btn-hover-subtle)] hover:text-text-2 transition-colors duration-fast focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500/40"
+      >
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="9 18 15 12 9 6"/>
+        </svg>
+      </button>
+
+    </div>
   </div>
 </section>
+
+<style>
+
+  /* ── Dots — mismo estilo que TOC ──────────────────────── */
+  .work-dot {
+    width:  6px;
+    height: 6px;
+    border-radius: 9999px;
+    background: var(--color-text-8);
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition:
+      background-color 0.25s ease,
+      box-shadow      0.25s ease,
+      width           0.25s ease,
+      height          0.25s ease;
+  }
+
+  .work-dot:hover {
+    background: var(--color-text-6);
+  }
+
+  .work-dot.is-active {
+    background: #E4A711;
+    box-shadow: 0 0 0 3px rgba(228, 167, 17, 0.2);
+    width:  8px;
+    height: 8px;
+  }
+
+  /* ── Disabled state para botones ──────────────────────── */
+  .carousel-btn.disabled {
+    opacity: 0.28;
+    pointer-events: none;
+    cursor: not-allowed;
+  }
+</style>
+
+<script>
+  const prevBtn = document.getElementById("work-prev")  as HTMLButtonElement;
+  const nextBtn = document.getElementById("work-next")  as HTMLButtonElement;
+  const slides  = Array.from(document.querySelectorAll<HTMLElement>(".work-slide"));
+  const dots    = Array.from(document.querySelectorAll<HTMLButtonElement>(".work-dot"));
+  const total   = slides.length;
+
+  const track = document.getElementById("work-track") as HTMLElement;
+  let current = 0;
+
+  function goTo(index: number): void {
+    current = index;
+    track.style.transform = `translateX(-${current * 100}%)`;
+
+    slides.forEach((slide, i) => {
+      slide.setAttribute("aria-hidden", i === current ? "false" : "true");
+      const link = slide.querySelector("a");
+      if (link) link.tabIndex = i === current ? 0 : -1;
+    });
+
+    dots.forEach((dot, i) => {
+      dot.classList.toggle("is-active", i === current);
+      dot.setAttribute("aria-selected", i === current ? "true" : "false");
+    });
+
+    prevBtn.classList.toggle("disabled", current === 0);
+    nextBtn.classList.toggle("disabled", current === total - 1);
+  }
+
+  prevBtn.addEventListener("click", () => { if (current > 0) goTo(current - 1); });
+  nextBtn.addEventListener("click", () => { if (current < total - 1) goTo(current + 1); });
+  dots.forEach((dot, i) => dot.addEventListener("click", () => goTo(i)));
+
+  goTo(0);
+</script>

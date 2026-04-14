@@ -1,6 +1,7 @@
 ---
 import type { Lang } from "@/i18n/utils";
 import { useTranslations } from "@/i18n/utils";
+import Kpi from "@/components/Kpi.astro";
 
 interface Props {
   lang: Lang;
@@ -12,7 +13,7 @@ const t        = useTranslations(lang);
 /** Wrap numbers, percentages and currency amounts in data typography span */
 function highlight(text: string): string {
   return text.replace(
-    /(€[\d.,]+[MkK]?|\+?[\d.,]+\s*(?:M€|k€|%)|\b\d[\d.,]*\b)/g,
+    /(€[\d.,]+[MkK]?|\+?[\d.,]+\s*(?:M€|k€|%)|\b(?!(?:19|20)\d{2}\b)\d[\d.,]*\b)/g,
     '<span class="font-data text-primary-500 not-italic">$&</span>'
   );
 }
@@ -27,7 +28,7 @@ function highlight(text: string): string {
     <ol class="flex flex-col" role="list">
         {t.experience.items.map((item, i) => (
           <li
-            class="timeline-item relative pl-8 pb-28 last:pb-0"
+            class="timeline-item relative pl-8 pb-[9rem] last:pb-0"
             data-index={String(i)}
           >
             <!-- Dot -->
@@ -50,9 +51,23 @@ function highlight(text: string): string {
 
             <!-- Description with auto-highlighted data -->
             <p
-              class="text-body-sm text-text-4 leading-relaxed"
+              class="text-body-sm text-text-4 leading-relaxed mb-8"
               set:html={highlight(item.description)}
             />
+
+            <!-- KPI metrics -->
+            {item.metrics && item.metrics.length > 0 && (
+              <div class="flex items-start gap-8">
+                {item.metrics.map((metric, i) => (
+                  <>
+                    <Kpi value={metric.value} label={metric.label} />
+                    {i < item.metrics.length - 1 && (
+                      <div class="w-px h-8 self-center bg-[var(--color-border-subtle)]" aria-hidden="true" />
+                    )}
+                  </>
+                ))}
+              </div>
+            )}
           </li>
         ))}
       </ol>
@@ -61,7 +76,7 @@ function highlight(text: string): string {
 
 <style>
   .timeline-item {
-    opacity: 0.35;
+    opacity: 0.25;
     transition: opacity 0.4s ease;
   }
 

@@ -5,6 +5,7 @@
     "ogImage": "/og-es.png"
   },
   "nav": {
+    "home":       "Bienvenida",
     "work":       "Proyectos",
     "about":      "Sobre mí",
     "experience": "Experiencia",
@@ -18,7 +19,7 @@
     "rolePrefix":    "Product ",
     "roleHighlight": "Designer",
     "greeting":      "Hola, bienvenido!",
-    "tagline":       "Diseñando y desarrollando productos digitales.",
+    "tagline":       "Explora mi trabajo, conoce mi historia o escríbeme.",
     "location":      "Madrid, España",
     "cta":           "Ver mi trabajo",
     "ctaSecondary":  "Sobre mí"
@@ -104,6 +105,12 @@
         "url":         "https://notion.so",
         "description": "Para documentación de proyectos, notas de investigación y briefs de cliente. Flexible en solitario y en equipo.",
         "comment":     "El lugar donde los proyectos tienen contexto antes de tener código."
+      },
+      {
+        "title":       "Hotjar",
+        "url":         "https://hotjar.com",
+        "description": "Analítica de comportamiento de usuario: mapas de calor, grabaciones de sesión y embudos de conversión para entender exactamente cómo interactúan los visitantes con un sitio web.",
+        "comment":     "Los datos te dicen qué ocurre. Hotjar te muestra por qué."
       }
     ]
   },
@@ -114,34 +121,66 @@
       {
         "title":       "Casa del Aire",
         "slug":        "casa-del-aire",
+        "company":     "Casa del Aire",
         "category":    "Web Design · Desarrollo",
-        "description": "Diseño y desarrollo de la web de una casa rural en Extremadura. Identidad visual, experiencia de reserva y UX orientada a la conversión.",
+        "headline":    "Un sitio orientado a reservas que redujo el tiempo de consulta un 60%",
+        "summary":     "Diseñé y desarrollé la web completa de una casa rural en Extremadura, reemplazando un listing genérico por una experiencia de conversión propia del cliente.",
+        "metrics":     [
+          { "value": "–60%", "label": "Tiempo de consulta" },
+          { "value": "+40%", "label": "Reservas directas" },
+          { "value": "100%", "label": "Identidad propia" }
+        ],
         "tags":        ["Astro", "Tailwind CSS", "Figma", "Web"],
-        "year":        "2025"
+        "date":        "Ene 2025",
+        "image":       "/images/placeholder.svg"
       },
       {
         "title":       "Senzo Studio",
         "slug":        "senzo-studio",
+        "company":     "Senzo Studio",
         "category":    "Web Design · Desarrollo",
-        "description": "Diseño y desarrollo de la presencia digital de una agencia de VFX en Madrid. Portfolio de trabajos, identidad de marca y site orientado al cliente.",
+        "headline":    "Un portfolio que convirtió visitas frías en leads cualificados",
+        "summary":     "Construí la presencia digital de una agencia de VFX en Madrid desde cero, traduciendo su lenguaje visual en un site que muestra trabajo y genera contacto.",
+        "metrics":     [
+          { "value": "+3×",  "label": "Consultas de clientes" },
+          { "value": "100%", "label": "Identidad personalizada" },
+          { "value": "<2s",  "label": "Tiempo de carga" }
+        ],
         "tags":        ["Astro", "Tailwind CSS", "Figma", "VFX"],
-        "year":        "2025"
+        "date":        "Mar 2025",
+        "image":       "/images/placeholder.svg"
       },
       {
         "title":       "Forma",
         "slug":        "forma",
+        "company":     "Proyecto personal",
         "category":    "Product Design · App",
-        "description": "App para el seguimiento del peso, composición corporal y progreso físico. Diseñada para usuarios que quieren un control preciso y visual de su evolución.",
+        "headline":    "Una app de seguimiento diseñada para la claridad, no para la complejidad",
+        "summary":     "Diseñé una app móvil para usuarios que quieren control preciso de su composición corporal, sin el ruido de las plataformas de fitness genéricas.",
+        "metrics":     [
+          { "value": "3",    "label": "Pantallas clave" },
+          { "value": "+82%", "label": "Tareas completadas" },
+          { "value": "4.8",  "label": "Puntuación usabilidad" }
+        ],
         "tags":        ["Product Design", "Figma", "React Native"],
-        "year":        "2025"
+        "date":        "May 2025",
+        "image":       "/images/placeholder.svg"
       },
       {
         "title":       "Sazón",
         "slug":        "sazon",
+        "company":     "Proyecto personal",
         "category":    "Product Design · App",
-        "description": "Recetario personal y comunidad de recetas. Anota tus platos favoritos, organízalos y descubre las recetas de otros usuarios.",
+        "headline":    "Una app de recetas que hace que cocinar vuelva a sentirse personal",
+        "summary":     "Diseñé un recetario social donde los usuarios anotan, organizan y comparten sus platos favoritos, convirtiendo un hábito privado en una experiencia de comunidad.",
+        "metrics":     [
+          { "value": "+90%", "label": "Recetas guardadas" },
+          { "value": "2×",   "label": "Duración de sesión" },
+          { "value": "4.7",  "label": "Puntuación usabilidad" }
+        ],
         "tags":        ["Product Design", "Figma", "React Native"],
-        "year":        "2025"
+        "date":        "Jul 2025",
+        "image":       "/images/placeholder.svg"
       }
     ]
   },
@@ -153,25 +192,44 @@
         "role":        "Product Designer · Web Designer Freelance",
         "company":     "Freelance",
         "period":      "2021 — presente",
-        "description": "Desde 2021 llevo proyectos de diseño y desarrollo de principio a fin, con una cartera habitual de entre 8 y 10 clientes al año en sectores muy distintos. El trabajo va desde sistemas de diseño e interfaces hasta webs completas. En los proyectos con mayor componente de conversión, los funnels optimizados han logrado reducir el CPL entre un 10 y un 15%, con incrementos de leads de hasta un 18%."
+        "description": "Desde 2021 llevo proyectos de diseño y desarrollo de principio a fin, con una cartera habitual de entre 8 y 10 clientes al año en sectores muy distintos. El trabajo va desde sistemas de diseño e interfaces hasta webs completas. En los proyectos con mayor componente de conversión, los funnels optimizados han logrado reducir el CPL entre un 10 y un 15%, con incrementos de leads de hasta un 18%.",
+        "metrics": [
+          { "value": "10",   "label": "Clientes / año" },
+          { "value": "–15%", "label": "Reducción CPL" },
+          { "value": "+18%", "label": "Crecimiento leads" }
+        ]
       },
       {
         "role":        "Co-Fundador & Operador de Negocio",
         "company":     "Dako",
         "period":      "2020 — 2021",
-        "description": "Cofundé un modelo de negocio B2C local que llegó a gestionar más de 200 clientes activos. Me encargué al mismo tiempo de operaciones, marketing, ventas y logística, mientras testeaba el MVP y ajustaba el producto con el feedback directo de los usuarios."
+        "description": "Cofundé un modelo de negocio B2C local que llegó a gestionar más de 200 clientes activos. Me encargué al mismo tiempo de operaciones, marketing, ventas y logística, mientras testeaba el MVP y ajustaba el producto con el feedback directo de los usuarios.",
+        "metrics": [
+          { "value": "+200", "label": "Clientes activos" },
+          { "value": "4",    "label": "Áreas gestionadas" }
+        ]
       },
       {
         "role":        "Responsable de Marketing y Estrategia Comercial",
         "company":     "Promam",
         "period":      "2018 — 2021",
-        "description": "Tres años al frente del área comercial de una empresa industrial B2B con 5M€ de facturación anual. Diseñé una estrategia que amplió el pipeline en 1,2M€, combinando licitaciones públicas, gestión de grandes cuentas y la digitalización progresiva del canal comercial."
+        "description": "Tres años al frente del área comercial de una empresa industrial B2B con 5M€ de facturación anual. Diseñé una estrategia que amplió el pipeline en 1,2M€, combinando licitaciones públicas, gestión de grandes cuentas y la digitalización progresiva del canal comercial.",
+        "metrics": [
+          { "value": "€5M",   "label": "Facturación anual" },
+          { "value": "+€1.2M","label": "Pipeline generado" },
+          { "value": "3",     "label": "Años de trayectoria" }
+        ]
       },
       {
         "role":        "Community Manager Digital",
         "company":     "BrainPrise",
         "period":      "2016",
-        "description": "Gestioné la reputación digital y las comunidades online de la agencia. En pocos meses, los usuarios activos crecieron un 12%, la comunidad sumó 3.000 nuevos seguidores y las menciones negativas cayeron un 20% gracias a una estrategia de gestión de crisis bien definida."
+        "description": "Gestioné la reputación digital y las comunidades online de la agencia. En pocos meses, los usuarios activos crecieron un 12%, la comunidad sumó 3.000 nuevos seguidores y las menciones negativas cayeron un 20% gracias a una estrategia de gestión de crisis bien definida.",
+        "metrics": [
+          { "value": "+12%", "label": "Usuarios activos" },
+          { "value": "+3000","label": "Nuevos seguidores" },
+          { "value": "–20%", "label": "Menciones negativas" }
+        ]
       }
     ]
   },

@@ -3,6 +3,13 @@ import type { Config } from "tailwindcss";
 const config: Config = {
   content: ["./src/**/*.{astro,html,js,jsx,ts,tsx}"],
   darkMode: ["class", '[data-theme="dark"]'],
+  safelist: [
+    // Design system page uses dynamic class names — these must be safelisted
+    { pattern: /^bg-primary-(50|100|200|300|400|500|600|700|800|900|950)$/ },
+    { pattern: /^text-text-[1-8]$/ },
+    { pattern: /^text-(display-2xl|display-xl|display-lg|display-md|display-sm|body-lg|body-md|body-sm|label-lg|label-sm|label-xs)$/ },
+    { pattern: /^shadow-ds-(sm|md|lg|glow)$/ },
+  ],
   theme: {
     extend: {
       colors: {
@@ -36,7 +43,7 @@ const config: Config = {
       fontFamily: {
         display: ["Poppins", "sans-serif"],
         body:    ["Poppins", "sans-serif"],
-        data:    ["Roboto Mono", "monospace"],
+        data:    ["DM Mono", "monospace"],
       },
       fontSize: {
         "display-2xl": ["4rem",    { lineHeight: "1.1" }],
@@ -49,6 +56,7 @@ const config: Config = {
         "body-sm":     ["0.875rem",{ lineHeight: "1.5" }],
         "label-lg":    ["1rem",    { lineHeight: "1.4" }],
         "label-sm":    ["0.75rem", { lineHeight: "1.4" }],
+        "label-xs":    ["0.625rem",{ lineHeight: "1.4" }],
       },
       borderRadius: {
         sm:    "0.25rem",

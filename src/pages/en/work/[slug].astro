@@ -31,7 +31,7 @@ const typeLabel = isApp ? "Application" : "Web project";
 
 <BaseLayout
   title={`${project.title} — Alejandro Moreno`}
-  description={project.description}
+  description={project.summary}
   lang={lang}
   canonicalURL={canonicalURL}
   alternateURL={alternateURL}
@@ -62,14 +62,14 @@ const typeLabel = isApp ? "Application" : "Web project";
         </h1>
 
         <p class="text-body-lg text-text-4 leading-relaxed max-w-xl mb-10">
-          {project.description}
+          {project.summary}
         </p>
 
         <!-- Meta row -->
         <div class="flex flex-wrap items-center gap-x-10 gap-y-4 pb-10 border-b border-[var(--color-border-subtle)]">
           <div>
-            <p class="font-data text-label-sm text-primary-500 mb-0.5">Year</p>
-            <p class="font-display text-label-lg font-medium text-text-2">{project.year}</p>
+            <p class="font-data text-label-sm text-primary-500 mb-0.5">Date</p>
+            <p class="font-display text-label-lg font-medium text-text-2">{project.date}</p>
           </div>
           <div>
             <p class="font-data text-label-sm text-primary-500 mb-0.5">Type</p>
