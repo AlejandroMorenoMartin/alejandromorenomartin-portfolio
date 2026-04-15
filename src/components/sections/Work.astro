@@ -20,13 +20,13 @@ const workBase = lang === "en" ? "/en/work" : "/work";
     </h2>
 
     <!-- Carousel wrapper -->
-    <div id="work-carousel" class="overflow-hidden rounded-xl">
+    <div id="work-carousel" class="overflow-hidden rounded-none">
       <div id="work-track" class="flex" style="transition: transform 0.85s cubic-bezier(0.76, 0, 0.24, 1);">
         {t.work.projects.map((project) => (
           <div class="work-slide w-full shrink-0" aria-hidden="false">
             <a
               href={`${workBase}/${project.slug}`}
-              class="group flex flex-col md:flex-row h-full rounded-xl border-[0.5px] border-[var(--color-border-subtle)] bg-surface hover:bg-[var(--color-btn-hover-subtle)] transition-colors duration-fast active:scale-[0.995] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500/40 overflow-hidden"
+              class="group flex flex-col md:flex-row h-full rounded-none border-[0.5px] border-[var(--color-border-subtle)] bg-surface hover:bg-[var(--color-btn-hover-subtle)] transition-colors duration-fast active:scale-[0.995] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500/40 overflow-hidden"
               tabindex="0"
             >
               <!-- Left: content -->
@@ -86,7 +86,7 @@ const workBase = lang === "en" ? "/en/work" : "/work";
         id="work-prev"
         type="button"
         aria-label="Previous project"
-        class="carousel-btn flex items-center justify-center w-9 h-9 rounded-lg border-[0.5px] border-[var(--color-border-subtle)] text-text-4 hover:bg-[var(--color-btn-hover-subtle)] hover:text-text-2 transition-colors duration-fast focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500/40"
+        class="carousel-btn flex items-center justify-center w-9 h-9 rounded-none border-[0.5px] border-[var(--color-border-subtle)] text-text-4 hover:bg-[var(--color-btn-hover-subtle)] hover:text-text-2 transition-colors duration-fast focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500/40"
       >
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
           <polyline points="15 18 9 12 15 6"/>
@@ -112,7 +112,7 @@ const workBase = lang === "en" ? "/en/work" : "/work";
         id="work-next"
         type="button"
         aria-label="Next project"
-        class="carousel-btn flex items-center justify-center w-9 h-9 rounded-lg border-[0.5px] border-[var(--color-border-subtle)] text-text-4 hover:bg-[var(--color-btn-hover-subtle)] hover:text-text-2 transition-colors duration-fast focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500/40"
+        class="carousel-btn flex items-center justify-center w-9 h-9 rounded-none border-[0.5px] border-[var(--color-border-subtle)] text-text-4 hover:bg-[var(--color-btn-hover-subtle)] hover:text-text-2 transition-colors duration-fast focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500/40"
       >
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
           <polyline points="9 18 15 12 9 6"/>
@@ -129,7 +129,6 @@ const workBase = lang === "en" ? "/en/work" : "/work";
   .work-dot {
     width:  6px;
     height: 6px;
-    border-radius: 9999px;
     background: var(--color-text-8);
     border: none;
     padding: 0;

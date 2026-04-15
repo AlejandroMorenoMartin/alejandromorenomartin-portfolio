@@ -14,7 +14,7 @@ const t        = useTranslations(lang);
 function highlight(text: string): string {
   return text.replace(
     /(€[\d.,]+[MkK]?|\+?[\d.,]+\s*(?:M€|k€|%)|\b(?!(?:19|20)\d{2}\b)\d[\d.,]*\b)/g,
-    '<span class="font-data text-primary-500 not-italic">$&</span>'
+    '<span class="text-primary-500 not-italic">$&</span>'
   );
 }
 ---

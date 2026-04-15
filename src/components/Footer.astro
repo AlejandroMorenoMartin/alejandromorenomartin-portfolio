@@ -57,7 +57,11 @@ const socials = [
     <!-- Meta -->
     <p class="text-label-sm text-text-6 text-center">
       {t.footer.made}{" "}
-      <a href={lang === "en" ? "/en" : "/"} class="text-text-4 font-medium hover:text-text-2 transition-colors duration-fast">{t.footer.name}</a>
+      <a
+        href={lang === "en" ? "/en" : "/"}
+        class="link-internal"
+        data-astro-reload
+      >{t.footer.name}</a>
       <span class="inline-flex items-baseline gap-1 ml-1">
         <span class="text-text-6">&amp;</span>
         <a
@@ -65,32 +69,15 @@ const socials = [
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Claude Code"
-          class="inline-flex items-baseline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500/40 rounded-sm"
+          class="inline-flex items-baseline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500/40 rounded-none"
         >
-        <svg
-          class="claude-mascot inline-block relative top-[2px]"
-          width="22" height="17"
-          viewBox="0 0 20 15"
-          fill="#D4714E"
-          aria-label="Claude Code"
-          role="img"
-        >
-          <!-- Body -->
-          <rect x="3" y="1" width="14" height="8"/>
-          <!-- Left arm -->
-          <rect x="2" y="4" width="1" height="2"/>
-          <!-- Right arm -->
-          <rect x="17" y="4" width="1" height="2"/>
-          <!-- Left eye (hole) -->
-          <rect x="6" y="2" width="2" height="3" fill="var(--color-surface)"/>
-          <!-- Right eye (hole) -->
-          <rect x="12" y="2" width="2" height="3" fill="var(--color-surface)"/>
-          <!-- Legs -->
-          <rect x="4"  y="9" width="2" height="3"/>
-          <rect x="7"  y="9" width="2" height="3"/>
-          <rect x="11" y="9" width="2" height="3"/>
-          <rect x="14" y="9" width="2" height="3"/>
-        </svg>
+          <img
+            src="/claude-code_icon.png"
+            alt="Claude Code"
+            width="25"
+            aria-hidden="true"
+            style="image-rendering: pixelated; display: inline-block; position: relative; top: 3px;"
+          />
         </a>
       </span>.
       {" "}{year}.
@@ -98,16 +85,3 @@ const socials = [
 
   </div>
 </footer>
-
-<style>
-  .claude-mascot {
-    animation: mascot-float 2.4s ease-in-out infinite;
-    image-rendering: pixelated;
-  }
-
-  @keyframes mascot-float {
-    0%, 100% { transform: translateY(0); }
-    50%       { transform: translateY(-3px); }
-  }
-</style>
-

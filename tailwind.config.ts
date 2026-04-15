@@ -43,7 +43,7 @@ const config: Config = {
       fontFamily: {
         display: ["Poppins", "sans-serif"],
         body:    ["Poppins", "sans-serif"],
-        data:    ["DM Mono", "monospace"],
+        data:    ["Press Start 2P", "monospace"],
       },
       fontSize: {
         "display-2xl": ["4rem",    { lineHeight: "1.1" }],

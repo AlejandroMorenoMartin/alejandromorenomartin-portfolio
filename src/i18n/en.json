@@ -22,7 +22,8 @@
     "tagline":       "Browse my work, read my story, or reach out.",
     "location":      "Madrid, Spain",
     "cta":           "See my work",
-    "ctaSecondary":  "About me"
+    "ctaSecondary":  "About me",
+    "thinking":      ["Designing", "Prototyping", "Prompting", "Building", "Iterating", "Systemising", "Exploring", "Validating"]
   },
   "about": {
     "label":   "About",

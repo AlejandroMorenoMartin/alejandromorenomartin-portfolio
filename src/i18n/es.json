@@ -22,7 +22,8 @@
     "tagline":       "Explora mi trabajo, conoce mi historia o escríbeme.",
     "location":      "Madrid, España",
     "cta":           "Ver mi trabajo",
-    "ctaSecondary":  "Sobre mí"
+    "ctaSecondary":  "Sobre mí",
+    "thinking":      ["Diseñando", "Prototipando", "Prompting", "Construyendo", "Iterando", "Sistematizando", "Explorando", "Validando"]
   },
   "about": {
     "label":   "Sobre mí",

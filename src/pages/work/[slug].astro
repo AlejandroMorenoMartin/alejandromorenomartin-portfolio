@@ -80,7 +80,7 @@ const typeLabel = isApp ? "Aplicación" : "Proyecto web";
             <p class="font-data text-label-sm text-primary-500 mb-0.5">Stack</p>
             <ul class="flex flex-wrap gap-2 mt-1" role="list">
               {project.tags.map((tag) => (
-                <li class="text-label-sm text-text-5 bg-surface-overlay border-[0.5px] border-[var(--color-border-subtle)] rounded-full px-3 py-1">
+                <li class="text-label-sm text-text-5 bg-surface-overlay border-[0.5px] border-[var(--color-border-subtle)] rounded-none px-3 py-1">
                   {tag}
                 </li>
               ))}
@@ -91,10 +91,10 @@ const typeLabel = isApp ? "Aplicación" : "Proyecto web";
 
       <!-- WIP placeholder -->
       <div class="max-w-3xl">
-        <div class="flex flex-col gap-6 p-8 rounded-2xl border-[0.5px] border-[var(--color-border-subtle)] bg-surface-raised">
+        <div class="flex flex-col gap-6 p-8 rounded-none border-[0.5px] border-[var(--color-border-subtle)] bg-surface-raised">
 
           <!-- Icon -->
-          <div class="w-10 h-10 rounded-xl bg-primary-500/10 flex items-center justify-center flex-shrink-0">
+          <div class="w-10 h-10 rounded-none bg-primary-500/10 flex items-center justify-center flex-shrink-0">
             <svg class="w-5 h-5 text-primary-500" viewBox="0 0 24 24" fill="currentColor">
               <path fill-rule="evenodd" d="M12 2.25c-5.385 0-9.75 4.365-9.75 9.75s4.365 9.75 9.75 9.75 9.75-4.365 9.75-9.75S17.385 2.25 12 2.25Zm.53 5.47a.75.75 0 0 0-1.06 0l-3 3a.75.75 0 1 0 1.06 1.06l1.72-1.72v5.69a.75.75 0 0 0 1.5 0v-5.69l1.72 1.72a.75.75 0 1 0 1.06-1.06l-3-3Z" clip-rule="evenodd" />
             </svg>

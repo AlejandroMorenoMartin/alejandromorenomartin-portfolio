@@ -28,9 +28,17 @@ const suffix  = match?.[3] ?? "";
 const decimals = numeric.includes(".") ? numeric.split(".")[1].length : 0;
 ---
 
+<style>
+  .kpi-value {
+    font-family: 'Press Start 2P', monospace;
+    font-size: 1.25rem;
+    line-height: 1;
+  }
+</style>
+
 <div class:list={["kpi", className]}>
   <p
-    class="kpi-value font-data text-display-md font-bold text-primary-500 leading-none"
+    class="kpi-value text-primary-500 leading-none"
     data-kpi-prefix={prefix}
     data-kpi-target={numeric}
     data-kpi-suffix={suffix}

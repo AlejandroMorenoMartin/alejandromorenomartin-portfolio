@@ -38,11 +38,11 @@ const toolIcons: Record<string, string> = {
             href={tool.url}
             target="_blank"
             rel="noopener noreferrer"
-            class="group flex flex-col h-full p-7 rounded-xl border-[0.5px] border-[var(--color-border-subtle)] bg-surface hover:bg-[var(--color-btn-hover-subtle)] transition-all duration-fast active:scale-[0.99] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500/40"
+            class="group flex flex-col h-full p-7 rounded-none border-[0.5px] border-[var(--color-border-subtle)] bg-surface hover:bg-[var(--color-btn-hover-subtle)] transition-all duration-fast active:scale-[0.99] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500/40"
           >
             <!-- Icon -->
             <div
-              class="w-10 h-10 rounded-lg bg-surface-overlay flex items-center justify-center text-primary-500 mb-5 flex-shrink-0"
+              class="w-10 h-10 rounded-none bg-surface-overlay flex items-center justify-center text-primary-500 mb-5 flex-shrink-0"
               aria-hidden="true"
               set:html={toolIcons[tool.title]}
             />

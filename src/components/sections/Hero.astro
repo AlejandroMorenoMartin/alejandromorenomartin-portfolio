@@ -44,17 +44,14 @@ const t        = useTranslations(lang);
           {t.hero.tagline}
         </p>
 
-        <div class="flex items-center justify-center gap-2 mt-5">
-          <!-- Pin con ondas -->
-          <div class="pin-wrapper" aria-hidden="true">
-            <div class="ripple ripple-1"></div>
-            <div class="ripple ripple-2"></div>
-            <div class="ripple ripple-3"></div>
-            <svg class="pin-icon w-[17.5px] h-[17.5px] text-primary-500 relative z-10" viewBox="0 0 24 24" fill="currentColor">
-              <path fill-rule="evenodd" d="M11.54 22.351l.07.04.028.016a.76.76 0 00.723 0l.028-.015.071-.041a16.975 16.975 0 001.144-.742 19.58 19.58 0 002.683-2.282c1.944-1.99 3.963-4.98 3.963-8.827a8.25 8.25 0 00-16.5 0c0 3.846 2.02 6.837 3.963 8.827a19.58 19.58 0 002.682 2.282 16.975 16.975 0 001.145.742zM12 13.5a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd" />
-            </svg>
-          </div>
-          <span class="font-display text-label-sm text-text-5 tracking-wide">{t.hero.location}</span>
+        <!-- Thinking widget -->
+        <div class="thinking-widget" aria-label="En proceso creativo" data-verbs={JSON.stringify(t.hero.thinking)}>
+          <span style="display:inline-flex;flex-shrink:0;width:18px;height:18px;align-self:center;" aria-hidden="true">
+          <img src="/alejandro-icon-nav.svg" alt="" style="width:18px;height:18px;object-fit:contain;" />
+        </span>
+          <span class="thinking-verb-wrap" aria-live="polite">
+            <span id="thinking-verb"></span><span class="thinking-cursor" aria-hidden="true">|</span>
+          </span>
         </div>
 
       </div>
@@ -120,39 +117,35 @@ const t        = useTranslations(lang);
   #hero-main.is-visible > *:nth-child(1) { opacity: 1; transform: none; transition-delay:   0ms; }
   #hero-main.is-visible > *:nth-child(2) { opacity: 1; transform: none; transition-delay: 141ms; }
   #hero-main.is-visible > *:nth-child(3) { opacity: 1; transform: none; transition-delay: 281ms; }
-  #hero-main.is-visible > *:nth-child(4) { opacity: 1; transform: none; transition-delay: 406ms; }
+  #hero-main.is-visible > *:nth-child(4) { opacity: 1; transform: none; transition-delay: 380ms; }
 
-  /* ── Location pin + ripples ───────────────────────── */
-  .pin-wrapper {
-    position: relative;
-    display: flex;
-    align-items: center;
+  /* ── Thinking widget ─────────────────────────────── */
+  .thinking-widget {
+    display:         inline-flex;
+    align-items:     center;
     justify-content: center;
-    width: 17.5px;
-    height: 17.5px;
-    flex-shrink: 0;
+    gap:             0.5rem;
+    margin-top:      1.5rem;
   }
 
-  .ripple {
-    position: absolute;
-    bottom: -7.5px;
-    left: 50%;
-    transform: translateX(-50%) scale(0);
-    width: 25px;
-    height: 10px;
-    border-radius: 50%;
-    border: 1px solid #E4A711;
-    opacity: 0;
-    animation: rippleOut 2.4s ease-out infinite;
+  .thinking-verb-wrap {
+    font-family: 'Poppins', sans-serif;
+    font-size:   0.8125rem;
+    color:       var(--color-text-4);
+    display:     inline-flex;
+    align-items: baseline;
+    gap:         1px;
   }
 
-  .ripple-1 { animation-delay: 0s; }
-  .ripple-2 { animation-delay: 0.6s; }
-  .ripple-3 { animation-delay: 1.2s; }
+  .thinking-cursor {
+    color:     var(--color-primary);
+    animation: cursor-blink 0.75s step-end infinite;
+    margin-left: 1px;
+  }
 
-  @keyframes rippleOut {
-    0%   { transform: translateX(-50%) scale(0.3); opacity: 0.7; }
-    100% { transform: translateX(-50%) scale(2.0); opacity: 0; }
+  @keyframes cursor-blink {
+    0%, 100% { opacity: 1; }
+    50%       { opacity: 0; }
   }
 
   /* ── Shared ───────────────────────────────────────── */
@@ -178,6 +171,57 @@ const t        = useTranslations(lang);
 </style>
 
 <script>
+  // ── Thinking widget — typewriter effect ─────────────────────
+  const thinkingWidget = document.querySelector(".thinking-widget") as HTMLElement;
+  const thinkingVerb   = document.getElementById("thinking-verb")  as HTMLSpanElement;
+
+  if (thinkingWidget && thinkingVerb) {
+    const verbs: string[] = JSON.parse(thinkingWidget.dataset.verbs ?? "[]");
+    let idx = 0;
+
+    const CHAR_DELAY        = 80;
+    const DELETE_DELAY      = 45;
+    const PAUSE_AFTER_TYPE  = 1800;
+    const PAUSE_AFTER_DEL   = 150;
+
+    function typeText(text: string, onDone: () => void): void {
+      let i = 0;
+      thinkingVerb.textContent = "";
+      const tick = (): void => {
+        thinkingVerb.textContent = text.slice(0, ++i);
+        if (i < text.length) setTimeout(tick, CHAR_DELAY);
+        else onDone();
+      };
+      setTimeout(tick, CHAR_DELAY);
+    }
+
+    function deleteText(onDone: () => void): void {
+      const tick = (): void => {
+        const cur = thinkingVerb.textContent ?? "";
+        if (cur.length === 0) { onDone(); return; }
+        thinkingVerb.textContent = cur.slice(0, -1);
+        setTimeout(tick, DELETE_DELAY);
+      };
+      tick();
+    }
+
+    function cycle(): void {
+      typeText(verbs[idx], () => {
+        setTimeout(() => {
+          deleteText(() => {
+            setTimeout(() => {
+              idx = (idx + 1) % verbs.length;
+              cycle();
+            }, PAUSE_AFTER_DEL);
+          });
+        }, PAUSE_AFTER_TYPE);
+      });
+    }
+
+    cycle();
+  }
+
+  // ── Greeting + main ─────────────────────────────────────────
   const greetingText = document.getElementById("greeting-text") as HTMLSpanElement;
   const cursor       = document.querySelector(".cursor")         as HTMLSpanElement;
   const heroMain     = document.getElementById("hero-main")      as HTMLDivElement;
