@@ -82,16 +82,8 @@ const jsonLd = {
 
     <ViewTransitions />
 
-    <!-- System preference detection — runs before paint to avoid flash -->
+    <!-- Language redirect (only from root "/") -->
     <script is:inline define:vars={{ lang }}>
-      // ── Theme ──────────────────────────────────────────────────
-      (function () {
-        const saved = localStorage.getItem("theme");
-        const theme = saved ?? "dark";
-        document.documentElement.setAttribute("data-theme", theme);
-      })();
-
-      // ── Language redirect (only from root "/") ─────────────────
       (function () {
         if (lang !== "es") return;
         if (localStorage.getItem("lang-redirected")) return;

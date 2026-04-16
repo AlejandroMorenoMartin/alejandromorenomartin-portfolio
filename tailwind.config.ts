@@ -41,22 +41,25 @@ const config: Config = {
         "text-8": "var(--color-text-8)",
       },
       fontFamily: {
-        display: ["Poppins", "sans-serif"],
-        body:    ["Poppins", "sans-serif"],
+        display: ["Roboto Mono", "monospace"],
+        body:    ["Roboto Mono", "monospace"],
         data:    ["Press Start 2P", "monospace"],
       },
       fontSize: {
-        "display-2xl": ["4rem",    { lineHeight: "1.1" }],
-        "display-xl":  ["3rem",    { lineHeight: "1.15" }],
-        "display-lg":  ["2.25rem", { lineHeight: "1.2" }],
-        "display-md":  ["1.875rem",{ lineHeight: "1.25" }],
-        "display-sm":  ["1.5rem",  { lineHeight: "1.3" }],
-        "body-lg":     ["1.125rem",{ lineHeight: "1.6" }],
-        "body-md":     ["1rem",    { lineHeight: "1.6" }],
-        "body-sm":     ["0.875rem",{ lineHeight: "1.5" }],
-        "label-lg":    ["1rem",    { lineHeight: "1.4" }],
-        "label-sm":    ["0.75rem", { lineHeight: "1.4" }],
-        "label-xs":    ["0.625rem",{ lineHeight: "1.4" }],
+        // ── Display — terminal, compacto ──────────────────────
+        "display-2xl": ["2.375rem", { lineHeight: "1.05" }],
+        "display-xl":  ["1.875rem", { lineHeight: "1.1"  }],
+        "display-lg":  ["1.375rem", { lineHeight: "1.2"  }],
+        "display-md":  ["1.125rem", { lineHeight: "1.25" }],
+        "display-sm":  ["0.875rem", { lineHeight: "1.3"  }],
+        // ── Body — monospace needs more leading ───────────────
+        "body-lg":     ["0.8125rem",{ lineHeight: "1.75" }],
+        "body-md":     ["0.75rem",  { lineHeight: "1.75" }],
+        "body-sm":     ["0.6875rem",{ lineHeight: "1.65" }],
+        // ── Label — teletipo, tracking abierto ───────────────
+        "label-lg":    ["0.625rem", { lineHeight: "1.5",  letterSpacing: "0.08em" }],
+        "label-sm":    ["0.5625rem",{ lineHeight: "1.5",  letterSpacing: "0.1em"  }],
+        "label-xs":    ["0.5rem",   { lineHeight: "1.4",  letterSpacing: "0.12em" }],
       },
       borderRadius: {
         sm:    "0.25rem",

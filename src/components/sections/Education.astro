@@ -10,11 +10,8 @@ const { lang } = Astro.props;
 const t        = useTranslations(lang);
 ---
 
-<section id="education" class="section-padding" aria-labelledby="education-heading">
+<section id="education" class="section-padding" aria-label={t.education.heading}>
   <div class="container-wide">
-    <h2 id="education-heading" class="text-display-lg font-display font-bold text-text-1 mb-10">
-      {t.education.heading}
-    </h2>
 
     <!-- Tab bar -->
     <div class="tab-bar-track flex gap-6 mb-10" role="tablist" aria-label={t.education.heading}>

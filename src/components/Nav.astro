@@ -1,119 +1,62 @@
 ---
 import type { Lang } from "@/i18n/utils";
-import { useTranslations, getLocalizedPath } from "@/i18n/utils";
+import pkg from "../../package.json";
 
 interface Props {
   lang: Lang;
 }
 
-const { lang } = Astro.props;
-const t        = useTranslations(lang);
-const altPath  = lang === "es" ? "/en" : "/";
+const { lang }   = Astro.props;
+const version    = `V.${pkg.version}`;
+const pathname   = Astro.url.pathname;
+
+const navLinks = [
+  { href: "/",            label: "Inicio" },
+  { href: "/proyectos",   label: "Proyectos" },
+  { href: "/sobre-mi",    label: "Sobre mí" },
+  { href: "/trayectoria", label: "Trayectoria" },
+];
+
+function isActive(href: string): boolean {
+  if (href === "/") return pathname === "/" || pathname === "";
+  return pathname === href || pathname === href + "/";
+}
 ---
 
 <header
   id="nav"
-  class="fixed top-0 inset-x-0 z-50 border-b border-transparent transition-colors duration-normal"
+  class="fixed top-0 inset-x-0 z-50 bg-surface border-b border-[var(--color-border-subtle)]"
   aria-label="Main navigation"
 >
-  <div class="px-4">
-    <nav class="flex items-center justify-between h-16">
+  <div style="max-width:1024px;margin-inline:auto;">
+    <nav class="flex items-center justify-between h-12">
 
-      <!-- Logo -->
-      <a
-        href={getLocalizedPath(lang)}
-        class="logo-link focus-visible:outline-none"
-        aria-label="Inicio"
-        data-astro-reload
-      >
-        <img
-          src="/alejandro-icon.png"
-          alt="Alejandro Moreno"
-          width="32"
-          height="32"
-          style="image-rendering: pixelated; display: block;"
-        />
-      </a>
-
-      <!-- Right: lang + theme -->
-      <div class="flex items-center gap-2">
-
-        <!-- Language switch -->
-        <a
-          href={altPath}
-          class="text-label-sm text-text-1 border-[var(--color-border-subtle)] hover:bg-[var(--color-btn-hover-subtle)] transition-all duration-fast px-3 py-2 rounded-none border-[0.5px]"
-          aria-label={`Switch to ${t.nav.langSwitch}`}
-        >
-          {t.nav.langSwitch}
-        </a>
-
-        <!-- Theme toggle -->
-        <button
-          id="theme-toggle"
-          type="button"
-          aria-label="Toggle theme"
-          class="w-9 h-9 rounded-none border-[0.5px] border-[var(--color-border-subtle)] flex items-center justify-center text-text-1 hover:bg-[var(--color-btn-hover-subtle)] transition-all duration-fast active:scale-95"
-        >
-          <span id="icon-light" class="hidden">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <circle cx="12" cy="12" r="5"/>
-              <line x1="12" y1="1" x2="12" y2="3"/>
-              <line x1="12" y1="21" x2="12" y2="23"/>
-              <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
-              <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
-              <line x1="1" y1="12" x2="3" y2="12"/>
-              <line x1="21" y1="12" x2="23" y2="12"/>
-              <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
-              <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
-            </svg>
-          </span>
-          <span id="icon-dark">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
-            </svg>
-          </span>
-        </button>
-
+      <!-- Left: project name + version -->
+      <div class="flex items-center">
+        <span class="text-body-md text-text-5">alejandro-portfolio</span>
       </div>
+
+      <!-- Right: page links -->
+      <ul class="flex items-center gap-6 list-none m-0 p-0" role="list">
+        {navLinks.map(link => (
+          <li>
+            <a
+              href={link.href}
+              class:list={[
+                "text-body-md transition-colors duration-100",
+                "focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary-500 focus-visible:ring-offset-1 focus-visible:ring-offset-surface",
+                isActive(link.href)
+                  ? "bg-primary-500 text-surface px-2 py-0.5"
+                  : "text-text-5 hover:text-text-3",
+              ]}
+              aria-current={isActive(link.href) ? "page" : undefined}
+            >
+              {link.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+
     </nav>
   </div>
 </header>
-
-<script>
-  // ─── Scroll behaviour ──────────────────────────────────────
-  const nav = document.getElementById("nav")!;
-  window.addEventListener("scroll", () => {
-    if (window.scrollY > 20) {
-      nav.classList.add("bg-surface/90", "backdrop-blur-xl", "!border-border");
-    } else {
-      nav.classList.remove("bg-surface/90", "backdrop-blur-xl", "!border-border");
-    }
-  }, { passive: true });
-
-  // ─── Theme toggle ──────────────────────────────────────────
-  const html      = document.documentElement;
-  const iconLight = document.getElementById("icon-light")!;
-  const iconDark  = document.getElementById("icon-dark")!;
-  const themeBtn  = document.getElementById("theme-toggle")!;
-
-  function applyTheme(theme: string) {
-    html.setAttribute("data-theme", theme);
-    localStorage.setItem("theme", theme);
-    if (theme === "dark") {
-      iconLight.classList.remove("hidden");
-      iconDark.classList.add("hidden");
-    } else {
-      iconLight.classList.add("hidden");
-      iconDark.classList.remove("hidden");
-    }
-  }
-
-  const systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
-  const savedTheme  = localStorage.getItem("theme") ?? systemTheme;
-  applyTheme(savedTheme);
-
-  themeBtn.addEventListener("click", () => {
-    const current = html.getAttribute("data-theme") ?? "dark";
-    applyTheme(current === "dark" ? "light" : "dark");
-  });
-</script>

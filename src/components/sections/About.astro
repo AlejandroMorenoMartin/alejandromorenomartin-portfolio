@@ -11,15 +11,12 @@ const { lang } = Astro.props;
 const t        = useTranslations(lang);
 ---
 
-<section id="about" class="section-padding" aria-labelledby="about-heading">
+<section id="about" class="section-padding" aria-label={t.about.heading}>
   <div class="container-wide">
     <div class="grid md:grid-cols-2 gap-4 items-center">
 
       <!-- Text -->
       <div>
-        <h2 id="about-heading" class="text-display-lg font-display font-bold text-text-1 mb-3">
-          {t.about.heading}
-        </h2>
 
         <!-- Location -->
         <div class="flex items-center gap-1.5 mb-8">
@@ -49,7 +46,7 @@ const t        = useTranslations(lang);
       </div>
 
       <!-- Photo -->
-      <div class="flex justify-center md:justify-end">
+      <div class="flex justify-end">
         <div class="w-72 h-72 md:w-80 md:h-80 rounded-none overflow-hidden border-[0.5px] border-[var(--color-border-subtle)]">
           <img
             src="/profile.png"

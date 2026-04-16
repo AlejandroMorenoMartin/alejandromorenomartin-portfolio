@@ -6,14 +6,14 @@ const lang = "es" as const;
 
 // Token reference data — single source of truth aligned with global.css + tailwind.config.ts
 const textTokens = [
-  { token: "text-1", hex_dark: "#ffffff", hex_light: "#0a0a0a", use: "H1, H2 — section headings" },
-  { token: "text-2", hex_dark: "#e8e8e8", hex_light: "#1f1f1f", use: "H3 — card headlines" },
-  { token: "text-3", hex_dark: "#c8c8c8", hex_light: "#3d3d3d", use: "Body principal" },
-  { token: "text-4", hex_dark: "#a8a8a8", hex_light: "#5c5c5c", use: "Body secundario, descripciones" },
-  { token: "text-5", hex_dark: "#909090", hex_light: "#757575", use: "Labels, meta, company names" },
-  { token: "text-6", hex_dark: "#787878", hex_light: "#8f8f8f", use: "Labels mínimos, fechas, subtexto" },
-  { token: "text-7", hex_dark: "#606060", hex_light: "#a3a3a3", use: "TOC inactivo, placeholder" },
-  { token: "text-8", hex_dark: "#505050", hex_light: "#b8b8b8", use: "Dots inactivos, disabled" },
+  { token: "text-1", hex_dark: "#ffffff", hex_light: "#0a0a0a", use: "H1 hero, headings principales" },
+  { token: "text-2", hex_dark: "#e8e8e8", hex_light: "#1f1f1f", use: "H2 — section headings" },
+  { token: "text-3", hex_dark: "#c8c8c8", hex_light: "#3d3d3d", use: "H3 — card headlines, subtítulos" },
+  { token: "text-4", hex_dark: "#a8a8a8", hex_light: "#5c5c5c", use: "Body principal, descripciones" },
+  { token: "text-5", hex_dark: "#909090", hex_light: "#757575", use: "Nav, footer, labels UI, meta — color estándar de chrome" },
+  { token: "text-6", hex_dark: "#787878", hex_light: "#8f8f8f", use: "Body secundario, subtexto de apoyo" },
+  { token: "text-7", hex_dark: "#606060", hex_light: "#a3a3a3", use: "Placeholder, elementos inactivos" },
+  { token: "text-8", hex_dark: "#505050", hex_light: "#b8b8b8", use: "Disabled, decorativo mínimo" },
 ];
 
 const surfaceTokens = [
@@ -25,17 +25,17 @@ const surfaceTokens = [
 ];
 
 const typoScale = [
-  { token: "display-2xl", size: "4rem",     lh: "1.1",  use: "Nombre / H1 hero" },
-  { token: "display-xl",  size: "3rem",     lh: "1.15", use: "Título grande" },
-  { token: "display-lg",  size: "2.25rem",  lh: "1.2",  use: "H2 — headings de sección" },
-  { token: "display-md",  size: "1.875rem", lh: "1.25", use: "H3 — card headline, KPI valor" },
-  { token: "display-sm",  size: "1.5rem",   lh: "1.3",  use: "Subtitle, greeting" },
-  { token: "body-lg",     size: "1.125rem", lh: "1.6",  use: "Body destacado, tagline" },
-  { token: "body-md",     size: "1rem",     lh: "1.6",  use: "Body principal (about)" },
-  { token: "body-sm",     size: "0.875rem", lh: "1.5",  use: "Body secundario, descripciones" },
-  { token: "label-lg",    size: "1rem",     lh: "1.4",  use: "Labels UI, roles (experience)" },
-  { token: "label-sm",    size: "0.75rem",  lh: "1.4",  use: "Meta, fechas, company, tags" },
-  { token: "label-xs",    size: "0.625rem", lh: "1.4",  use: "TOC labels, micro labels" },
+  { token: "display-2xl", size: "2.375rem", lh: "1.05", ls: "—",       use: "Nombre / H1 hero" },
+  { token: "display-xl",  size: "1.875rem", lh: "1.1",  ls: "—",       use: "Display mayor" },
+  { token: "display-lg",  size: "1.375rem", lh: "1.2",  ls: "—",       use: "H2 — headings de sección" },
+  { token: "display-md",  size: "1.125rem", lh: "1.25", ls: "—",       use: "H3 — card headline" },
+  { token: "display-sm",  size: "0.875rem", lh: "1.3",  ls: "—",       use: "Sub-headings" },
+  { token: "body-lg",     size: "0.8125rem",lh: "1.75", ls: "—",       use: "Lead text, tagline" },
+  { token: "body-md",     size: "0.75rem",  lh: "1.75", ls: "—",       use: "Body principal" },
+  { token: "body-sm",     size: "0.6875rem",lh: "1.65", ls: "—",       use: "Body secundario" },
+  { token: "label-lg",    size: "0.625rem", lh: "1.5",  ls: "0.08em",  use: "Labels UI, roles" },
+  { token: "label-sm",    size: "0.5625rem",lh: "1.5",  ls: "0.1em",   use: "Meta, fechas, company" },
+  { token: "label-xs",    size: "0.5rem",   lh: "1.4",  ls: "0.12em",  use: "Micro labels, tags" },
 ];
 ---
 
@@ -46,7 +46,7 @@ const typoScale = [
 >
   <Nav lang={lang} />
 
-  <main class="pt-32 pb-48 px-8">
+  <main class="pt-20 pb-48 px-8">
     <div class="container-wide">
 
       <!-- Header -->
@@ -75,7 +75,7 @@ const typoScale = [
 
         <!-- Text hierarchy -->
         <h3 class="text-display-sm font-display font-semibold text-text-2 mb-2">Jerarquía de texto</h3>
-        <p class="text-body-sm text-text-5 mb-6">Regla: a mayor tamaño tipográfico → color más puro. Nunca usar text-1 en un nivel inferior al que ya lo usa.</p>
+        <p class="text-body-sm text-text-5 mb-6">Regla: a mayor tamaño tipográfico → color más puro (text-1). A menor tamaño → color más apagado. El chrome de UI (nav, footer) usa siempre <code class="font-data text-primary-500">text-5</code> uniforme, sin excepciones.</p>
         <div class="flex flex-col gap-3 mb-12">
           {textTokens.map(t => (
             <div class="flex items-center gap-4">
@@ -109,7 +109,7 @@ const typoScale = [
       <section class="mb-24" aria-labelledby="type-heading">
         <h2 id="type-heading" class="text-display-lg font-display font-bold text-text-1 mb-4">Tipografía</h2>
         <div class="flex gap-8 mb-10 text-body-sm text-text-5">
-          <span><strong class="text-text-3 font-semibold">Display / Body:</strong> Poppins 400–700</span>
+          <span><strong class="text-text-3 font-semibold">Display / Body:</strong> Roboto Mono 400–700</span>
           <span><strong class="text-text-3 font-semibold">Data / Mono:</strong> Press Start 2P 400</span>
         </div>
 
@@ -120,6 +120,26 @@ const typoScale = [
               <span class="font-data text-label-xs text-text-6 w-20 shrink-0">{t.size} / {t.lh}</span>
               <span class={`font-display text-${t.token} text-text-1 leading-none`}>Aa</span>
               <span class="text-body-sm text-text-5 ml-auto">{t.use}</span>
+            </div>
+          ))}
+        </div>
+
+        <!-- Color rules -->
+        <h3 class="text-display-sm font-display font-semibold text-text-2 mb-4">Reglas de color en tipografía</h3>
+        <div class="flex flex-col gap-3 mb-12 text-body-sm">
+          {[
+            { context: "H1 / display-2xl",  token: "text-text-1", rule: "Blanco puro. Solo para el nombre en hero." },
+            { context: "H2 / display-lg",   token: "text-text-2", rule: "Headings de sección principales." },
+            { context: "H3 / display-md",   token: "text-text-3", rule: "Card headlines, subtítulos." },
+            { context: "Body lead",          token: "text-text-4", rule: "Tagline, párrafos de introducción." },
+            { context: "Body / labels",      token: "text-text-5", rule: "Chrome de UI: nav y footer completos, uniform sin excepciones." },
+            { context: "Body secundario",    token: "text-text-6", rule: "Subtexto, apoyo, descripciones secundarias." },
+            { context: "KPIs / métricas",   token: "text-primary-500", rule: "font-data (Press Start 2P). Números y datos destacados." },
+          ].map(r => (
+            <div class="flex items-start gap-4 py-2 border-b-[0.5px] border-[var(--color-border-subtle)]">
+              <code class="font-data text-label-sm text-primary-500 w-36 shrink-0">{r.context}</code>
+              <code class="font-data text-label-sm text-text-4 w-28 shrink-0">{r.token}</code>
+              <span class="text-text-5">{r.rule}</span>
             </div>
           ))}
         </div>

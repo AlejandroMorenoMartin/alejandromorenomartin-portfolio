@@ -25,12 +25,8 @@ const toolIcons: Record<string, string> = {
 };
 ---
 
-<section id="craft" class="section-padding" aria-labelledby="craft-heading">
+<section id="craft" class="section-padding" aria-label={t.craft.heading}>
   <div class="container-wide">
-    <h2 id="craft-heading" class="text-display-lg font-display font-bold text-text-1 mb-12">
-      {t.craft.heading}
-    </h2>
-
     <ul class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4" role="list">
       {t.craft.tools.map((tool) => (
         <li>

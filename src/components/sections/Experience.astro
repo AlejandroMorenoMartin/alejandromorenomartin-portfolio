@@ -19,12 +19,8 @@ function highlight(text: string): string {
 }
 ---
 
-<section id="experience" class="section-padding" aria-labelledby="experience-heading">
+<section id="experience" class="section-padding" aria-label={t.experience.heading}>
   <div class="container-wide">
-    <h2 id="experience-heading" class="text-display-lg font-display font-bold text-text-1 mb-16">
-      {t.experience.heading}
-    </h2>
-
     <ol class="flex flex-col" role="list">
         {t.experience.items.map((item, i) => (
           <li

@@ -13,11 +13,8 @@ const t        = useTranslations(lang);
 const workBase = lang === "en" ? "/en/work" : "/work";
 ---
 
-<section id="work" class="section-padding" aria-labelledby="work-heading">
+<section id="work" class="section-padding" aria-label={t.work.heading}>
   <div class="container-wide">
-    <h2 id="work-heading" class="text-display-lg font-display font-bold text-text-1 mb-12">
-      {t.work.heading}
-    </h2>
 
     <!-- Carousel wrapper -->
     <div id="work-carousel" class="overflow-hidden rounded-none">
@@ -79,7 +76,7 @@ const workBase = lang === "en" ? "/en/work" : "/work";
     </div>
 
     <!-- Controls -->
-    <div class="flex items-center justify-center gap-5 mt-7">
+    <div class="flex items-center gap-5 mt-7">
 
       <!-- Prev -->
       <button

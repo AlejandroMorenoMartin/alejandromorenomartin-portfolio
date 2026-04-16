@@ -1,7 +1,7 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import Nav        from "@/components/Nav.astro";
-import Hero       from "@/components/sections/Hero.astro";
+import Work       from "@/components/sections/Work.astro";
 import Footer     from "@/components/Footer.astro";
 import { useTranslations } from "@/i18n/utils";
 
@@ -12,20 +12,19 @@ const siteURL = "https://alejandromorenomartin.com";
 ---
 
 <BaseLayout
-  title={t.meta.title}
+  title={`Proyectos · ${t.meta.title}`}
   description={t.meta.description}
   lang={lang}
-  ogImage={t.meta.ogImage}
-  canonicalURL={siteURL}
+  canonicalURL={`${siteURL}/proyectos`}
 >
   <Nav  lang={lang} />
   <main id="main-scroll">
     <div class="px-8 pb-0">
       <div class="container-wide">
-        <h1 class="text-display-md text-text-2 uppercase">Inicio</h1>
+        <h1 class="text-display-md text-text-2 uppercase">Proyectos</h1>
       </div>
     </div>
-    <Hero lang={lang} />
+    <Work lang={lang} />
   </main>
   <Footer lang={lang} />
 </BaseLayout>
