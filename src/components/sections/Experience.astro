@@ -21,42 +21,36 @@ function highlight(text: string): string {
 
 <section id="experience" class="section-padding" aria-label={t.experience.heading}>
   <div class="container-wide">
+    <p class="font-body text-label-xs text-text-7" style="margin-bottom: var(--section-gap)">/experiencia</p>
     <ol class="flex flex-col" role="list">
-        {t.experience.items.map((item, i) => (
-          <li
-            class="timeline-item relative pl-8 pb-[9rem] last:pb-0"
-            data-index={String(i)}
-          >
-            <!-- Dot -->
-            <div
-              class="timeline-dot absolute left-0 top-1.5 w-3.5 h-3.5 rounded-full bg-text-8"
-              aria-hidden="true"
-            />
+      {t.experience.items.map((item, i) => (
+        <li
+          class="timeline-item relative pl-8 last:pb-0"
+          style="padding-bottom: var(--page-gap)"
+          data-index={String(i)}
+        >
+          <!-- Dot -->
+          <div class="timeline-dot absolute left-0" aria-hidden="true" />
 
-            <!-- Role -->
-            <h3 class="text-label-lg font-display font-semibold text-text-1 leading-snug mb-1">
-              {item.role}
-            </h3>
+          <div class="experience-card">
+            <!-- Header -->
+            <div class="card-header">
+              <p class="font-body text-label-xs text-text-7">{item.company} - {item.period}</p>
+              <h3 class="font-display text-body-lg text-text-3 leading-snug">{item.role}</h3>
+            </div>
 
-            <!-- Company · period -->
-            <p class="font-display text-label-sm text-text-5 italic mb-4">
-              {item.company}
-              <span class="not-italic mx-1 text-text-6">—</span>
-              <span class="font-display text-text-5 italic">{item.period}</span>
-            </p>
-
-            <!-- Description with auto-highlighted data -->
+            <!-- Description -->
             <p
-              class="text-body-sm text-text-4 leading-relaxed mb-8"
+              class="text-body-md text-text-4 leading-relaxed"
               set:html={highlight(item.description)}
             />
 
             <!-- KPI metrics -->
             {item.metrics && item.metrics.length > 0 && (
-              <div class="flex items-start gap-8">
+              <div class="flex items-start" style="gap: var(--card-gap)">
                 {item.metrics.map((metric, i) => (
                   <>
-                    <Kpi value={metric.value} label={metric.label} />
+                    <Kpi value={metric.value} label={metric.label} class="kpi-managed" />
                     {i < item.metrics.length - 1 && (
                       <div class="w-px h-8 self-center bg-[var(--color-border-subtle)]" aria-hidden="true" />
                     )}
@@ -64,59 +58,89 @@ function highlight(text: string): string {
                 ))}
               </div>
             )}
-          </li>
-        ))}
-      </ol>
+
+          </div>
+        </li>
+      ))}
+    </ol>
   </div>
 </section>
 
 <style>
-  .timeline-item {
-    opacity: 0.25;
-    transition: opacity 0.4s ease;
+  .experience-card {
+    display:        flex;
+    flex-direction: column;
+    gap:            var(--card-gap);
   }
 
-  .timeline-item.is-active {
-    opacity: 1;
+  .card-header {
+    display:        flex;
+    flex-direction: column;
+    gap:            0.5rem;
   }
 
   .timeline-dot {
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    width:       8px;
+    height:      8px;
+    top:         calc((var(--fs-label-xs) * 1.4 - 8px) / 2);
+    background:  var(--color-text-7);
+    flex-shrink: 0;
+    transition:  background-color 0.2s, width 0.2s, height 0.2s;
   }
 
   .timeline-dot.is-active {
-    background-color: #E4A711;
-    box-shadow: 0 0 0 3px rgba(228, 167, 17, 0.2);
+    background: var(--color-primary);
+    width:      10px;
+    height:     10px;
   }
 </style>
 
 <script>
-  const items = Array.from(document.querySelectorAll<HTMLElement>('.timeline-item'));
+  (function () {
+    const DURATION_MS = 1200;
+    const ease = (t: number) => 1 - Math.pow(1 - t, 3);
 
-  let activeIndex = -1;
+    function animateKpi(el: HTMLElement): void {
+      if (el.dataset.kpiDone) return;
+      el.dataset.kpiDone = "1";
+      const target   = parseFloat(el.dataset.kpiTarget   ?? "0");
+      const decimals = parseInt(el.dataset.kpiDecimals   ?? "0", 10);
+      const prefix   = el.dataset.kpiPrefix ?? "";
+      const suffix   = el.dataset.kpiSuffix ?? "";
+      const start    = performance.now();
+      function frame(now: number): void {
+        const progress = Math.min((now - start) / DURATION_MS, 1);
+        el.textContent = `${prefix}${(target * ease(progress)).toFixed(decimals)}${suffix}`;
+        if (progress < 1) requestAnimationFrame(frame);
+      }
+      requestAnimationFrame(frame);
+    }
 
-  function setActive(index: number): void {
-    if (index === activeIndex) return;
-    activeIndex = index;
-    items.forEach((item, i) => {
-      const active = i === index;
-      item.classList.toggle('is-active', active);
-      item.querySelector('.timeline-dot')?.classList.toggle('is-active', active);
-    });
-  }
+    const items = Array.from(document.querySelectorAll<HTMLElement>(".timeline-item"));
+    const dots  = items.map(item => item.querySelector<HTMLElement>(".timeline-dot"));
 
-  function getActiveIndex(): number {
-    const triggerY = window.scrollY + window.innerHeight * 0.35;
-    let best = 0;
-    let bestDist = Infinity;
-    items.forEach((item, i) => {
-      const dotDocY = item.getBoundingClientRect().top + window.scrollY;
-      const dist = Math.abs(dotDocY - triggerY);
-      if (dist < bestDist) { bestDist = dist; best = i; }
-    });
-    return best;
-  }
+    function setActive(index: number): void {
+      dots.forEach((dot, i) => dot?.classList.toggle("is-active", i === index));
+      items[index]
+        ?.querySelectorAll<HTMLElement>(".kpi-value")
+        .forEach(animateKpi);
+    }
 
-  window.addEventListener('scroll', () => setActive(getActiveIndex()), { passive: true });
-  setActive(getActiveIndex());
+    function getActiveIndex(): number {
+      const scroll    = document.getElementById("main-scroll");
+      const scrollTop = scroll ? scroll.scrollTop : window.scrollY;
+      const viewH     = scroll ? scroll.clientHeight : window.innerHeight;
+      const trigger   = scrollTop + viewH * 0.4;
+      let best = 0, bestDist = Infinity;
+      items.forEach((item, i) => {
+        const dist = Math.abs(item.offsetTop - trigger);
+        if (dist < bestDist) { bestDist = dist; best = i; }
+      });
+      return best;
+    }
+
+    const scroll = document.getElementById("main-scroll");
+    (scroll ?? window).addEventListener("scroll", () => setActive(getActiveIndex()), { passive: true });
+    setActive(getActiveIndex());
+  })();
 </script>

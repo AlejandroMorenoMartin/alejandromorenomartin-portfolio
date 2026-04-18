@@ -28,9 +28,8 @@
   "about": {
     "label":   "Sobre mí",
     "heading": "Sobre mí",
-    "p1":      "Soy un perfil multidisciplinar: diseño interfaces, construyo sistemas de diseño, escribo código y pienso en producto. No encajo bien en una sola caja, y no creo que tenga que hacerlo.",
-    "p2":      "Lo que más me define es una curiosidad que no tiene punto de cierre. Aprendo rápido, me adapto a entornos muy distintos y encuentro el camino incluso cuando la situación es compleja.",
-    "p3":      "Trabajo mejor cuando diseño y desarrollo conviven desde el principio. Más criterio en las decisiones, menos fricción entre equipos y mejores resultados en el producto final.",
+    "p1":      "Funciono como puente entre diseño y desarrollo, con una vocación clara por la investigación y el usuario. Prefiero entender antes de proponer, y proponer antes de construir.",
+    "p2":      "Actualmente trabajo por mi cuenta, ayudando a empresas y particulares a desarrollar sus proyectos digitales y a entender mejor a las personas para las que trabajan. Con ganas de asumir nuevos retos y en busca de la oportunidad adecuada.",
     "stats": [
       { "value": "+20", "label": "Proyectos entregados" },
       { "value": "+5",  "label": "Años en diseño de producto" },
@@ -190,10 +189,10 @@
     "heading": "Experiencia",
     "items": [
       {
-        "role":        "Product Designer · Web Designer Freelance",
+        "role":        "Freelance Product Designer",
         "company":     "Freelance",
         "period":      "2021 — presente",
-        "description": "Desde 2021 llevo proyectos de diseño y desarrollo de principio a fin, con una cartera habitual de entre 8 y 10 clientes al año en sectores muy distintos. El trabajo va desde sistemas de diseño e interfaces hasta webs completas. En los proyectos con mayor componente de conversión, los funnels optimizados han logrado reducir el CPL entre un 10 y un 15%, con incrementos de leads de hasta un 18%.",
+        "description": "Diseño y desarrollo proyectos digitales de principio a fin para una cartera diversa de clientes. El trabajo abarca sistemas de diseño, interfaces de producto, webs y optimización de funnels de conversión. Gestiono cada proyecto como un proceso completo: discovery, diseño, implementación y seguimiento de resultados.",
         "metrics": [
           { "value": "10",   "label": "Clientes / año" },
           { "value": "–15%", "label": "Reducción CPL" },
@@ -201,20 +200,20 @@
         ]
       },
       {
-        "role":        "Co-Fundador & Operador de Negocio",
+        "role":        "Co-Founder & General Manager",
         "company":     "Dako",
         "period":      "2020 — 2021",
-        "description": "Cofundé un modelo de negocio B2C local que llegó a gestionar más de 200 clientes activos. Me encargué al mismo tiempo de operaciones, marketing, ventas y logística, mientras testeaba el MVP y ajustaba el producto con el feedback directo de los usuarios.",
+        "description": "Cofundé y operé un negocio B2C local gestionando simultáneamente operaciones, marketing, ventas y logística. Diseñé y testé el MVP, incorporé feedback directo de usuarios para ajustar el producto y tomé decisiones de negocio en todas las áreas de la empresa.",
         "metrics": [
           { "value": "+200", "label": "Clientes activos" },
           { "value": "4",    "label": "Áreas gestionadas" }
         ]
       },
       {
-        "role":        "Responsable de Marketing y Estrategia Comercial",
+        "role":        "Head of Marketing & Sales",
         "company":     "Promam",
         "period":      "2018 — 2021",
-        "description": "Tres años al frente del área comercial de una empresa industrial B2B con 5M€ de facturación anual. Diseñé una estrategia que amplió el pipeline en 1,2M€, combinando licitaciones públicas, gestión de grandes cuentas y la digitalización progresiva del canal comercial.",
+        "description": "Lideré el área comercial de una empresa industrial B2B durante tres años. Diseñé la estrategia de ventas, gestioné grandes cuentas, participé en licitaciones públicas e impulsé la digitalización progresiva del canal comercial para modernizar los procesos de captación y seguimiento.",
         "metrics": [
           { "value": "€5M",   "label": "Facturación anual" },
           { "value": "+€1.2M","label": "Pipeline generado" },
@@ -222,10 +221,10 @@
         ]
       },
       {
-        "role":        "Community Manager Digital",
+        "role":        "Social Media & Community Manager",
         "company":     "BrainPrise",
         "period":      "2016",
-        "description": "Gestioné la reputación digital y las comunidades online de la agencia. En pocos meses, los usuarios activos crecieron un 12%, la comunidad sumó 3.000 nuevos seguidores y las menciones negativas cayeron un 20% gracias a una estrategia de gestión de crisis bien definida.",
+        "description": "Gestioné la reputación digital y las comunidades online de la agencia. Definí la estrategia de contenido, coordiné la presencia en redes sociales y desarrollé un protocolo de gestión de crisis para reducir el impacto de menciones negativas y mantener la imagen de marca.",
         "metrics": [
           { "value": "+12%", "label": "Usuarios activos" },
           { "value": "+3000","label": "Nuevos seguidores" },

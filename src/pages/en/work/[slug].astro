@@ -57,7 +57,7 @@ const typeLabel = isApp ? "Application" : "Web project";
       <div class="max-w-3xl mb-20">
         <p class="font-data text-label-sm text-primary-500 mb-4">{project.category}</p>
 
-        <h1 class="text-display-2xl font-display font-bold text-text-1 leading-[1.05] mb-6">
+        <h1 class="text-display-lg font-display font-bold text-text-1 leading-[1.05] mb-6">
           {project.title}
         </h1>
 
@@ -69,11 +69,11 @@ const typeLabel = isApp ? "Application" : "Web project";
         <div class="flex flex-wrap items-center gap-x-10 gap-y-4 pb-10 border-b border-[var(--color-border-subtle)]">
           <div>
             <p class="font-data text-label-sm text-primary-500 mb-0.5">Date</p>
-            <p class="font-display text-label-lg font-medium text-text-2">{project.date}</p>
+            <p class="font-display text-label-sm font-medium text-text-2">{project.date}</p>
           </div>
           <div>
             <p class="font-data text-label-sm text-primary-500 mb-0.5">Type</p>
-            <p class="font-display text-label-lg font-medium text-text-2">{typeLabel}</p>
+            <p class="font-display text-label-sm font-medium text-text-2">{typeLabel}</p>
           </div>
           <div>
             <p class="font-data text-label-sm text-primary-500 mb-0.5">Stack</p>
@@ -100,10 +100,10 @@ const typeLabel = isApp ? "Application" : "Web project";
           </div>
 
           <div>
-            <h2 class="font-display text-display-sm font-semibold text-text-1 mb-2">
+            <h2 class="font-display text-body-lg font-semibold text-text-1 mb-2">
               Case study in progress
             </h2>
-            <p class="text-body-sm text-text-5 leading-relaxed mb-6">
+            <p class="text-body-md text-text-5 leading-relaxed mb-6">
               This project is actively in development. Once it's ready, you'll find the full process here.
             </p>
 
@@ -116,7 +116,7 @@ const typeLabel = isApp ? "Application" : "Web project";
                 "Final result and screenshots",
                 "Reflections and takeaways",
               ].map((item) => (
-                <li class="flex items-center gap-3 text-body-sm text-text-6">
+                <li class="flex items-center gap-3 text-body-md text-text-6">
                   <span class="w-1.5 h-1.5 rounded-full bg-primary-500/40 flex-shrink-0" aria-hidden="true" />
                   {item}
                 </li>

@@ -1,0 +1,102 @@
+---
+import type { Lang } from "@/i18n/utils";
+import { useTranslations } from "@/i18n/utils";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t        = useTranslations(lang);
+
+const workBase = lang === "en" ? "/en/work" : "/work";
+---
+
+<section id="work" class="section-padding" aria-label={t.work.heading}>
+  <div class="container-wide">
+
+    <table class="project-table" role="table">
+      <thead>
+        <tr>
+          <th class="col-name  font-body text-label-xs text-text-7 uppercase">Proyecto</th>
+          <th class="col-desc  font-body text-label-xs text-text-7 uppercase">Descripción</th>
+          <th class="col-date  font-body text-label-xs text-text-7 uppercase">Actualización</th>
+        </tr>
+      </thead>
+      <tbody>
+        {t.work.projects.map((project) => (
+          <tr class="project-row" data-nav-item>
+            <td class="col-name">
+              <a
+                href={`${workBase}/${project.slug}`}
+                class="link-internal font-body text-body-md"
+              >
+                {project.title}
+              </a>
+            </td>
+            <td class="col-desc font-body text-body-md text-text-5">
+              {project.summary}
+            </td>
+            <td class="col-date font-body text-label-sm text-text-6 tabular-nums">
+              {project.date}
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+
+  </div>
+</section>
+
+<style>
+  .project-table {
+    width:           100%;
+    border-collapse: collapse;
+  }
+
+  thead tr {
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  th {
+    padding:    0 0 0.75rem 0;
+    text-align: left;
+    font-weight: 500;
+  }
+
+  .project-row td {
+    padding:       1rem 0;
+    border-bottom: 1px solid var(--color-border-subtle);
+    vertical-align: top;
+  }
+
+  .project-row:last-child td {
+    border-bottom: none;
+  }
+
+  .project-row .link-internal:hover {
+    color: var(--color-text-2);
+  }
+
+  .project-row.is-selected td {
+    background: rgba(228, 167, 17, 0.04);
+  }
+
+  .project-row.is-selected .col-name {
+    border-left: 2px solid var(--color-primary);
+    padding-left: 0.75rem;
+  }
+
+  .project-row.is-selected .col-name a {
+    color: var(--color-text-1);
+    text-decoration-color: var(--color-primary);
+  }
+
+  .project-row.is-selected .col-date {
+    color: var(--color-primary);
+  }
+
+  .col-name { width: 16%; padding-right: 4rem; }
+  .col-desc { width: 68%; padding-right: 4rem; }
+  .col-date { width: 16%; white-space: nowrap; }
+</style>

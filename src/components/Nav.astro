@@ -1,6 +1,7 @@
 ---
 import type { Lang } from "@/i18n/utils";
 import pkg from "../../package.json";
+import Btn from "@/components/Btn.astro";
 
 interface Props {
   lang: Lang;
@@ -11,10 +12,10 @@ const version    = `V.${pkg.version}`;
 const pathname   = Astro.url.pathname;
 
 const navLinks = [
-  { href: "/",            label: "Inicio" },
-  { href: "/proyectos",   label: "Proyectos" },
-  { href: "/sobre-mi",    label: "Sobre mí" },
-  { href: "/trayectoria", label: "Trayectoria" },
+  { href: "/",            label: "/root" },
+  { href: "/proyectos",   label: "/work" },
+  { href: "/sobre-mi",    label: "/info" },
+  { href: "/trayectoria", label: "/path" },
 ];
 
 function isActive(href: string): boolean {
@@ -26,37 +27,38 @@ function isActive(href: string): boolean {
 <header
   id="nav"
   class="fixed top-0 inset-x-0 z-50 bg-surface border-b border-[var(--color-border-subtle)]"
+  style="background-image: none;"
   aria-label="Main navigation"
 >
   <div style="max-width:1024px;margin-inline:auto;">
     <nav class="flex items-center justify-between h-12">
 
-      <!-- Left: project name + version -->
-      <div class="flex items-center">
-        <span class="text-body-md text-text-5">alejandro-portfolio</span>
-      </div>
+      <!-- Left: ASCII logo -->
+      <span class="ascii-logo font-body">/alejandro-portfolio</span>
 
       <!-- Right: page links -->
-      <ul class="flex items-center gap-6 list-none m-0 p-0" role="list">
+      <ul class="flex items-center gap-2 list-none m-0 p-0" role="list">
         {navLinks.map(link => (
           <li>
-            <a
+            <Btn
               href={link.href}
-              class:list={[
-                "text-body-md transition-colors duration-100",
-                "focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-primary-500 focus-visible:ring-offset-1 focus-visible:ring-offset-surface",
-                isActive(link.href)
-                  ? "bg-primary-500 text-surface px-2 py-0.5"
-                  : "text-text-5 hover:text-text-3",
-              ]}
               aria-current={isActive(link.href) ? "page" : undefined}
             >
               {link.label}
-            </a>
+            </Btn>
           </li>
         ))}
       </ul>
 
     </nav>
+
   </div>
+<style>
+  .ascii-logo {
+    font-size:      var(--fs-label-sm);
+    color:          var(--color-text-4);
+    letter-spacing: 0;
+  }
+
+</style>
 </header>

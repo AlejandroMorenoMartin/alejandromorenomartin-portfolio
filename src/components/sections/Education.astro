@@ -8,114 +8,58 @@ interface Props {
 
 const { lang } = Astro.props;
 const t        = useTranslations(lang);
+
+const allItems = [
+  ...t.education.certifications.items.map((item) => ({
+    category:    "Certificación",
+    title:       item.title,
+    institution: item.issuer,
+    year:        item.year,
+  })),
+  ...t.education.degrees.items.map((item) => ({
+    category:    "Titulación",
+    title:       item.title,
+    institution: item.institution,
+    year:        item.period.split("—")[1]?.trim() ?? item.period,
+  })),
+].sort((a, b) => Number(b.year) - Number(a.year));
 ---
 
 <section id="education" class="section-padding" aria-label={t.education.heading}>
   <div class="container-wide">
+    <p class="font-body text-label-xs text-text-7" style="margin-bottom: var(--section-gap)">/educación</p>
 
-    <!-- Tab bar -->
-    <div class="tab-bar-track flex gap-6 mb-10" role="tablist" aria-label={t.education.heading}>
-      <button
-        class="tab-btn is-active font-display text-label-sm pb-3"
-        data-tab="degrees"
-        role="tab"
-        aria-selected="true"
-        aria-controls="panel-degrees"
-      >
-        {t.education.tabs.degrees}
-      </button>
-      <button
-        class="tab-btn font-display text-label-sm pb-3"
-        data-tab="certifications"
-        role="tab"
-        aria-selected="false"
-        aria-controls="panel-certifications"
-      >
-        {t.education.tabs.certifications}
-      </button>
-    </div>
-
-    <!-- Panel: Titulaciones -->
-    <div id="panel-degrees" class="tab-panel" role="tabpanel">
-      <ul class="flex flex-col" role="list">
-        {t.education.degrees.items.map((item) => (
-          <li>
-            <h3 class="text-label-lg font-display font-semibold text-text-1 mb-1">{item.title}</h3>
-            <p class="font-display text-label-sm text-text-5 italic mb-3">
-              {item.institution}
-              <span class="not-italic mx-1 text-text-6">—</span>
-              <span class="font-display text-text-5 italic">{item.period}</span>
-            </p>
-            {item.description && (
-              <p class="text-body-sm text-text-4 leading-relaxed">{item.description}</p>
-            )}
-          </li>
+    <table class="edu-table">
+      <thead>
+        <tr class="edu-header-row">
+          <th class="font-body text-label-xs text-text-7 text-left font-normal pb-3 pr-6">Categoría</th>
+          <th class="font-body text-label-xs text-text-7 text-left font-normal pb-3 pr-6">Nombre</th>
+          <th class="font-body text-label-xs text-text-7 text-left font-normal pb-3 pr-6">Institución</th>
+          <th class="font-body text-label-xs text-text-7 text-left font-normal pb-3">Año</th>
+        </tr>
+      </thead>
+      <tbody>
+        {allItems.map((item) => (
+          <tr class="edu-row">
+            <td class="font-body text-label-xs text-text-6 py-3 pr-6">{item.category}</td>
+            <td class="font-display text-label-sm text-text-3 py-3 pr-6">{item.title}</td>
+            <td class="font-display text-label-sm text-text-5 italic py-3 pr-6">{item.institution}</td>
+            <td class="font-body text-label-xs text-text-6 py-3">{item.year}</td>
+          </tr>
         ))}
-      </ul>
-    </div>
-
-    <!-- Panel: Certificaciones -->
-    <div id="panel-certifications" class="tab-panel hidden" role="tabpanel">
-      <ul class="grid sm:grid-cols-2 md:grid-cols-3 gap-x-8 gap-y-6" role="list">
-        {t.education.certifications.items.map((item) => (
-          <li>
-            <p class="font-display text-label-lg font-semibold text-text-1 leading-snug mb-1">{item.title}</p>
-            <p class="font-display text-label-sm text-text-5 italic">
-              {item.issuer}
-              <span class="not-italic mx-1 text-text-6">—</span>
-              <span class="font-display text-text-5 italic">{item.year}</span>
-            </p>
-          </li>
-        ))}
-      </ul>
-    </div>
-
+      </tbody>
+    </table>
   </div>
 </section>
 
 <style>
-  .tab-bar-track {
+  .edu-table {
+    width:           100%;
+    border-collapse: collapse;
+  }
+
+  .edu-header-row {
     border-bottom: 1px solid var(--color-border-subtle);
   }
 
-  .tab-btn {
-    background: transparent;
-    border: none;
-    border-bottom: 2px solid transparent;
-    margin-bottom: -1px; /* sit on top of track line */
-    color: var(--color-text-6);
-    font-weight: 500;
-    cursor: pointer;
-    transition: color 150ms, border-color 150ms;
-  }
-
-  .tab-btn:hover:not(.is-active) {
-    color: var(--color-text-3);
-  }
-
-  .tab-btn.is-active {
-    color: var(--color-text-1);
-    font-weight: 600;
-    border-bottom-color: var(--color-primary);
-  }
 </style>
-
-<script>
-  const tabBtns  = document.querySelectorAll<HTMLButtonElement>('.tab-btn');
-  const panels   = document.querySelectorAll<HTMLElement>('.tab-panel');
-
-  tabBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const target = btn.dataset.tab!;
-
-      tabBtns.forEach(b => {
-        b.classList.toggle('is-active', b.dataset.tab === target);
-        b.setAttribute('aria-selected', String(b.dataset.tab === target));
-      });
-
-      panels.forEach(panel => {
-        panel.classList.toggle('hidden', panel.id !== `panel-${target}`);
-      });
-    });
-  });
-</script>

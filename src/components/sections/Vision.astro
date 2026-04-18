@@ -1,0 +1,29 @@
+---
+import type { Lang } from "@/i18n/utils";
+
+interface Props {
+  lang: Lang;
+}
+---
+
+<section id="vision" class="section-padding" aria-label="Visión">
+  <div class="container-wide">
+    <p class="font-body text-label-xs text-text-7" style="margin-bottom: var(--section-gap)">/visión</p>
+    <div class="vision-content">
+      <p class="text-body-md text-text-3 leading-relaxed">
+        Creo que el mejor diseño es el que no se nota. El que reduce la fricción hasta que el usuario simplemente hace lo que quería hacer, sin pensar en la interfaz. Mi objetivo es desaparecer como diseñador para que el producto hable solo.
+      </p>
+      <p class="text-body-md text-text-4 leading-relaxed">
+        Para eso necesito entender el negocio, el usuario y la tecnología al mismo tiempo. No diseño pantallas — diseño flujos, decisiones y sistemas que escalan. Un producto bien diseñado resiste el tiempo, el crecimiento y los cambios de dirección.
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .vision-content {
+    display:        flex;
+    flex-direction: column;
+    gap:            var(--section-gap);
+  }
+</style>

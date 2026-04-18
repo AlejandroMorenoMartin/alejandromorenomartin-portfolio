@@ -13,27 +13,19 @@ const t        = useTranslations(lang);
 
 <section id="about" class="section-padding" aria-label={t.about.heading}>
   <div class="container-wide">
-    <div class="grid md:grid-cols-2 gap-4 items-center">
+    <p class="font-body text-label-xs text-text-7" style="margin-bottom: var(--section-gap)">/perfil</p>
+    <div class="grid md:grid-cols-[1fr_auto] items-center" style="gap: var(--section-gap)">
 
       <!-- Text -->
       <div>
 
-        <!-- Location -->
-        <div class="flex items-center gap-1.5 mb-8">
-          <svg class="w-3.5 h-3.5 text-primary-500 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-            <path fill-rule="evenodd" d="M11.54 22.351l.07.04.028.016a.76.76 0 00.723 0l.028-.015.071-.041a16.975 16.975 0 001.144-.742 19.58 19.58 0 002.683-2.282c1.944-1.99 3.963-4.98 3.963-8.827a8.25 8.25 0 00-16.5 0c0 3.846 2.02 6.837 3.963 8.827a19.58 19.58 0 002.682 2.282 16.975 16.975 0 001.145.742zM12 13.5a3 3 0 100-6 3 3 0 000 6z" clip-rule="evenodd" />
-          </svg>
-          <span class="font-display text-label-sm text-text-5">{t.hero.location}</span>
-        </div>
-
-        <div class="flex flex-col gap-5">
+        <div class="flex flex-col" style="gap: var(--section-gap)">
           <p class="text-body-md text-text-3 leading-relaxed">{t.about.p1}</p>
           <p class="text-body-md text-text-3 leading-relaxed">{t.about.p2}</p>
-          <p class="text-body-md text-text-3 leading-relaxed">{t.about.p3}</p>
         </div>
 
         <!-- Stats -->
-        <div class="flex items-center gap-8 mt-10">
+        <div class="flex items-center gap-8" style="margin-top: var(--section-gap)">
           {t.about.stats.map((stat, i) => (
             <>
               <Kpi value={stat.value} label={stat.label} />
@@ -46,7 +38,7 @@ const t        = useTranslations(lang);
       </div>
 
       <!-- Photo -->
-      <div class="flex justify-end">
+      <div>
         <div class="w-72 h-72 md:w-80 md:h-80 rounded-none overflow-hidden border-[0.5px] border-[var(--color-border-subtle)]">
           <img
             src="/profile.png"

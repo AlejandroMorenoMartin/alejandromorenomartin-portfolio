@@ -1,6 +1,7 @@
 ---
 import type { Lang } from "@/i18n/utils";
 import { useTranslations } from "@/i18n/utils";
+import Btn from "@/components/Btn.astro";
 
 interface Props {
   lang: Lang;
@@ -12,173 +13,148 @@ const t        = useTranslations(lang);
 
 <section
   id="hero"
-  class="px-8 pt-12 pb-16"
+  class="section-padding"
   aria-label="Hero"
 >
-  <div class="container-wide">
+  <div class="container-wide hero-content">
 
-    <!-- Role label -->
-    <p class="text-label-sm text-text-5 uppercase tracking-widest mb-3">Product Designer</p>
+    <!-- Identity card -->
+    <div class="hero-card">
+      <div class="hero-heading">
+        <p class="font-body text-label-xs text-text-7">Product Designer</p>
+        <h2 class="text-display-lg text-text-1"><span class="font-data text-primary-500">A</span>lejandro Moreno Martín</h2>
+      </div>
+      <p class="text-body-md text-text-4 leading-relaxed">
+        Bienvenido a mi portfolio. Aquí encontrarás proyectos reales, decisiones de diseño
+        y cómo pienso el producto — desde la primera pregunta hasta la interfaz en producción.
+      </p>
+    </div>
 
-    <!-- Name -->
-    <h2 class="text-display-lg text-text-1 mb-8">Alejandro Moreno Martín</h2>
-
-    <!-- Bio -->
-    <p class="text-body-md text-text-3 leading-relaxed  mb-4">
-      Diseño interfaces y construyo sistemas. Me muevo entre Figma y el editor de código
-      con la misma naturalidad, y eso cambia cómo pienso el producto — menos fricción
-      entre diseño y desarrollo, mejores decisiones desde el principio.
-    </p>
-    <p class="text-body-md text-text-3 leading-relaxed  mb-10">
-      Llevo más de 15 años en entornos muy distintos. Esa amplitud no es ruido,
-      es perspectiva.
-    </p>
-
-    <!-- Thinking widget -->
-    <div
-      class="thinking-widget mb-12"
-      aria-label="En proceso creativo"
-      data-verbs={JSON.stringify(t.hero.thinking)}
-    >
-      <span class="thinking-verb-wrap" aria-live="polite">
-        <span id="thinking-verb"></span><span class="thinking-cursor" aria-hidden="true">|</span>
+    <!-- Typewriter -->
+    <div class="thinking-widget" aria-label="Estado de procesamiento">
+      <span class="thinking-verb-wrap font-body" aria-live="polite">
+        <span id="thinking-verb"></span><span class="thinking-cursor" aria-hidden="true"></span>
       </span>
     </div>
 
-    <!-- Qué hay aquí -->
-    <nav aria-label="Secciones del portfolio">
-      <ul class="flex flex-col gap-3 list-none p-0 m-0" role="list">
-        <li>
-          <a href="/proyectos" class="hero-link">
-            <span class="hero-link-label">Proyectos</span>
-            <span class="hero-link-desc">Casos reales — Casa del Aire, VivaGym, Artisteo y más</span>
-          </a>
-        </li>
-        <li>
-          <a href="/sobre-mi" class="hero-link">
-            <span class="hero-link-label">Sobre mí</span>
-            <span class="hero-link-desc">Quién soy, cómo trabajo y qué me mueve</span>
-          </a>
-        </li>
-        <li>
-          <a href="/trayectoria" class="hero-link">
-            <span class="hero-link-label">Trayectoria</span>
-            <span class="hero-link-desc">Experiencia, formación y stack</span>
-          </a>
-        </li>
-      </ul>
-    </nav>
+    <!-- /ctrl -->
+    <Btn id="kb-toggle" data-default-focus aria-expanded="false" aria-controls="kb-panel">
+      /ctrl
+    </Btn>
 
   </div>
 </section>
 
 <style>
+  /* ── Layout ──────────────────────────────────────── */
+  .hero-content {
+    display:        flex;
+    flex-direction: column;
+    align-items:    flex-start;
+    gap:            var(--page-gap);
+  }
+
+  .hero-card {
+    display:        flex;
+    flex-direction: column;
+    gap:            var(--card-gap);
+  }
+
+  .hero-heading {
+    display:        flex;
+    flex-direction: column;
+    gap:            0.5rem;
+  }
+
   /* ── Thinking widget ─────────────────────────────── */
   .thinking-widget {
-    display:     inline-flex;
+    display:    flex;
     align-items: center;
+    min-height: calc(var(--fs-body-md) * 1.6);
   }
 
   .thinking-verb-wrap {
-    font-family: 'Roboto Mono', monospace;
-    font-size:   0.8125rem;
-    color:       var(--color-text-5);
+    font-size:   var(--fs-body-md);
+    color:       var(--color-primary);
     display:     inline-flex;
     align-items: baseline;
-    gap:         1px;
+    gap:         2px;
+  }
+
+  .thinking-verb-wrap.is-complete #thinking-verb {
+    text-shadow: 0 0 8px rgba(228, 167, 17, 0.6);
   }
 
   .thinking-cursor {
-    color:       var(--color-primary);
-    animation:   cursor-blink 0.75s step-end infinite;
-    margin-left: 1px;
+    display:          inline-block;
+    width:            0.25em;
+    height:           1em;
+    background-color: var(--color-primary);
+    vertical-align:   -0.25em;
+    animation:        cursor-blink 1s step-end infinite;
   }
 
   @keyframes cursor-blink {
     0%, 100% { opacity: 1; }
     50%       { opacity: 0; }
   }
-
-  /* ── Section nav links ───────────────────────────── */
-  .hero-link {
-    display:         flex;
-    align-items:     baseline;
-    gap:             1rem;
-    text-decoration: none;
-    color:           inherit;
-    transition:      opacity 100ms;
-  }
-
-  .hero-link:hover .hero-link-label {
-    color: var(--color-text-1);
-  }
-
-  .hero-link:hover .hero-link-desc {
-    color: var(--color-text-4);
-  }
-
-  .hero-link:focus-visible {
-    outline:        2px solid var(--color-primary);
-    outline-offset: 3px;
-  }
-
-  .hero-link-label {
-    font-family:  'Roboto Mono', monospace;
-    font-size:    0.75rem;
-    color:        var(--color-text-4);
-    white-space:  nowrap;
-    min-width:    7rem;
-    transition:   color 100ms;
-  }
-
-  .hero-link-desc {
-    font-family: 'Roboto Mono', monospace;
-    font-size:   0.75rem;
-    color:       var(--color-text-6);
-    transition:  color 100ms;
-  }
 </style>
 
 <script>
-  const thinkingWidget = document.querySelector(".thinking-widget") as HTMLElement;
-  const thinkingVerb   = document.getElementById("thinking-verb")  as HTMLSpanElement;
+  const VERBS = [
+    "INVESTIGANDO...",
+    "COLABORANDO...",
+    "ANALIZANDO...",
+    "ESTRUCTURANDO...",
+    "PROTOTIPANDO...",
+    "ITERANDO...",
+    "SOLUCIONANDO...",
+  ];
 
-  if (thinkingWidget && thinkingVerb) {
-    const verbs: string[] = JSON.parse(thinkingWidget.dataset.verbs ?? "[]");
+  const CHAR_DELAY       = 50;
+  const DELETE_DELAY     = 30;
+  const PAUSE_AFTER_TYPE = 2000;
+  const PAUSE_AFTER_DEL  = 150;
+
+  const wrap  = document.querySelector(".thinking-verb-wrap") as HTMLElement;
+  const verb  = document.getElementById("thinking-verb")     as HTMLSpanElement;
+
+  if (wrap && verb) {
     let idx = 0;
-
-    const CHAR_DELAY       = 80;
-    const DELETE_DELAY     = 45;
-    const PAUSE_AFTER_TYPE = 1800;
-    const PAUSE_AFTER_DEL  = 150;
 
     function typeText(text: string, onDone: () => void): void {
       let i = 0;
-      thinkingVerb.textContent = "";
+      verb.textContent = "";
+      wrap.classList.remove("is-complete");
       const tick = (): void => {
-        thinkingVerb.textContent = text.slice(0, ++i);
-        if (i < text.length) setTimeout(tick, CHAR_DELAY);
-        else onDone();
+        verb.textContent = text.slice(0, ++i);
+        if (i < text.length) {
+          setTimeout(tick, CHAR_DELAY);
+        } else {
+          wrap.classList.add("is-complete");
+          onDone();
+        }
       };
       setTimeout(tick, CHAR_DELAY);
     }
 
     function deleteText(onDone: () => void): void {
+      wrap.classList.remove("is-complete");
       const tick = (): void => {
-        const cur = thinkingVerb.textContent ?? "";
+        const cur = verb.textContent ?? "";
         if (cur.length === 0) { onDone(); return; }
-        thinkingVerb.textContent = cur.slice(0, -1);
+        verb.textContent = cur.slice(0, -1);
         setTimeout(tick, DELETE_DELAY);
       };
       tick();
     }
 
     function cycle(): void {
-      typeText(verbs[idx], () => {
+      typeText(VERBS[idx], () => {
         setTimeout(() => {
           deleteText(() => {
             setTimeout(() => {
-              idx = (idx + 1) % verbs.length;
+              idx = (idx + 1) % VERBS.length;
               cycle();
             }, PAUSE_AFTER_DEL);
           });

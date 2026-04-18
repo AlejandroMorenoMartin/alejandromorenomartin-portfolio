@@ -1,0 +1,32 @@
+---
+import type { Lang } from "@/i18n/utils";
+
+interface Props {
+  lang: Lang;
+}
+---
+
+<section id="metodo" class="section-padding" aria-label="Método">
+  <div class="container-wide">
+    <p class="font-body text-label-xs text-text-7" style="margin-bottom: var(--section-gap)">/método</p>
+    <div class="metodo-content">
+      <p class="text-body-md text-text-3 leading-relaxed">
+        Todo empieza con preguntas. Antes de abrir Figma necesito entender el problema real: qué están intentando hacer los usuarios, dónde se atascan y qué espera el negocio de la solución. El diseño sin contexto es decoración.
+      </p>
+      <p class="text-body-md text-text-4 leading-relaxed">
+        Trabajo en ciclos cortos — exploración, prototipo, feedback, ajuste. No espero a tener todo resuelto para enseñar algo. Prefiero equivocarme pronto y en papel que tarde y en producción.
+      </p>
+      <p class="text-body-md text-text-4 leading-relaxed">
+        Al final mido. Un diseño que no se puede evaluar es una opinión, no una solución. Métricas de uso, tests con usuarios, datos de producto — todo suma para saber si lo que construimos realmente funciona.
+      </p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .metodo-content {
+    display:        flex;
+    flex-direction: column;
+    gap:            var(--section-gap);
+  }
+</style>

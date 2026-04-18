@@ -1,71 +1,102 @@
 ---
+import { execSync } from "node:child_process";
 import type { Lang } from "@/i18n/utils";
-import { useTranslations } from "@/i18n/utils";
 
 interface Props {
   lang: Lang;
 }
 
 const { lang } = Astro.props;
-const t        = useTranslations(lang);
-const _now     = new Date(new Date().toLocaleString("en-US", { timeZone: "Europe/Madrid" }));
-const dateStr  = [
-  String(_now.getFullYear()),
-  String(_now.getMonth() + 1).padStart(2, "0"),
-  String(_now.getDate()).padStart(2, "0"),
-].join("-");
+
+const gitHash = (() => {
+  try {
+    return execSync("git log -1 --format=%h -- apps/portfolio/", { cwd: process.cwd() })
+      .toString()
+      .trim();
+  } catch {
+    return "unknown";
+  }
+})();
 ---
 
-<footer class="border-t border-border" role="contentinfo">
+<footer class="relative z-50 border-t border-border bg-surface" style="background-image: none;" role="contentinfo">
   <div style="max-width:1024px;margin-inline:auto;">
-    <div class="flex items-center justify-between h-12">
+    <div class="footer-row">
 
-      <!-- Left: meta -->
-      <p class="text-body-md text-text-5">
-        {t.footer.made}{" "}
-        <span>{t.footer.name}</span>
-        <span class="inline-flex items-baseline gap-1 ml-1">
-          <span>&amp;</span>
-          <a
-            href="https://claude.ai/code"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Claude Code"
-            class="inline-flex items-baseline focus-visible:outline-none"
-          >
-            <img
-              src="/claude-code_icon.png"
-              alt="Claude Code"
-              width="19"
-              aria-hidden="true"
-              style="image-rendering: pixelated; display: inline-block; position: relative; top: 2px;"
-            />
-          </a>
-        </span>.
+      <p class="footer-item font-body">
+        <span class="footer-key">DATE:</span>
+        <span id="footer-date" class="footer-val"></span>
       </p>
 
-      <!-- Right: location + date + time -->
-      <p class="text-body-md text-text-5 tabular-nums">
-        España &nbsp;·&nbsp; {dateStr} &nbsp;·&nbsp; <span id="footer-time"></span>
+      <p class="footer-item font-body">
+        <span class="footer-key">TIME:</span>
+        <span id="footer-time" class="footer-val"></span>
+      </p>
+
+      <p class="footer-item font-body">
+        <span class="footer-key">LOC:</span>
+        <span class="footer-val">MADRID, ESP</span>
+      </p>
+
+      <p class="footer-item font-body">
+        <span class="footer-key">v</span>
+        <span class="footer-val">{gitHash}</span>
       </p>
 
     </div>
   </div>
 </footer>
 
-<script>
-  function updateFooterTime(): void {
-    const el = document.getElementById("footer-time");
-    if (!el) return;
-    el.textContent = new Date().toLocaleTimeString("es-ES", {
-      timeZone: "Europe/Madrid",
-      hour:     "2-digit",
-      minute:   "2-digit",
-      second:   "2-digit",
-      hour12:   false,
-    });
+<style>
+  .footer-row {
+    display:         flex;
+    justify-content: space-between;
+    align-items:     center;
+    height:          3rem;
+  }
+  .footer-item {
+    display:     flex;
+    align-items: center;
+    gap:         0.35rem;
+    font-size:   var(--fs-label-xs);
+    line-height: 1;
+  }
+  .footer-key { color: var(--color-text-7); }
+  .footer-val { color: var(--color-text-4); }
+</style>
+
+<script is:inline>
+  function updateFooter() {
+    var now   = new Date();
+    var tz    = "Europe/Madrid";
+
+    var dateEl = document.getElementById("footer-date");
+    if (dateEl) {
+      var y = now.toLocaleString("en-US", { timeZone: tz, year:  "numeric" });
+      var m = now.toLocaleString("en-US", { timeZone: tz, month: "2-digit" });
+      var d = now.toLocaleString("en-US", { timeZone: tz, day:   "2-digit" });
+      dateEl.textContent = y + "." + m + "." + d;
+    }
+
+    var timeEl = document.getElementById("footer-time");
+    if (timeEl) {
+      var t = now.toLocaleTimeString("es-ES", {
+        timeZone: tz,
+        hour:     "2-digit",
+        minute:   "2-digit",
+        second:   "2-digit",
+        hour12:   false,
+      });
+      timeEl.textContent = t + " UTC+1";
+    }
   }
 
-  updateFooterTime();
-  setInterval(updateFooterTime, 1000);
+  updateFooter();
+
+  var _footerInterval;
+  document.addEventListener("astro:page-load", function () {
+    clearInterval(_footerInterval);
+    updateFooter();
+    _footerInterval = setInterval(updateFooter, 1000);
+  });
 </script>

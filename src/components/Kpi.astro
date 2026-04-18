@@ -31,7 +31,7 @@ const decimals = numeric.includes(".") ? numeric.split(".")[1].length : 0;
 <style>
   .kpi-value {
     font-family: 'Press Start 2P', monospace;
-    font-size: 1.25rem;
+    font-size: var(--fs-body-lg);
     line-height: 1;
   }
 </style>
@@ -88,6 +88,7 @@ const decimals = numeric.includes(".") ? numeric.split(".")[1].length : 0;
   );
 
   document.querySelectorAll<HTMLElement>(".kpi-value").forEach((el) => {
+    if (el.closest(".kpi-managed")) return;
     observer.observe(el);
   });
 </script>

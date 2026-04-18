@@ -1,0 +1,333 @@
+---
+import type { Lang } from "@/i18n/utils";
+import { useTranslations } from "@/i18n/utils";
+import Kpi from "@/components/Kpi.astro";
+import Btn from "@/components/Btn.astro";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const t        = useTranslations(lang);
+
+const workBase = lang === "en" ? "/en/work" : "/work";
+const projects = t.work.projects;
+---
+
+<section id="work" class="section-padding" aria-label={t.work.heading}>
+  <div class="container-wide">
+
+    <div class="project-stage">
+      {projects.map((project, i) => (
+        <div
+          class={`project-card ${i === 0 ? "is-selected" : ""}`}
+          data-nav-item
+          data-project-index={i}
+          aria-hidden={i !== 0}
+        >
+
+          <!-- Left: info -->
+          <div class="project-info">
+
+            <!-- 1. Cabecera -->
+            <div class="card-header">
+              <p class="font-body text-label-xs text-text-7">{project.category}</p>
+              <h2 class="project-title font-display text-text-1">{project.title}</h2>
+            </div>
+
+            <!-- 2. Cuerpo -->
+            <div class="card-body">
+              <p class="font-body text-body-md text-text-5 leading-relaxed">{project.summary}</p>
+            </div>
+
+            <!-- 3. Info -->
+            <div class="card-metrics">
+              {project.metrics.map((m, mi) => (
+                <>
+                  <Kpi value={m.value} label={m.label} />
+                  {mi < project.metrics.length - 1 && (
+                    <div class="kpi-divider" aria-hidden="true" />
+                  )}
+                </>
+              ))}
+            </div>
+
+            <!-- 4. Botón -->
+            <div class="card-cta">
+              <Btn href={`${workBase}/${project.slug}`} data-cta-index={i} {...(i === 0 ? { "data-default-focus": true } : {})}>Ver proyecto</Btn>
+            </div>
+
+          </div>
+
+          <!-- Right: preview -->
+          <div class="project-preview">
+            <div class="preview-scanlines" aria-hidden="true"></div>
+            <div class="preview-content">
+              <span class="preview-num font-data">0{i + 1}</span>
+              <span class="preview-status font-body text-label-xs text-text-7">PREVIEW.PENDING</span>
+            </div>
+          </div>
+
+        </div>
+      ))}
+    </div>
+
+    <!-- Navigation -->
+    <nav class="project-nav" aria-label="Navegación de proyectos">
+      <Btn id="proj-prev" class="nav-btn" aria-label="Proyecto anterior" disabled>◀</Btn>
+      <div class="nav-dots" aria-hidden="true">
+        {projects.map((_, i) => (
+          <span class={`nav-dot ${i === 0 ? "is-active" : ""}`} data-dot={i} />
+        ))}
+      </div>
+      <Btn id="proj-next" class="nav-btn" aria-label="Proyecto siguiente">▶</Btn>
+    </nav>
+
+  </div>
+</section>
+
+<style>
+  /* ── Tokens locales derivados de los globales ── */
+  #work {
+    --c-primary-border: color-mix(in srgb, var(--color-primary) 25%, transparent);
+    --c-primary-grid:   color-mix(in srgb, var(--color-primary)  7%, transparent);
+    --c-primary-ghost:  color-mix(in srgb, var(--color-primary) 12%, transparent);
+    --c-scanline:       rgba(0, 0, 0, 0.14);
+    --c-preview-bg:     var(--color-surface);
+    --preview-num-size: 2.5rem;
+
+    padding-top:    var(--page-gap);
+    padding-bottom: 0.5rem;
+  }
+
+  /* ── Stage ── */
+  .project-stage {
+    position: relative;
+  }
+
+  /* ── Card ── */
+  .project-card {
+    display:               none;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .project-card.is-selected {
+    display: grid;
+  }
+
+  /* ── Info side ── */
+  .project-info {
+    display:        flex;
+    flex-direction: column;
+    gap:            var(--card-gap);
+  }
+
+  .project-title {
+    font-size:   var(--fs-display-lg);
+    line-height: 1.15;
+    margin-top:  0.25rem;
+  }
+
+  /* ── Card sections ── */
+  .card-body p {
+    display:            -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow:           hidden;
+  }
+
+  .card-metrics {
+    display:     flex;
+    align-items: center;
+    gap:         1.5rem;
+  }
+
+  .kpi-divider {
+    width:       1px;
+    height:      2rem;
+    background:  var(--color-border-subtle);
+    flex-shrink: 0;
+  }
+
+  .card-cta {
+    margin-top: auto;
+  }
+
+
+  /* ── Preview side ── */
+  .project-preview {
+    position:         relative;
+    background-color: var(--c-preview-bg);
+    background-image:
+      linear-gradient(var(--c-primary-grid) 1px, transparent 1px),
+      linear-gradient(90deg, var(--c-primary-grid) 1px, transparent 1px);
+    background-size: 32px 32px;
+    overflow:        hidden;
+  }
+
+  .preview-scanlines {
+    position:   absolute;
+    inset:      0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 3px,
+      var(--c-scanline) 3px,
+      var(--c-scanline) 4px
+    );
+    pointer-events: none;
+  }
+
+  .preview-content {
+    position:        absolute;
+    inset:           0;
+    display:         flex;
+    flex-direction:  column;
+    align-items:     center;
+    justify-content: center;
+    gap:             1rem;
+    z-index:         1;
+  }
+
+  .preview-num {
+    font-size:   var(--preview-num-size);
+    color:       var(--c-primary-ghost);
+    line-height: 1;
+  }
+
+  .preview-status {
+    letter-spacing: 0.12em;
+  }
+
+  /* ── Navigation ── */
+  .project-nav {
+    display:     flex;
+    align-items: center;
+    gap:         1.25rem;
+    margin-top:  var(--page-gap);
+  }
+
+  .nav-btn {
+    padding: 0.35rem 0.6rem;
+  }
+
+  .nav-dots {
+    display:     flex;
+    gap:         0.5rem;
+    align-items: center;
+  }
+
+  .nav-dot {
+    display:       inline-block;
+    width:         6px;
+    height:        6px;
+    background:    var(--color-text-7);
+    border-radius: 0;
+    flex-shrink:   0;
+  }
+
+  .nav-dot.is-active {
+    background: var(--color-primary);
+    width:      8px;
+    height:     8px;
+  }
+</style>
+
+<script>
+  (function () {
+    const cards   = Array.from(document.querySelectorAll<HTMLElement>("[data-project-index]"));
+    const dots    = Array.from(document.querySelectorAll<HTMLElement>("[data-dot]"));
+    const btnPrev = document.getElementById("proj-prev") as HTMLButtonElement | null;
+    const btnNext = document.getElementById("proj-next") as HTMLButtonElement | null;
+
+    let current     = 0;
+    let navFocusIdx = -1; // -1 = default focus (ver proyecto), 0 = btnPrev, 1 = btnNext
+
+    function navControls(): HTMLElement[] {
+      return [btnPrev, btnNext].filter(Boolean) as HTMLElement[];
+    }
+
+    function ctaBtn(idx: number): HTMLElement | null {
+      return document.querySelector<HTMLElement>(`[data-cta-index="${idx}"]`);
+    }
+
+    function setNavFocus(idx: number): void {
+      // clear all is-focused globally
+      document.querySelectorAll<HTMLElement>(".btn.is-focused").forEach(b => b.classList.remove("is-focused"));
+      navFocusIdx = idx;
+      if (idx === -1) {
+        // restore focus to current card's ver-proyecto
+        const cta = ctaBtn(current);
+        if (cta) cta.classList.add("is-focused");
+      } else {
+        const controls = navControls();
+        if (controls[idx]) controls[idx].classList.add("is-focused");
+      }
+    }
+
+    function updateDisabled(): void {
+      if (btnPrev) btnPrev.disabled = current === 0;
+      if (btnNext) btnNext.disabled = current === cards.length - 1;
+    }
+
+    function updateCtaFocus(idx: number): void {
+      document.querySelectorAll<HTMLElement>("[data-cta-index]").forEach(b => {
+        b.removeAttribute("data-default-focus");
+        b.classList.remove("is-focused");
+      });
+      const cta = ctaBtn(idx);
+      if (cta) {
+        cta.setAttribute("data-default-focus", "");
+        cta.classList.add("is-focused");
+      }
+    }
+
+    function go(idx: number): void {
+      const next = Math.max(0, Math.min(idx, cards.length - 1));
+      if (next === current) return;
+
+      cards[current].classList.remove("is-selected");
+      cards[current].setAttribute("aria-hidden", "true");
+      dots[current]?.classList.remove("is-active");
+
+      current = next;
+
+      cards[current].classList.add("is-selected");
+      cards[current].setAttribute("aria-hidden", "false");
+      dots[current]?.classList.add("is-active");
+
+      updateDisabled();
+      updateCtaFocus(current);
+      navFocusIdx = -1;
+    }
+
+    btnPrev?.addEventListener("click", () => go(current - 1));
+    btnNext?.addEventListener("click", () => go(current + 1));
+
+    // Init
+    updateDisabled();
+    setNavFocus(-1);
+
+    // Keyboard: J/K navigate prev/next controls
+    document.addEventListener("keydown", (e: KeyboardEvent) => {
+      if (window.location.pathname !== "/proyectos") return;
+      const t = e.target as HTMLElement;
+      if (t.tagName === "INPUT" || t.tagName === "TEXTAREA" || t.isContentEditable) return;
+      if (e.metaKey || e.ctrlKey || e.altKey) return;
+
+      if (e.key === "j" || e.key === "J") {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        const controls = navControls();
+        const next = Math.min(navFocusIdx + 1, controls.length - 1);
+        setNavFocus(next);
+      } else if (e.key === "k" || e.key === "K") {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        const prev = Math.max(navFocusIdx - 1, -1);
+        setNavFocus(prev);
+      }
+    });
+  })();
+</script>

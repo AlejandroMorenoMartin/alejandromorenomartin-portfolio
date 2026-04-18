@@ -7,7 +7,7 @@ const config: Config = {
     // Design system page uses dynamic class names — these must be safelisted
     { pattern: /^bg-primary-(50|100|200|300|400|500|600|700|800|900|950)$/ },
     { pattern: /^text-text-[1-8]$/ },
-    { pattern: /^text-(display-2xl|display-xl|display-lg|display-md|display-sm|body-lg|body-md|body-sm|label-lg|label-sm|label-xs)$/ },
+    { pattern: /^text-(display-lg|display-md|body-lg|body-md|label-sm|label-xs)$/ },
     { pattern: /^shadow-ds-(sm|md|lg|glow)$/ },
   ],
   theme: {
@@ -46,20 +46,14 @@ const config: Config = {
         data:    ["Press Start 2P", "monospace"],
       },
       fontSize: {
-        // ── Display — terminal, compacto ──────────────────────
-        "display-2xl": ["2.375rem", { lineHeight: "1.05" }],
-        "display-xl":  ["1.875rem", { lineHeight: "1.1"  }],
-        "display-lg":  ["1.375rem", { lineHeight: "1.2"  }],
-        "display-md":  ["1.125rem", { lineHeight: "1.25" }],
-        "display-sm":  ["0.875rem", { lineHeight: "1.3"  }],
-        // ── Body — monospace needs more leading ───────────────
-        "body-lg":     ["0.8125rem",{ lineHeight: "1.75" }],
-        "body-md":     ["0.75rem",  { lineHeight: "1.75" }],
-        "body-sm":     ["0.6875rem",{ lineHeight: "1.65" }],
-        // ── Label — teletipo, tracking abierto ───────────────
-        "label-lg":    ["0.625rem", { lineHeight: "1.5",  letterSpacing: "0.08em" }],
-        "label-sm":    ["0.5625rem",{ lineHeight: "1.5",  letterSpacing: "0.1em"  }],
-        "label-xs":    ["0.5rem",   { lineHeight: "1.4",  letterSpacing: "0.12em" }],
+        // ── 6 tokens — responsive via CSS vars en global.css ──
+        // Mobile (default) → Desktop (md: 768px)
+        "display-lg": ["var(--fs-display-lg)", { lineHeight: "1.2"  }], // 26px → 30px
+        "display-md": ["var(--fs-display-md)", { lineHeight: "1.25" }], // 20px → 22px
+        "body-lg":    ["var(--fs-body-lg)",    { lineHeight: "1.6"  }], // 16px → 18px
+        "body-md":    ["var(--fs-body-md)",    { lineHeight: "1.65" }], // 14px → 16px
+        "label-sm":   ["var(--fs-label-sm)",   { lineHeight: "1.5", letterSpacing: "0.06em" }], // 13px → 14px
+        "label-xs":   ["var(--fs-label-xs)",   { lineHeight: "1.4", letterSpacing: "0.08em" }], // 11px → 12px
       },
       borderRadius: {
         sm:    "0.25rem",

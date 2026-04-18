@@ -75,7 +75,7 @@ const jsonLd = {
     <meta name="twitter:image"       content={`${siteURL}${ogImage}`} />
 
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="/alejandro-icon.png" />
+    <link rel="icon" type="image/png" href="/browser-icon.png" />
 
     <!-- JSON-LD -->
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
@@ -96,7 +96,344 @@ const jsonLd = {
     </script>
   </head>
   <body>
+    <div class="scroll-fade scroll-fade--top"    aria-hidden="true"></div>
+    <div class="scroll-fade scroll-fade--bottom" aria-hidden="true"></div>
+    <!-- Backdrop -->
+    <div id="kb-backdrop" aria-hidden="true"></div>
+
+    <!-- Keyboard shortcuts modal -->
+    <aside id="kb-panel" role="dialog" aria-modal="true" aria-label="Atajos de teclado" aria-hidden="true">
+      <div class="kb-header">
+        <p class="kb-title font-body">Navegación por teclado</p>
+      </div>
+      <p class="kb-desc font-body">Este portfolio se puede navegar íntegramente con el teclado. Usa estas teclas para moverte por las páginas y seleccionar elementos.</p>
+      <div class="kb-body">
+        <div class="kb-row font-body">
+          <span class="kb-keys"><span class="kb-key">←</span><span class="kb-key">→</span></span>
+          <span class="kb-label">cambiar página</span>
+        </div>
+        <div class="kb-row font-body">
+          <span class="kb-keys"><span class="kb-key">↑</span><span class="kb-key">↓</span></span>
+          <span class="kb-label">scroll</span>
+        </div>
+        <div class="kb-row font-body">
+          <span class="kb-keys"><span class="kb-key">J</span><span class="kb-key">K</span></span>
+          <span class="kb-label">seleccionar</span>
+        </div>
+        <div class="kb-row font-body">
+          <span class="kb-keys"><span class="kb-key">↵</span></span>
+          <span class="kb-label">abrir</span>
+        </div>
+        <div class="kb-row font-body">
+          <span class="kb-keys"><span class="kb-key">⌫</span></span>
+          <span class="kb-label">atrás</span>
+        </div>
+        <div class="kb-row font-body">
+          <span class="kb-keys"><span class="kb-key">ESC</span></span>
+          <span class="kb-label">inicio</span>
+        </div>
+      </div>
+      <div class="kb-footer">
+        <button id="kb-accept" class="btn font-body">Entendido</button>
+      </div>
+    </aside>
+
     <slot />
     <Analytics />
+
+    <!-- Page title typewriter + content reveal -->
+    <style>
+      .scroll-fade {
+        position:       fixed;
+        inset-inline:   0;
+        height:         6rem;
+        pointer-events: none;
+        z-index:        45;
+      }
+      .scroll-fade--top {
+        top:        3rem;
+        background: linear-gradient(to bottom, var(--color-surface), transparent);
+      }
+      .scroll-fade--bottom {
+        bottom:     3rem;
+        background: linear-gradient(to top, var(--color-surface), transparent);
+      }
+    </style>
+    <style>
+      /* Backdrop */
+      #kb-backdrop {
+        display:    none;
+        position:   fixed;
+        inset:      0;
+        z-index:    199;
+        background: rgba(0, 0, 0, 0.5);
+      }
+      #kb-backdrop.is-open { display: block; }
+
+      /* Modal */
+      #kb-panel {
+        display:        none;
+        position:       fixed;
+        top:            50%;
+        left:           50%;
+        transform:      translate(-50%, -50%);
+        z-index:        200;
+        flex-direction: column;
+        gap:            var(--card-gap);
+        background:     var(--color-surface-raised);
+        border:         1px solid var(--color-border);
+        padding:        var(--card-gap);
+        min-width:      20rem;
+      }
+      #kb-panel.is-open { display: flex; }
+
+      @media (max-width: 767px) {
+        #kb-panel, #kb-backdrop { display: none !important; }
+      }
+
+      /* Header */
+      .kb-header {
+        display:         flex;
+        align-items:     center;
+        justify-content: flex-start;
+      }
+      .kb-title {
+        font-size: var(--fs-body-md);
+        color:     var(--color-text-2);
+      }
+
+      /* Description */
+      .kb-desc {
+        font-size:   var(--fs-body-md);
+        color:       var(--color-text-6);
+        line-height: 1.5;
+      }
+
+      /* Body */
+      .kb-body {
+        display:        flex;
+        flex-direction: column;
+        gap:            0.75rem;
+      }
+      .kb-row {
+        display:     flex;
+        align-items: center;
+        gap:         0.5rem;
+        font-size:   var(--fs-body-md);
+      }
+      .kb-keys {
+        display:     inline-flex;
+        gap:         0.25rem;
+        width:       4rem;
+        flex-shrink: 0;
+      }
+      .kb-key   { color: var(--color-text-4); }
+      .kb-label { color: var(--color-text-6); }
+
+      /* Footer */
+      .kb-footer {
+        display:    flex;
+        justify-content: flex-start;
+      }
+    </style>
+    <script is:inline>
+      // /ctrl popup toggle
+      function isModalOpen() {
+        var panel = document.getElementById("kb-panel");
+        return panel ? panel.classList.contains("is-open") : false;
+      }
+
+      function toggleKbPanel() {
+        var btn      = document.getElementById("kb-toggle");
+        var panel    = document.getElementById("kb-panel");
+        var backdrop = document.getElementById("kb-backdrop");
+        var accept   = document.getElementById("kb-accept");
+        if (!panel) return;
+        var open = panel.classList.toggle("is-open");
+        if (backdrop) backdrop.classList.toggle("is-open", open);
+        if (btn) btn.setAttribute("aria-expanded", open ? "true" : "false");
+        panel.setAttribute("aria-hidden", open ? "false" : "true");
+        // give focus state to accept button when modal opens
+        if (open && accept) {
+          var allBtns = Array.from(document.querySelectorAll(".btn"));
+          allBtns.forEach(function (b) { b.classList.remove("is-focused"); });
+          accept.classList.add("is-focused");
+        } else if (!open) {
+          // restore default focus when modal closes
+          var defaultBtn = document.querySelector("[data-default-focus]");
+          var allBtns = Array.from(document.querySelectorAll(".btn"));
+          allBtns.forEach(function (b) { b.classList.remove("is-focused"); });
+          if (defaultBtn) defaultBtn.classList.add("is-focused");
+        }
+      }
+
+      function initKbToggle() {
+        var btn      = document.getElementById("kb-toggle");
+        var accept   = document.getElementById("kb-accept");
+        var backdrop = document.getElementById("kb-backdrop");
+
+        if (btn && !btn.dataset.kbInit) {
+          btn.dataset.kbInit = "1";
+          btn.addEventListener("click", toggleKbPanel);
+        }
+        if (accept && !accept.dataset.kbInit) {
+          accept.dataset.kbInit = "1";
+          accept.addEventListener("click", toggleKbPanel);
+        }
+        if (backdrop && !backdrop.dataset.kbInit) {
+          backdrop.dataset.kbInit = "1";
+          backdrop.addEventListener("click", toggleKbPanel);
+        }
+      }
+
+      document.addEventListener("keydown", function (e) {
+        var panel = document.getElementById("kb-panel");
+        var open  = panel && panel.classList.contains("is-open");
+        if (e.key === "Escape" && open) {
+          e.stopImmediatePropagation();
+          toggleKbPanel();
+        }
+      });
+
+      initKbToggle();
+      document.addEventListener("astro:page-load", initKbToggle);
+    </script>
+
+    <script is:inline>
+      // Título estático — sin animación
+      function setPageTitle() {
+        var titleEl = document.getElementById("page-title");
+        if (titleEl) {
+          titleEl.textContent = titleEl.getAttribute("data-title") || "";
+        }
+      }
+      setPageTitle();
+      document.addEventListener("astro:page-load", setPageTitle);
+
+      // Scroll a top instantáneo tras la transición
+      document.addEventListener("astro:after-swap", function () {
+        var main = document.getElementById("main-scroll");
+        if (main) main.scrollTop = 0;
+      });
+    </script>
+
+    <!-- FocusManager — gestiona is-focused en .btn -->
+    <script is:inline>
+      // Enter handler — una sola vez, nunca se duplica
+      document.addEventListener("keydown", function (e) {
+        if (e.key !== "Enter") return;
+        var t = e.target;
+        if (t.tagName === "INPUT" || t.tagName === "TEXTAREA" || t.isContentEditable) return;
+        var focused = document.querySelector(".btn.is-focused");
+        if (!focused) return;
+        e.preventDefault();
+        // if modal is open, only allow activating buttons inside the modal
+        if (isModalOpen()) {
+          var panel = document.getElementById("kb-panel");
+          if (!panel || !panel.contains(focused)) return;
+        }
+        focused.classList.add("is-active");
+        setTimeout(function () {
+          focused.classList.remove("is-active");
+          focused.click();
+        }, 120);
+      });
+
+      function initFocusManager() {
+        var buttons    = Array.from(document.querySelectorAll(".btn"));
+        var defaultBtn = document.querySelector("[data-default-focus]");
+
+        function setFocused(el) {
+          buttons.forEach(function (b) { b.classList.remove("is-focused"); });
+          if (el) el.classList.add("is-focused");
+        }
+
+        setFocused(defaultBtn || null);
+
+        buttons.forEach(function (btn) {
+          if (btn.dataset.fmInit) return;
+          btn.dataset.fmInit = "1";
+          btn.addEventListener("mouseenter", function () { setFocused(btn); });
+          btn.addEventListener("mouseleave", function () {
+            setFocused(document.querySelector("[data-default-focus]") || null);
+          });
+          btn.addEventListener("focus", function () { setFocused(btn); });
+          btn.addEventListener("blur",  function () {
+            setTimeout(function () {
+              var allBtns = Array.from(document.querySelectorAll(".btn"));
+              if (!allBtns.includes(document.activeElement)) {
+                setFocused(document.querySelector("[data-default-focus]") || null);
+              }
+            }, 0);
+          });
+        });
+      }
+
+      initFocusManager();
+      document.addEventListener("astro:page-load", initFocusManager);
+    </script>
+
+    <!-- KeyboardManager — desktop only -->
+    <script>
+      (function () {
+        const pages = ["/", "/proyectos", "/sobre-mi", "/trayectoria"];
+
+        function currentPath(): string {
+          return window.location.pathname.replace(/\/$/, "") || "/";
+        }
+
+        function pageIndex(): number {
+          const idx = pages.indexOf(currentPath());
+          return idx === -1 ? 0 : idx;
+        }
+
+        function isTyping(e: KeyboardEvent): boolean {
+          const t = e.target as HTMLElement;
+          return t.tagName === "INPUT" || t.tagName === "TEXTAREA" || t.isContentEditable;
+        }
+
+        window.addEventListener("keydown", (e: KeyboardEvent) => {
+          if (isTyping(e)) return;
+          if (e.metaKey || e.ctrlKey || e.altKey) return;
+          const panel = document.getElementById("kb-panel");
+          if (panel && panel.classList.contains("is-open")) return;
+
+          switch (e.key) {
+            case "ArrowRight": {
+              e.preventDefault();
+              const next = pages[pageIndex() + 1];
+              if (next) window.location.href = next;
+              break;
+            }
+            case "ArrowLeft": {
+              e.preventDefault();
+              const prev = pages[pageIndex() - 1];
+              if (prev) window.location.href = prev;
+              break;
+            }
+            case "ArrowDown": {
+              e.preventDefault();
+              (document.getElementById("main-scroll") ?? window).scrollBy({ top: 120, behavior: "smooth" });
+              break;
+            }
+            case "ArrowUp": {
+              e.preventDefault();
+              (document.getElementById("main-scroll") ?? window).scrollBy({ top: -120, behavior: "smooth" });
+              break;
+            }
+            case "Backspace": {
+              e.preventDefault();
+              history.back();
+              break;
+            }
+            case "Escape": {
+              e.preventDefault();
+              window.location.href = "/";
+              break;
+            }
+          }
+        });
+      })();
+    </script>
   </body>
 </html>
