@@ -1,7 +1,8 @@
 ---
 import type { Lang } from "@/i18n/utils";
 import { useTranslations } from "@/i18n/utils";
-import Kpi from "@/components/Kpi.astro";
+import Kpi          from "@/components/Kpi.astro";
+import SectionLabel from "@/components/SectionLabel.astro";
 
 interface Props {
   lang: Lang;
@@ -21,7 +22,7 @@ function highlight(text: string): string {
 
 <section id="experience" class="section-padding" aria-label={t.experience.heading}>
   <div class="container-wide">
-    <p class="font-body text-label-xs text-text-7" style="margin-bottom: var(--section-gap)">/experiencia</p>
+    <SectionLabel label="/experiencia" />
     <ol class="flex flex-col" role="list">
       {t.experience.items.map((item, i) => (
         <li
@@ -35,13 +36,13 @@ function highlight(text: string): string {
           <div class="experience-card">
             <!-- Header -->
             <div class="card-header">
-              <p class="font-body text-label-xs text-text-7">{item.company} - {item.period}</p>
-              <h3 class="font-display text-body-lg text-text-3 leading-snug">{item.role}</h3>
+              <p class="tag">{item.company} - {item.period}</p>
+              <h3 class="font-display text-body-lg leading-snug">{item.role}</h3>
             </div>
 
             <!-- Description -->
             <p
-              class="text-body-md text-text-4 leading-relaxed"
+              class="text-body-md leading-relaxed"
               set:html={highlight(item.description)}
             />
 

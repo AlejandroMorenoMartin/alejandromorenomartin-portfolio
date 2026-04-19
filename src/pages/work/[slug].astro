@@ -6,6 +6,7 @@ import { useTranslations } from "@/i18n/utils";
 
 export function getStaticPaths() {
   return [
+    { params: { slug: "portfolio"           } },
     { params: { slug: "casa-del-aire" } },
     { params: { slug: "senzo-studio"  } },
     { params: { slug: "forma"         } },
@@ -58,7 +59,7 @@ const typeLabel = isApp ? "Aplicación" : "Proyecto web";
       <div class="max-w-3xl mb-20">
         <p class="font-data text-label-sm text-primary-500 mb-4">{project.category}</p>
 
-        <h1 class="text-display-lg font-display font-bold text-text-1 leading-[1.05] mb-6">
+        <h1 class="text-display-lg font-display font-bold leading-[1.05] mb-6">
           {project.title}
         </h1>
 
@@ -80,7 +81,7 @@ const typeLabel = isApp ? "Aplicación" : "Proyecto web";
             <p class="font-data text-label-sm text-primary-500 mb-0.5">Stack</p>
             <ul class="flex flex-wrap gap-2 mt-1" role="list">
               {project.tags.map((tag) => (
-                <li class="text-label-sm text-text-5 bg-surface-overlay border-[0.5px] border-[var(--color-border-subtle)] rounded-none px-3 py-1">
+                <li class="text-label-sm bg-surface-overlay border-[0.5px] border-[var(--color-border-subtle)] rounded-none px-3 py-1">
                   {tag}
                 </li>
               ))}
@@ -111,7 +112,7 @@ const typeLabel = isApp ? "Aplicación" : "Proyecto web";
             <ul class="flex flex-col gap-3">
               {[
                 "Brief y objetivos del proyecto",
-                "Investigación y definición de usuario",
+                "Investigación y definición de personas",
                 "Proceso de diseño: wireframes y prototipos",
                 "Sistema de diseño y componentes",
                 "Resultado final y capturas",

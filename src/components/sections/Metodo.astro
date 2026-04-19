@@ -1,5 +1,6 @@
 ---
-import type { Lang } from "@/i18n/utils";
+import type { Lang }  from "@/i18n/utils";
+import SectionLabel from "@/components/SectionLabel.astro";
 
 interface Props {
   lang: Lang;
@@ -8,16 +9,13 @@ interface Props {
 
 <section id="metodo" class="section-padding" aria-label="Método">
   <div class="container-wide">
-    <p class="font-body text-label-xs text-text-7" style="margin-bottom: var(--section-gap)">/método</p>
+    <SectionLabel label="/método" />
     <div class="metodo-content">
       <p class="text-body-md text-text-3 leading-relaxed">
-        Todo empieza con preguntas. Antes de abrir Figma necesito entender el problema real: qué están intentando hacer los usuarios, dónde se atascan y qué espera el negocio de la solución. El diseño sin contexto es decoración.
+        Más allá de las IAs, las herramientas o las tecnologías del momento, el método de diseño sigue siendo el mismo: trabajar para las personas. Entender cómo piensan, qué necesitan, qué les frustra en su día a día.
       </p>
-      <p class="text-body-md text-text-4 leading-relaxed">
-        Trabajo en ciclos cortos — exploración, prototipo, feedback, ajuste. No espero a tener todo resuelto para enseñar algo. Prefiero equivocarme pronto y en papel que tarde y en producción.
-      </p>
-      <p class="text-body-md text-text-4 leading-relaxed">
-        Al final mido. Un diseño que no se puede evaluar es una opinión, no una solución. Métricas de uso, tests con usuarios, datos de producto — todo suma para saber si lo que construimos realmente funciona.
+      <p class="text-body-md leading-relaxed">
+        Con eso claro, el resto es movimiento: proponer algo, ponerlo delante de alguien, ver qué pasa, ajustar. No espero a tener la solución perfecta para enseñar algo — prefiero una idea imperfecta hoy que una respuesta impecable cuando ya no importa.
       </p>
     </div>
   </div>

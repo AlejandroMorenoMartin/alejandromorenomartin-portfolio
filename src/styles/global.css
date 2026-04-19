@@ -33,12 +33,12 @@
   --color-btn-secondary-hover: #1b170a;
   --color-border-subtle:       color-mix(in srgb, var(--color-text-8) 50%, transparent);
   --color-btn-hover-subtle:    color-mix(in srgb, var(--color-btn-secondary-hover) 50%, transparent);
-  --color-scrollbar:       #1b170a;
-  --color-scrollbar-hover: #2e280e;
+  --color-scrollbar:       var(--color-text-7);
+  --color-scrollbar-hover: var(--color-text-6);
 
-  --page-gap:    4rem;
-  --card-gap:    2rem;
+  --page-gap:    3rem;
   --section-gap: 2rem;
+  --card-gap:    2rem;
 
   /* ── Tipografía — escala mobile (base) ───────────────────── */
   --fs-display-lg: 1.625rem;  /* 26px */
@@ -126,6 +126,7 @@
   ::-webkit-scrollbar-track  { background: var(--color-surface); }
   ::-webkit-scrollbar-thumb  { background: var(--color-scrollbar); border-radius: 3px; }
   ::-webkit-scrollbar-thumb:hover { background: var(--color-scrollbar-hover); }
+  * { scrollbar-color: var(--color-scrollbar) var(--color-surface); scrollbar-width: thin; }
 }
 
 /* ─── Utilities ───────────────────────────────────────────── */
@@ -146,6 +147,43 @@
   .container-wide {
     max-width: 1024px;
     margin-inline: auto;
+  }
+
+  /* ── Tipografía — color por defecto vinculado al tamaño ─── */
+  .text-display-lg { color: var(--color-text-1); }
+  .text-display-md { color: var(--color-text-2); }
+  .text-body-lg    { color: var(--color-text-3); }
+  .text-body-md    { color: var(--color-text-4); }
+  .text-label-sm   { color: var(--color-text-5); }
+  .text-label-xs   { color: var(--color-text-6); }
+
+  /* ── section-label — título de sección (/experiencia…) ──── */
+  .section-label {
+    @apply font-body;
+    font-size:      var(--fs-label-sm);
+    line-height:    1.5;
+    letter-spacing: 0.06em;
+    color:          var(--color-text-5);
+    margin-bottom:  var(--section-gap);
+  }
+
+  /* ── subsection-label — título de subsección ─────────────── */
+  .subsection-label {
+    @apply font-body;
+    font-size:      var(--fs-label-xs);
+    line-height:    1.4;
+    letter-spacing: 0.08em;
+    color:          var(--color-text-6);
+    margin-bottom:  var(--card-gap);
+  }
+
+  /* ── tag — etiqueta de categoría en cards ────────────────── */
+  .tag {
+    @apply font-body;
+    font-size:      var(--fs-label-xs);
+    color:          var(--color-text-7);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
   }
 
   /* ── link-internal — navegación interna, prosa/footer ─
@@ -175,27 +213,29 @@
      La flecha sigue la lógica de las cards de toolstack
   ─────────────────────────────────────────────────────── */
   .link-external {
-    display:     inline-flex;
-    align-items: center;
-    gap:         0.2rem;
-    color:       var(--color-text-4);
-    font-weight: 500;
+    display:               inline-flex;
+    align-items:           center;
+    gap:                   0.2rem;
+    color:                 var(--color-text-4);
+    font-weight:           500;
+    text-decoration:       underline;
+    text-underline-offset: 3px;
   }
 
   .link-external::after {
     content:                  "";
     display:                  inline-block;
-    width:                    11px;
-    height:                   11px;
+    width:                    1em;
+    height:                   1em;
     flex-shrink:              0;
-    background-color:         var(--color-text-5);
+    background-color:         currentColor;
     -webkit-mask-image:       url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='currentColor'%3E%3Cpath fill-rule='evenodd' d='M5.22 14.78a.75.75 0 0 0 1.06 0l7.22-7.22v5.69a.75.75 0 0 0 1.5 0v-7.5a.75.75 0 0 0-.75-.75h-7.5a.75.75 0 0 0 0 1.5h5.69l-7.22 7.22a.75.75 0 0 0 0 1.06Z' clip-rule='evenodd'/%3E%3C/svg%3E");
     mask-image:               url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='currentColor'%3E%3Cpath fill-rule='evenodd' d='M5.22 14.78a.75.75 0 0 0 1.06 0l7.22-7.22v5.69a.75.75 0 0 0 1.5 0v-7.5a.75.75 0 0 0-.75-.75h-7.5a.75.75 0 0 0 0 1.5h5.69l-7.22 7.22a.75.75 0 0 0 0 1.06Z' clip-rule='evenodd'/%3E%3C/svg%3E");
     -webkit-mask-size:        contain;
     mask-size:                contain;
     -webkit-mask-repeat:      no-repeat;
     mask-repeat:              no-repeat;
-    opacity:                  0.5;
+    opacity:                  1;
   }
 
   .link-external:hover {
@@ -235,27 +275,24 @@
   /* Hover + Focused */
   .btn:hover,
   .btn:focus-visible,
-  .btn.is-focused {
-    outline:     none;
-    color:       var(--color-primary);
+  .btn.is-active:hover,
+  .btn[aria-current="page"]:hover,
+  .btn[aria-selected="true"]:hover {
+    outline:      none;
+    background:   transparent;
+    color:        var(--color-primary);
     border-color: var(--color-primary);
-    text-shadow: 0 0 6px rgba(228,167,17,0.35);
-    animation:   btn-glow 1.2s step-end infinite;
-  }
-
-  @keyframes btn-glow {
-    0%, 100% { box-shadow: 0 0 0 1px var(--color-primary), 0 0 6px rgba(228,167,17,0.25); }
-    50%       { box-shadow: 0 0 0 1px var(--color-primary), 0 0 20px rgba(228,167,17,0.75); }
+    filter:       none;
   }
 
   /* Active — inversión total */
   .btn:active,
   .btn.is-active {
-    background:  var(--color-primary);
-    color:       var(--color-surface);
+    background:   var(--color-primary);
+    color:        var(--color-surface);
     border-color: var(--color-primary);
-    text-shadow: none;
-    animation:   none;
+    text-shadow:  none;
+    animation:    none;
   }
 
   /* Selected — marcador de posición */

@@ -1,0 +1,107 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Nav        from "@/components/Nav.astro";
+import Footer     from "@/components/Footer.astro";
+import { useTranslations } from "@/i18n/utils";
+
+const lang    = "es" as const;
+const t       = useTranslations(lang);
+const siteURL = "https://alejandromorenomartin.com";
+
+const controls = [
+  { keys: ["←", "→"], label: "Cambiar página" },
+  { keys: ["↑", "↓"], label: "Scroll" },
+  { keys: ["J", "K"], label: "Seleccionar elemento" },
+  { keys: ["↵"],      label: "Abrir / activar" },
+  { keys: ["⌫"],      label: "Volver atrás" },
+  { keys: ["ESC"],    label: "Ir al inicio" },
+];
+---
+
+<BaseLayout
+  title={`Ctrl · ${t.meta.title}`}
+  description="Atajos de teclado para navegar el portfolio."
+  lang={lang}
+  canonicalURL={`${siteURL}/ctrl`}
+>
+  <Nav lang={lang} />
+  <main id="main-scroll" data-no-scroll>
+    <div class="px-8 pb-0">
+      <div class="container-wide">
+        <h1 id="page-title" class="text-body-md" data-title="/ctrl" aria-label="/ctrl"></h1>
+      </div>
+    </div>
+
+    <section class="section-padding">
+      <div class="container-wide ctrl-content">
+
+        <div class="ctrl-group">
+          <p class="text-body-md leading-relaxed">
+            Usa estas teclas para navegar el portfolio.
+          </p>
+
+          <ol class="ctrl-list" role="list">
+            {controls.map(({ keys, label }) => (
+              <li class="ctrl-row">
+                <span class="ctrl-keys">
+                  {keys.map(k => <span class="ctrl-key font-body">{k}</span>)}
+                </span>
+                <span class="font-display text-label-sm">{label}</span>
+              </li>
+            ))}
+          </ol>
+        </div>
+
+      </div>
+    </section>
+  </main>
+  <Footer lang={lang} />
+</BaseLayout>
+
+<style>
+  .ctrl-content {
+    display:        flex;
+    flex-direction: column;
+  }
+
+  .ctrl-group {
+    display:        flex;
+    flex-direction: column;
+    gap:            var(--card-gap);
+  }
+
+.ctrl-list {
+    display:        flex;
+    flex-direction: column;
+    gap:            var(--card-gap);
+    list-style:     none;
+    padding:        0;
+    margin:         0;
+  }
+
+  .ctrl-row {
+    display:     flex;
+    align-items: center;
+    gap:         var(--card-gap);
+  }
+
+  .ctrl-keys {
+    display: flex;
+    gap:     0.5rem;
+    width:   6rem;
+    flex-shrink: 0;
+  }
+
+  .ctrl-key {
+    display:          inline-flex;
+    align-items:      center;
+    justify-content:  center;
+    min-width:        2rem;
+    height:           2rem;
+    padding:          0 0.5rem;
+    border:           1px solid var(--color-border-subtle);
+    color:            var(--color-text-4);
+    font-size:        var(--fs-label-sm);
+    letter-spacing:   0;
+  }
+</style>

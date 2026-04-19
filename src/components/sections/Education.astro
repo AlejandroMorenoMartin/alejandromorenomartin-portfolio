@@ -1,6 +1,7 @@
 ---
 import type { Lang } from "@/i18n/utils";
 import { useTranslations } from "@/i18n/utils";
+import SectionLabel        from "@/components/SectionLabel.astro";
 
 interface Props {
   lang: Lang;
@@ -27,24 +28,24 @@ const allItems = [
 
 <section id="education" class="section-padding" aria-label={t.education.heading}>
   <div class="container-wide">
-    <p class="font-body text-label-xs text-text-7" style="margin-bottom: var(--section-gap)">/educación</p>
+    <SectionLabel label="/educación" />
 
     <table class="edu-table">
       <thead>
         <tr class="edu-header-row">
-          <th class="font-body text-label-xs text-text-7 text-left font-normal pb-3 pr-6">Categoría</th>
-          <th class="font-body text-label-xs text-text-7 text-left font-normal pb-3 pr-6">Nombre</th>
-          <th class="font-body text-label-xs text-text-7 text-left font-normal pb-3 pr-6">Institución</th>
-          <th class="font-body text-label-xs text-text-7 text-left font-normal pb-3">Año</th>
+          <th class="tag text-left font-normal pb-3 pr-6">Categoría</th>
+          <th class="tag text-left font-normal pb-3 pr-6">Nombre</th>
+          <th class="tag text-left font-normal pb-3 pr-6">Institución</th>
+          <th class="tag text-left font-normal pb-3">Año</th>
         </tr>
       </thead>
       <tbody>
         {allItems.map((item) => (
           <tr class="edu-row">
-            <td class="font-body text-label-xs text-text-6 py-3 pr-6">{item.category}</td>
+            <td class="font-body text-label-xs py-3 pr-6">{item.category}</td>
             <td class="font-display text-label-sm text-text-3 py-3 pr-6">{item.title}</td>
-            <td class="font-display text-label-sm text-text-5 italic py-3 pr-6">{item.institution}</td>
-            <td class="font-body text-label-xs text-text-6 py-3">{item.year}</td>
+            <td class="font-display text-label-sm italic py-3 pr-6">{item.institution}</td>
+            <td class="font-body text-label-xs py-3">{item.year}</td>
           </tr>
         ))}
       </tbody>

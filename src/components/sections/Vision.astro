@@ -1,5 +1,6 @@
 ---
-import type { Lang } from "@/i18n/utils";
+import type { Lang }  from "@/i18n/utils";
+import SectionLabel from "@/components/SectionLabel.astro";
 
 interface Props {
   lang: Lang;
@@ -8,13 +9,13 @@ interface Props {
 
 <section id="vision" class="section-padding" aria-label="Visión">
   <div class="container-wide">
-    <p class="font-body text-label-xs text-text-7" style="margin-bottom: var(--section-gap)">/visión</p>
+    <SectionLabel label="/visión" />
     <div class="vision-content">
       <p class="text-body-md text-text-3 leading-relaxed">
-        Creo que el mejor diseño es el que no se nota. El que reduce la fricción hasta que el usuario simplemente hace lo que quería hacer, sin pensar en la interfaz. Mi objetivo es desaparecer como diseñador para que el producto hable solo.
+        Creo que el mejor diseño es el que no se nota. El que reduce la fricción hasta que la persona simplemente hace lo que quería hacer, sin pensar en la interfaz. Mi objetivo es desaparecer como diseñador para que el producto hable solo.
       </p>
-      <p class="text-body-md text-text-4 leading-relaxed">
-        Para eso necesito entender el negocio, el usuario y la tecnología al mismo tiempo. No diseño pantallas — diseño flujos, decisiones y sistemas que escalan. Un producto bien diseñado resiste el tiempo, el crecimiento y los cambios de dirección.
+      <p class="text-body-md leading-relaxed">
+        Me interesan especialmente los productos que van más allá de resolver un problema individual. Productos que nos integren en algo más grande — que atiendan también a los animales, las plantas y el planeta que compartimos. Creo que el diseño puede ser una herramienta para hacer el mundo un poco mejor, y esa posibilidad es lo que me mantiene motivado.
       </p>
     </div>
   </div>

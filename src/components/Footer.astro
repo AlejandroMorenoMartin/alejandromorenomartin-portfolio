@@ -1,5 +1,4 @@
 ---
-import { execSync } from "node:child_process";
 import type { Lang } from "@/i18n/utils";
 
 interface Props {
@@ -7,16 +6,6 @@ interface Props {
 }
 
 const { lang } = Astro.props;
-
-const gitHash = (() => {
-  try {
-    return execSync("git log -1 --format=%h -- apps/portfolio/", { cwd: process.cwd() })
-      .toString()
-      .trim();
-  } catch {
-    return "unknown";
-  }
-})();
 ---
 
 <footer class="relative z-50 border-t border-border bg-surface" style="background-image: none;" role="contentinfo">
@@ -36,11 +25,6 @@ const gitHash = (() => {
       <p class="footer-item font-body">
         <span class="footer-key">LOC:</span>
         <span class="footer-val">MADRID, ESP</span>
-      </p>
-
-      <p class="footer-item font-body">
-        <span class="footer-key">v</span>
-        <span class="footer-val">{gitHash}</span>
       </p>
 
     </div>

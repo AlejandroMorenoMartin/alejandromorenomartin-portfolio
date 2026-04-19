@@ -1,7 +1,7 @@
 {
   "meta": {
     "title": "Alejandro Moreno Martín — Product Designer",
-    "description": "Product Designer especializado en interfaces digitales, sistemas de diseño y experiencia de usuario. Disponible para nuevas oportunidades.",
+    "description": "Product Designer especializado en interfaces digitales, sistemas de diseño y experiencia de personas. Disponible para nuevas oportunidades.",
     "ogImage": "/og-es.png"
   },
   "nav": {
@@ -28,7 +28,7 @@
   "about": {
     "label":   "Sobre mí",
     "heading": "Sobre mí",
-    "p1":      "Funciono como puente entre diseño y desarrollo, con una vocación clara por la investigación y el usuario. Prefiero entender antes de proponer, y proponer antes de construir.",
+    "p1":      "Funciono como puente entre diseño y desarrollo, con una vocación clara por la investigación y las personas. Prefiero entender antes de proponer, y proponer antes de construir.",
     "p2":      "Actualmente trabajo por mi cuenta, ayudando a empresas y particulares a desarrollar sus proyectos digitales y a entender mejor a las personas para las que trabajan. Con ganas de asumir nuevos retos y en busca de la oportunidad adecuada.",
     "stats": [
       { "value": "+20", "label": "Proyectos entregados" },
@@ -109,7 +109,7 @@
       {
         "title":       "Hotjar",
         "url":         "https://hotjar.com",
-        "description": "Analítica de comportamiento de usuario: mapas de calor, grabaciones de sesión y embudos de conversión para entender exactamente cómo interactúan los visitantes con un sitio web.",
+        "description": "Analítica de comportamiento: mapas de calor, grabaciones de sesión y embudos de conversión para entender cómo interactúan las personas con un producto.",
         "comment":     "Los datos te dicen qué ocurre. Hotjar te muestra por qué."
       }
     ]
@@ -118,6 +118,22 @@
     "label":   "Proyectos",
     "heading": "Proyectos",
     "projects": [
+      {
+        "title":       "/alejandro-portfolio",
+        "slug":        "portfolio",
+        "company":     "Proyecto personal",
+        "category":    "Product Design · Desarrollo",
+        "headline":    "El proceso de diseño y desarrollo detrás de lo que estás viendo ahora",
+        "summary":     "Diseñé y desarrollé este portfolio como ejercicio completo de producto: sistema de diseño propio, arquitectura de información, navegación por teclado y despliegue en producción.",
+        "metrics":     [
+          { "value": "100%", "label": "Sistema de diseño propio" },
+          { "value": "0",    "label": "Dependencias de UI" },
+          { "value": "<1s",  "label": "Tiempo de carga" }
+        ],
+        "tags":        ["Astro", "Tailwind CSS", "TypeScript", "Figma"],
+        "date":        "Abr 2025",
+        "image":       "/images/placeholder.svg"
+      },
       {
         "title":       "Casa del Aire",
         "slug":        "casa-del-aire",
@@ -156,7 +172,7 @@
         "company":     "Proyecto personal",
         "category":    "Product Design · App",
         "headline":    "Una app de seguimiento diseñada para la claridad, no para la complejidad",
-        "summary":     "Diseñé una app móvil para usuarios que quieren control preciso de su composición corporal, sin el ruido de las plataformas de fitness genéricas.",
+        "summary":     "Diseñé una app móvil para personas que quieren control preciso de su composición corporal, sin el ruido de las plataformas de fitness genéricas.",
         "metrics":     [
           { "value": "3",    "label": "Pantallas clave" },
           { "value": "+82%", "label": "Tareas completadas" },
@@ -172,7 +188,7 @@
         "company":     "Proyecto personal",
         "category":    "Product Design · App",
         "headline":    "Una app de recetas que hace que cocinar vuelva a sentirse personal",
-        "summary":     "Diseñé un recetario social donde los usuarios anotan, organizan y comparten sus platos favoritos, convirtiendo un hábito privado en una experiencia de comunidad.",
+        "summary":     "Diseñé un recetario social donde las personas anotan, organizan y comparten sus platos favoritos, convirtiendo un hábito privado en una experiencia de comunidad.",
         "metrics":     [
           { "value": "+90%", "label": "Recetas guardadas" },
           { "value": "2×",   "label": "Duración de sesión" },
@@ -203,7 +219,7 @@
         "role":        "Co-Founder & General Manager",
         "company":     "Dako",
         "period":      "2020 — 2021",
-        "description": "Cofundé y operé un negocio B2C local gestionando simultáneamente operaciones, marketing, ventas y logística. Diseñé y testé el MVP, incorporé feedback directo de usuarios para ajustar el producto y tomé decisiones de negocio en todas las áreas de la empresa.",
+        "description": "Cofundé y operé un negocio B2C local gestionando simultáneamente operaciones, marketing, ventas y logística. Diseñé y testé el MVP, incorporé feedback directo de personas para ajustar el producto y tomé decisiones de negocio en todas las áreas de la empresa.",
         "metrics": [
           { "value": "+200", "label": "Clientes activos" },
           { "value": "4",    "label": "Áreas gestionadas" }
@@ -226,7 +242,7 @@
         "period":      "2016",
         "description": "Gestioné la reputación digital y las comunidades online de la agencia. Definí la estrategia de contenido, coordiné la presencia en redes sociales y desarrollé un protocolo de gestión de crisis para reducir el impacto de menciones negativas y mantener la imagen de marca.",
         "metrics": [
-          { "value": "+12%", "label": "Usuarios activos" },
+          { "value": "+12%", "label": "Personas activas" },
           { "value": "+3000","label": "Nuevos seguidores" },
           { "value": "–20%", "label": "Menciones negativas" }
         ]

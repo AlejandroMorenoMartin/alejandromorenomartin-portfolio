@@ -28,10 +28,10 @@ const surfaceTokens = [
 const typoScale = [
   { token: "display-lg", mobile: "26px", desktop: "30px", lh: "1.2",  ls: "—",      color: "text-text-1", use: "Título principal" },
   { token: "display-md", mobile: "20px", desktop: "22px", lh: "1.25", ls: "—",      color: "text-text-2", use: "Título secundario" },
-  { token: "body-lg",    mobile: "16px", desktop: "18px", lh: "1.6",  ls: "—",      color: "text-text-3", use: "Cuerpo grande" },
+  { token: "body-lg",    mobile: "16px", desktop: "18px", lh: "1.6",  ls: "—",      color: "text-text-3", use: "Cuerpo grande, introducción" },
   { token: "body-md",    mobile: "14px", desktop: "16px", lh: "1.65", ls: "—",      color: "text-text-4", use: "Cuerpo principal" },
-  { token: "label-sm",   mobile: "13px", desktop: "14px", lh: "1.5",  ls: "0.06em", color: "text-text-5", use: "Detalle grande — nav, footer, labels" },
-  { token: "label-xs",   mobile: "11px", desktop: "12px", lh: "1.4",  ls: "0.08em", color: "text-text-6", use: "Detalle pequeño — micro labels, tags" },
+  { token: "label-sm",   mobile: "13px", desktop: "14px", lh: "1.5",  ls: "0.06em", color: "text-text-5", use: "SectionLabel · nav, footer, labels" },
+  { token: "label-xs",   mobile: "11px", desktop: "12px", lh: "1.4",  ls: "0.08em", color: "text-text-6", use: "SubsectionLabel · micro labels, tags" },
 ];
 ---
 
@@ -125,12 +125,13 @@ const typoScale = [
         <h3 class="text-body-lg font-display font-semibold text-text-2 mb-4">Reglas de color en tipografía</h3>
         <div class="flex flex-col gap-3 mb-12 text-body-md">
           {[
-            { context: "display-lg",  token: "text-text-1", rule: "Título principal — máxima pureza." },
-            { context: "display-md",  token: "text-text-2", rule: "Título secundario." },
-            { context: "body-lg",     token: "text-text-3", rule: "Cuerpo grande, párrafos de introducción." },
-            { context: "body-md",     token: "text-text-3/4", rule: "Cuerpo principal — 14px desktop / 12px mobile." },
-            { context: "label-sm",    token: "text-text-5", rule: "Chrome UI: nav, footer, labels. Sin excepciones." },
-            { context: "label-xs",    token: "text-text-6", rule: "Micro labels, tags, detalles mínimos." },
+            { context: "display-lg",  token: "text-text-1",     rule: "Título principal — máxima pureza." },
+            { context: "display-md",  token: "text-text-2",     rule: "Título secundario." },
+            { context: "body-lg",     token: "text-text-3",     rule: "Cuerpo grande, párrafos de introducción." },
+            { context: "body-md",     token: "text-text-4",     rule: "Cuerpo principal." },
+            { context: "label-sm",    token: "text-text-5",     rule: "SectionLabel (.section-label) · nav, footer, labels." },
+            { context: "label-xs",    token: "text-text-6",     rule: "SubsectionLabel (.subsection-label) · micro labels, tags." },
+            { context: "label-xs",    token: "text-text-6",     rule: "Micro labels, tags, detalles mínimos." },
             { context: "KPIs / datos", token: "text-primary-500", rule: "font-data (Press Start 2P). Números destacados." },
           ].map(r => (
             <div class="flex items-start gap-4 py-2 border-b-[0.5px] border-[var(--color-border-subtle)]">
@@ -203,6 +204,22 @@ const typoScale = [
       <!-- ── 6. COMPONENTES ────────────────────────────────────── -->
       <section class="mb-24" aria-labelledby="components-heading">
         <h2 id="components-heading" class="text-display-lg font-display font-bold text-text-1 mb-12">Componentes</h2>
+
+        <!-- SectionLabel / SubsectionLabel -->
+        <div class="mb-14">
+          <h3 class="text-body-lg font-display font-semibold text-text-2 mb-2">SectionLabel / SubsectionLabel</h3>
+          <p class="text-body-md text-text-5 mb-6">Componentes atómicos para títulos de sección y subsección. Tipografía y color fijos — no admiten overrides de color.</p>
+          <div class="flex flex-col gap-6">
+            <div class="flex flex-col gap-1">
+              <p class="section-label">/experiencia</p>
+              <code class="font-data text-label-xs text-text-6">SectionLabel label="/experiencia" — label-sm · text-5</code>
+            </div>
+            <div class="flex flex-col gap-1">
+              <p class="subsection-label">Titulaciones</p>
+              <code class="font-data text-label-xs text-text-6">SubsectionLabel label="Titulaciones" — label-xs · text-6</code>
+            </div>
+          </div>
+        </div>
 
         <!-- Links -->
         <div class="mb-14">
