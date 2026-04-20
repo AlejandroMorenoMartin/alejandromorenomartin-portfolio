@@ -167,7 +167,49 @@ const lang = "es" as const;
         <h3 class="font-display text-body-lg font-semibold text-text-2 mb-6">Grosor y color de borde</h3>
         <div id="ds-border-styles" class="flex flex-col gap-4"></div>
       </section>
-      <div id="ds-effects"    class="mb-24"></div>
+      <!-- ── 5. EFECTOS ────────────────────────────────────────────── -->
+      <section id="ds-effects" class="mb-24" aria-labelledby="effects-heading">
+        <h2 id="effects-heading" class="font-display text-display-lg font-bold text-text-1 mb-12">Efectos</h2>
+
+        <h3 class="font-display text-body-lg font-semibold text-text-2 mb-2">Sombras</h3>
+        <p class="text-body-md text-text-5 mb-6">Multicapa con tinte dorado. Nunca usar <code class="font-data text-label-xs">shadow-md</code> plana de Tailwind.</p>
+        <div id="ds-shadows" class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-16"></div>
+
+        <h3 class="font-display text-body-lg font-semibold text-text-2 mb-6">Transiciones</h3>
+        <div class="flex flex-col gap-4 mb-16">
+          {[
+            { name: 'fast',   ms: '100ms', use: 'Hover, cambios de color' },
+            { name: 'normal', ms: '200ms', use: 'Layout shifts, theme changes' },
+            { name: 'slow',   ms: '350ms', use: 'Expansiones, modales' },
+          ].map(t => (
+            <div class="flex items-center gap-4">
+              <code class="font-data text-label-sm text-primary-500 w-16 shrink-0">{t.name}</code>
+              <span class="font-data text-label-xs text-text-5 w-16 shrink-0">{t.ms}</span>
+              <span class="text-body-md text-text-6">— {t.use}</span>
+            </div>
+          ))}
+        </div>
+
+        <h3 class="font-display text-body-lg font-semibold text-text-2 mb-4">Background pattern</h3>
+        <p class="text-body-md text-text-5 mb-4">Grid dorado sobre fondo oscuro. Definido en <code class="font-data text-primary-500">global.css</code> en el selector <code class="font-data text-label-xs">body</code>.</p>
+        <div class="h-32 w-full mb-16 border-[0.5px] border-[var(--color-border-subtle)]" style="background-image: radial-gradient(ellipse 62% 100% at center, var(--color-surface) 5%, transparent 68%), radial-gradient(ellipse at center, transparent 30%, rgba(16,13,7,0.9) 100%), linear-gradient(rgba(228,167,17,0.10) 1px, transparent 1px), linear-gradient(90deg, rgba(228,167,17,0.10) 1px, transparent 1px); background-size: 100% 100%, 100% 100%, 40px 40px, 40px 40px;"></div>
+
+        <h3 class="font-display text-body-lg font-semibold text-text-2 mb-4">Selección de texto</h3>
+        <p class="text-body-md text-text-5 mb-2">Selecciona este texto para ver el highlight gold.</p>
+        <p class="text-body-lg text-text-2 mb-12 select-all">← Selecciona esto: background gold rgba(228,167,17,0.25)</p>
+
+        <h3 class="font-display text-body-lg font-semibold text-text-2 mb-4">Scrollbar</h3>
+        <div class="flex gap-3 items-center">
+          <div class="overflow-y-scroll h-16 w-48 bg-surface-raised border-[0.5px] border-[var(--color-border-subtle)] p-2">
+            <p class="text-body-md text-text-5">Línea 1</p>
+            <p class="text-body-md text-text-5">Línea 2</p>
+            <p class="text-body-md text-text-5">Línea 3</p>
+            <p class="text-body-md text-text-5">Línea 4</p>
+            <p class="text-body-md text-text-5">Línea 5</p>
+          </div>
+          <code class="font-data text-label-xs text-text-6">6px · color-text-7 → text-6 en hover</code>
+        </div>
+      </section>
       <div id="ds-components" class="mb-24"></div>
 
     </div>
@@ -308,6 +350,25 @@ const lang = "es" as const;
           <div style="width:6rem;height:2.5rem;border:${b.thick} solid ${colorVal || 'var(--color-border)'};flex-shrink:0"></div>
           <code style="font-family:'Press Start 2P',monospace;font-size:11px;color:var(--color-primary);width:9rem;flex-shrink:0">${b.label}</code>
           <span style="font-size:13px;color:var(--color-text-5)">${b.desc}</span>
+        </div>`;
+    }).join('');
+  }
+
+  // ── Effects section ──────────────────────────────────────────
+  const shadows = [
+    { token: '--shadow-sm',   label: 'ds-sm',   desc: 'Cards en reposo' },
+    { token: '--shadow-md',   label: 'ds-md',   desc: 'Hover, modales' },
+    { token: '--shadow-lg',   label: 'ds-lg',   desc: 'Dropdowns, popovers' },
+    { token: '--shadow-glow', label: 'ds-glow', desc: 'Focus ring dorado' },
+  ];
+  const shadowContainer = document.getElementById('ds-shadows');
+  if (shadowContainer) {
+    shadowContainer.innerHTML = shadows.map(s => {
+      const val = style.getPropertyValue(s.token).trim();
+      return `
+        <div style="padding:1.5rem;background:var(--color-surface-raised);box-shadow:${val}">
+          <code style="font-family:'Press Start 2P',monospace;font-size:11px;color:var(--color-primary);display:block;margin-bottom:0.25rem">${s.label}</code>
+          <span style="font-size:13px;color:var(--color-text-5)">${s.desc}</span>
         </div>`;
     }).join('');
   }
