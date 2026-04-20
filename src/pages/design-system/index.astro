@@ -97,7 +97,44 @@ const lang = "es" as const;
           <code class="font-data text-label-xs text-text-5 ml-4">font-data text-display-md font-bold text-primary-500</code>
         </div>
       </section>
-      <div id="ds-spacing"    class="mb-24"></div>
+      <!-- ── 3. ESPACIADO Y LAYOUT ─────────────────────────────────── -->
+      <section id="ds-spacing" class="mb-24" aria-labelledby="spacing-heading">
+        <h2 id="spacing-heading" class="font-display text-display-lg font-bold text-text-1 mb-12">Espaciado y Layout</h2>
+
+        <h3 class="font-display text-body-lg font-semibold text-text-2 mb-4">Rem base</h3>
+        <p class="text-body-md text-text-5 mb-12">
+          Sin override — el navegador usa <code class="font-data text-primary-500">16px</code> como base.
+          <span class="text-text-6"> · 1rem = 16px · 0.5rem = 8px · 0.25rem = 4px</span>
+        </p>
+
+        <h3 class="font-display text-body-lg font-semibold text-text-2 mb-4">Gap tokens</h3>
+        <p class="text-body-md text-text-5 mb-6">Tokens semánticos de espaciado. Se aplican via CSS vars, no valores arbitrarios.</p>
+        <div id="ds-gap-tokens" class="flex flex-col gap-4 mb-16"></div>
+
+        <h3 class="font-display text-body-lg font-semibold text-text-2 mb-4">Contenedores</h3>
+        <p class="text-body-md text-text-5 mb-6">Dos anchos máximos. Siempre centrados con <code class="font-data text-primary-500">margin-inline: auto</code>.</p>
+        <div class="flex flex-col gap-4 mb-16">
+          <div>
+            <div class="h-8 bg-surface-overlay border-[0.5px] border-[var(--color-border-subtle)]" style="max-width:640px"></div>
+            <p class="text-label-xs text-text-6 mt-1"><code class="font-data text-primary-500">.container-narrow</code> — max-width: 640px</p>
+          </div>
+          <div>
+            <div class="h-8 bg-surface-overlay border-[0.5px] border-[var(--color-border-subtle)]" style="max-width:1024px"></div>
+            <p class="text-label-xs text-text-6 mt-1"><code class="font-data text-primary-500">.container-wide</code> — max-width: 1024px</p>
+          </div>
+        </div>
+
+        <h3 class="font-display text-body-lg font-semibold text-text-2 mb-4">Patrón de sección</h3>
+        <div class="flex flex-col gap-2">
+          <code class="font-data text-label-sm text-primary-500">.section-padding</code>
+          <p class="text-body-md text-text-5">
+            <code class="font-data text-label-xs text-text-4">px-8</code> ·
+            <code class="font-data text-label-xs text-text-4">pb-16</code> ·
+            <code class="font-data text-label-xs text-text-4">padding-top: var(--page-gap)</code>
+          </p>
+          <p class="text-body-md text-text-6">Estructura estándar: <code class="font-data text-label-xs">section.section-padding &gt; div.container-wide</code></p>
+        </div>
+      </section>
       <div id="ds-borders"    class="mb-24"></div>
       <div id="ds-effects"    class="mb-24"></div>
       <div id="ds-components" class="mb-24"></div>
@@ -201,6 +238,27 @@ const lang = "es" as const;
           <span style="font-family:'Press Start 2P',monospace;font-size:10px;color:var(--color-text-7);width:2rem;flex-shrink:0">${t.lh}</span>
           <span style="font-size:${fs};color:${colorVal};line-height:1;flex-shrink:0">Aa</span>
           <span style="font-size:13px;color:var(--color-text-5);margin-left:auto">${t.use}</span>
+        </div>`;
+    }).join('');
+  }
+
+  // ── Spacing section ──────────────────────────────────────────
+  const gapTokens = [
+    { token: '--page-gap',    label: 'page-gap',    desc: 'Padding top de cada sección de página' },
+    { token: '--section-gap', label: 'section-gap', desc: 'Margen bottom de SectionLabel' },
+    { token: '--card-gap',    label: 'card-gap',    desc: 'Margen bottom de SubsectionLabel' },
+  ];
+  const gapContainer = document.getElementById('ds-gap-tokens');
+  if (gapContainer) {
+    gapContainer.innerHTML = gapTokens.map(g => {
+      const val = style.getPropertyValue(g.token).trim();
+      const px = parseFloat(val) * 16;
+      return `
+        <div style="display:flex;align-items:center;gap:1rem">
+          <div style="height:1rem;background:var(--color-primary);opacity:0.3;width:${px}px;flex-shrink:0;min-width:4px"></div>
+          <code style="font-family:'Press Start 2P',monospace;font-size:11px;color:var(--color-primary);width:8rem;flex-shrink:0">${g.label}</code>
+          <span style="font-family:'Press Start 2P',monospace;font-size:10px;color:var(--color-text-6);width:9rem;flex-shrink:0">${val} (${px}px)</span>
+          <span style="font-size:13px;color:var(--color-text-5)">${g.desc}</span>
         </div>`;
     }).join('');
   }
