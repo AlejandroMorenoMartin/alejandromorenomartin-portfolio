@@ -26,7 +26,30 @@ const lang = "es" as const;
       </div>
 
       <!-- Sections — filled in subsequent tasks -->
-      <div id="ds-color"      class="mb-24"></div>
+      <!-- ── 1. COLOR ──────────────────────────────────────────────── -->
+      <section id="ds-color" class="mb-24" aria-labelledby="color-heading">
+        <h2 id="color-heading" class="font-display text-display-lg font-bold text-text-1 mb-12">Color</h2>
+
+        <!-- Primary palette -->
+        <h3 class="font-display text-body-lg font-semibold text-text-2 mb-2">Primary — Gold</h3>
+        <p class="text-body-md text-text-5 mb-6">Paleta principal. 11 pasos desde casi-blanco hasta casi-negro con tinte dorado.</p>
+        <div id="ds-primary-swatches" class="flex flex-wrap gap-2 mb-16"></div>
+
+        <!-- Superficies -->
+        <h3 class="font-display text-body-lg font-semibold text-text-2 mb-2">Superficies y bordes</h3>
+        <p class="text-body-md text-text-5 mb-6">Fondos semánticos y tokens de borde.</p>
+        <div id="ds-surface-swatches" class="flex flex-col gap-3 mb-16"></div>
+
+        <!-- Jerarquía de texto -->
+        <h3 class="font-display text-body-lg font-semibold text-text-2 mb-2">Jerarquía de texto</h3>
+        <p class="text-body-md text-text-5 mb-6">A mayor tamaño tipográfico → color más puro (text-1). Chrome UI (nav, footer) usa siempre text-5.</p>
+        <div id="ds-text-swatches" class="flex flex-col gap-3 mb-16"></div>
+
+        <!-- Gradiente -->
+        <h3 class="font-display text-body-lg font-semibold text-text-2 mb-2">Gradiente de texto</h3>
+        <p class="text-body-md text-text-5 mb-4">Animado — gold a fucsia-rosa. Clase <code class="font-data text-primary-500">.text-gradient</code>.</p>
+        <span class="text-gradient font-display text-display-lg font-bold">Designer</span>
+      </section>
       <div id="ds-typography" class="mb-24"></div>
       <div id="ds-spacing"    class="mb-24"></div>
       <div id="ds-borders"    class="mb-24"></div>
@@ -42,5 +65,72 @@ const lang = "es" as const;
   const host = window.location.hostname;
   if (host !== 'localhost' && host !== '127.0.0.1') {
     window.location.replace('/');
+  }
+</script>
+
+<script>
+  // ── Design System — Token reader ─────────────────────────────
+  const style = getComputedStyle(document.documentElement);
+
+  // Primary palette (11 steps)
+  const primarySteps = [50,100,200,300,400,500,600,700,800,900,950];
+  const primaryContainer = document.getElementById('ds-primary-swatches');
+  if (primaryContainer) {
+    primaryContainer.innerHTML = primarySteps.map(n => {
+      const val = style.getPropertyValue(`--color-primary-${n}`).trim();
+      return `
+        <div class="flex flex-col items-center gap-1.5">
+          <div style="width:3rem;height:3rem;background:${val};border:0.5px solid rgba(255,255,255,0.08)"></div>
+          <span class="font-data" style="font-size:10px;color:var(--color-text-6)">${n}</span>
+          <span class="font-data" style="font-size:9px;color:var(--color-text-7)">${val}</span>
+        </div>`;
+    }).join('');
+  }
+
+  // Surfaces & borders
+  const surfaces = [
+    { token: '--color-surface',         label: 'surface',         desc: 'Fondo base' },
+    { token: '--color-surface-raised',  label: 'surface-raised',  desc: 'Fondo elevado' },
+    { token: '--color-surface-overlay', label: 'surface-overlay', desc: 'Fondo overlay / icon bg' },
+    { token: '--color-border',          label: 'border',          desc: 'Borde estándar' },
+    { token: '--color-border-strong',   label: 'border-strong',   desc: 'Borde reforzado' },
+  ];
+  const surfaceContainer = document.getElementById('ds-surface-swatches');
+  if (surfaceContainer) {
+    surfaceContainer.innerHTML = surfaces.map(s => {
+      const val = style.getPropertyValue(s.token).trim();
+      return `
+        <div style="display:flex;align-items:center;gap:1rem">
+          <div style="width:1.5rem;height:1.5rem;background:${val};border:0.5px solid rgba(255,255,255,0.15);flex-shrink:0"></div>
+          <code style="font-family:'Press Start 2P',monospace;font-size:11px;color:var(--color-primary);width:11rem;flex-shrink:0">${s.label}</code>
+          <span style="font-family:'Press Start 2P',monospace;font-size:10px;color:var(--color-text-6);width:6rem;flex-shrink:0">${val}</span>
+          <span style="font-size:14px;color:var(--color-text-5)">${s.desc}</span>
+        </div>`;
+    }).join('');
+  }
+
+  // Text hierarchy tokens
+  const textTokens = [
+    { token: '--color-text-1', label: 'text-1', desc: 'Títulos principales (display-lg)' },
+    { token: '--color-text-2', label: 'text-2', desc: 'Títulos secundarios (display-md)' },
+    { token: '--color-text-3', label: 'text-3', desc: 'Cuerpo grande (body-lg)' },
+    { token: '--color-text-4', label: 'text-4', desc: 'Cuerpo principal (body-md)' },
+    { token: '--color-text-5', label: 'text-5', desc: 'Labels, nav, footer, chrome UI (label-sm)' },
+    { token: '--color-text-6', label: 'text-6', desc: 'Micro labels, subsecciones (label-xs)' },
+    { token: '--color-text-7', label: 'text-7', desc: 'Tags, placeholder' },
+    { token: '--color-text-8', label: 'text-8', desc: 'Disabled, decorativo mínimo' },
+  ];
+  const textContainer = document.getElementById('ds-text-swatches');
+  if (textContainer) {
+    textContainer.innerHTML = textTokens.map(t => {
+      const val = style.getPropertyValue(t.token).trim();
+      return `
+        <div style="display:flex;align-items:center;gap:1rem">
+          <div style="width:1.5rem;height:1.5rem;border-radius:50%;background:${val};flex-shrink:0"></div>
+          <code style="font-family:'Press Start 2P',monospace;font-size:11px;color:var(--color-primary);width:5rem;flex-shrink:0">${t.label}</code>
+          <span style="font-family:'Press Start 2P',monospace;font-size:10px;color:var(--color-text-6);width:6rem;flex-shrink:0">${val}</span>
+          <span style="font-size:14px;color:${val};flex:1">${t.desc}</span>
+        </div>`;
+    }).join('');
   }
 </script>
