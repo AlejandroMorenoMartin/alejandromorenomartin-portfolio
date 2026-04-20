@@ -30,6 +30,17 @@
   --shadow-glow: 0 0 0 1px rgba(228,167,17,.25), 0 4px 32px rgba(228,167,17,.25);
 
   --color-primary:             #E4A711;
+  --color-primary-50:  #fdf9f0;
+  --color-primary-100: #faf2de;
+  --color-primary-200: #f6e0ae;
+  --color-primary-300: #f0cf7d;
+  --color-primary-400: #ebbe4a;
+  --color-primary-500: #E4A711;
+  --color-primary-600: #c27d00;
+  --color-primary-700: #9a6200;
+  --color-primary-800: #6b4500;
+  --color-primary-900: #3d2800;
+  --color-primary-950: #1a1100;
   --color-btn-secondary-hover: #1b170a;
   --color-border-subtle:       color-mix(in srgb, var(--color-text-8) 50%, transparent);
   --color-btn-hover-subtle:    color-mix(in srgb, var(--color-btn-secondary-hover) 50%, transparent);
