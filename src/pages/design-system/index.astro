@@ -135,7 +135,38 @@ const lang = "es" as const;
           <p class="text-body-md text-text-6">Estructura estándar: <code class="font-data text-label-xs">section.section-padding &gt; div.container-wide</code></p>
         </div>
       </section>
-      <div id="ds-borders"    class="mb-24"></div>
+      <!-- ── 4. BORDES Y RADIOS ─────────────────────────────────────── -->
+      <section id="ds-borders" class="mb-24" aria-labelledby="borders-heading">
+        <h2 id="borders-heading" class="font-display text-display-lg font-bold text-text-1 mb-12">Bordes y Radios</h2>
+
+        <h3 class="font-display text-body-lg font-semibold text-text-2 mb-2">Border radius disponibles</h3>
+        <p class="text-body-md text-text-5 mb-2">
+          Tokens definidos en <code class="font-data text-primary-500">tailwind.config.ts</code>.
+        </p>
+        <p class="text-body-md mb-8" style="color:var(--color-primary)">
+          Norma del portfolio: <code class="font-data text-label-sm">rounded-none</code> en todos los elementos. Sin excepciones salvo decisión explícita.
+        </p>
+        <div class="flex flex-wrap gap-6 mb-16">
+          {[
+            { label: 'none',  value: '0px',    cls: 'rounded-none'  },
+            { label: 'sm',    value: '4px',    cls: 'rounded-sm'    },
+            { label: 'md',    value: '8px',    cls: 'rounded-md'    },
+            { label: 'lg',    value: '12px',   cls: 'rounded-lg'    },
+            { label: 'xl',    value: '16px',   cls: 'rounded-xl'    },
+            { label: '2xl',   value: '24px',   cls: 'rounded-2xl'   },
+            { label: 'full',  value: '9999px', cls: 'rounded-full'  },
+          ].map(r => (
+            <div class="flex flex-col items-center gap-2">
+              <div class={`w-16 h-16 bg-surface-overlay border-[0.5px] border-[var(--color-border)] ${r.cls}`}></div>
+              <code class="font-data text-label-xs text-primary-500">{r.label}</code>
+              <span class="font-data text-label-xs text-text-7">{r.value}</span>
+            </div>
+          ))}
+        </div>
+
+        <h3 class="font-display text-body-lg font-semibold text-text-2 mb-6">Grosor y color de borde</h3>
+        <div id="ds-border-styles" class="flex flex-col gap-4"></div>
+      </section>
       <div id="ds-effects"    class="mb-24"></div>
       <div id="ds-components" class="mb-24"></div>
 
@@ -259,6 +290,24 @@ const lang = "es" as const;
           <code style="font-family:'Press Start 2P',monospace;font-size:11px;color:var(--color-primary);width:8rem;flex-shrink:0">${g.label}</code>
           <span style="font-family:'Press Start 2P',monospace;font-size:10px;color:var(--color-text-6);width:9rem;flex-shrink:0">${val} (${px}px)</span>
           <span style="font-size:13px;color:var(--color-text-5)">${g.desc}</span>
+        </div>`;
+    }).join('');
+  }
+
+  // ── Borders section ──────────────────────────────────────────
+  const borderStyles = [
+    { label: '0.5px estándar', thick: '0.5px', tokenName: '--color-border-subtle', desc: 'Cards, separadores, layout' },
+    { label: '1px fuerte',     thick: '1px',   tokenName: '--color-border-strong', desc: 'Btn, elementos interactivos' },
+  ];
+  const borderContainer = document.getElementById('ds-border-styles');
+  if (borderContainer) {
+    borderContainer.innerHTML = borderStyles.map(b => {
+      const colorVal = style.getPropertyValue(b.tokenName).trim();
+      return `
+        <div style="display:flex;align-items:center;gap:1.5rem">
+          <div style="width:6rem;height:2.5rem;border:${b.thick} solid ${colorVal || 'var(--color-border)'};flex-shrink:0"></div>
+          <code style="font-family:'Press Start 2P',monospace;font-size:11px;color:var(--color-primary);width:9rem;flex-shrink:0">${b.label}</code>
+          <span style="font-size:13px;color:var(--color-text-5)">${b.desc}</span>
         </div>`;
     }).join('');
   }
