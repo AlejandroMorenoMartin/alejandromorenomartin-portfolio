@@ -1,6 +1,10 @@
 ---
-import BaseLayout from "@/layouts/BaseLayout.astro";
-import Nav        from "@/components/Nav.astro";
+import BaseLayout      from "@/layouts/BaseLayout.astro";
+import Nav             from "@/components/Nav.astro";
+import Btn             from "@/components/Btn.astro";
+import Kpi             from "@/components/Kpi.astro";
+import SectionLabel    from "@/components/SectionLabel.astro";
+import SubsectionLabel from "@/components/SubsectionLabel.astro";
 
 const lang = "es" as const;
 ---
@@ -210,7 +214,167 @@ const lang = "es" as const;
           <code class="font-data text-label-xs text-text-6">6px · color-text-7 → text-6 en hover</code>
         </div>
       </section>
-      <div id="ds-components" class="mb-24"></div>
+      <!-- ── 6. COMPONENTES ────────────────────────────────────────── -->
+      <section id="ds-components" class="mb-24" aria-labelledby="components-heading">
+        <h2 id="components-heading" class="font-display text-display-lg font-bold text-text-1 mb-12">Componentes</h2>
+        <p class="text-body-md text-text-5 mb-16">Todos renderizados con los archivos <code class="font-data text-primary-500">.astro</code> reales del portfolio. Cualquier cambio en el componente se refleja aquí automáticamente.</p>
+
+        <!-- SectionLabel -->
+        <div class="mb-16 pb-16 border-b-[0.5px] border-[var(--color-border-subtle)]">
+          <h3 class="font-display text-body-lg font-semibold text-text-2 mb-6">SectionLabel</h3>
+          <SectionLabel label="/experiencia" />
+          <code class="font-data text-label-xs text-text-6 block mt-2">&lt;SectionLabel label="/experiencia" /&gt; — label-sm · text-5 · margin-bottom: section-gap</code>
+        </div>
+
+        <!-- SubsectionLabel -->
+        <div class="mb-16 pb-16 border-b-[0.5px] border-[var(--color-border-subtle)]">
+          <h3 class="font-display text-body-lg font-semibold text-text-2 mb-6">SubsectionLabel</h3>
+          <SubsectionLabel label="Titulaciones" />
+          <code class="font-data text-label-xs text-text-6 block mt-2">&lt;SubsectionLabel label="Titulaciones" /&gt; — label-xs · text-6 · margin-bottom: card-gap</code>
+        </div>
+
+        <!-- Btn states -->
+        <div class="mb-16 pb-16 border-b-[0.5px] border-[var(--color-border-subtle)]">
+          <h3 class="font-display text-body-lg font-semibold text-text-2 mb-8">Btn</h3>
+          <div class="flex flex-col gap-8">
+            <div>
+              <p class="font-data text-label-xs text-text-7 uppercase tracking-widest mb-3">Idle</p>
+              <div class="flex gap-4">
+                <Btn>Acción</Btn>
+                <Btn href="#">Link</Btn>
+              </div>
+            </div>
+            <div>
+              <p class="font-data text-label-xs text-text-7 uppercase tracking-widest mb-3">Hover (simulado)</p>
+              <button class="btn" style="color:var(--color-primary);border-color:var(--color-primary)">Acción</button>
+            </div>
+            <div>
+              <p class="font-data text-label-xs text-text-7 uppercase tracking-widest mb-3">Focus-visible (simulado)</p>
+              <button class="btn" style="outline:2px solid #E4A711;outline-offset:3px">Acción</button>
+            </div>
+            <div>
+              <p class="font-data text-label-xs text-text-7 uppercase tracking-widest mb-3">Active</p>
+              <button class="btn is-active">Acción</button>
+            </div>
+            <div>
+              <p class="font-data text-label-xs text-text-7 uppercase tracking-widest mb-3">Selected — página actual</p>
+              <button class="btn" aria-current="page">Acción</button>
+            </div>
+            <div>
+              <p class="font-data text-label-xs text-text-7 uppercase tracking-widest mb-3">Disabled</p>
+              <button class="btn" disabled>Acción</button>
+            </div>
+          </div>
+          <code class="font-data text-label-xs text-text-6 mt-8 block">&lt;Btn&gt; — Btn.astro · estilos en global.css</code>
+        </div>
+
+        <!-- Kpi -->
+        <div class="mb-16 pb-16 border-b-[0.5px] border-[var(--color-border-subtle)]">
+          <h3 class="font-display text-body-lg font-semibold text-text-2 mb-6">Kpi</h3>
+          <p class="text-body-md text-text-5 mb-6">Anima al entrar en viewport (counter 1200ms ease-out). Separadores con divisor 1px.</p>
+          <div class="flex items-start gap-8 p-6 bg-surface-raised border-[0.5px] border-[var(--color-border-subtle)]">
+            <Kpi value="+82%" label="Task completion" />
+            <div class="w-px h-8 self-center bg-[var(--color-border-subtle)]"></div>
+            <Kpi value="€1.2M" label="Pipeline growth" />
+            <div class="w-px h-8 self-center bg-[var(--color-border-subtle)]"></div>
+            <Kpi value="3×" label="Client inquiries" />
+          </div>
+          <code class="font-data text-label-xs text-text-6 mt-3 block">&lt;Kpi value="+82%" label="Task completion" /&gt;</code>
+        </div>
+
+        <!-- Tags -->
+        <div class="mb-16 pb-16 border-b-[0.5px] border-[var(--color-border-subtle)]">
+          <h3 class="font-display text-body-lg font-semibold text-text-2 mb-6">Tag / Pill</h3>
+          <p class="text-body-md text-text-5 mb-4">Clase <code class="font-data text-primary-500">.tag</code> — label-xs · text-7 · uppercase. Usado en stacks de proyectos.</p>
+          <div class="flex gap-2 flex-wrap">
+            {["Astro", "Tailwind CSS", "Figma", "TypeScript", "React Native"].map(tag => (
+              <span class="tag bg-surface-overlay border-[0.5px] border-[var(--color-border-subtle)] px-3 py-1">{tag}</span>
+            ))}
+          </div>
+        </div>
+
+        <!-- Links -->
+        <div class="mb-16 pb-16 border-b-[0.5px] border-[var(--color-border-subtle)]">
+          <h3 class="font-display text-body-lg font-semibold text-text-2 mb-8">Links</h3>
+
+          <p class="font-data text-label-xs text-text-7 uppercase tracking-widest mb-4">link-internal</p>
+          <div class="flex gap-8 flex-wrap mb-8">
+            <div class="flex flex-col gap-1">
+              <a href="#" class="link-internal text-body-md">Alejandro Moreno</a>
+              <span class="font-data text-label-xs text-text-7">default</span>
+            </div>
+            <div class="flex flex-col gap-1">
+              <a href="#" class="link-internal text-body-md" style="color:var(--color-text-2)">Alejandro Moreno</a>
+              <span class="font-data text-label-xs text-text-7">hover</span>
+            </div>
+            <div class="flex flex-col gap-1">
+              <a href="#" class="link-internal text-body-md" style="outline:2px solid #E4A711;outline-offset:2px">Alejandro Moreno</a>
+              <span class="font-data text-label-xs text-text-7">focus-visible</span>
+            </div>
+          </div>
+
+          <p class="font-data text-label-xs text-text-7 uppercase tracking-widest mb-4">link-external</p>
+          <div class="flex gap-8 flex-wrap">
+            <div class="flex flex-col gap-1">
+              <a href="#" class="link-external text-body-md">Figma</a>
+              <span class="font-data text-label-xs text-text-7">default</span>
+            </div>
+            <div class="flex flex-col gap-1">
+              <a href="#" class="link-external text-body-md" style="color:var(--color-text-2)">Figma</a>
+              <span class="font-data text-label-xs text-text-7">hover</span>
+            </div>
+            <div class="flex flex-col gap-1">
+              <a href="#" class="link-external text-body-md" style="outline:2px solid #E4A711;outline-offset:2px">Figma</a>
+              <span class="font-data text-label-xs text-text-7">focus-visible</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card proyecto -->
+        <div class="mb-16 pb-16 border-b-[0.5px] border-[var(--color-border-subtle)]">
+          <h3 class="font-display text-body-lg font-semibold text-text-2 mb-4">Card — Proyecto</h3>
+          <p class="text-body-md text-text-5 mb-6">Layout horizontal: contenido (flex-1) + imagen (42%). En carousel, una card a la vez. Definida en <code class="font-data text-primary-500">ProjectCard.astro</code>.</p>
+          <div class="border-[0.5px] border-[var(--color-border-subtle)] bg-surface overflow-hidden flex flex-col md:flex-row">
+            <div class="flex flex-col flex-1 p-8">
+              <span class="font-display text-label-sm font-semibold tracking-widest uppercase text-text-5 mb-5 block">Casa del Aire</span>
+              <h4 class="font-display text-display-md font-bold text-text-2 leading-[1.1] mb-4">A booking-focused site that cut direct enquiry time by 60%</h4>
+              <p class="text-body-md text-text-4 leading-relaxed flex-1 max-w-lg">Designed and developed the full website for a rural house in Extremadura.</p>
+              <div class="flex items-start gap-8 mt-8">
+                <div><p class="font-data text-display-md font-bold text-primary-500 leading-none">–60%</p><p class="text-label-sm text-text-6 mt-1">Enquiry time</p></div>
+                <div class="w-px h-8 self-center bg-[var(--color-border-subtle)]"></div>
+                <div><p class="font-data text-display-md font-bold text-primary-500 leading-none">+40%</p><p class="text-label-sm text-text-6 mt-1">Direct bookings</p></div>
+              </div>
+            </div>
+            <div class="md:w-[42%] shrink-0 min-h-[180px] bg-surface-overlay border-t-[0.5px] md:border-t-0 md:border-l-[0.5px] border-[var(--color-border-subtle)] flex items-center justify-center">
+              <span class="font-data text-label-xs text-text-7">imagen del proyecto</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dots -->
+        <div class="mb-16">
+          <h3 class="font-display text-body-lg font-semibold text-text-2 mb-6">Dots — indicadores</h3>
+          <p class="text-body-md text-text-5 mb-6">Patrón unificado en carousel de proyectos y timeline de experiencia.</p>
+          <div class="flex flex-col gap-6">
+            <div class="flex items-center gap-6">
+              <div class="flex items-center gap-3">
+                <span class="block w-1.5 h-1.5 rounded-full bg-text-8"></span>
+                <span class="block w-1.5 h-1.5 rounded-full bg-text-8"></span>
+                <span class="block w-2 h-2 rounded-full" style="background:#E4A711;box-shadow:0 0 0 3px rgba(228,167,17,0.2)"></span>
+                <span class="block w-1.5 h-1.5 rounded-full bg-text-8"></span>
+              </div>
+              <code class="font-data text-label-xs text-text-6">Carousel: 6×6 bg-text-8 — activo: 8×8 gold + glow ring</code>
+            </div>
+            <div class="flex items-center gap-6">
+              <div class="flex items-center gap-3">
+                <span class="block w-3.5 h-3.5 rounded-full bg-text-8 border-[0.5px] border-[var(--color-border-subtle)]"></span>
+                <span class="block w-3.5 h-3.5 rounded-full" style="background:#E4A711;box-shadow:0 0 0 3px rgba(228,167,17,0.2)"></span>
+              </div>
+              <code class="font-data text-label-xs text-text-6">Timeline: 3.5px — activo gold + glow</code>
+            </div>
+          </div>
+        </div>
+      </section>
 
     </div>
   </main>
