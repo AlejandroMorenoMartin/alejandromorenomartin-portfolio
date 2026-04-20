@@ -24,15 +24,18 @@ const t        = useTranslations(lang);
         <p class="tag">Product Designer</p>
         <h2 class="text-display-lg"><span class="hero-initial text-primary-500">A</span>lejandro Moreno Martín</h2>
       </div>
-      <p class="text-body-md text-text-3 leading-relaxed">Hola, bienvenido.</p>
-      <p class="text-body-md leading-relaxed">
-        Puedes explorar mis proyectos, conocer cómo pienso y trabajo, o simplemente curiosear.
-      </p>
+      <p class="text-body-md text-text-3 leading-relaxed">{t.hero.greeting}</p>
+      <p class="text-body-md leading-relaxed">{t.hero.tagline}</p>
+      <div class="flex flex-wrap gap-x-6 gap-y-2">
+        <a href="mailto:alejandromorenomartin1990@gmail.com" class="link-external text-body-md">Email</a>
+        <a href="https://wa.me/34618110583" target="_blank" rel="noopener noreferrer" class="link-external text-body-md">WhatsApp</a>
+        <a href="https://www.linkedin.com/in/alejandromorenomartin" target="_blank" rel="noopener noreferrer" class="link-external text-body-md">LinkedIn</a>
+      </div>
     </div>
 
     <!-- Typewriter -->
     <div class="thinking-widget" aria-label="Estado de procesamiento">
-      <span class="thinking-verb-wrap font-body" aria-live="polite">
+      <span class="thinking-verb-wrap font-body" aria-live="polite" data-verbs={JSON.stringify(t.hero.thinking)}>
         <span id="thinking-verb"></span><span class="thinking-cursor" aria-hidden="true"></span>
       </span>
     </div>
@@ -104,16 +107,6 @@ const t        = useTranslations(lang);
 </style>
 
 <script>
-  const VERBS = [
-    "INVESTIGANDO...",
-    "COLABORANDO...",
-    "ANALIZANDO...",
-    "ESTRUCTURANDO...",
-    "PROTOTIPANDO...",
-    "ITERANDO...",
-    "SOLUCIONANDO...",
-  ];
-
   const CHAR_DELAY       = 50;
   const DELETE_DELAY     = 30;
   const PAUSE_AFTER_TYPE = 2000;
@@ -121,6 +114,11 @@ const t        = useTranslations(lang);
 
   const wrap  = document.querySelector(".thinking-verb-wrap") as HTMLElement;
   const verb  = document.getElementById("thinking-verb")     as HTMLSpanElement;
+
+  const rawVerbs = wrap?.dataset.verbs;
+  const VERBS: string[] = rawVerbs
+    ? (JSON.parse(rawVerbs) as string[]).map(v => v.toUpperCase() + "...")
+    : [];
 
   if (wrap && verb) {
     let idx = 0;

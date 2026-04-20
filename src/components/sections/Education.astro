@@ -12,13 +12,13 @@ const t        = useTranslations(lang);
 
 const allItems = [
   ...t.education.certifications.items.map((item) => ({
-    category:    "Certificación",
+    category:    t.education.table.certification,
     title:       item.title,
     institution: item.issuer,
     year:        item.year,
   })),
   ...t.education.degrees.items.map((item) => ({
-    category:    "Titulación",
+    category:    t.education.table.degree,
     title:       item.title,
     institution: item.institution,
     year:        item.period.split("—")[1]?.trim() ?? item.period,
@@ -28,15 +28,15 @@ const allItems = [
 
 <section id="education" class="section-padding" aria-label={t.education.heading}>
   <div class="container-wide">
-    <SectionLabel label="/educación" />
+    <SectionLabel label={lang === "en" ? "/education" : "/educación"} />
 
     <table class="edu-table">
       <thead>
         <tr class="edu-header-row">
-          <th class="tag text-left font-normal pb-3 pr-6">Categoría</th>
-          <th class="tag text-left font-normal pb-3 pr-6">Nombre</th>
-          <th class="tag text-left font-normal pb-3 pr-6">Institución</th>
-          <th class="tag text-left font-normal pb-3">Año</th>
+          <th class="tag text-left font-normal pb-3 pr-6">{t.education.table.category}</th>
+          <th class="tag text-left font-normal pb-3 pr-6">{t.education.table.name}</th>
+          <th class="tag text-left font-normal pb-3 pr-6">{t.education.table.institution}</th>
+          <th class="tag text-left font-normal pb-3">{t.education.table.year}</th>
         </tr>
       </thead>
       <tbody>

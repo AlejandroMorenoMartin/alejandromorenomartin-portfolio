@@ -32,7 +32,7 @@ const projects = t.work.projects;
 
             <!-- 1. Cabecera -->
             <div class="card-header">
-              <p class="font-body text-label-xs text-text-7">{project.category}</p>
+              <p class="tag">{project.category}</p>
               <h2 class="project-title font-display text-text-1">{project.title}</h2>
             </div>
 
@@ -55,7 +55,7 @@ const projects = t.work.projects;
 
             <!-- 4. Botón -->
             <div class="card-cta">
-              <Btn href={`${workBase}/${project.slug}`} data-cta-index={i} {...(i === 0 ? { "data-default-focus": true } : {})}>Ver proyecto</Btn>
+              <Btn href={`${workBase}/${project.slug}`} data-cta-index={i} {...(i === 0 ? { "data-default-focus": true } : {})}>{t.work.cta}</Btn>
             </div>
 
           </div>
@@ -65,7 +65,7 @@ const projects = t.work.projects;
             <div class="preview-scanlines" aria-hidden="true"></div>
             <div class="preview-content">
               <span class="preview-num font-data">0{i + 1}</span>
-              <span class="preview-status font-body text-label-xs text-text-7">PREVIEW.PENDING</span>
+              <span class="preview-status tag">PREVIEW.PENDING</span>
             </div>
           </div>
 
@@ -74,14 +74,14 @@ const projects = t.work.projects;
     </div>
 
     <!-- Navigation -->
-    <nav class="project-nav" aria-label="Navegación de proyectos">
-      <Btn id="proj-prev" class="nav-btn" aria-label="Proyecto anterior" disabled>◀</Btn>
+    <nav class="project-nav" aria-label={lang === "en" ? "Project navigation" : "Navegación de proyectos"}>
+      <Btn id="proj-prev" class="nav-btn" aria-label={lang === "en" ? "Previous project" : "Proyecto anterior"} disabled>◀</Btn>
       <div class="nav-dots" aria-hidden="true">
         {projects.map((_, i) => (
           <span class={`nav-dot ${i === 0 ? "is-active" : ""}`} data-dot={i} />
         ))}
       </div>
-      <Btn id="proj-next" class="nav-btn" aria-label="Proyecto siguiente">▶</Btn>
+      <Btn id="proj-next" class="nav-btn" aria-label={lang === "en" ? "Next project" : "Proyecto siguiente"}>▶</Btn>
     </nav>
 
   </div>
@@ -108,12 +108,18 @@ const projects = t.work.projects;
 
   /* ── Card ── */
   .project-card {
-    display:               none;
-    grid-template-columns: 1fr 1fr;
+    display: none;
   }
 
   .project-card.is-selected {
-    display: grid;
+    display:               grid;
+    grid-template-columns: 1fr;
+  }
+
+  @media (min-width: 768px) {
+    .project-card.is-selected {
+      grid-template-columns: 1fr 1fr;
+    }
   }
 
   /* ── Info side ── */
@@ -139,15 +145,26 @@ const projects = t.work.projects;
 
   .card-metrics {
     display:     flex;
-    align-items: center;
-    gap:         1.5rem;
+    align-items: start;
+    gap:         1rem;
   }
 
   .kpi-divider {
-    width:       1px;
-    height:      2rem;
-    background:  var(--color-border-subtle);
-    flex-shrink: 0;
+    display: none;
+  }
+
+  @media (min-width: 768px) {
+    .card-metrics {
+      align-items: center;
+      gap:         1.5rem;
+    }
+    .kpi-divider {
+      display:     block;
+      width:       1px;
+      height:      2rem;
+      background:  var(--color-border-subtle);
+      flex-shrink: 0;
+    }
   }
 
   .card-cta {

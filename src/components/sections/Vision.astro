@@ -1,22 +1,22 @@
 ---
-import type { Lang }  from "@/i18n/utils";
+import type { Lang } from "@/i18n/utils";
+import { useTranslations } from "@/i18n/utils";
 import SectionLabel from "@/components/SectionLabel.astro";
 
 interface Props {
   lang: Lang;
 }
+
+const { lang } = Astro.props;
+const t        = useTranslations(lang);
 ---
 
-<section id="vision" class="section-padding" aria-label="Visión">
+<section id="vision" class="section-padding" aria-label={t.vision.label}>
   <div class="container-wide">
-    <SectionLabel label="/visión" />
+    <SectionLabel label={t.vision.label} />
     <div class="vision-content">
-      <p class="text-body-md text-text-3 leading-relaxed">
-        Creo que el mejor diseño es el que no se nota. El que reduce la fricción hasta que la persona simplemente hace lo que quería hacer, sin pensar en la interfaz. Mi objetivo es desaparecer como diseñador para que el producto hable solo.
-      </p>
-      <p class="text-body-md leading-relaxed">
-        Me interesan especialmente los productos que van más allá de resolver un problema individual. Productos que nos integren en algo más grande — que atiendan también a los animales, las plantas y el planeta que compartimos. Creo que el diseño puede ser una herramienta para hacer el mundo un poco mejor, y esa posibilidad es lo que me mantiene motivado.
-      </p>
+      <p class="text-body-md text-text-3 leading-relaxed">{t.vision.p1}</p>
+      <p class="text-body-md leading-relaxed">{t.vision.p2}</p>
     </div>
   </div>
 </section>

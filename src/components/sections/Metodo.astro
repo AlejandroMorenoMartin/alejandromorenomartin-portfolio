@@ -1,22 +1,22 @@
 ---
-import type { Lang }  from "@/i18n/utils";
+import type { Lang } from "@/i18n/utils";
+import { useTranslations } from "@/i18n/utils";
 import SectionLabel from "@/components/SectionLabel.astro";
 
 interface Props {
   lang: Lang;
 }
+
+const { lang } = Astro.props;
+const t        = useTranslations(lang);
 ---
 
-<section id="metodo" class="section-padding" aria-label="Método">
+<section id="metodo" class="section-padding" aria-label={t.metodo.label}>
   <div class="container-wide">
-    <SectionLabel label="/método" />
+    <SectionLabel label={t.metodo.label} />
     <div class="metodo-content">
-      <p class="text-body-md text-text-3 leading-relaxed">
-        Más allá de las IAs, las herramientas o las tecnologías del momento, el método de diseño sigue siendo el mismo: trabajar para las personas. Entender cómo piensan, qué necesitan, qué les frustra en su día a día.
-      </p>
-      <p class="text-body-md leading-relaxed">
-        Con eso claro, el resto es movimiento: proponer algo, ponerlo delante de alguien, ver qué pasa, ajustar. No espero a tener la solución perfecta para enseñar algo — prefiero una idea imperfecta hoy que una respuesta impecable cuando ya no importa.
-      </p>
+      <p class="text-body-md text-text-3 leading-relaxed">{t.metodo.p1}</p>
+      <p class="text-body-md leading-relaxed">{t.metodo.p2}</p>
     </div>
   </div>
 </section>

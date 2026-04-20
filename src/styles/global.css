@@ -168,13 +168,18 @@
   .text-label-sm   { color: var(--color-text-5); }
   .text-label-xs   { color: var(--color-text-6); }
 
+  /* ── page-title — etiqueta de página (/work, /info…) ──────── */
+  #page-title {
+    color: var(--color-text-3);
+  }
+
   /* ── section-label — título de sección (/experiencia…) ──── */
   .section-label {
     @apply font-body;
     font-size:      var(--fs-label-sm);
     line-height:    1.5;
     letter-spacing: 0.06em;
-    color:          var(--color-text-5);
+    color:          var(--color-text-4);
     margin-bottom:  var(--section-gap);
   }
 
@@ -184,7 +189,7 @@
     font-size:      var(--fs-label-xs);
     line-height:    1.4;
     letter-spacing: 0.08em;
-    color:          var(--color-text-6);
+    color:          var(--color-text-5);
     margin-bottom:  var(--card-gap);
   }
 

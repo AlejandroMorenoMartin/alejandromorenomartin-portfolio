@@ -5,20 +5,25 @@ import SectionLabel from "@/components/SectionLabel.astro";
 interface Props {
   lang: Lang;
 }
+
+const { lang } = Astro.props;
 ---
 
 <section id="creditos" class="section-padding" aria-label="Créditos">
   <div class="container-wide">
     <SectionLabel label="/créditos" />
     <div class="creditos-content">
-      <p class="text-body-md leading-relaxed">
-        El diseño de producto no es un camino fácil. Requiere desarrollar una forma de pensar que no se aprende sola — necesitas personas que te ayuden a ver lo que todavía no ves.
-      </p>
-      <p class="text-body-md leading-relaxed">
-        Tengo mucho que agradecer a dos personas en particular.
-        A <a href="https://diegovz.com/" class="link-external text-body-md" target="_blank" rel="noopener noreferrer">Diego</a>, mi mentor en este proceso: por su generosidad, su criterio y por haberme enseñado a hacer las preguntas correctas antes de buscar respuestas.
-        Y a <a href="https://www.linkedin.com/in/pablo-moreno-mart%C3%ADn-5a7513114/" class="link-external text-body-md" target="_blank" rel="noopener noreferrer">Pablo</a>, un apoyo incondicional desde el principio: por estar siempre ahí, en los momentos de duda y en los de celebración. Este camino es tremendamente divertido y enriquecedor — y lo es mucho más cuando no se recorre solo.
-      </p>
+      {lang === "en" ? (
+        <p class="text-body-md leading-relaxed">
+          To <a href="https://diegovz.com/" class="link-external text-body-md" target="_blank" rel="noopener noreferrer">Diego</a>, my mentor in this process: for his generosity, his perspective, and for teaching me to ask the right questions before looking for answers.
+          And to <a href="https://www.linkedin.com/in/pablo-moreno-mart%C3%ADn-5a7513114/" class="link-external text-body-md" target="_blank" rel="noopener noreferrer">Pablo</a>, an unconditional support from the very beginning: for always being there, through moments of doubt and moments of celebration.
+        </p>
+      ) : (
+        <p class="text-body-md leading-relaxed">
+          A <a href="https://diegovz.com/" class="link-external text-body-md" target="_blank" rel="noopener noreferrer">Diego</a>, mi mentor en este proceso: por su generosidad, su criterio y por haberme enseñado a hacer las preguntas correctas antes de buscar respuestas.
+          Y a <a href="https://www.linkedin.com/in/pablo-moreno-mart%C3%ADn-5a7513114/" class="link-external text-body-md" target="_blank" rel="noopener noreferrer">Pablo</a>, un apoyo incondicional desde el principio: por estar siempre ahí, en los momentos de duda y en los de celebración.
+        </p>
+      )}
     </div>
   </div>
 </section>

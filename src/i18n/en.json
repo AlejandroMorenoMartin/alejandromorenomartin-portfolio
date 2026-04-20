@@ -12,7 +12,9 @@
     "education":  "Education",
     "craft":      "Stack",
     "resume":     "Resume",
-    "langSwitch": "Español"
+    "langSwitch": "Español",
+    "openMenu":   "Open menu",
+    "closeMenu":  "Close menu"
   },
   "hero": {
     "name":          "Alejandro Moreno",
@@ -24,6 +26,16 @@
     "cta":           "See my work",
     "ctaSecondary":  "About me",
     "thinking":      ["Designing", "Prototyping", "Prompting", "Building", "Iterating", "Systemising", "Exploring", "Validating"]
+  },
+  "vision": {
+    "label": "/vision",
+    "p1":    "I believe the best design is the one you don't notice. The kind that removes friction until the person simply does what they wanted to do, without thinking about the interface. My goal is to disappear as a designer so the product can speak for itself.",
+    "p2":    "I'm especially drawn to products that go beyond solving individual problems. Products that connect us to something larger — that also consider animals, plants, and the planet we share. I believe design can be a tool for making the world a little better, and that possibility is what keeps me motivated."
+  },
+  "metodo": {
+    "label": "/method",
+    "p1":    "Beyond AI, tools, or the latest technology, the design method remains the same: work for people. Understand how they think, what they need, what frustrates them in their daily life.",
+    "p2":    "Once that's clear, the rest is movement: propose something, put it in front of someone, see what happens, adjust. I don't wait to have the perfect solution before showing something — I'd rather have an imperfect idea today than a flawless answer when it no longer matters."
   },
   "about": {
     "label":   "About",
@@ -118,7 +130,24 @@
   "work": {
     "label":   "Work",
     "heading": "Work",
+    "cta":     "View project",
     "projects": [
+      {
+        "title":       "/alejandro-portfolio",
+        "slug":        "portfolio",
+        "company":     "Personal project",
+        "category":    "Product Design · Development",
+        "headline":    "The design and development process behind what you're looking at right now",
+        "summary":     "I designed and built this portfolio as a complete product exercise: custom design system, information architecture, keyboard navigation, and production deployment.",
+        "metrics":     [
+          { "value": "100%", "label": "Custom design system" },
+          { "value": "0",    "label": "UI dependencies" },
+          { "value": "<1s",  "label": "Load time" }
+        ],
+        "tags":        ["Astro", "Tailwind CSS", "TypeScript", "Figma"],
+        "date":        "Apr 2025",
+        "image":       "/images/placeholder.svg"
+      },
       {
         "title":       "Casa del Aire",
         "slug":        "casa-del-aire",
@@ -240,6 +269,14 @@
     "tabs": {
       "degrees":        "Degrees",
       "certifications": "Certifications"
+    },
+    "table": {
+      "category":      "Category",
+      "name":          "Name",
+      "institution":   "Institution",
+      "year":          "Year",
+      "certification": "Certification",
+      "degree":        "Degree"
     },
     "degrees": {
       "heading": "Degrees",

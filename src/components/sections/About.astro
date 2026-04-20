@@ -26,12 +26,12 @@ const t        = useTranslations(lang);
         </div>
 
         <!-- Stats -->
-        <div class="flex items-center gap-8" style="margin-top: var(--section-gap)">
+        <div class="flex items-start gap-6 md:gap-8" style="margin-top: var(--section-gap)">
           {t.about.stats.map((stat, i) => (
             <>
               <Kpi value={stat.value} label={stat.label} />
               {i < t.about.stats.length - 1 && (
-                <div class="w-px h-8 bg-[var(--color-border-subtle)]" aria-hidden="true" />
+                <div class="hidden md:block w-px h-8 self-center bg-[var(--color-border-subtle)]" aria-hidden="true" />
               )}
             </>
           ))}
@@ -40,7 +40,7 @@ const t        = useTranslations(lang);
 
       <!-- Photo -->
       <div>
-        <div class="w-72 h-72 md:w-80 md:h-80 rounded-none overflow-hidden border-[0.5px] border-[var(--color-border-subtle)]">
+        <div class="w-full h-72 md:w-80 md:h-80 rounded-none overflow-hidden border-[0.5px] border-[var(--color-border-subtle)]">
           <img
             src="/profile.png"
             alt="Alejandro Moreno Martín — Product Designer"

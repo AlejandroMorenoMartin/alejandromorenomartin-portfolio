@@ -1,5 +1,6 @@
 ---
 import type { Lang } from "@/i18n/utils";
+import { useTranslations } from "@/i18n/utils";
 import pkg from "../../package.json";
 import Btn from "@/components/Btn.astro";
 
@@ -7,20 +8,52 @@ interface Props {
   lang: Lang;
 }
 
-const { lang }   = Astro.props;
-const version    = `V.${pkg.version}`;
-const pathname   = Astro.url.pathname;
+const { lang } = Astro.props;
+const t        = useTranslations(lang);
+const pathname = Astro.url.pathname;
 
-const navLinks = [
-  { href: "/",            label: "/root" },
-  { href: "/proyectos",   label: "/work" },
-  { href: "/sobre-mi",    label: "/info" },
-  { href: "/trayectoria", label: "/path" },
-  { href: "/ctrl",        label: "/ctrl" },
-];
+const navLinks = lang === "en"
+  ? [
+      { href: "/en",       label: "/root", mobile: true  },
+      { href: "/en/work",  label: "/work", mobile: true  },
+      { href: "/en/about", label: "/info", mobile: true  },
+      { href: "/en/path",  label: "/path", mobile: true  },
+      { href: "/ctrl",     label: "/ctrl", mobile: false },
+    ]
+  : [
+      { href: "/",            label: "/root", mobile: true  },
+      { href: "/proyectos",   label: "/work", mobile: true  },
+      { href: "/sobre-mi",    label: "/info", mobile: true  },
+      { href: "/trayectoria", label: "/path", mobile: true  },
+      { href: "/ctrl",        label: "/ctrl", mobile: false },
+    ];
+
+const alternatePath = (() => {
+  if (lang === "es") {
+    const map: Record<string, string> = {
+      "/":            "/en",
+      "/proyectos":   "/en/work",
+      "/sobre-mi":    "/en/about",
+      "/trayectoria": "/en/path",
+    };
+    if (pathname.startsWith("/work/")) return `/en${pathname}`;
+    return map[pathname] ?? "/en";
+  } else {
+    const map: Record<string, string> = {
+      "/en":       "/",
+      "/en/work":  "/proyectos",
+      "/en/about": "/sobre-mi",
+      "/en/path":  "/trayectoria",
+    };
+    if (pathname.startsWith("/en/work/")) return pathname.replace("/en", "");
+    return map[pathname] ?? "/";
+  }
+})();
+
+const switcherLabel = lang === "es" ? "EN" : "ES";
 
 function isActive(href: string): boolean {
-  if (href === "/") return pathname === "/" || pathname === "";
+  if (href === "/" || href === "/en") return pathname === href || pathname === href + "/";
   return pathname === href || pathname === href + "/";
 }
 ---
@@ -31,14 +64,14 @@ function isActive(href: string): boolean {
   style="background-image: none;"
   aria-label="Main navigation"
 >
-  <div style="max-width:1024px;margin-inline:auto;">
+  <div class="px-8 md:px-0" style="max-width:1024px;margin-inline:auto;">
     <nav class="flex items-center justify-between h-12">
 
       <!-- Left: ASCII logo -->
       <span class="ascii-logo font-body">/alejandro-portfolio</span>
 
-      <!-- Right: page links -->
-      <ul class="flex items-center gap-2 list-none m-0 p-0" role="list">
+      <!-- Right: desktop links -->
+      <ul class="hidden md:flex items-center gap-2 list-none m-0 p-0" role="list">
         {navLinks.map(link => (
           <li>
             <Btn
@@ -49,17 +82,161 @@ function isActive(href: string): boolean {
             </Btn>
           </li>
         ))}
+        <li class="lang-divider" aria-hidden="true"></li>
+        <li>
+          <Btn href={alternatePath} aria-label={`Switch to ${switcherLabel}`}>{switcherLabel}</Btn>
+        </li>
       </ul>
 
-    </nav>
+      <!-- Right: mobile hamburger -->
+      <button
+        id="nav-mobile-btn"
+        class="md:hidden flex flex-col justify-center items-center gap-[5px] w-9 h-9 border-[0.5px] border-[var(--color-border-subtle)] hover:bg-[var(--color-btn-hover-subtle)] transition-colors duration-fast focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500/40"
+        aria-label={t.nav.openMenu}
+        data-label-open={t.nav.openMenu}
+        data-label-close={t.nav.closeMenu}
+        aria-expanded="false"
+        aria-controls="nav-mobile-menu"
+      >
+        <span class="h-bar"></span>
+        <span class="h-bar"></span>
+        <span class="h-bar"></span>
+      </button>
 
+    </nav>
   </div>
+</header>
+
+<!-- Mobile menu — aparece bajo el nav, cubre el resto de la pantalla -->
+<div
+  id="nav-mobile-menu"
+  class="fixed top-12 inset-x-0 bottom-0 z-40 bg-[var(--color-surface)] flex flex-col md:hidden opacity-0 pointer-events-none transition-opacity duration-normal"
+  style="background-image: none;"
+  aria-hidden="true"
+>
+  <nav class="flex-1 px-8 pt-8 overflow-y-auto">
+    <ul class="flex flex-col list-none m-0 p-0" role="list">
+      {navLinks.filter(l => l.mobile).map(link => (
+        <li>
+          <a
+            href={link.href}
+            class="mobile-nav-link block py-5 font-display text-display-md font-bold"
+            aria-current={isActive(link.href) ? "page" : undefined}
+          >
+            {link.label}
+          </a>
+        </li>
+      ))}
+      <li>
+        <a
+          href={alternatePath}
+          class="mobile-nav-link block py-5 font-display text-display-md font-bold"
+          aria-label={`Switch to ${switcherLabel}`}
+        >
+          /{switcherLabel.toLowerCase()}
+        </a>
+      </li>
+    </ul>
+  </nav>
+</div>
+
 <style>
+  .lang-divider {
+    width:      1px;
+    height:     1rem;
+    background: var(--color-border-subtle);
+    flex-shrink: 0;
+  }
+
   .ascii-logo {
     font-size:      var(--fs-label-sm);
     color:          var(--color-text-4);
     letter-spacing: 0;
   }
 
+  /* Mobile nav links */
+  .mobile-nav-link {
+    color:         var(--color-text-4);
+    border-bottom: 0.5px solid var(--color-border-subtle);
+    transition:    color 100ms ease, border-color 100ms ease;
+  }
+  .mobile-nav-link:hover {
+    color: var(--color-text-1);
+  }
+  .mobile-nav-link[aria-current="page"] {
+    color: var(--color-primary);
+  }
+  .mobile-nav-link:focus-visible {
+    outline:      2px solid #E4A711;
+    outline-offset: 3px;
+  }
+
+  /* Hamburger bars — idénticas */
+  .h-bar {
+    display:    block;
+    width:      18px;
+    height:     1px;
+    background: var(--color-text-4);
+    transition: transform 200ms ease, opacity 200ms ease;
+    transform-origin: center;
+  }
+
+  /* Hamburger → X animation */
+  #nav-mobile-btn[aria-expanded="true"] .h-bar:nth-child(1) {
+    transform: translateY(6px) rotate(45deg);
+  }
+  #nav-mobile-btn[aria-expanded="true"] .h-bar:nth-child(2) {
+    opacity: 0;
+  }
+  #nav-mobile-btn[aria-expanded="true"] .h-bar:nth-child(3) {
+    transform: translateY(-6px) rotate(-45deg);
+  }
 </style>
-</header>
+
+<script>
+  // AbortController cancela listeners anteriores en cada navegación (View Transitions)
+  let navController: AbortController | null = null;
+
+  function initMobileNav() {
+    navController?.abort();
+    navController = new AbortController();
+    const { signal } = navController;
+
+    const btn  = document.getElementById("nav-mobile-btn") as HTMLButtonElement | null;
+    const menu = document.getElementById("nav-mobile-menu");
+    if (!btn || !menu) return;
+
+    const labelOpen  = btn.dataset.labelOpen  ?? "Open menu";
+    const labelClose = btn.dataset.labelClose ?? "Close menu";
+
+    function openMenu() {
+      btn.setAttribute("aria-expanded", "true");
+      btn.setAttribute("aria-label", labelClose);
+      menu.classList.remove("opacity-0", "pointer-events-none");
+      menu.classList.add("opacity-100");
+      menu.setAttribute("aria-hidden", "false");
+    }
+
+    function closeMenu() {
+      btn.setAttribute("aria-expanded", "false");
+      btn.setAttribute("aria-label", labelOpen);
+      menu.classList.add("opacity-0", "pointer-events-none");
+      menu.classList.remove("opacity-100");
+      menu.setAttribute("aria-hidden", "true");
+    }
+
+    btn.addEventListener("click", () => {
+      btn.getAttribute("aria-expanded") === "true" ? closeMenu() : openMenu();
+    }, { signal });
+
+    menu.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", closeMenu, { signal });
+    });
+
+    // Cerrar menú al navegar (View Transitions)
+    document.addEventListener("astro:before-preparation", closeMenu, { signal });
+  }
+
+  initMobileNav();
+  document.addEventListener("astro:page-load", initMobileNav);
+</script>

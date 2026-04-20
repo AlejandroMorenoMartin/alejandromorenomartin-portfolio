@@ -12,7 +12,9 @@
     "education":  "Educación",
     "craft":      "Stack",
     "resume":     "CV",
-    "langSwitch": "English"
+    "langSwitch": "English",
+    "openMenu":   "Abrir menú",
+    "closeMenu":  "Cerrar menú"
   },
   "hero": {
     "name":          "Alejandro Moreno",
@@ -24,6 +26,16 @@
     "cta":           "Ver mi trabajo",
     "ctaSecondary":  "Sobre mí",
     "thinking":      ["Diseñando", "Prototipando", "Prompting", "Construyendo", "Iterando", "Sistematizando", "Explorando", "Validando"]
+  },
+  "vision": {
+    "label": "/visión",
+    "p1":    "Creo que el mejor diseño es el que no se nota. El que reduce la fricción hasta que la persona simplemente hace lo que quería hacer, sin pensar en la interfaz. Mi objetivo es desaparecer como diseñador para que el producto hable solo.",
+    "p2":    "Me interesan especialmente los productos que van más allá de resolver un problema individual. Productos que nos integren en algo más grande — que atiendan también a los animales, las plantas y el planeta que compartimos. Creo que el diseño puede ser una herramienta para hacer el mundo un poco mejor, y esa posibilidad es lo que me mantiene motivado."
+  },
+  "metodo": {
+    "label": "/método",
+    "p1":    "Más allá de las IAs, las herramientas o las tecnologías del momento, el método de diseño sigue siendo el mismo: trabajar para las personas. Entender cómo piensan, qué necesitan, qué les frustra en su día a día.",
+    "p2":    "Con eso claro, el resto es movimiento: proponer algo, ponerlo delante de alguien, ver qué pasa, ajustar. No espero a tener la solución perfecta para enseñar algo — prefiero una idea imperfecta hoy que una respuesta impecable cuando ya no importa."
   },
   "about": {
     "label":   "Sobre mí",
@@ -117,6 +129,7 @@
   "work": {
     "label":   "Proyectos",
     "heading": "Proyectos",
+    "cta":     "Ver proyecto",
     "projects": [
       {
         "title":       "/alejandro-portfolio",
@@ -226,9 +239,9 @@
         ]
       },
       {
-        "role":        "Head of Marketing & Sales",
+        "role":        "Marketing Manager",
         "company":     "Promam",
-        "period":      "2018 — 2021",
+        "period":      "2017 — 2021",
         "description": "Lideré el área comercial de una empresa industrial B2B durante tres años. Diseñé la estrategia de ventas, gestioné grandes cuentas, participé en licitaciones públicas e impulsé la digitalización progresiva del canal comercial para modernizar los procesos de captación y seguimiento.",
         "metrics": [
           { "value": "€5M",   "label": "Facturación anual" },
@@ -255,6 +268,14 @@
     "tabs": {
       "degrees":        "Titulaciones",
       "certifications": "Certificaciones"
+    },
+    "table": {
+      "category":      "Categoría",
+      "name":          "Nombre",
+      "institution":   "Institución",
+      "year":          "Año",
+      "certification": "Certificación",
+      "degree":        "Titulación"
     },
     "degrees": {
       "heading": "Titulaciones",

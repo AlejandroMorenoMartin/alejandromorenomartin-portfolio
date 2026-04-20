@@ -1,0 +1,32 @@
+---
+import BaseLayout   from "@/layouts/BaseLayout.astro";
+import Nav          from "@/components/Nav.astro";
+import ProjectCard  from "@/components/sections/ProjectCard.astro";
+import Footer       from "@/components/Footer.astro";
+import { useTranslations } from "@/i18n/utils";
+
+const lang = "en" as const;
+const t    = useTranslations(lang);
+
+const siteURL = "https://alejandromorenomartin.com";
+---
+
+<BaseLayout
+  title={`Work · ${t.meta.title}`}
+  description={t.meta.description}
+  lang={lang}
+  canonicalURL={`${siteURL}/en/work`}
+  alternateURL={`${siteURL}/proyectos`}
+  alternateLang="es"
+>
+  <Nav lang={lang} />
+  <main id="main-scroll" data-no-scroll>
+    <div class="px-8 pb-0">
+      <div class="container-wide">
+        <h1 id="page-title" class="text-body-md" data-title="/work" aria-label="/work"></h1>
+      </div>
+    </div>
+    <ProjectCard lang={lang} />
+  </main>
+  <Footer lang={lang} />
+</BaseLayout>

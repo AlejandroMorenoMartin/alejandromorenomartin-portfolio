@@ -1,0 +1,40 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Nav        from "@/components/Nav.astro";
+import About      from "@/components/sections/About.astro";
+import Vision     from "@/components/sections/Vision.astro";
+import Craft      from "@/components/sections/Craft.astro";
+import Metodo     from "@/components/sections/Metodo.astro";
+import Creditos   from "@/components/sections/Creditos.astro";
+import Footer     from "@/components/Footer.astro";
+import { useTranslations } from "@/i18n/utils";
+
+const lang = "en" as const;
+const t    = useTranslations(lang);
+
+const siteURL = "https://alejandromorenomartin.com";
+---
+
+<BaseLayout
+  title={`About · ${t.meta.title}`}
+  description={t.meta.description}
+  lang={lang}
+  canonicalURL={`${siteURL}/en/about`}
+  alternateURL={`${siteURL}/sobre-mi`}
+  alternateLang="es"
+>
+  <Nav lang={lang} />
+  <main id="main-scroll">
+    <div class="px-8 pb-0">
+      <div class="container-wide">
+        <h1 id="page-title" class="text-body-md" data-title="/info" aria-label="/info"></h1>
+      </div>
+    </div>
+    <About    lang={lang} />
+    <Vision   lang={lang} />
+    <Metodo   lang={lang} />
+    <Craft    lang={lang} />
+    <Creditos lang={lang} />
+  </main>
+  <Footer lang={lang} />
+</BaseLayout>
