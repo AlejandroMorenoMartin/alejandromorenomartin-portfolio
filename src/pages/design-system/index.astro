@@ -50,7 +50,53 @@ const lang = "es" as const;
         <p class="text-body-md text-text-5 mb-4">Animado — gold a fucsia-rosa. Clase <code class="font-data text-primary-500">.text-gradient</code>.</p>
         <span class="text-gradient font-display text-display-lg font-bold">Designer</span>
       </section>
-      <div id="ds-typography" class="mb-24"></div>
+      <!-- ── 2. TIPOGRAFÍA ─────────────────────────────────────────── -->
+      <section id="ds-typography" class="mb-24" aria-labelledby="type-heading">
+        <h2 id="type-heading" class="font-display text-display-lg font-bold text-text-1 mb-12">Tipografía</h2>
+
+        <!-- Font families -->
+        <h3 class="font-display text-body-lg font-semibold text-text-2 mb-6">Familias tipográficas</h3>
+        <div class="flex gap-12 mb-16 flex-wrap">
+          <div>
+            <p class="font-data text-label-xs text-text-6 mb-2 uppercase tracking-widest">font-display / font-body</p>
+            <p class="font-display text-display-md text-text-2">Roboto Mono</p>
+            <p class="font-display text-body-md text-text-5 mt-1">400 · 500 · 600 · 700</p>
+            <p class="font-display text-body-lg text-text-3 mt-3">Aa Bb Cc 0123456789</p>
+          </div>
+          <div>
+            <p class="font-data text-label-xs text-text-6 mb-2 uppercase tracking-widest">font-data</p>
+            <p class="font-data text-display-md text-primary-500">Press Start 2P</p>
+            <p class="font-data text-label-xs text-text-5 mt-1">400</p>
+            <p class="font-data text-body-md text-primary-500 mt-3">+82% €1.2M 3×</p>
+          </div>
+        </div>
+
+        <!-- Type scale -->
+        <h3 class="font-display text-body-lg font-semibold text-text-2 mb-2">Escala tipográfica</h3>
+        <p class="text-body-md text-text-5 mb-6">6 tokens. Responsive via CSS vars — mobile (base) → desktop (768px+). El color canónico se aplica automáticamente por clase.</p>
+        <div id="ds-type-scale" class="flex flex-col gap-0 mb-16"></div>
+
+        <!-- Visual hierarchy demo -->
+        <h3 class="font-display text-body-lg font-semibold text-text-2 mb-6">Demo de jerarquía visual</h3>
+        <div class="p-8 border-[0.5px] border-[var(--color-border-subtle)] bg-surface-raised flex flex-col gap-3 mb-16">
+          <p class="font-display text-display-lg font-bold">Título principal — display-lg / text-1</p>
+          <p class="font-display text-display-md font-bold">Título de sección — display-md / text-2</p>
+          <p class="text-body-lg">Párrafo de introducción — body-lg / text-3</p>
+          <p class="text-body-md">Cuerpo principal del contenido — body-md / text-4</p>
+          <p class="text-label-sm">Etiqueta de sección o chrome UI — label-sm / text-5</p>
+          <p class="text-label-xs">Micro label o tag — label-xs / text-6</p>
+        </div>
+
+        <!-- Data typography -->
+        <h3 class="font-display text-body-lg font-semibold text-text-2 mb-4">Tipografía de datos</h3>
+        <p class="text-body-md text-text-5 mb-6"><code class="font-data text-primary-500">font-data</code> (Press Start 2P) + <code class="font-data text-primary-500">text-primary-500</code>. Solo para KPIs y datos destacados.</p>
+        <div class="flex items-baseline gap-8">
+          <span class="font-data text-display-md font-bold text-primary-500">+82%</span>
+          <span class="font-data text-display-md font-bold text-primary-500">€1.2M</span>
+          <span class="font-data text-display-md font-bold text-primary-500">3×</span>
+          <code class="font-data text-label-xs text-text-5 ml-4">font-data text-display-md font-bold text-primary-500</code>
+        </div>
+      </section>
       <div id="ds-spacing"    class="mb-24"></div>
       <div id="ds-borders"    class="mb-24"></div>
       <div id="ds-effects"    class="mb-24"></div>
@@ -130,6 +176,31 @@ const lang = "es" as const;
           <code style="font-family:'Press Start 2P',monospace;font-size:11px;color:var(--color-primary);width:5rem;flex-shrink:0">${t.label}</code>
           <span style="font-family:'Press Start 2P',monospace;font-size:10px;color:var(--color-text-6);width:6rem;flex-shrink:0">${val}</span>
           <span style="font-size:14px;color:${val};flex:1">${t.desc}</span>
+        </div>`;
+    }).join('');
+  }
+
+  // ── Typography section ───────────────────────────────────────
+  const typeTokens = [
+    { token: '--fs-display-lg', name: 'display-lg', lh: '1.2',  color: 'text-1', use: 'Título principal' },
+    { token: '--fs-display-md', name: 'display-md', lh: '1.25', color: 'text-2', use: 'Título de sección' },
+    { token: '--fs-body-lg',    name: 'body-lg',    lh: '1.6',  color: 'text-3', use: 'Cuerpo grande, intro' },
+    { token: '--fs-body-md',    name: 'body-md',    lh: '1.65', color: 'text-4', use: 'Cuerpo principal' },
+    { token: '--fs-label-sm',   name: 'label-sm',   lh: '1.5',  color: 'text-5', use: 'Labels, nav, footer' },
+    { token: '--fs-label-xs',   name: 'label-xs',   lh: '1.4',  color: 'text-6', use: 'Micro labels, tags' },
+  ];
+  const typeContainer = document.getElementById('ds-type-scale');
+  if (typeContainer) {
+    typeContainer.innerHTML = typeTokens.map(t => {
+      const fs = style.getPropertyValue(t.token).trim();
+      const colorVal = style.getPropertyValue(`--color-${t.color}`).trim();
+      return `
+        <div style="display:flex;align-items:baseline;gap:1.5rem;padding:0.75rem 0;border-bottom:0.5px solid var(--color-border-subtle)">
+          <code style="font-family:'Press Start 2P',monospace;font-size:11px;color:var(--color-primary);width:7rem;flex-shrink:0">${t.name}</code>
+          <span style="font-family:'Press Start 2P',monospace;font-size:10px;color:var(--color-text-6);width:3.5rem;flex-shrink:0">${fs}</span>
+          <span style="font-family:'Press Start 2P',monospace;font-size:10px;color:var(--color-text-7);width:2rem;flex-shrink:0">${t.lh}</span>
+          <span style="font-size:${fs};color:${colorVal};line-height:1;flex-shrink:0">Aa</span>
+          <span style="font-size:13px;color:var(--color-text-5);margin-left:auto">${t.use}</span>
         </div>`;
     }).join('');
   }
