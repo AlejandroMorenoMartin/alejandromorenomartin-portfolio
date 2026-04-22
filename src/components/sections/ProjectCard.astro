@@ -32,7 +32,11 @@ const projects = t.work.projects;
 
             <!-- 1. Cabecera -->
             <div class="card-header">
-              <p class="tag">{project.category}</p>
+              <div class="flex flex-wrap gap-2">
+                {project.category.split(" · ").map((cat) => (
+                  <p class="tag">{cat}</p>
+                ))}
+              </div>
               <h2 class="project-title font-display text-text-1">{project.title}</h2>
             </div>
 
@@ -62,11 +66,14 @@ const projects = t.work.projects;
 
           <!-- Right: preview -->
           <div class="project-preview">
+            <img
+              src={project.image ?? "/images/placeholder.svg"}
+              alt={project.title}
+              class="preview-img"
+              loading="lazy"
+              decoding="async"
+            />
             <div class="preview-scanlines" aria-hidden="true"></div>
-            <div class="preview-content">
-              <span class="preview-num font-data">0{i + 1}</span>
-              <span class="preview-status tag">PREVIEW.PENDING</span>
-            </div>
           </div>
 
         </div>
@@ -75,13 +82,13 @@ const projects = t.work.projects;
 
     <!-- Navigation -->
     <nav class="project-nav" aria-label={lang === "en" ? "Project navigation" : "Navegación de proyectos"}>
-      <Btn id="proj-prev" class="nav-btn" aria-label={lang === "en" ? "Previous project" : "Proyecto anterior"} disabled>◀</Btn>
+      <Btn id="proj-prev" aria-label={lang === "en" ? "Previous project" : "Proyecto anterior"} disabled>◀</Btn>
       <div class="nav-dots" aria-hidden="true">
         {projects.map((_, i) => (
           <span class={`nav-dot ${i === 0 ? "is-active" : ""}`} data-dot={i} />
         ))}
       </div>
-      <Btn id="proj-next" class="nav-btn" aria-label={lang === "en" ? "Next project" : "Proyecto siguiente"}>▶</Btn>
+      <Btn id="proj-next" aria-label={lang === "en" ? "Next project" : "Proyecto siguiente"}>▶</Btn>
     </nav>
 
   </div>
@@ -114,9 +121,10 @@ const projects = t.work.projects;
   .project-card.is-selected {
     display:               grid;
     grid-template-columns: 1fr;
+    margin-bottom:         var(--section-gap);
   }
 
-  @media (min-width: 768px) {
+  @media (min-width: 1280px) {
     .project-card.is-selected {
       grid-template-columns: 1fr 1fr;
     }
@@ -153,7 +161,7 @@ const projects = t.work.projects;
     display: none;
   }
 
-  @media (min-width: 768px) {
+  @media (min-width: 1280px) {
     .card-metrics {
       align-items: center;
       gap:         1.5rem;
@@ -175,12 +183,19 @@ const projects = t.work.projects;
   /* ── Preview side ── */
   .project-preview {
     position:         relative;
+    min-height:       220px;
     background-color: var(--c-preview-bg);
     background-image:
       linear-gradient(var(--c-primary-grid) 1px, transparent 1px),
       linear-gradient(90deg, var(--c-primary-grid) 1px, transparent 1px);
     background-size: 32px 32px;
     overflow:        hidden;
+  }
+
+  @media (min-width: 1280px) {
+    .project-preview {
+      min-height: unset;
+    }
   }
 
   .preview-scanlines {
@@ -196,25 +211,12 @@ const projects = t.work.projects;
     pointer-events: none;
   }
 
-  .preview-content {
-    position:        absolute;
-    inset:           0;
-    display:         flex;
-    flex-direction:  column;
-    align-items:     center;
-    justify-content: center;
-    gap:             1rem;
-    z-index:         1;
-  }
-
-  .preview-num {
-    font-size:   var(--preview-num-size);
-    color:       var(--c-primary-ghost);
-    line-height: 1;
-  }
-
-  .preview-status {
-    letter-spacing: 0.12em;
+  .preview-img {
+    position:   absolute;
+    inset:      0;
+    width:      100%;
+    height:     100%;
+    object-fit: cover;
   }
 
   /* ── Navigation ── */
@@ -223,10 +225,6 @@ const projects = t.work.projects;
     align-items: center;
     gap:         1.25rem;
     margin-top:  var(--page-gap);
-  }
-
-  .nav-btn {
-    padding: 0.35rem 0.6rem;
   }
 
   .nav-dots {
@@ -252,17 +250,25 @@ const projects = t.work.projects;
 </style>
 
 <script>
-  (function () {
-    const cards   = Array.from(document.querySelectorAll<HTMLElement>("[data-project-index]"));
-    const dots    = Array.from(document.querySelectorAll<HTMLElement>("[data-dot]"));
+  let projectController: AbortController | null = null;
+
+  function initProjectCard(): void {
     const btnPrev = document.getElementById("proj-prev") as HTMLButtonElement | null;
+    if (!btnPrev) return; // not on this page
+
+    projectController?.abort();
+    projectController = new AbortController();
+    const { signal } = projectController;
+
+    const cards = Array.from(document.querySelectorAll<HTMLElement>("[data-project-index]"));
+    const dots  = Array.from(document.querySelectorAll<HTMLElement>("[data-dot]"));
     const btnNext = document.getElementById("proj-next") as HTMLButtonElement | null;
 
     let current     = 0;
-    let navFocusIdx = -1; // -1 = default focus (ver proyecto), 0 = btnPrev, 1 = btnNext
+    let navFocusIdx = -1;
 
-    function navControls(): HTMLElement[] {
-      return [btnPrev, btnNext].filter(Boolean) as HTMLElement[];
+    function navControls(): HTMLButtonElement[] {
+      return ([btnPrev, btnNext] as HTMLButtonElement[]).filter(b => b && !b.disabled);
     }
 
     function ctaBtn(idx: number): HTMLElement | null {
@@ -270,16 +276,15 @@ const projects = t.work.projects;
     }
 
     function setNavFocus(idx: number): void {
-      // clear all is-focused globally
       document.querySelectorAll<HTMLElement>(".btn.is-focused").forEach(b => b.classList.remove("is-focused"));
       navFocusIdx = idx;
       if (idx === -1) {
-        // restore focus to current card's ver-proyecto
         const cta = ctaBtn(current);
-        if (cta) cta.classList.add("is-focused");
+        if (cta) { cta.classList.add("is-focused"); cta.focus(); }
       } else {
         const controls = navControls();
-        if (controls[idx]) controls[idx].classList.add("is-focused");
+        const target = controls[idx];
+        if (target) { target.classList.add("is-focused"); target.focus(); }
       }
     }
 
@@ -319,16 +324,15 @@ const projects = t.work.projects;
       navFocusIdx = -1;
     }
 
-    btnPrev?.addEventListener("click", () => go(current - 1));
-    btnNext?.addEventListener("click", () => go(current + 1));
+    btnPrev?.addEventListener("click", () => go(current - 1), { signal });
+    btnNext?.addEventListener("click", () => go(current + 1), { signal });
 
-    // Init
     updateDisabled();
     setNavFocus(-1);
 
-    // Keyboard: J/K navigate prev/next controls
     document.addEventListener("keydown", (e: KeyboardEvent) => {
-      if (window.location.pathname !== "/proyectos") return;
+      const p = window.location.pathname;
+      if (p !== "/proyectos" && p !== "/en/work") return;
       const t = e.target as HTMLElement;
       if (t.tagName === "INPUT" || t.tagName === "TEXTAREA" || t.isContentEditable) return;
       if (e.metaKey || e.ctrlKey || e.altKey) return;
@@ -337,14 +341,15 @@ const projects = t.work.projects;
         e.preventDefault();
         e.stopImmediatePropagation();
         const controls = navControls();
-        const next = Math.min(navFocusIdx + 1, controls.length - 1);
-        setNavFocus(next);
+        setNavFocus(Math.min(navFocusIdx + 1, controls.length - 1));
       } else if (e.key === "k" || e.key === "K") {
         e.preventDefault();
         e.stopImmediatePropagation();
-        const prev = Math.max(navFocusIdx - 1, -1);
-        setNavFocus(prev);
+        setNavFocus(Math.max(navFocusIdx - 1, -1));
       }
-    });
-  })();
+    }, { signal });
+  }
+
+  initProjectCard();
+  document.addEventListener("astro:page-load", initProjectCard);
 </script>
