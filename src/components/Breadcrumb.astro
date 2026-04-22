@@ -1,0 +1,66 @@
+---
+interface Props {
+  workHref: string;
+  slug:     string;
+}
+
+const { workHref, slug } = Astro.props;
+---
+
+<nav aria-label="Breadcrumb" class="breadcrumb">
+  <ol>
+    <li>
+      <a href={workHref} class="crumb crumb--link">/work</a>
+    </li>
+    <li class="crumb-sep" aria-hidden="true">›</li>
+    <li>
+      <span class="crumb crumb--current" aria-current="page">/{slug}</span>
+    </li>
+  </ol>
+</nav>
+
+<style>
+  .breadcrumb {
+    margin-bottom: 4rem;
+  }
+
+  ol {
+    display:     flex;
+    align-items: center;
+    gap:         0.5rem;
+    list-style:  none;
+    margin:      0;
+    padding:     0;
+  }
+
+  .crumb {
+    font-family:     'Roboto Mono', monospace;
+    font-size:       var(--fs-label-sm);
+    letter-spacing:  0.02em;
+    line-height:     1;
+    text-decoration: none;
+  }
+
+  .crumb--link {
+    color:      var(--color-text-4);
+    transition: color 100ms ease;
+  }
+  .crumb--link:hover {
+    color: var(--color-text-1);
+  }
+  .crumb--link:focus-visible {
+    outline:        2px solid var(--color-primary);
+    outline-offset: 3px;
+  }
+
+  .crumb-sep {
+    font-family: 'Roboto Mono', monospace;
+    font-size:   var(--fs-label-sm);
+    color:       var(--color-text-7);
+    user-select: none;
+  }
+
+  .crumb--current {
+    color: var(--color-text-4);
+  }
+</style>

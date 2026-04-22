@@ -5,14 +5,14 @@ interface Props {
 const { title } = Astro.props;
 ---
 
-<!-- ── Desktop TOC — fixed left column, ≥1024px ────────────── -->
-<nav id="toc" aria-label="Secciones" style="display:none;" data-toc-title={title}>
+<!-- ── Desktop TOC — fixed left column, ≥1280px ────────────── -->
+<nav id="toc" aria-label="Secciones" data-toc-title={title}>
   <p  id="toc-title" class="toc-title" aria-hidden="true"></p>
   <ul id="toc-list"  class="toc-list" role="list"></ul>
 </nav>
 
-<!-- ── Mobile — floating button + panel, <1024px ────────────── -->
-<div id="toc-mobile" style="display:none;">
+<!-- ── Mobile — floating button + panel, <1280px ────────────── -->
+<div id="toc-mobile">
   <div id="toc-panel" role="dialog" aria-modal="false" aria-label="Secciones" aria-hidden="true">
     <p class="toc-title toc-panel-title" aria-hidden="true" id="toc-panel-title"></p>
     <ul id="toc-panel-list" class="toc-list" role="list"></ul>
@@ -159,12 +159,17 @@ const { title } = Astro.props;
   .toc-panel-title { margin-bottom: 0.5rem; }
 
   /* ── Responsive visibility ────────────────────────────────── */
-  @media (min-width: 1024px) {
-    #toc-mobile { display: none !important; }
+  #toc        { display: none !important; }
+  #toc-mobile { display: none !important; }
+
+  @media (min-width: 1280px) {
+    #toc.toc-active        { display: flex !important; }
+    #toc-mobile.toc-active { display: none !important; }
   }
 
-  @media (max-width: 1023px) {
-    #toc { display: none !important; }
+  @media (max-width: 1279px) {
+    #toc.toc-active        { display: none !important; }
+    #toc-mobile.toc-active { display: flex !important; }
   }
 </style>
 
@@ -193,8 +198,8 @@ const { title } = Astro.props;
     if (!tocDesktop || !tocMobile || !mainEl) return;
 
     if (mainEl.dataset.noScroll !== undefined) {
-      tocDesktop.style.display = "none";
-      tocMobile.style.display  = "none";
+      tocDesktop.classList.remove("toc-active");
+      tocMobile.classList.remove("toc-active");
       return;
     }
 
@@ -203,8 +208,8 @@ const { title } = Astro.props;
     ).filter(s => s.querySelector(".section-label"));
 
     if (sections.length < 2) {
-      tocDesktop.style.display = "none";
-      tocMobile.style.display  = "none";
+      tocDesktop.classList.remove("toc-active");
+      tocMobile.classList.remove("toc-active");
       return;
     }
 
@@ -249,8 +254,8 @@ const { title } = Astro.props;
       sections.forEach(s => tocPanelList.appendChild(makeItem(s, true)));
     }
 
-    tocDesktop.style.display = "flex";
-    tocMobile.style.display  = "flex";
+    tocDesktop.classList.add("toc-active");
+    tocMobile.classList.add("toc-active");
 
     function getAllItems(): HTMLElement[] {
       return Array.from(document.querySelectorAll<HTMLElement>(".toc-item"));

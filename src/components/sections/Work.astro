@@ -158,37 +158,42 @@ const workBase = lang === "en" ? "/en/work" : "/work";
 </style>
 
 <script>
-  const prevBtn = document.getElementById("work-prev")  as HTMLButtonElement;
-  const nextBtn = document.getElementById("work-next")  as HTMLButtonElement;
-  const slides  = Array.from(document.querySelectorAll<HTMLElement>(".work-slide"));
-  const dots    = Array.from(document.querySelectorAll<HTMLButtonElement>(".work-dot"));
-  const total   = slides.length;
+  function initCarousel(): void {
+    const prevBtn = document.getElementById("work-prev")  as HTMLButtonElement | null;
+    const nextBtn = document.getElementById("work-next")  as HTMLButtonElement | null;
+    const track   = document.getElementById("work-track") as HTMLElement | null;
+    if (!prevBtn || !nextBtn || !track) return;
 
-  const track = document.getElementById("work-track") as HTMLElement;
-  let current = 0;
+    const slides = Array.from(document.querySelectorAll<HTMLElement>(".work-slide"));
+    const dots   = Array.from(document.querySelectorAll<HTMLButtonElement>(".work-dot"));
+    const total  = slides.length;
+    let current  = 0;
 
-  function goTo(index: number): void {
-    current = index;
-    track.style.transform = `translateX(-${current * 100}%)`;
+    function goTo(index: number): void {
+      current = index;
+      track!.style.transform = `translateX(-${current * 100}%)`;
 
-    slides.forEach((slide, i) => {
-      slide.setAttribute("aria-hidden", i === current ? "false" : "true");
-      const link = slide.querySelector("a");
-      if (link) link.tabIndex = i === current ? 0 : -1;
-    });
+      slides.forEach((slide, i) => {
+        slide.setAttribute("aria-hidden", i === current ? "false" : "true");
+        const link = slide.querySelector("a");
+        if (link) link.tabIndex = i === current ? 0 : -1;
+      });
 
-    dots.forEach((dot, i) => {
-      dot.classList.toggle("is-active", i === current);
-      dot.setAttribute("aria-selected", i === current ? "true" : "false");
-    });
+      dots.forEach((dot, i) => {
+        dot.classList.toggle("is-active", i === current);
+        dot.setAttribute("aria-selected", i === current ? "true" : "false");
+      });
 
-    prevBtn.classList.toggle("disabled", current === 0);
-    nextBtn.classList.toggle("disabled", current === total - 1);
+      prevBtn!.classList.toggle("disabled", current === 0);
+      nextBtn!.classList.toggle("disabled", current === total - 1);
+    }
+
+    prevBtn.addEventListener("click", () => { if (current > 0) goTo(current - 1); });
+    nextBtn.addEventListener("click", () => { if (current < total - 1) goTo(current + 1); });
+    dots.forEach((dot, i) => dot.addEventListener("click", () => goTo(i)));
+
+    goTo(0);
   }
 
-  prevBtn.addEventListener("click", () => { if (current > 0) goTo(current - 1); });
-  nextBtn.addEventListener("click", () => { if (current < total - 1) goTo(current + 1); });
-  dots.forEach((dot, i) => dot.addEventListener("click", () => goTo(i)));
-
-  goTo(0);
+  document.addEventListener("astro:page-load", initCarousel);
 </script>

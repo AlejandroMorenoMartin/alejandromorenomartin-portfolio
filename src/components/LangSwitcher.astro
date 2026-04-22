@@ -1,0 +1,78 @@
+---
+import type { Lang } from "@/i18n/utils";
+
+interface Props {
+  lang:          Lang;
+  alternatePath: string;
+}
+
+const { lang, alternatePath } = Astro.props;
+---
+
+<div class:list={["lang-switcher", `lang-${lang}`]} role="group" aria-label="Language switcher">
+  <a
+    href={lang === "es" ? undefined : alternatePath}
+    data-astro-reload
+    class:list={["seg", lang === "es" ? "is-active" : "is-inactive"]}
+    aria-current={lang === "es" ? "true" : undefined}
+    aria-label="Cambiar a español"
+    tabindex={lang === "es" ? -1 : 0}
+  >ES</a>
+  <a
+    href={lang === "en" ? undefined : alternatePath}
+    data-astro-reload
+    class:list={["seg", lang === "en" ? "is-active" : "is-inactive"]}
+    aria-current={lang === "en" ? "true" : undefined}
+    aria-label="Switch to English"
+    tabindex={lang === "en" ? -1 : 0}
+  >EN</a>
+</div>
+
+<style>
+  .lang-switcher {
+    display:    inline-flex;
+    align-items: center;
+    border:     1px solid var(--color-text-7);
+    background: transparent;
+  }
+
+  .seg {
+    font-family:     inherit;
+    font-size:       var(--fs-label-sm);
+    letter-spacing:  0.02em;
+    padding:         0.4rem 0.85rem;
+    line-height:     1;
+    text-decoration: none;
+    display:         flex;
+    align-items:     center;
+    justify-content: center;
+    transition:      color 100ms ease, background 100ms ease;
+  }
+
+  .seg + .seg {
+    border-left: 1px solid var(--color-text-7);
+  }
+
+  .seg.is-active {
+    background:     var(--color-primary);
+    color:          var(--color-surface);
+    font-weight:    600;
+    pointer-events: none;
+  }
+
+  .seg.is-inactive {
+    color:      var(--color-text-4);
+    background: transparent;
+  }
+
+  .seg.is-inactive:hover,
+  .seg.is-inactive:focus-visible {
+    color:   var(--color-primary);
+    outline: none;
+  }
+
+  .seg:focus-visible {
+    outline:        2px solid var(--color-primary);
+    outline-offset: -2px;
+  }
+</style>

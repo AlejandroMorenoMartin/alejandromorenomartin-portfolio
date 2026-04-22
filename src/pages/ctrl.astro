@@ -19,7 +19,7 @@ const controls = [
 ---
 
 <BaseLayout
-  title={`Ctrl · ${t.meta.title}`}
+  title={`/ctrl · ${t.meta.title}`}
   description="Atajos de teclado para navegar el portfolio."
   lang={lang}
   canonicalURL={`${siteURL}/ctrl`}
@@ -73,7 +73,7 @@ const controls = [
 .ctrl-list {
     display:        flex;
     flex-direction: column;
-    gap:            var(--card-gap);
+    gap:            0.5rem;
     list-style:     none;
     padding:        0;
     margin:         0;
@@ -82,13 +82,13 @@ const controls = [
   .ctrl-row {
     display:     flex;
     align-items: center;
-    gap:         var(--card-gap);
+    gap:         0.75rem;
   }
 
   .ctrl-keys {
-    display: flex;
-    gap:     0.5rem;
-    width:   6rem;
+    display:     flex;
+    gap:         0.25rem;
+    width:       5rem;
     flex-shrink: 0;
   }
 
@@ -96,9 +96,9 @@ const controls = [
     display:          inline-flex;
     align-items:      center;
     justify-content:  center;
-    min-width:        2rem;
-    height:           2rem;
-    padding:          0 0.5rem;
+    min-width:        1.625rem;
+    height:           1.625rem;
+    padding:          0 0.375rem;
     border:           1px solid var(--color-border-subtle);
     color:            var(--color-text-4);
     font-size:        var(--fs-label-sm);

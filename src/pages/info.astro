@@ -5,6 +5,7 @@ import About      from "@/components/sections/About.astro";
 import Vision     from "@/components/sections/Vision.astro";
 import Craft      from "@/components/sections/Craft.astro";
 import Metodo     from "@/components/sections/Metodo.astro";
+import Offline    from "@/components/sections/Offline.astro";
 import Creditos   from "@/components/sections/Creditos.astro";
 import Footer     from "@/components/Footer.astro";
 import { useTranslations } from "@/i18n/utils";
@@ -20,7 +21,7 @@ const siteURL = "https://alejandromorenomartin.com";
   description={t.meta.description}
   lang={lang}
   tocTitle="/info"
-  canonicalURL={`${siteURL}/sobre-mi`}
+  canonicalURL={`${siteURL}/info`}
 >
   <Nav  lang={lang} />
   <main id="main-scroll">
@@ -33,6 +34,7 @@ const siteURL = "https://alejandromorenomartin.com";
     <Vision lang={lang} />
     <Metodo lang={lang} />
     <Craft    lang={lang} />
+    <Offline  lang={lang} />
     <Creditos lang={lang} />
   </main>
   <Footer lang={lang} />

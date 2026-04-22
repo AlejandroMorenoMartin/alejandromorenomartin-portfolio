@@ -5,6 +5,7 @@ import About      from "@/components/sections/About.astro";
 import Vision     from "@/components/sections/Vision.astro";
 import Craft      from "@/components/sections/Craft.astro";
 import Metodo     from "@/components/sections/Metodo.astro";
+import Offline    from "@/components/sections/Offline.astro";
 import Creditos   from "@/components/sections/Creditos.astro";
 import Footer     from "@/components/Footer.astro";
 import { useTranslations } from "@/i18n/utils";
@@ -21,7 +22,7 @@ const siteURL = "https://alejandromorenomartin.com";
   lang={lang}
   tocTitle="/info"
   canonicalURL={`${siteURL}/en/about`}
-  alternateURL={`${siteURL}/sobre-mi`}
+  alternateURL={`${siteURL}/info`}
   alternateLang="es"
 >
   <Nav lang={lang} />
@@ -35,6 +36,7 @@ const siteURL = "https://alejandromorenomartin.com";
     <Vision   lang={lang} />
     <Metodo   lang={lang} />
     <Craft    lang={lang} />
+    <Offline  lang={lang} />
     <Creditos lang={lang} />
   </main>
   <Footer lang={lang} />

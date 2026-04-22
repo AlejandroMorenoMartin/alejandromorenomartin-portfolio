@@ -23,28 +23,28 @@ const navLinks = lang === "en"
     ]
   : [
       { href: "/",            label: "/root", mobile: true  },
-      { href: "/proyectos",   label: "/work", mobile: true  },
-      { href: "/sobre-mi",    label: "/info", mobile: true  },
-      { href: "/trayectoria", label: "/path", mobile: true  },
+      { href: "/work", label: "/work", mobile: true  },
+      { href: "/info", label: "/info", mobile: true  },
+      { href: "/path", label: "/path", mobile: true  },
       { href: "/ctrl",        label: "/ctrl", mobile: false },
     ];
 
 const alternatePath = (() => {
   if (lang === "es") {
     const map: Record<string, string> = {
-      "/":            "/en",
-      "/proyectos":   "/en/work",
-      "/sobre-mi":    "/en/about",
-      "/trayectoria": "/en/path",
+      "/":      "/en",
+      "/work":  "/en/work",
+      "/info":  "/en/about",
+      "/path":  "/en/path",
     };
     if (pathname.startsWith("/work/")) return `/en${pathname}`;
     return map[pathname] ?? "/en";
   } else {
     const map: Record<string, string> = {
       "/en":       "/",
-      "/en/work":  "/proyectos",
-      "/en/about": "/sobre-mi",
-      "/en/path":  "/trayectoria",
+      "/en/work":  "/work",
+      "/en/about": "/info",
+      "/en/path":  "/path",
     };
     if (pathname.startsWith("/en/work/")) return pathname.replace("/en", "");
     return map[pathname] ?? "/";
@@ -53,7 +53,7 @@ const alternatePath = (() => {
 
 function isActive(href: string): boolean {
   if (href === "/" || href === "/en") return pathname === href || pathname === href + "/";
-  if (href === "/proyectos") return pathname === href || pathname.startsWith("/work/");
+  if (href === "/work") return pathname === href || pathname.startsWith("/work/");
   if (href === "/en/work")   return pathname === href || pathname.startsWith("/en/work/");
   return pathname === href || pathname === href + "/";
 }

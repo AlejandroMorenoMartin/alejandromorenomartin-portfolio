@@ -2,7 +2,7 @@
   "meta": {
     "title": "Alejandro Moreno Martín — Product Designer",
     "description": "Product Designer specialising in digital interfaces, design systems, and user experience. Open to new opportunities.",
-    "ogImage": "/og-en.png"
+    "ogImage": "/og_image_en.png"
   },
   "nav": {
     "home":       "Welcome",
@@ -54,6 +54,24 @@
     "heading": "Tech Stack",
     "tools": [
       {
+        "title":       "Astro",
+        "url":         "https://astro.build",
+        "description": "Content-first web framework with static output by default. Fast, clean and TypeScript-native.",
+        "comment":     "I rediscovered the pleasure of building websites when I first used it. No overhead, no magic."
+      },
+      {
+        "title":       "Claude Code",
+        "url":         "https://claude.ai/code",
+        "description": "AI CLI integrated into the terminal and editor. Reasons through code, refactors and proposes solutions with full context.",
+        "comment":     "It changed how I work. It's not autocomplete — it's a collaborator that understands context."
+      },
+      {
+        "title":       "Claude Code Design",
+        "url":         "https://claude.ai/code",
+        "description": "Claude Code extension specialised in interface design. Generates, reviews and refines components with visual judgement and system consistency.",
+        "comment":     "Design and code in the same context. Closes the gap between intent and result."
+      },
+      {
         "title":       "Figma",
         "url":         "https://figma.com",
         "description": "Core UI/UX design tool. Full cycle: wireframes, components, design systems and dev handoff.",
@@ -66,10 +84,34 @@
         "comment":     "It's where scattered thinking becomes structure before opening Figma."
       },
       {
-        "title":       "Astro",
-        "url":         "https://astro.build",
-        "description": "Content-first web framework with static output by default. Fast, clean and TypeScript-native.",
-        "comment":     "I rediscovered the pleasure of building websites when I first used it. No overhead, no magic."
+        "title":       "GitHub",
+        "url":         "https://github.com",
+        "description": "Version control, code reviews and deployment pipelines integrated with every repository.",
+        "comment":     "Every project starts with a repo. It's the thread connecting design, code and deployment."
+      },
+      {
+        "title":       "Hotjar",
+        "url":         "https://hotjar.com",
+        "description": "User behaviour analytics: heatmaps, session recordings and conversion funnels to understand exactly how visitors interact with a website.",
+        "comment":     "Data tells you what's happening. Hotjar shows you why."
+      },
+      {
+        "title":       "Linear",
+        "url":         "https://linear.app",
+        "description": "Product-focused project management. Cycles, priorities and statuses that connect design and development in a single flow.",
+        "comment":     "The only task manager that doesn't get in the way of the work."
+      },
+      {
+        "title":       "Notion",
+        "url":         "https://notion.so",
+        "description": "For project documentation, research notes and client briefs. Flexible both solo and in a team.",
+        "comment":     "The place where projects have context before they have code."
+      },
+      {
+        "title":       "React Native",
+        "url":         "https://reactnative.dev",
+        "description": "Native mobile applications with JavaScript. One codebase for iOS and Android with Expo.",
+        "comment":     "The Expo ecosystem makes it accessible without sacrificing native experience."
       },
       {
         "title":       "Tailwind CSS",
@@ -84,46 +126,16 @@
         "comment":     "Types aren't bureaucracy — they're living documentation the editor understands."
       },
       {
-        "title":       "React Native",
-        "url":         "https://reactnative.dev",
-        "description": "Native mobile applications with JavaScript. One codebase for iOS and Android with Expo.",
-        "comment":     "The Expo ecosystem makes it accessible without sacrificing native experience."
-      },
-      {
-        "title":       "VS Code",
-        "url":         "https://code.visualstudio.com",
-        "description": "My primary editor. Extensible, fast and with native support for everything in my stack.",
-        "comment":     "With the right extensions it stops being an editor and becomes an environment."
-      },
-      {
-        "title":       "Claude Code",
-        "url":         "https://claude.ai/code",
-        "description": "AI CLI integrated into the terminal and editor. Reasons through code, refactors and proposes solutions with full context.",
-        "comment":     "It changed how I work. It's not autocomplete — it's a collaborator that understands context."
-      },
-      {
-        "title":       "GitHub",
-        "url":         "https://github.com",
-        "description": "Version control, code reviews and deployment pipelines integrated with every repository.",
-        "comment":     "Every project starts with a repo. It's the thread connecting design, code and deployment."
-      },
-      {
         "title":       "Vercel",
         "url":         "https://vercel.com",
         "description": "Deployment platform for web projects. GitHub integration, branch previews and built-in analytics.",
         "comment":     "Deploying shouldn't be work. With Vercel, it isn't."
       },
       {
-        "title":       "Notion",
-        "url":         "https://notion.so",
-        "description": "For project documentation, research notes and client briefs. Flexible both solo and in a team.",
-        "comment":     "The place where projects have context before they have code."
-      },
-      {
-        "title":       "Hotjar",
-        "url":         "https://hotjar.com",
-        "description": "User behaviour analytics: heatmaps, session recordings and conversion funnels to understand exactly how visitors interact with a website.",
-        "comment":     "Data tells you what's happening. Hotjar shows you why."
+        "title":       "VS Code",
+        "url":         "https://code.visualstudio.com",
+        "description": "My primary editor. Extensible, fast and with native support for everything in my stack.",
+        "comment":     "With the right extensions it stops being an editor and becomes an environment."
       }
     ]
   },
@@ -146,22 +158,8 @@
         ],
         "tags":        ["Astro", "Tailwind CSS", "TypeScript", "Figma"],
         "date":        "Apr 2025",
-        "image":       "/images/placeholder.svg"
-      },
-      {
-        "title":       "Casa del Aire",
-        "slug":        "casa-del-aire",
-        "company":     "Casa del Aire",
-        "category":    "Web Design · Development",
-        "headline":    "A booking-focused site that cut direct enquiry time by 60%",
-        "summary":     "Designed and developed the full website for a rural house in Extremadura, replacing a generic listing with a conversion-first experience owned by the client.",
-        "metrics":     [
-          { "value": "–60%", "label": "Enquiry time" },
-          { "value": "+40%", "label": "Direct bookings" },
-          { "value": "100%", "label": "Brand ownership" }
-        ],
-        "tags":        ["Astro", "Tailwind CSS", "Figma", "Web"],
-        "date":        "Jan 2025",
+        "timeline":    "6 weeks",
+        "responsibilities": "Design, Development, Deployment",
         "image":       "/images/placeholder.svg"
       },
       {
@@ -178,22 +176,26 @@
         ],
         "tags":        ["Astro", "Tailwind CSS", "Figma", "VFX"],
         "date":        "Mar 2025",
+        "timeline":    "3 weeks",
+        "responsibilities": "Web Design, Frontend",
         "image":       "/images/placeholder.svg"
       },
       {
-        "title":       "Forma",
-        "slug":        "forma",
-        "company":     "Personal project",
-        "category":    "Product Design · App",
-        "headline":    "A progress-tracking app designed for clarity over complexity",
-        "summary":     "Designed a mobile app for users who want precise, visual control of their body composition — without the noise of generic fitness platforms.",
+        "title":       "Casa del Aire",
+        "slug":        "casa-del-aire",
+        "company":     "Casa del Aire",
+        "category":    "Web Design · Development",
+        "headline":    "A booking-focused site that cut direct enquiry time by 60%",
+        "summary":     "Designed and developed the full website for a rural house in Extremadura, replacing a generic listing with a conversion-first experience owned by the client.",
         "metrics":     [
-          { "value": "3",    "label": "Core screens" },
-          { "value": "+82%", "label": "Task completion" },
-          { "value": "4.8",  "label": "Usability score" }
+          { "value": "–60%", "label": "Enquiry time" },
+          { "value": "+40%", "label": "Direct bookings" },
+          { "value": "100%", "label": "Brand ownership" }
         ],
-        "tags":        ["Product Design", "Figma", "React Native"],
-        "date":        "May 2025",
+        "tags":        ["Astro", "Tailwind CSS", "Figma", "Web"],
+        "date":        "Jan 2025",
+        "timeline":    "4 weeks",
+        "responsibilities": "Web Design, Development",
         "image":       "/images/placeholder.svg"
       },
       {
@@ -210,6 +212,26 @@
         ],
         "tags":        ["Product Design", "Figma", "React Native"],
         "date":        "Jul 2025",
+        "timeline":    "8 weeks",
+        "responsibilities": "UX Research, UI Design",
+        "image":       "/images/placeholder.svg"
+      },
+      {
+        "title":       "Forma",
+        "slug":        "forma",
+        "company":     "Personal project",
+        "category":    "Product Design · App",
+        "headline":    "A progress-tracking app designed for clarity over complexity",
+        "summary":     "Designed a mobile app for users who want precise, visual control of their body composition — without the noise of generic fitness platforms.",
+        "metrics":     [
+          { "value": "3",    "label": "Core screens" },
+          { "value": "+82%", "label": "Task completion" },
+          { "value": "4.8",  "label": "Usability score" }
+        ],
+        "tags":        ["Product Design", "Figma", "React Native"],
+        "date":        "May 2025",
+        "timeline":    "6 weeks",
+        "responsibilities": "UX Research, UI Design",
         "image":       "/images/placeholder.svg"
       }
     ]

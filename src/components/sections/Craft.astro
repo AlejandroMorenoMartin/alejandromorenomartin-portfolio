@@ -29,41 +29,16 @@ const toolIcons: Record<string, string> = {
 <section id="craft" class="section-padding" aria-label={t.craft.heading}>
   <div class="container-wide">
     <SectionLabel label="/stack" />
-    <ul class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4" role="list">
+    <ul class="flex flex-wrap gap-x-6 gap-y-3 text-body-md" role="list">
       {t.craft.tools.map((tool) => (
         <li>
           <a
             href={tool.url}
             target="_blank"
             rel="noopener noreferrer"
-            class="group flex flex-col h-full p-7 rounded-none border-[0.5px] border-[var(--color-border-subtle)] bg-surface hover:bg-[var(--color-btn-hover-subtle)] transition-all duration-fast active:scale-[0.99] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-500/40"
+            class="link-external"
           >
-            <!-- Icon -->
-            <div
-              class="w-10 h-10 rounded-none bg-surface-overlay flex items-center justify-center text-primary-500 mb-5 flex-shrink-0"
-              aria-hidden="true"
-              set:html={toolIcons[tool.title]}
-            />
-
-            <!-- Name + external arrow -->
-            <div class="flex items-center gap-1.5 mb-2">
-              <h3 class="text-body-lg font-display font-semibold">
-                {tool.title}
-              </h3>
-              <svg
-                class="w-[15px] h-[15px] flex-shrink-0 text-text-5 opacity-50 group-hover:opacity-100 group-hover:text-primary-400 group-hover:translate-x-[2px] group-hover:-translate-y-[2px] transition-all duration-fast"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-                aria-hidden="true"
-              >
-                <path fill-rule="evenodd" d="M5.22 14.78a.75.75 0 0 0 1.06 0l7.22-7.22v5.69a.75.75 0 0 0 1.5 0v-7.5a.75.75 0 0 0-.75-.75h-7.5a.75.75 0 0 0 0 1.5h5.69l-7.22 7.22a.75.75 0 0 0 0 1.06Z" clip-rule="evenodd" />
-              </svg>
-            </div>
-
-            <!-- Description -->
-            <p class="text-body-md leading-relaxed flex-1 line-clamp-5">
-              {tool.description}
-            </p>
+            {tool.title}
           </a>
         </li>
       ))}

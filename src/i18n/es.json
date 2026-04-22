@@ -53,6 +53,24 @@
     "heading": "Stack Tecnológico",
     "tools": [
       {
+        "title":       "Astro",
+        "url":         "https://astro.build",
+        "description": "Framework web orientado a contenido con salida estática por defecto. Rápido, limpio y con TypeScript nativo.",
+        "comment":     "Redescubrí el placer de hacer webs cuando lo probé. Sin overhead, sin magia innecesaria."
+      },
+      {
+        "title":       "Claude Code",
+        "url":         "https://claude.ai/code",
+        "description": "CLI de IA integrada en el terminal y el editor. Razona código, refactoriza y propone soluciones con contexto completo.",
+        "comment":     "Cambió cómo trabajo. No es autocompletado — es un colaborador que entiende contexto."
+      },
+      {
+        "title":       "Claude Code Design",
+        "url":         "https://claude.ai/code",
+        "description": "Extensión de Claude Code especializada en diseño de interfaces. Genera, revisa y refina componentes con criterio visual y coherencia de sistema.",
+        "comment":     "Diseño y código en el mismo contexto. Acorta la distancia entre la intención y el resultado."
+      },
+      {
         "title":       "Figma",
         "url":         "https://figma.com",
         "description": "Herramienta central de diseño UI/UX. Todo el ciclo: wireframes, componentes, sistemas de diseño y handoff a desarrollo.",
@@ -65,10 +83,34 @@
         "comment":     "Es donde el pensamiento desordenado se vuelve estructura antes de abrir Figma."
       },
       {
-        "title":       "Astro",
-        "url":         "https://astro.build",
-        "description": "Framework web orientado a contenido con salida estática por defecto. Rápido, limpio y con TypeScript nativo.",
-        "comment":     "Redescubrí el placer de hacer webs cuando lo probé. Sin overhead, sin magia innecesaria."
+        "title":       "GitHub",
+        "url":         "https://github.com",
+        "description": "Control de versiones, revisiones de código y pipelines de despliegue integrados con cada repositorio.",
+        "comment":     "Todo proyecto empieza con un repo. Es el hilo que conecta diseño, código y despliegue."
+      },
+      {
+        "title":       "Hotjar",
+        "url":         "https://hotjar.com",
+        "description": "Analítica de comportamiento: mapas de calor, grabaciones de sesión y embudos de conversión para entender cómo interactúan las personas con un producto.",
+        "comment":     "Los datos te dicen qué ocurre. Hotjar te muestra por qué."
+      },
+      {
+        "title":       "Linear",
+        "url":         "https://linear.app",
+        "description": "Gestión de proyectos orientada a producto. Cycles, prioridades y estados que conectan diseño y desarrollo en un mismo flujo.",
+        "comment":     "El único gestor de tareas que no se interpone entre tú y el trabajo."
+      },
+      {
+        "title":       "Notion",
+        "url":         "https://notion.so",
+        "description": "Para documentación de proyectos, notas de investigación y briefs de cliente. Flexible en solitario y en equipo.",
+        "comment":     "El lugar donde los proyectos tienen contexto antes de tener código."
+      },
+      {
+        "title":       "React Native",
+        "url":         "https://reactnative.dev",
+        "description": "Aplicaciones móviles nativas con JavaScript. Una sola base de código para iOS y Android con Expo.",
+        "comment":     "El ecosistema de Expo lo hace accesible sin sacrificar la experiencia nativa."
       },
       {
         "title":       "Tailwind CSS",
@@ -83,46 +125,16 @@
         "comment":     "Los tipos no son burocracia — son documentación viva que el editor entiende."
       },
       {
-        "title":       "React Native",
-        "url":         "https://reactnative.dev",
-        "description": "Aplicaciones móviles nativas con JavaScript. Una sola base de código para iOS y Android con Expo.",
-        "comment":     "El ecosistema de Expo lo hace accesible sin sacrificar la experiencia nativa."
-      },
-      {
-        "title":       "VS Code",
-        "url":         "https://code.visualstudio.com",
-        "description": "Mi editor principal. Extensible, rápido y con soporte nativo para todo el stack que uso.",
-        "comment":     "Con las extensiones correctas deja de ser un editor y se convierte en un entorno."
-      },
-      {
-        "title":       "Claude Code",
-        "url":         "https://claude.ai/code",
-        "description": "CLI de IA integrada en el terminal y el editor. Razona código, refactoriza y propone soluciones con contexto completo.",
-        "comment":     "Cambió cómo trabajo. No es autocompletado — es un colaborador que entiende contexto."
-      },
-      {
-        "title":       "GitHub",
-        "url":         "https://github.com",
-        "description": "Control de versiones, revisiones de código y pipelines de despliegue integrados con cada repositorio.",
-        "comment":     "Todo proyecto empieza con un repo. Es el hilo que conecta diseño, código y despliegue."
-      },
-      {
         "title":       "Vercel",
         "url":         "https://vercel.com",
         "description": "Plataforma de despliegue para proyectos web. Integración con GitHub, previews por rama y analítica incluida.",
         "comment":     "Desplegar no debería ser trabajo. Con Vercel no lo es."
       },
       {
-        "title":       "Notion",
-        "url":         "https://notion.so",
-        "description": "Para documentación de proyectos, notas de investigación y briefs de cliente. Flexible en solitario y en equipo.",
-        "comment":     "El lugar donde los proyectos tienen contexto antes de tener código."
-      },
-      {
-        "title":       "Hotjar",
-        "url":         "https://hotjar.com",
-        "description": "Analítica de comportamiento: mapas de calor, grabaciones de sesión y embudos de conversión para entender cómo interactúan las personas con un producto.",
-        "comment":     "Los datos te dicen qué ocurre. Hotjar te muestra por qué."
+        "title":       "VS Code",
+        "url":         "https://code.visualstudio.com",
+        "description": "Mi editor principal. Extensible, rápido y con soporte nativo para todo el stack que uso.",
+        "comment":     "Con las extensiones correctas deja de ser un editor y se convierte en un entorno."
       }
     ]
   },

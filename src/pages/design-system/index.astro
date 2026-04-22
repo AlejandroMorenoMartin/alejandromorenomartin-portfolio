@@ -123,8 +123,8 @@ const lang = "es" as const;
             <p class="text-label-xs text-text-6 mt-1"><code class="font-display text-primary-500">.container-narrow</code> — max-width: 640px</p>
           </div>
           <div>
-            <div class="h-8 bg-surface-overlay border-[0.5px] border-[var(--color-border-subtle)]" style="max-width:1024px"></div>
-            <p class="text-label-xs text-text-6 mt-1"><code class="font-display text-primary-500">.container-wide</code> — max-width: 1024px</p>
+            <div class="h-8 bg-surface-overlay border-[0.5px] border-[var(--color-border-subtle)]" style="max-width:960px"></div>
+            <p class="text-label-xs text-text-6 mt-1"><code class="font-display text-primary-500">.container-wide</code> — max-width: 960px</p>
           </div>
         </div>
 
@@ -273,7 +273,20 @@ const lang = "es" as const;
               <button class="btn" disabled>Acción</button>
             </div>
           </div>
-          <code class="font-display text-label-xs text-text-6 mt-8 block">&lt;Btn&gt; — Btn.astro · estilos en global.css</code>
+          <div class="mt-10 pt-8 border-t-[0.5px] border-[var(--color-border-subtle)]">
+            <p class="text-label-xs text-text-7 uppercase tracking-widest mb-4">Uso en navegación — Nav + botonera de proyectos</p>
+            <p class="text-body-md text-text-5 mb-5">El mismo <code class="font-display text-primary-500">Btn</code> en ambos contextos. Sin overrides de padding.</p>
+            <div class="flex items-center gap-5">
+              <Btn disabled>◀</Btn>
+              <div class="flex items-center gap-2">
+                <span class="block w-2 h-2 rounded-none" style="background:#E4A711;box-shadow:0 0 0 3px rgba(228,167,17,0.2)"></span>
+                <span class="block w-1.5 h-1.5 rounded-none bg-text-8"></span>
+                <span class="block w-1.5 h-1.5 rounded-none bg-text-8"></span>
+              </div>
+              <Btn>▶</Btn>
+            </div>
+          </div>
+          <code class="font-display text-label-xs text-text-6 mt-8 block">&lt;Btn&gt; — Btn.astro · estilos en global.css · padding base: 0.4rem 0.85rem</code>
         </div>
 
         <!-- Kpi -->

@@ -1,0 +1,25 @@
+---
+import type { Lang } from "@/i18n/utils";
+import SectionLabel from "@/components/SectionLabel.astro";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+---
+
+<section id="offline" class="section-padding" aria-label={lang === "en" ? "Offline" : "Offline"}>
+  <div class="container-wide">
+    <SectionLabel label="/offline" />
+    {lang === "en" ? (
+      <p class="text-body-md leading-relaxed">
+        Outside of work, I try to keep a balance between mind and body. Meditation and philosophy help me think more clearly; sport and nature bring me back to the present. I read out of curiosity, travel when I can, and learn languages because each one opens a different way of seeing the world. Time with family and friends, cars, design that exists beyond screens — all of that is part of who I am.
+      </p>
+    ) : (
+      <p class="text-body-md leading-relaxed">
+        Fuera del trabajo, busco el equilibrio entre la mente y el cuerpo. La meditación y la filosofía me ayudan a pensar con más claridad; el deporte y la naturaleza me devuelven al presente. Leo con curiosidad, viajo cuando puedo y aprendo idiomas porque cada uno abre una forma distinta de ver el mundo. El tiempo con familia y amigos, los coches, el diseño que existe fuera de las pantallas — todo eso forma parte de quién soy.
+      </p>
+    )}
+  </div>
+</section>

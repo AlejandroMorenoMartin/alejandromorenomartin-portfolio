@@ -18,6 +18,13 @@ const t        = useTranslations(lang);
 >
   <div class="container-wide hero-content">
 
+    <!-- Typewriter -->
+    <div class="thinking-widget" aria-label="Estado de procesamiento">
+      <span class="thinking-verb-wrap font-body" aria-live="polite" data-verbs={JSON.stringify(t.hero.thinking)}>
+        <span id="thinking-verb"></span><span class="thinking-cursor" aria-hidden="true"></span>
+      </span>
+    </div>
+
     <!-- Identity card -->
     <div class="hero-card">
       <div class="hero-heading">
@@ -26,18 +33,12 @@ const t        = useTranslations(lang);
       </div>
       <p class="text-body-md text-text-3 leading-relaxed">{t.hero.greeting}</p>
       <p class="text-body-md leading-relaxed">{t.hero.tagline}</p>
-      <div class="flex flex-wrap gap-x-6 gap-y-2">
-        <a href="mailto:alejandromorenomartin1990@gmail.com" class="link-external text-body-md">Email</a>
-        <a href="https://wa.me/34618110583" target="_blank" rel="noopener noreferrer" class="link-external text-body-md">WhatsApp</a>
-        <a href="https://www.linkedin.com/in/alejandromorenomartin" target="_blank" rel="noopener noreferrer" class="link-external text-body-md">LinkedIn</a>
+      <div class="flex flex-wrap gap-x-6 gap-y-2 text-body-md">
+        <a href="mailto:alejandromorenomartin1990@gmail.com" class="link-external">Email</a>
+        <a href="https://wa.me/34618110583" target="_blank" rel="noopener noreferrer" class="link-external">WhatsApp</a>
+        <a href="https://www.linkedin.com/in/alejandromorenomartin" target="_blank" rel="noopener noreferrer" class="link-external">LinkedIn</a>
+        <a href="https://github.com/AlejandroMorenoMartin" target="_blank" rel="noopener noreferrer" class="link-external">GitHub</a>
       </div>
-    </div>
-
-    <!-- Typewriter -->
-    <div class="thinking-widget" aria-label="Estado de procesamiento">
-      <span class="thinking-verb-wrap font-body" aria-live="polite" data-verbs={JSON.stringify(t.hero.thinking)}>
-        <span id="thinking-verb"></span><span class="thinking-cursor" aria-hidden="true"></span>
-      </span>
     </div>
 
   </div>
@@ -112,27 +113,35 @@ const t        = useTranslations(lang);
   const PAUSE_AFTER_TYPE = 2000;
   const PAUSE_AFTER_DEL  = 150;
 
-  const wrap  = document.querySelector(".thinking-verb-wrap") as HTMLElement;
-  const verb  = document.getElementById("thinking-verb")     as HTMLSpanElement;
+  let generation = 0;
 
-  const rawVerbs = wrap?.dataset.verbs;
-  const VERBS: string[] = rawVerbs
-    ? (JSON.parse(rawVerbs) as string[]).map(v => v.toUpperCase() + "...")
-    : [];
+  function initTypewriter(): void {
+    const wrap = document.querySelector(".thinking-verb-wrap") as HTMLElement | null;
+    const verb = document.getElementById("thinking-verb")     as HTMLSpanElement | null;
+    if (!wrap || !verb) return;
 
-  if (wrap && verb) {
+    const rawVerbs = wrap.dataset.verbs;
+    const VERBS: string[] = rawVerbs
+      ? (JSON.parse(rawVerbs) as string[]).map(v => v.toUpperCase() + "...")
+      : [];
+    if (VERBS.length === 0) return;
+
+    const gen = ++generation;
     let idx = 0;
+
+    function alive(): boolean { return gen === generation; }
 
     function typeText(text: string, onDone: () => void): void {
       let i = 0;
-      verb.textContent = "";
-      wrap.classList.remove("is-complete");
+      verb!.textContent = "";
+      wrap!.classList.remove("is-complete");
       const tick = (): void => {
-        verb.textContent = text.slice(0, ++i);
+        if (!alive()) return;
+        verb!.textContent = text.slice(0, ++i);
         if (i < text.length) {
           setTimeout(tick, CHAR_DELAY);
         } else {
-          wrap.classList.add("is-complete");
+          wrap!.classList.add("is-complete");
           onDone();
         }
       };
@@ -140,21 +149,25 @@ const t        = useTranslations(lang);
     }
 
     function deleteText(onDone: () => void): void {
-      wrap.classList.remove("is-complete");
+      wrap!.classList.remove("is-complete");
       const tick = (): void => {
-        const cur = verb.textContent ?? "";
+        if (!alive()) return;
+        const cur = verb!.textContent ?? "";
         if (cur.length === 0) { onDone(); return; }
-        verb.textContent = cur.slice(0, -1);
+        verb!.textContent = cur.slice(0, -1);
         setTimeout(tick, DELETE_DELAY);
       };
       tick();
     }
 
     function cycle(): void {
+      if (!alive()) return;
       typeText(VERBS[idx], () => {
         setTimeout(() => {
+          if (!alive()) return;
           deleteText(() => {
             setTimeout(() => {
+              if (!alive()) return;
               idx = (idx + 1) % VERBS.length;
               cycle();
             }, PAUSE_AFTER_DEL);
@@ -165,4 +178,6 @@ const t        = useTranslations(lang);
 
     cycle();
   }
+
+  document.addEventListener("astro:page-load", initTypewriter);
 </script>

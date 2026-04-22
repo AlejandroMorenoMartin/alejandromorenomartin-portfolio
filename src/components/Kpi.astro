@@ -52,43 +52,50 @@ const decimals = numeric.includes(".") ? numeric.split(".")[1].length : 0;
 
 <script>
   const DURATION_MS = 1200;
-  const EASING = (t: number) => 1 - Math.pow(1 - t, 3); // ease-out cubic
+  const EASING = (t: number) => 1 - Math.pow(1 - t, 3);
 
   function animateKpi(el: HTMLElement): void {
     const target   = parseFloat(el.dataset.kpiTarget   ?? "0");
     const decimals = parseInt(el.dataset.kpiDecimals   ?? "0", 10);
     const prefix   = el.dataset.kpiPrefix ?? "";
     const suffix   = el.dataset.kpiSuffix ?? "";
-
     const start    = performance.now();
 
     function frame(now: number): void {
       const elapsed  = now - start;
       const progress = Math.min(elapsed / DURATION_MS, 1);
-      const eased    = EASING(progress);
-      const current  = target * eased;
-
+      const current  = target * EASING(progress);
       el.textContent = `${prefix}${current.toFixed(decimals)}${suffix}`;
-
       if (progress < 1) requestAnimationFrame(frame);
     }
 
     requestAnimationFrame(frame);
   }
 
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (!entry.isIntersecting) return;
-        animateKpi(entry.target as HTMLElement);
-        observer.unobserve(entry.target);
-      });
-    },
-    { threshold: 0.5 }
-  );
+  let kpiObserver: IntersectionObserver | null = null;
 
-  document.querySelectorAll<HTMLElement>(".kpi-value").forEach((el) => {
-    if (el.closest(".kpi-managed")) return;
-    observer.observe(el);
-  });
+  function initKpis(): void {
+    if (kpiObserver) {
+      kpiObserver.disconnect();
+      kpiObserver = null;
+    }
+
+    kpiObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          animateKpi(entry.target as HTMLElement);
+          kpiObserver?.unobserve(entry.target);
+        });
+      },
+      { threshold: 0.5 }
+    );
+
+    document.querySelectorAll<HTMLElement>(".kpi-value").forEach((el) => {
+      if (el.closest(".kpi-managed")) return;
+      kpiObserver!.observe(el);
+    });
+  }
+
+  document.addEventListener("astro:page-load", initKpis);
 </script>
