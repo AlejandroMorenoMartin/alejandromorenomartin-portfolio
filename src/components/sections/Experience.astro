@@ -26,17 +26,23 @@ function highlight(text: string): string {
     <ol class="flex flex-col" role="list">
       {t.experience.items.map((item, i) => (
         <li
-          class="timeline-item relative pl-8 last:pb-0"
-          style="padding-bottom: var(--page-gap)"
+          class="timeline-item relative pl-8"
           data-index={String(i)}
         >
           <!-- Dot -->
           <div class="timeline-dot absolute left-0" aria-hidden="true" />
+          <!-- Connecting line (hidden on last item via CSS) -->
+          <div class="timeline-line absolute" aria-hidden="true">
+            <div class="timeline-line-fill"></div>
+          </div>
 
           <div class="experience-card">
             <!-- Header -->
             <div class="card-header">
-              <p class="tag">{item.company} - {item.period}</p>
+              <div class="flex flex-wrap gap-2">
+                <p class="tag">{item.company}</p>
+                <p class="tag">{item.period}</p>
+              </div>
               <h3 class="font-display text-body-lg leading-snug">{item.role}</h3>
             </div>
 
@@ -48,14 +54,9 @@ function highlight(text: string): string {
 
             <!-- KPI metrics -->
             {item.metrics && item.metrics.length > 0 && (
-              <div class="flex items-start" style="gap: var(--card-gap)">
-                {item.metrics.map((metric, i) => (
-                  <>
-                    <Kpi value={metric.value} label={metric.label} class="kpi-managed" />
-                    {i < item.metrics.length - 1 && (
-                      <div class="w-px h-8 self-center bg-[var(--color-border-subtle)]" aria-hidden="true" />
-                    )}
-                  </>
+              <div class="flex flex-wrap items-start" style="gap: var(--card-gap)">
+                {item.metrics.map((metric) => (
+                  <Kpi value={metric.value} label={metric.label} class="kpi-managed" />
                 ))}
               </div>
             )}
@@ -68,10 +69,27 @@ function highlight(text: string): string {
 </section>
 
 <style>
+  .timeline-item {
+    padding-bottom: var(--page-gap);
+  }
+
+  .timeline-item:last-child {
+    padding-bottom: 0;
+  }
+
+  .timeline-item:last-child .timeline-line {
+    display: none;
+  }
+
   .experience-card {
     display:        flex;
     flex-direction: column;
     gap:            var(--card-gap);
+    margin-bottom:  var(--section-gap);
+  }
+
+  .timeline-item:last-child .experience-card {
+    margin-bottom: 0;
   }
 
   .card-header {
@@ -80,24 +98,56 @@ function highlight(text: string): string {
     gap:            0.5rem;
   }
 
+  /* ── Dot ── */
   .timeline-dot {
     width:       8px;
     height:      8px;
     top:         calc((var(--fs-label-xs) * 1.4 - 8px) / 2);
     background:  var(--color-text-7);
     flex-shrink: 0;
-    transition:  background-color 0.2s, width 0.2s, height 0.2s;
+    transition:  background-color 0.3s ease, width 0.3s ease, height 0.3s ease, left 0.3s ease, top 0.3s ease;
   }
 
   .timeline-dot.is-active {
     background: var(--color-primary);
     width:      10px;
     height:     10px;
+    top:        calc((var(--fs-label-xs) * 1.4 - 10px) / 2);
+    left:       -1px;
+  }
+
+  /* ── Connecting line ── */
+  .timeline-line {
+    left:             3.5px;
+    top:              calc((var(--fs-label-xs) * 1.4 - 8px) / 2 + 10px);
+    bottom:           0;
+    width:            1px;
+    background:       var(--color-text-8);
+    overflow:         hidden;
+  }
+
+  .timeline-line-fill {
+    position:         absolute;
+    top:              0;
+    left:             0;
+    width:            100%;
+    height:           0%;
+    background:       var(--color-primary);
+    transition:       height 0.25s ease-out;
   }
 </style>
 
 <script>
-  (function () {
+  let experienceController: AbortController | null = null;
+
+  function initExperience(): void {
+    const section = document.getElementById("experience");
+    if (!section) return;
+
+    experienceController?.abort();
+    experienceController = new AbortController();
+    const { signal } = experienceController;
+
     const DURATION_MS = 1200;
     const ease = (t: number) => 1 - Math.pow(1 - t, 3);
 
@@ -119,29 +169,51 @@ function highlight(text: string): string {
 
     const items = Array.from(document.querySelectorAll<HTMLElement>(".timeline-item"));
     const dots  = items.map(item => item.querySelector<HTMLElement>(".timeline-dot"));
+    const lines = items.map(item => item.querySelector<HTMLElement>(".timeline-line-fill"));
 
-    function setActive(index: number): void {
-      dots.forEach((dot, i) => dot?.classList.toggle("is-active", i === index));
-      items[index]
-        ?.querySelectorAll<HTMLElement>(".kpi-value")
-        .forEach(animateKpi);
+      function getAbsTop(el: HTMLElement): number {
+      const scrollEl = document.getElementById("main-scroll");
+      const rect     = el.getBoundingClientRect();
+      if (scrollEl) {
+        return rect.top - scrollEl.getBoundingClientRect().top + scrollEl.scrollTop;
+      }
+      return rect.top + window.scrollY;
     }
 
-    function getActiveIndex(): number {
-      const scroll    = document.getElementById("main-scroll");
-      const scrollTop = scroll ? scroll.scrollTop : window.scrollY;
-      const viewH     = scroll ? scroll.clientHeight : window.innerHeight;
-      const trigger   = scrollTop + viewH * 0.4;
-      let best = 0, bestDist = Infinity;
-      items.forEach((item, i) => {
-        const dist = Math.abs(item.offsetTop - trigger);
-        if (dist < bestDist) { bestDist = dist; best = i; }
+    function onScroll(): void {
+      const scrollEl  = document.getElementById("main-scroll");
+      const scrollTop = scrollEl ? scrollEl.scrollTop : window.scrollY;
+
+      // Compute absolute tops once per frame
+      const tops    = items.map(item => getAbsTop(item));
+      const baseline = tops[0]; // treat first item as scroll origin
+
+      // Line progress: 0 when scroll=0, 1 when scroll reaches next item
+      const lineProgress = tops.slice(0, -1).map((top, i) => {
+        const span = tops[i + 1] - top;
+        if (span <= 0) return 1;
+        return Math.max(0, Math.min(1, (scrollTop - (top - baseline)) / span));
       });
-      return best;
+
+      // Lines update
+      lineProgress.forEach((p, i) => {
+        const fill = lines[i];
+        if (fill) fill.style.height = `${p * 100}%`;
+      });
+
+      // Active dot = highest dot whose incoming line is >= 95%, default 0
+      let activeIndex = 0;
+      lineProgress.forEach((p, i) => { if (p >= 0.95) activeIndex = i + 1; });
+
+      dots.forEach((dot, i) => dot?.classList.toggle("is-active", i === activeIndex));
+      items[activeIndex]?.querySelectorAll<HTMLElement>(".kpi-value").forEach(animateKpi);
     }
 
-    const scroll = document.getElementById("main-scroll");
-    (scroll ?? window).addEventListener("scroll", () => setActive(getActiveIndex()), { passive: true });
-    setActive(getActiveIndex());
-  })();
+    const scrollEl = document.getElementById("main-scroll");
+    (scrollEl ?? window).addEventListener("scroll", onScroll, { passive: true, signal });
+    onScroll();
+  }
+
+  initExperience();
+  document.addEventListener("astro:page-load", initExperience);
 </script>
