@@ -1,0 +1,311 @@
+---
+interface Props {
+  title?: string;
+}
+const { title } = Astro.props;
+---
+
+<!-- ── Desktop TOC — fixed left column, ≥1280px ────────────── -->
+<nav id="toc" aria-label="Secciones" style="display:none;" data-toc-title={title}>
+  <p  id="toc-title" class="toc-title" aria-hidden="true"></p>
+  <ul id="toc-list"  class="toc-list" role="list"></ul>
+</nav>
+
+<!-- ── Mobile — floating button + panel, <1280px ────────────── -->
+<div id="toc-mobile" style="display:none;">
+  <div id="toc-panel" role="dialog" aria-modal="false" aria-label="Secciones" aria-hidden="true">
+    <p class="toc-title toc-panel-title" aria-hidden="true" id="toc-panel-title"></p>
+    <ul id="toc-panel-list" class="toc-list" role="list"></ul>
+  </div>
+
+  <button
+    id="toc-btn"
+    type="button"
+    aria-expanded="false"
+    aria-controls="toc-panel"
+    aria-label="Ver secciones"
+  >
+    <svg width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+      <rect x="0" y="2"  width="16" height="1.5" fill="currentColor"/>
+      <rect x="0" y="7"  width="16" height="1.5" fill="currentColor"/>
+      <rect x="0" y="12" width="16" height="1.5" fill="currentColor"/>
+    </svg>
+    <span id="toc-btn-label"></span>
+  </button>
+</div>
+
+<style is:global>
+  /* ── Title — label-xs ─────────────────────────────────────── */
+  .toc-title {
+    font-family:    'Roboto Mono', monospace;
+    font-size:      var(--fs-label-xs);
+    line-height:    1.4;
+    letter-spacing: 0.08em;
+    color:          var(--color-text-6);
+    margin:         0 0 0.75rem 0;
+  }
+
+  /* ── Shared list ──────────────────────────────────────────── */
+  .toc-list {
+    list-style: none;
+    margin:     0;
+    padding:    0;
+    display:    flex;
+    flex-direction: column;
+    gap:        0.5rem;
+  }
+
+  .toc-item {
+    display:    block;
+    width:      100%;
+    background: none;
+    border:     none;
+    padding:    0;
+    cursor:     pointer;
+    text-align: left;
+  }
+
+  /* ── Item label — label-sm ────────────────────────────────── */
+  .toc-item-label {
+    display:        block;
+    font-family:    'Roboto Mono', monospace;
+    font-size:      var(--fs-label-sm);
+    line-height:    1.5;
+    letter-spacing: 0.06em;
+    color:          var(--color-text-5);
+    white-space:    nowrap;
+    transition:     color 120ms ease;
+  }
+
+  /* hover */
+  .toc-item:hover .toc-item-label { color: var(--color-text-3); }
+
+  /* active */
+  .toc-item.is-active .toc-item-label { color: var(--color-primary); }
+
+  /* ── Desktop TOC ──────────────────────────────────────────── */
+  #toc {
+    position:       fixed;
+    left:           1.5rem;
+    top:            50%;
+    transform:      translateY(-50%);
+    z-index:        40;
+    display:        flex;
+    flex-direction: column;
+    pointer-events: none;
+  }
+
+  #toc .toc-title,
+  #toc .toc-list { pointer-events: all; }
+
+  /* ── Mobile button ────────────────────────────────────────── */
+  #toc-mobile {
+    position:       fixed;
+    bottom:         4.5rem;
+    left:           0.75rem;
+    z-index:        40;
+    display:        flex;
+    flex-direction: column;
+    align-items:    flex-start;
+    gap:            0.5rem;
+  }
+
+  #toc-btn {
+    display:     inline-flex;
+    align-items: center;
+    gap:         0.35rem;
+    padding:     0.4rem 0.6rem;
+    background:  var(--color-surface-raised);
+    border:      1px solid var(--color-text-7);
+    color:       var(--color-text-4);
+    cursor:      pointer;
+    transition:  color 120ms ease, border-color 120ms ease;
+  }
+
+  #toc-btn:hover,
+  #toc-btn[aria-expanded="true"] {
+    color:        var(--color-primary);
+    border-color: var(--color-primary);
+  }
+
+  #toc-btn-label {
+    font-family:    'Roboto Mono', monospace;
+    font-size:      var(--fs-label-xs);
+    line-height:    1.4;
+    letter-spacing: 0.08em;
+    max-width:      7rem;
+    overflow:       hidden;
+    text-overflow:  ellipsis;
+    white-space:    nowrap;
+  }
+
+  /* ── Mobile panel ─────────────────────────────────────────── */
+  #toc-panel {
+    background:     var(--color-surface-raised);
+    border:         1px solid var(--color-border-subtle);
+    padding:        0.75rem 1rem;
+    opacity:        0;
+    transform:      translateY(6px);
+    pointer-events: none;
+    transition:     opacity 150ms ease, transform 150ms ease;
+  }
+
+  #toc-panel.is-open {
+    opacity:        1;
+    transform:      translateY(0);
+    pointer-events: all;
+  }
+
+  .toc-panel-title { margin-bottom: 0.5rem; }
+
+  /* ── Responsive visibility ────────────────────────────────── */
+  @media (min-width: 1280px) {
+    #toc-mobile { display: none !important; }
+  }
+
+  @media (max-width: 1279px) {
+    #toc { display: none !important; }
+  }
+</style>
+
+<script>
+  let tocController: AbortController | null = null;
+
+  // Nav height (3rem = 48px) + breathing room
+  const SCROLL_OFFSET = 80;
+
+  function initToc(): void {
+    tocController?.abort();
+    tocController = new AbortController();
+    const { signal } = tocController;
+
+    const tocDesktop    = document.getElementById("toc");
+    const tocMobile     = document.getElementById("toc-mobile");
+    const tocTitle      = document.getElementById("toc-title");
+    const tocList       = document.getElementById("toc-list");
+    const tocPanel      = document.getElementById("toc-panel");
+    const tocPanelTitle = document.getElementById("toc-panel-title");
+    const tocPanelList  = document.getElementById("toc-panel-list");
+    const tocBtn        = document.getElementById("toc-btn") as HTMLButtonElement | null;
+    const tocBtnLabel   = document.getElementById("toc-btn-label");
+    const mainEl        = document.getElementById("main-scroll");
+
+    if (!tocDesktop || !tocMobile || !mainEl) return;
+
+    if (mainEl.dataset.noScroll !== undefined) {
+      tocDesktop.style.display = "none";
+      tocMobile.style.display  = "none";
+      return;
+    }
+
+    const sections = Array.from(
+      mainEl.querySelectorAll<HTMLElement>("section[id]")
+    ).filter(s => s.querySelector(".section-label"));
+
+    if (sections.length < 2) {
+      tocDesktop.style.display = "none";
+      tocMobile.style.display  = "none";
+      return;
+    }
+
+    const lang     = document.documentElement.lang ?? "es";
+    const fallback = lang === "en" ? "/index" : "/índice";
+    const title    = tocDesktop.dataset.tocTitle ?? fallback;
+    if (tocTitle)      tocTitle.textContent      = title;
+    if (tocPanelTitle) tocPanelTitle.textContent = title;
+
+    function scrollToSection(section: HTMLElement): void {
+      const top = section.offsetTop - SCROLL_OFFSET;
+      mainEl!.scrollTo({ top: Math.max(0, top), behavior: "smooth" });
+    }
+
+    function makeItem(section: HTMLElement, forPanel: boolean): HTMLLIElement {
+      const labelEl = section.querySelector<HTMLElement>(".section-label");
+      const label   = labelEl?.textContent?.trim() ?? section.id;
+
+      const li  = document.createElement("li");
+      const btn = document.createElement("button");
+      btn.type           = "button";
+      btn.className      = "toc-item";
+      btn.dataset.target = section.id;
+      btn.setAttribute("aria-label", label);
+      btn.innerHTML      = `<span class="toc-item-label">${label}</span>`;
+
+      btn.addEventListener("click", () => {
+        scrollToSection(section);
+        if (forPanel) closePanel();
+      }, { signal });
+
+      li.appendChild(btn);
+      return li;
+    }
+
+    if (tocList) {
+      tocList.innerHTML = "";
+      sections.forEach(s => tocList.appendChild(makeItem(s, false)));
+    }
+    if (tocPanelList) {
+      tocPanelList.innerHTML = "";
+      sections.forEach(s => tocPanelList.appendChild(makeItem(s, true)));
+    }
+
+    tocDesktop.style.display = "flex";
+    tocMobile.style.display  = "flex";
+
+    function getAllItems(): HTMLElement[] {
+      return Array.from(document.querySelectorAll<HTMLElement>(".toc-item"));
+    }
+
+    function setActive(id: string): void {
+      getAllItems().forEach(item =>
+        item.classList.toggle("is-active", item.dataset.target === id)
+      );
+      const label = document.querySelector<HTMLElement>(
+        `.toc-item[data-target="${id}"] .toc-item-label`
+      )?.textContent ?? "";
+      if (tocBtnLabel) tocBtnLabel.textContent = label;
+    }
+
+    if (sections[0]) setActive(sections[0].id);
+
+    const observer = new IntersectionObserver(
+      entries => {
+        const visible = entries
+          .filter(e => e.isIntersecting)
+          .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+        if (visible.length > 0)
+          setActive((visible[0].target as HTMLElement).id);
+      },
+      { root: mainEl, threshold: 0.2 }
+    );
+
+    sections.forEach(s => observer.observe(s));
+    signal.addEventListener("abort", () => observer.disconnect());
+
+    function openPanel(): void {
+      tocPanel?.classList.add("is-open");
+      tocBtn?.setAttribute("aria-expanded", "true");
+      tocPanel?.setAttribute("aria-hidden", "false");
+    }
+    function closePanel(): void {
+      tocPanel?.classList.remove("is-open");
+      tocBtn?.setAttribute("aria-expanded", "false");
+      tocPanel?.setAttribute("aria-hidden", "true");
+    }
+
+    tocBtn?.addEventListener("click", e => {
+      e.stopPropagation();
+      tocBtn.getAttribute("aria-expanded") === "true" ? closePanel() : openPanel();
+    }, { signal });
+
+    document.addEventListener("click", e => {
+      const wrap = document.getElementById("toc-mobile");
+      if (wrap && !wrap.contains(e.target as Node)) closePanel();
+    }, { signal });
+
+    document.addEventListener("astro:before-preparation", closePanel, { signal });
+  }
+
+  initToc();
+  document.addEventListener("astro:page-load", initToc);
+</script>
