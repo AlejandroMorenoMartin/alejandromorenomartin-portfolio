@@ -5,6 +5,7 @@ import Footer       from "@/components/Footer.astro";
 import Breadcrumb   from "@/components/Breadcrumb.astro";
 import SectionLabel from "@/components/SectionLabel.astro";
 import Btn          from "@/components/Btn.astro";
+import Toc          from "@/components/Toc.astro";
 
 const lang         = "es" as const;
 const slug         = "portfolio";
@@ -76,8 +77,9 @@ const nextProject = { slug: "senzo-studio", title: "Senzo Studio" };
   alternateLang="en"
 >
   <Nav lang={lang} />
+  <Toc />
 
-  <main class="pt-32 pb-48 px-5 md:px-8">
+  <main id="main-scroll" class="pt-32 pb-48 px-5 md:px-8">
     <div class="container-wide">
 
       <Breadcrumb workHref="/proyectos" slug={slug} />
@@ -123,7 +125,7 @@ const nextProject = { slug: "senzo-studio", title: "Senzo Studio" };
       </div>
 
       <!-- S1: Introducción -->
-      <section class="pt-12 pb-12">
+      <section id="introduccion" class="pt-12 pb-12">
         <SectionLabel label="/introducción" />
         <div class="flex flex-col gap-5">
           <p class="text-body-md leading-relaxed">
@@ -140,7 +142,7 @@ const nextProject = { slug: "senzo-studio", title: "Senzo Studio" };
       </section>
 
       <!-- S2: Objetivos -->
-      <section class="pt-12 pb-12">
+      <section id="objetivos" class="pt-12 pb-12">
         <SectionLabel label="/objetivos" />
         <ul class="flex flex-col gap-4">
           {[
@@ -158,7 +160,7 @@ const nextProject = { slug: "senzo-studio", title: "Senzo Studio" };
       </section>
 
       <!-- S3: Sistema de diseño -->
-      <section class="pt-12 pb-12">
+      <section id="sistema-de-diseno" class="pt-12 pb-12">
         <SectionLabel label="/sistema-de-diseño" />
         <p class="text-body-md leading-relaxed mb-10">
           Construí el sistema desde los fundamentos: tokens de color, escala tipográfica y espaciado
@@ -250,7 +252,7 @@ const nextProject = { slug: "senzo-studio", title: "Senzo Studio" };
       </section>
 
       <!-- S4: Stack -->
-      <section class="pt-12 pb-12">
+      <section id="stack" class="pt-12 pb-12">
         <SectionLabel label="/stack" />
         <p class="text-body-md leading-relaxed mb-8">
           Cada herramienta tiene una razón de estar aquí.
@@ -266,7 +268,7 @@ const nextProject = { slug: "senzo-studio", title: "Senzo Studio" };
       </section>
 
       <!-- S5: Escalado -->
-      <section class="pt-12 pb-12">
+      <section id="v2" class="pt-12 pb-12">
         <SectionLabel label="/v2" />
         <p class="text-body-md leading-relaxed mb-8">
           Este portfolio es una v1. Estas son las líneas que abriría en una v2:
@@ -290,7 +292,7 @@ const nextProject = { slug: "senzo-studio", title: "Senzo Studio" };
       </section>
 
       <!-- S6: Aprendizajes -->
-      <section class="pt-12 pb-12">
+      <section id="aprendizajes" class="pt-12 pb-12">
         <SectionLabel label="/aprendizajes" />
         <ul class="flex flex-col gap-4">
           {[
