@@ -9,6 +9,60 @@ const slug         = "portfolio";
 const siteURL      = "https://alejandromorenomartin.com";
 const canonicalURL = `${siteURL}/work/${slug}`;
 const alternateURL = `${siteURL}/en/work/${slug}`;
+
+const colorTokens = [
+  { name: "primary-300", hex: "#f0cf7d", label: "primary-300" },
+  { name: "primary-400", hex: "#ebbe4a", label: "primary-400" },
+  { name: "primary-500", hex: "#E4A711", label: "primary-500" },
+  { name: "primary-600", hex: "#c27d00", label: "primary-600" },
+  { name: "primary-700", hex: "#9a6200", label: "primary-700" },
+];
+
+const surfaceTokens = [
+  { name: "surface",         hex: "#100d07", label: "surface" },
+  { name: "surface-raised",  hex: "#1b170a", label: "surface-raised" },
+  { name: "surface-overlay", hex: "#25210d", label: "surface-overlay" },
+];
+
+const textTokens = [
+  { name: "text-1", hex: "#ffffff", label: "text-1" },
+  { name: "text-2", hex: "#dcdcdc", label: "text-2" },
+  { name: "text-3", hex: "#bebebe", label: "text-3" },
+  { name: "text-4", hex: "#a0a0a0", label: "text-4" },
+  { name: "text-5", hex: "#898989", label: "text-5" },
+  { name: "text-6", hex: "#727272", label: "text-6" },
+];
+
+const typeSpecimens = [
+  {
+    fontClass: "font-data",
+    name:      "Press Start 2P",
+    role:      "Display / Data",
+    sample:    "Aa 01",
+  },
+  {
+    fontClass: "font-display",
+    name:      "Roboto Mono",
+    role:      "Body / Interface",
+    sample:    "Aa Bb Cc 0123",
+  },
+];
+
+const components = [
+  "Nav", "Footer", "Hero", "ProjectCard", "Work", "Experience",
+  "Education", "Breadcrumb", "Kpi", "LangSwitcher", "Toc",
+];
+
+const stack = [
+  { tool: "Astro 4",         reason: "Renderizado estático, cero JS por defecto, carga ultrarrápida." },
+  { tool: "Tailwind CSS v3", reason: "Tokens como variables CSS, consistencia sin overhead." },
+  { tool: "TypeScript",      reason: "i18n tipado, sin sorpresas en runtime." },
+  { tool: "Figma",           reason: "Sistema de diseño antes de escribir una línea de código." },
+  { tool: "Vercel",          reason: "Deploy continuo desde git en segundos." },
+];
+
+const prevProject = { slug: "forma",       title: "Forma" };
+const nextProject = { slug: "senzo-studio", title: "Senzo Studio" };
 ---
 
 <BaseLayout
@@ -67,7 +121,231 @@ const alternateURL = `${siteURL}/en/work/${slug}`;
         <div class="border-b border-[var(--color-border-subtle)] mt-10"></div>
       </div>
 
-      <!-- Sections inserted in subsequent tasks -->
+      <!-- S1: Introducción -->
+      <section class="pt-12 pb-12 border-t border-[var(--color-border-subtle)]">
+        <h2 class="text-display-md font-display font-bold text-text-2 mb-6">
+          ¿De dónde viene este proyecto?
+        </h2>
+        <div class="flex flex-col gap-5">
+          <p class="text-body-lg text-text-4 leading-relaxed">
+            Quería construir algo que demostrara no solo que sé diseñar, sino que entiendo cómo un
+            producto se construye de principio a fin: desde los primeros tokens hasta el despliegue
+            en producción.
+          </p>
+          <p class="text-body-lg text-text-4 leading-relaxed">
+            Partí de cero — sin templates, sin librerías de componentes de terceros — porque esa
+            restricción me obligaba a tomar decisiones conscientes en cada paso. Cada color, cada
+            tipografía, cada margen tiene una razón.
+          </p>
+        </div>
+      </section>
+
+      <!-- S2: Objetivos -->
+      <section class="pt-12 pb-12 border-t border-[var(--color-border-subtle)]">
+        <h2 class="text-display-md font-display font-bold text-text-2 mb-6">
+          Qué me propuse conseguir
+        </h2>
+        <ul class="flex flex-col gap-4">
+          {[
+            "Ejecutar un proceso de diseño completo, desde investigación hasta sistema de diseño.",
+            "Llevar el resultado a producción de forma autónoma.",
+            "Construir un sistema de diseño reutilizable y coherente, sin dependencias de UI externas.",
+            "Crear una experiencia que comunique quién soy a recruiters, diseñadores, desarrolladores y personas que lideran estos equipos.",
+          ].map((item) => (
+            <li class="flex items-start gap-3 text-body-lg text-text-4">
+              <span class="w-1.5 h-1.5 mt-2.5 rounded-full bg-primary-500/40 flex-shrink-0" aria-hidden="true" />
+              {item}
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <!-- S3: Sistema de diseño -->
+      <section class="pt-12 pb-12 border-t border-[var(--color-border-subtle)]">
+        <h2 class="text-display-md font-display font-bold text-text-2 mb-3">
+          Sistema de diseño
+        </h2>
+        <p class="text-body-lg text-text-4 leading-relaxed mb-10">
+          Construí el sistema desde los fundamentos: tokens de color, escala tipográfica y espaciado
+          definidos como variables CSS, con Tailwind como capa de utilidades encima.
+        </p>
+
+        <!-- Tokens: color -->
+        <div class="mb-10">
+          <p class="font-data text-label-xs text-text-6 mb-4 uppercase tracking-widest">Color</p>
+
+          <div class="flex flex-col gap-6">
+            <!-- Primary -->
+            <div>
+              <p class="text-label-sm text-text-5 mb-3">Primary</p>
+              <div class="flex flex-wrap gap-2">
+                {colorTokens.map((t) => (
+                  <div class="flex flex-col gap-1.5">
+                    <div
+                      class="w-12 h-12 border border-[var(--color-border-subtle)]"
+                      style={`background-color: ${t.hex}`}
+                    />
+                    <span class="font-data text-label-xs text-text-6">{t.label}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <!-- Surface -->
+            <div>
+              <p class="text-label-sm text-text-5 mb-3">Surface</p>
+              <div class="flex flex-wrap gap-2">
+                {surfaceTokens.map((t) => (
+                  <div class="flex flex-col gap-1.5">
+                    <div
+                      class="w-12 h-12 border border-[var(--color-border-subtle)]"
+                      style={`background-color: ${t.hex}`}
+                    />
+                    <span class="font-data text-label-xs text-text-6">{t.label}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <!-- Text -->
+            <div>
+              <p class="text-label-sm text-text-5 mb-3">Text</p>
+              <div class="flex flex-wrap gap-2">
+                {textTokens.map((t) => (
+                  <div class="flex flex-col gap-1.5">
+                    <div
+                      class="w-12 h-12 border border-[var(--color-border-subtle)]"
+                      style={`background-color: ${t.hex}`}
+                    />
+                    <span class="font-data text-label-xs text-text-6">{t.label}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tokens: typography -->
+        <div class="mb-10">
+          <p class="font-data text-label-xs text-text-6 mb-4 uppercase tracking-widest">Tipografía</p>
+          <div class="flex flex-col gap-4">
+            {typeSpecimens.map((s) => (
+              <div class="flex items-baseline gap-6 p-5 border border-[var(--color-border-subtle)] bg-surface-raised">
+                <span class={`${s.fontClass} text-display-lg text-text-1`}>{s.sample}</span>
+                <div>
+                  <p class="font-display text-body-md font-semibold text-text-3">{s.name}</p>
+                  <p class="font-data text-label-xs text-text-6 mt-1">{s.role}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <!-- Components -->
+        <div>
+          <p class="font-data text-label-xs text-text-6 mb-4 uppercase tracking-widest">Componentes</p>
+          <div class="flex flex-wrap gap-2">
+            {components.map((name) => (
+              <span class="font-data text-label-xs text-text-5 px-3 py-2 border border-[var(--color-border-subtle)] bg-surface-raised">
+                {name}
+              </span>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <!-- S4: Stack -->
+      <section class="pt-12 pb-12 border-t border-[var(--color-border-subtle)]">
+        <h2 class="text-display-md font-display font-bold text-text-2 mb-3">
+          Stack técnico
+        </h2>
+        <p class="text-body-lg text-text-4 leading-relaxed mb-8">
+          Cada herramienta tiene una razón de estar aquí.
+        </p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+          {stack.map((item) => (
+            <div class="p-5 border border-[var(--color-border-subtle)] bg-surface-raised flex flex-col gap-2">
+              <p class="font-data text-label-sm text-primary-500">{item.tool}</p>
+              <p class="text-body-md text-text-5 leading-relaxed">{item.reason}</p>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      <!-- S5: Escalado -->
+      <section class="pt-12 pb-12 border-t border-[var(--color-border-subtle)]">
+        <h2 class="text-display-md font-display font-bold text-text-2 mb-3">
+          Hacia dónde puede crecer
+        </h2>
+        <p class="text-body-lg text-text-4 leading-relaxed mb-8">
+          Este portfolio es una v1. Estas son las líneas que abriría en una v2:
+        </p>
+        <ul class="flex flex-col gap-5">
+          {[
+            { title: "Case studies completos",  body: "Documentar el proceso real de cada proyecto: decisiones, iteraciones, lo que no funcionó y por qué." },
+            { title: "Sección de escritura",    body: "Reflexiones sobre diseño, producto y proceso. Una forma de mostrar cómo pienso, no solo qué hago." },
+            { title: "Métricas en vivo",        body: "Exponer datos reales del site (visitas, tiempo de carga, Core Web Vitals) como demostración de que el producto funciona." },
+            { title: "Modo oscuro",             body: "Ampliar el sistema de diseño con un tema alternativo completo." },
+          ].map((item) => (
+            <li class="flex items-start gap-3">
+              <span class="w-1.5 h-1.5 mt-2.5 rounded-full bg-primary-500/40 flex-shrink-0" aria-hidden="true" />
+              <span class="text-body-lg text-text-4 leading-relaxed">
+                <strong class="font-semibold text-text-3">{item.title}</strong>
+                {" — "}{item.body}
+              </span>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <!-- S6: Aprendizajes -->
+      <section class="pt-12 pb-12 border-t border-[var(--color-border-subtle)]">
+        <h2 class="text-display-md font-display font-bold text-text-2 mb-8">
+          Lo que me llevé
+        </h2>
+        <ul class="flex flex-col gap-4">
+          {[
+            "Construir un sistema de diseño desde cero obliga a tomar decisiones que normalmente se delegan o se posponen. Eso tiene un valor enorme.",
+            "La distancia entre \"queda bien en Figma\" y \"funciona en producción\" es real, y haberla cruzado solo cambia la forma en que diseño.",
+            "Hacer diseño y desarrollo en el mismo proyecto elimina el teléfono roto entre disciplinas — y acelera el aprendizaje en ambas direcciones.",
+            "Un portfolio nunca está terminado. La v1 existe para aprender qué necesita la v2.",
+          ].map((item) => (
+            <li class="flex items-start gap-3 text-body-lg text-text-4">
+              <span class="w-1.5 h-1.5 mt-2.5 rounded-full bg-primary-500/40 flex-shrink-0" aria-hidden="true" />
+              {item}
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <!-- Project navigation -->
+      <div class="pt-12 border-t border-[var(--color-border-subtle)] flex justify-between gap-4">
+
+        <a
+          href={`/work/${prevProject.slug}`}
+          class="group flex flex-col gap-1.5 p-5 border border-[var(--color-border-subtle)] bg-surface-raised
+                 hover:border-primary-500/40 focus-visible:border-primary-500 active:bg-surface-overlay
+                 transition-colors duration-normal flex-1"
+        >
+          <span class="font-data text-label-xs text-text-6">← Proyecto anterior</span>
+          <span class="font-display text-body-md font-semibold text-text-3 group-hover:text-primary-500 transition-colors duration-normal">
+            {prevProject.title}
+          </span>
+        </a>
+
+        <a
+          href={`/work/${nextProject.slug}`}
+          class="group flex flex-col gap-1.5 p-5 border border-[var(--color-border-subtle)] bg-surface-raised
+                 hover:border-primary-500/40 focus-visible:border-primary-500 active:bg-surface-overlay
+                 transition-colors duration-normal flex-1 items-end text-right"
+        >
+          <span class="font-data text-label-xs text-text-6">Siguiente proyecto →</span>
+          <span class="font-display text-body-md font-semibold text-text-3 group-hover:text-primary-500 transition-colors duration-normal">
+            {nextProject.title}
+          </span>
+        </a>
+
+      </div>
 
     </div>
   </main>
