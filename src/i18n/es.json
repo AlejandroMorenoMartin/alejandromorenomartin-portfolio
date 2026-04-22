@@ -302,9 +302,9 @@
     "certifications": {
       "heading": "Certificaciones",
       "items": [
+        { "title": "Google UX Design",                                         "url": "https://www.coursera.org/professional-certificates/google-ux-design",          "issuer": "Coursera · Google",            "year": "2021" },
         { "title": "User Experience: The Definitive Guide",                    "url": "https://ixdf.org/courses/hci-foundations-of-ux-design",                        "issuer": "Interaction Design Foundation", "year": "2021" },
         { "title": "UI Pattern Design for Successful Software",                "url": "https://ixdf.org/courses/ui-design-patterns-for-successful-software",          "issuer": "Interaction Design Foundation", "year": "2021" },
-        { "title": "Information Visualization",                                "url": "https://ixdf.org/courses/information-visualization-infovis",                   "issuer": "Interaction Design Foundation", "year": "2021" },
         { "title": "Emotional Design: How to Create Products That Are Loved",  "url": "https://ixdf.org/courses/emotional-design-how-to-make-products-people-will-love", "issuer": "Interaction Design Foundation", "year": "2022" },
         { "title": "Design for the 21st Century with Don Norman",              "url": "https://ixdf.org/courses/design-for-the-21st-century",                         "issuer": "Interaction Design Foundation", "year": "2022" },
         { "title": "Human-Computer Interaction",                               "url": "https://ixdf.org/courses/hci-foundations-of-ux-design",                        "issuer": "Interaction Design Foundation", "year": "2022" },
@@ -312,7 +312,7 @@
         { "title": "Visual Design: The Ultimate Guide",                        "url": "https://ixdf.org/courses/visual-design-the-ultimate-guide",                    "issuer": "Interaction Design Foundation", "year": "2023" },
         { "title": "User Research: Methods and Good Practices",                "url": "https://ixdf.org/courses/user-research-methods-and-best-practices",            "issuer": "Interaction Design Foundation", "year": "2023" },
         { "title": "Gestalt Psychology and Web Design",                        "url": "https://ixdf.org/courses/gestalt-psychology-and-web-design-the-ultimate-guide", "issuer": "Interaction Design Foundation", "year": "2023" },
-        { "title": "Fundamentals of User Experience",                          "url": "https://www.coursera.org/professional-certificates/google-ux-design",          "issuer": "Coursera · Google",            "year": "2023" }
+        { "title": "Information Visualization",                                "url": "https://ixdf.org/courses/information-visualization-infovis",                   "issuer": "Interaction Design Foundation", "year": "2023" }
       ]
     }
   },
