@@ -4,6 +4,7 @@ import Nav          from "@/components/Nav.astro";
 import Footer       from "@/components/Footer.astro";
 import Breadcrumb   from "@/components/Breadcrumb.astro";
 import SectionLabel from "@/components/SectionLabel.astro";
+import Btn          from "@/components/Btn.astro";
 
 const lang         = "es" as const;
 const slug         = "portfolio";
@@ -308,31 +309,8 @@ const nextProject = { slug: "senzo-studio", title: "Senzo Studio" };
 
       <!-- Project navigation -->
       <div class="pt-12 flex justify-between gap-4">
-
-        <a
-          href={`/work/${prevProject.slug}`}
-          class="group flex flex-col gap-1.5 p-5 border border-[var(--color-border-subtle)] bg-surface-raised
-                 hover:border-primary-500/40 focus-visible:border-primary-500 active:bg-surface-overlay
-                 transition-colors duration-normal flex-1"
-        >
-          <span class="font-data text-label-xs text-text-6">← Proyecto anterior</span>
-          <span class="font-display text-body-md font-semibold text-text-3 group-hover:text-primary-500 transition-colors duration-normal">
-            {prevProject.title}
-          </span>
-        </a>
-
-        <a
-          href={`/work/${nextProject.slug}`}
-          class="group flex flex-col items-end gap-1.5 p-5 border border-[var(--color-border-subtle)] bg-surface-raised
-                 hover:border-primary-500/40 focus-visible:border-primary-500 active:bg-surface-overlay
-                 transition-colors duration-normal flex-1 text-right"
-        >
-          <span class="font-data text-label-xs text-text-6">Siguiente proyecto →</span>
-          <span class="font-display text-body-md font-semibold text-text-3 group-hover:text-primary-500 transition-colors duration-normal">
-            {nextProject.title}
-          </span>
-        </a>
-
+        <Btn href={`/work/${prevProject.slug}`}>← {prevProject.title}</Btn>
+        <Btn href={`/work/${nextProject.slug}`}>{nextProject.title} →</Btn>
       </div>
 
     </div>
