@@ -213,8 +213,8 @@
   }
 
   /* ── link-internal — navegación interna, prosa/footer ─
-     Default : text-4, medium weight, sin subrayado
-     Hover   : text-2 (más brillante)
+     Default : text-4, medium weight, subrayado
+     Hover   : +2 niveles de brillo (brightness 1.6)
      Focus   : outline gold
   ─────────────────────────────────────────────────────── */
   .link-internal {
@@ -225,7 +225,7 @@
   }
 
   .link-internal:hover {
-    color: var(--color-text-2);
+    filter: brightness(1.6);
   }
 
   .link-internal:focus-visible {
@@ -265,7 +265,7 @@
   }
 
   .link-external:hover {
-    color: var(--color-text-2);
+    filter: brightness(1.6);
   }
 
   .link-external:hover::after {
