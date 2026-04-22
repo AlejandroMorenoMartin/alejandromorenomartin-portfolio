@@ -2,7 +2,7 @@
   "meta": {
     "title": "Alejandro Moreno Martín — Product Designer",
     "description": "Product Designer especializado en interfaces digitales, sistemas de diseño y experiencia de personas. Disponible para nuevas oportunidades.",
-    "ogImage": "/og-es.png"
+    "ogImage": "/og_image_es.png"
   },
   "nav": {
     "home":       "Bienvenida",
@@ -145,22 +145,8 @@
         ],
         "tags":        ["Astro", "Tailwind CSS", "TypeScript", "Figma"],
         "date":        "Abr 2025",
-        "image":       "/images/placeholder.svg"
-      },
-      {
-        "title":       "Casa del Aire",
-        "slug":        "casa-del-aire",
-        "company":     "Casa del Aire",
-        "category":    "Web Design · Desarrollo",
-        "headline":    "Un sitio orientado a reservas que redujo el tiempo de consulta un 60%",
-        "summary":     "Diseñé y desarrollé la web completa de una casa rural en Extremadura, reemplazando un listing genérico por una experiencia de conversión propia del cliente.",
-        "metrics":     [
-          { "value": "–60%", "label": "Tiempo de consulta" },
-          { "value": "+40%", "label": "Reservas directas" },
-          { "value": "100%", "label": "Identidad propia" }
-        ],
-        "tags":        ["Astro", "Tailwind CSS", "Figma", "Web"],
-        "date":        "Ene 2025",
+        "timeline":    "6 semanas",
+        "responsibilities": "Diseño, Desarrollo, Despliegue",
         "image":       "/images/placeholder.svg"
       },
       {
@@ -177,22 +163,26 @@
         ],
         "tags":        ["Astro", "Tailwind CSS", "Figma", "VFX"],
         "date":        "Mar 2025",
+        "timeline":    "3 semanas",
+        "responsibilities": "Web Design, Frontend",
         "image":       "/images/placeholder.svg"
       },
       {
-        "title":       "Forma",
-        "slug":        "forma",
-        "company":     "Proyecto personal",
-        "category":    "Product Design · App",
-        "headline":    "Una app de seguimiento diseñada para la claridad, no para la complejidad",
-        "summary":     "Diseñé una app móvil para personas que quieren control preciso de su composición corporal, sin el ruido de las plataformas de fitness genéricas.",
+        "title":       "Casa del Aire",
+        "slug":        "casa-del-aire",
+        "company":     "Casa del Aire",
+        "category":    "Web Design · Desarrollo",
+        "headline":    "Un sitio orientado a reservas que redujo el tiempo de consulta un 60%",
+        "summary":     "Diseñé y desarrollé la web completa de una casa rural en Extremadura, reemplazando un listing genérico por una experiencia de conversión propia del cliente.",
         "metrics":     [
-          { "value": "3",    "label": "Pantallas clave" },
-          { "value": "+82%", "label": "Tareas completadas" },
-          { "value": "4.8",  "label": "Puntuación usabilidad" }
+          { "value": "–60%", "label": "Tiempo de consulta" },
+          { "value": "+40%", "label": "Reservas directas" },
+          { "value": "100%", "label": "Identidad propia" }
         ],
-        "tags":        ["Product Design", "Figma", "React Native"],
-        "date":        "May 2025",
+        "tags":        ["Astro", "Tailwind CSS", "Figma", "Web"],
+        "date":        "Ene 2025",
+        "timeline":    "4 semanas",
+        "responsibilities": "Web Design, Desarrollo",
         "image":       "/images/placeholder.svg"
       },
       {
@@ -209,6 +199,26 @@
         ],
         "tags":        ["Product Design", "Figma", "React Native"],
         "date":        "Jul 2025",
+        "timeline":    "8 semanas",
+        "responsibilities": "UX Research, UI Design",
+        "image":       "/images/placeholder.svg"
+      },
+      {
+        "title":       "Forma",
+        "slug":        "forma",
+        "company":     "Proyecto personal",
+        "category":    "Product Design · App",
+        "headline":    "Una app de seguimiento diseñada para la claridad, no para la complejidad",
+        "summary":     "Diseñé una app móvil para personas que quieren control preciso de su composición corporal, sin el ruido de las plataformas de fitness genéricas.",
+        "metrics":     [
+          { "value": "3",    "label": "Pantallas clave" },
+          { "value": "+82%", "label": "Tareas completadas" },
+          { "value": "4.8",  "label": "Puntuación usabilidad" }
+        ],
+        "tags":        ["Product Design", "Figma", "React Native"],
+        "date":        "May 2025",
+        "timeline":    "6 semanas",
+        "responsibilities": "UX Research, UI Design",
         "image":       "/images/placeholder.svg"
       }
     ]
@@ -283,7 +293,8 @@
         {
           "title":       "Grado en Marketing",
           "institution": "Universidad Rey Juan Carlos",
-          "period":      "2010 — 2015",
+          "institutionUrl": "https://www.urjc.es/",
+          "period":      "2010 — 2016",
           "description": "Formación en estrategia comercial, comportamiento del consumidor, comunicación y marketing digital."
         }
       ]
@@ -291,17 +302,17 @@
     "certifications": {
       "heading": "Certificaciones",
       "items": [
-        { "title": "User Experience: The Definitive Guide",       "issuer": "Interaction Design Foundation", "year": "2023" },
-        { "title": "UI Pattern Design for Successful Software",   "issuer": "Interaction Design Foundation", "year": "2023" },
-        { "title": "Information Visualization",                   "issuer": "Interaction Design Foundation", "year": "2023" },
-        { "title": "Emotional Design: How to Create Products That Are Loved", "issuer": "Interaction Design Foundation", "year": "2023" },
-        { "title": "Design for the 21st Century with Don Norman", "issuer": "Interaction Design Foundation", "year": "2023" },
-        { "title": "Human-Computer Interaction",                  "issuer": "Interaction Design Foundation", "year": "2023" },
-        { "title": "Mobile User Experience (UX)",                 "issuer": "Interaction Design Foundation", "year": "2023" },
-        { "title": "Visual Design: The Ultimate Guide",           "issuer": "Interaction Design Foundation", "year": "2023" },
-        { "title": "User Research: Methods and Good Practices",   "issuer": "Interaction Design Foundation", "year": "2023" },
-        { "title": "Gestalt Psychology and Web Design",           "issuer": "Interaction Design Foundation", "year": "2023" },
-        { "title": "Fundamentals of User Experience",             "issuer": "Interaction Design Foundation", "year": "2023" }
+        { "title": "User Experience: The Definitive Guide",                    "url": "https://ixdf.org/courses/hci-foundations-of-ux-design",                        "issuer": "Interaction Design Foundation", "year": "2021" },
+        { "title": "UI Pattern Design for Successful Software",                "url": "https://ixdf.org/courses/ui-design-patterns-for-successful-software",          "issuer": "Interaction Design Foundation", "year": "2021" },
+        { "title": "Information Visualization",                                "url": "https://ixdf.org/courses/information-visualization-infovis",                   "issuer": "Interaction Design Foundation", "year": "2021" },
+        { "title": "Emotional Design: How to Create Products That Are Loved",  "url": "https://ixdf.org/courses/emotional-design-how-to-make-products-people-will-love", "issuer": "Interaction Design Foundation", "year": "2022" },
+        { "title": "Design for the 21st Century with Don Norman",              "url": "https://ixdf.org/courses/design-for-the-21st-century",                         "issuer": "Interaction Design Foundation", "year": "2022" },
+        { "title": "Human-Computer Interaction",                               "url": "https://ixdf.org/courses/hci-foundations-of-ux-design",                        "issuer": "Interaction Design Foundation", "year": "2022" },
+        { "title": "Mobile User Experience (UX)",                              "url": "https://ixdf.org/courses/mobile-ux-design-course-the-beginners-guide",         "issuer": "Interaction Design Foundation", "year": "2023" },
+        { "title": "Visual Design: The Ultimate Guide",                        "url": "https://ixdf.org/courses/visual-design-the-ultimate-guide",                    "issuer": "Interaction Design Foundation", "year": "2023" },
+        { "title": "User Research: Methods and Good Practices",                "url": "https://ixdf.org/courses/user-research-methods-and-best-practices",            "issuer": "Interaction Design Foundation", "year": "2023" },
+        { "title": "Gestalt Psychology and Web Design",                        "url": "https://ixdf.org/courses/gestalt-psychology-and-web-design-the-ultimate-guide", "issuer": "Interaction Design Foundation", "year": "2023" },
+        { "title": "Fundamentals of User Experience",                          "url": "https://www.coursera.org/professional-certificates/google-ux-design",          "issuer": "Coursera · Google",            "year": "2023" }
       ]
     }
   },

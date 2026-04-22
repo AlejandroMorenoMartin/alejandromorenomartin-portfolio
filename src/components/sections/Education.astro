@@ -12,18 +12,18 @@ const t        = useTranslations(lang);
 
 const allItems = [
   ...t.education.certifications.items.map((item) => ({
-    category:       t.education.table.certification,
-    title:          item.title,
-    institution:    item.issuer,
-    institutionUrl: item.issuerUrl ?? null,
-    year:           item.year,
+    category:    t.education.table.certification,
+    title:       item.title,
+    titleUrl:    item.url ?? null,
+    institution: item.issuer,
+    year:        item.year,
   })),
   ...t.education.degrees.items.map((item) => ({
-    category:       t.education.table.degree,
-    title:          item.title,
-    institution:    item.institution,
-    institutionUrl: item.institutionUrl ?? null,
-    year:           item.period.split("—")[1]?.trim() ?? item.period,
+    category:    t.education.table.degree,
+    title:       item.title,
+    titleUrl:    item.institutionUrl ?? null,
+    institution: item.institution,
+    year:        item.period.split("—")[1]?.trim() ?? item.period,
   })),
 ].sort((a, b) => Number(b.year) - Number(a.year));
 ---
@@ -46,12 +46,12 @@ const allItems = [
           {allItems.map((item) => (
             <tr class="edu-row">
               <td class="font-body text-label-xs py-3 pr-6">{item.category}</td>
-              <td class="font-body text-label-xs py-3 pr-6">{item.title}</td>
               <td class="font-body text-label-xs py-3 pr-6">
-                {item.institutionUrl
-                  ? <a href={item.institutionUrl} target="_blank" rel="noopener noreferrer" class="link-external">{item.institution}</a>
-                  : item.institution}
+                {item.titleUrl
+                  ? <a href={item.titleUrl} target="_blank" rel="noopener noreferrer" class="link-external">{item.title}</a>
+                  : item.title}
               </td>
+              <td class="font-body text-label-xs py-3 pr-6">{item.institution}</td>
               <td class="font-body text-label-xs py-3">{item.year}</td>
             </tr>
           ))}
