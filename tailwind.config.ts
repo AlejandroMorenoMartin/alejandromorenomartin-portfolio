@@ -11,6 +11,9 @@ const config: Config = {
     { pattern: /^shadow-ds-(sm|md|lg|glow)$/ },
   ],
   theme: {
+    screens: {
+      md: "1024px",
+    },
     extend: {
       colors: {
         primary: {

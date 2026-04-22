@@ -5,13 +5,13 @@ interface Props {
 const { title } = Astro.props;
 ---
 
-<!-- ── Desktop TOC — fixed left column, ≥1280px ────────────── -->
+<!-- ── Desktop TOC — fixed left column, ≥1024px ────────────── -->
 <nav id="toc" aria-label="Secciones" style="display:none;" data-toc-title={title}>
   <p  id="toc-title" class="toc-title" aria-hidden="true"></p>
   <ul id="toc-list"  class="toc-list" role="list"></ul>
 </nav>
 
-<!-- ── Mobile — floating button + panel, <1280px ────────────── -->
+<!-- ── Mobile — floating button + panel, <1024px ────────────── -->
 <div id="toc-mobile" style="display:none;">
   <div id="toc-panel" role="dialog" aria-modal="false" aria-label="Secciones" aria-hidden="true">
     <p class="toc-title toc-panel-title" aria-hidden="true" id="toc-panel-title"></p>
@@ -159,11 +159,11 @@ const { title } = Astro.props;
   .toc-panel-title { margin-bottom: 0.5rem; }
 
   /* ── Responsive visibility ────────────────────────────────── */
-  @media (min-width: 1280px) {
+  @media (min-width: 1024px) {
     #toc-mobile { display: none !important; }
   }
 
-  @media (max-width: 1279px) {
+  @media (max-width: 1023px) {
     #toc { display: none !important; }
   }
 </style>
