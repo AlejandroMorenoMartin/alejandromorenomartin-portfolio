@@ -36,23 +36,23 @@ const allItems = [
       <table class="edu-table">
         <thead>
           <tr class="edu-header-row">
-            <th class="subsection-label text-left font-normal pb-3 pr-6">{t.education.table.category}</th>
-            <th class="subsection-label text-left font-normal pb-3 pr-6">{t.education.table.name}</th>
-            <th class="subsection-label text-left font-normal pb-3 pr-6">{t.education.table.institution}</th>
-            <th class="subsection-label text-left font-normal pb-3">{t.education.table.year}</th>
+            <th class="text-label-sm text-left font-normal pb-3 pr-6">{t.education.table.category}</th>
+            <th class="text-label-sm text-left font-normal pb-3 pr-6">{t.education.table.name}</th>
+            <th class="text-label-sm text-left font-normal pb-3 pr-6">{t.education.table.institution}</th>
+            <th class="text-label-sm text-left font-normal pb-3">{t.education.table.year}</th>
           </tr>
         </thead>
         <tbody>
           {allItems.map((item) => (
             <tr class="edu-row">
-              <td class="font-body text-label-xs py-3 pr-6">{item.category}</td>
-              <td class="font-body text-label-xs py-3 pr-6">
+              <td class="font-body text-body-md py-3 pr-6">{item.category}</td>
+              <td class="font-body text-body-md py-3 pr-6">
                 {item.titleUrl
                   ? <a href={item.titleUrl} target="_blank" rel="noopener noreferrer" class="link-external">{item.title}</a>
                   : item.title}
               </td>
-              <td class="font-body text-label-xs py-3 pr-6">{item.institution}</td>
-              <td class="font-body text-label-xs py-3">{item.year}</td>
+              <td class="font-body text-body-md py-3 pr-6">{item.institution}</td>
+              <td class="font-body text-body-md py-3">{item.year}</td>
             </tr>
           ))}
         </tbody>

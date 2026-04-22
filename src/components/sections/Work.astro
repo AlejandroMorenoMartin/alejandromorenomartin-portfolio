@@ -1,7 +1,6 @@
 ---
 import type { Lang } from "@/i18n/utils";
 import { useTranslations } from "@/i18n/utils";
-import Kpi from "@/components/Kpi.astro";
 
 interface Props {
   lang: Lang;
@@ -43,18 +42,6 @@ const workBase = lang === "en" ? "/en/work" : "/work";
                 <p class="text-body-md leading-relaxed flex-1 max-w-lg">
                   {project.summary}
                 </p>
-
-                <!-- Metrics -->
-                <div class="flex items-start gap-8 mt-8">
-                  {project.metrics.map((metric, i) => (
-                    <>
-                      <Kpi value={metric.value} label={metric.label} />
-                      {i < project.metrics.length - 1 && (
-                        <div class="w-px h-8 self-center bg-[var(--color-border-subtle)]" aria-hidden="true" />
-                      )}
-                    </>
-                  ))}
-                </div>
 
               </div>
 

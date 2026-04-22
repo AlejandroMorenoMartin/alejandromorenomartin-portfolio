@@ -78,8 +78,8 @@ const nextProject = { slug: "senzo-studio", title: "Senzo Studio" };
 >
   <Nav lang={lang} />
 
-  <main id="main-scroll" class="pt-32 pb-48 px-5 md:px-8">
-    <div class="container-wide">
+  <main id="main-scroll" class="px-5 md:px-8">
+    <div class="container-wide pt-12">
 
       <Breadcrumb workHref="/work" slug={slug} />
 
@@ -91,23 +91,43 @@ const nextProject = { slug: "senzo-studio", title: "Senzo Studio" };
           /alejandro-portfolio
         </h1>
 
-        <p class="text-body-md text-text-3 leading-relaxed mb-10">
+        <p class="text-body-lg text-text-4 leading-relaxed mb-10">
           Diseñé y desarrollé este portfolio como ejercicio completo de producto: sistema de diseño
           propio, arquitectura de información, navegación por teclado y despliegue en producción.
         </p>
 
+        <!-- Metrics -->
+        <div class="flex items-start gap-10 mb-10">
+          {[
+            { value: "100%", label: "Sistema de diseño propio" },
+            { value: "0",    label: "Dependencias de UI" },
+            { value: "<1s",  label: "Tiempo de carga" },
+          ].map((metric, i, arr) => (
+            <>
+              <div>
+                <p class="font-data text-display-md text-text-1 leading-none mb-1.5">{metric.value}</p>
+                <p class="font-data text-label-xs text-text-6">{metric.label}</p>
+              </div>
+              {i < arr.length - 1 && (
+                <div class="w-px h-8 self-center bg-[var(--color-border-subtle)]" aria-hidden="true" />
+              )}
+            </>
+          ))}
+        </div>
+
+        <!-- Meta row -->
         <div class="flex flex-wrap gap-x-10 gap-y-6 mb-10">
           <div>
-            <p class="font-data text-label-xs text-text-6 mb-1.5">Entregado</p>
-            <p class="font-data text-label-sm text-text-3">Abr 2025</p>
+            <p class="font-data text-label-sm text-text-6 mb-1.5">Entregado</p>
+            <p class="text-body-md text-text-3">Abr 2025</p>
           </div>
           <div>
-            <p class="font-data text-label-xs text-text-6 mb-1.5">Responsabilidades</p>
-            <p class="font-data text-label-sm text-text-3">Diseño, Desarrollo, Despliegue</p>
+            <p class="font-data text-label-sm text-text-6 mb-1.5">Responsabilidades</p>
+            <p class="text-body-md text-text-3">Diseño, Desarrollo, Despliegue</p>
           </div>
           <div>
-            <p class="font-data text-label-xs text-text-6 mb-1.5">Timeline</p>
-            <p class="font-data text-label-sm text-text-3">6 semanas</p>
+            <p class="font-data text-label-sm text-text-6 mb-1.5">Timeline</p>
+            <p class="text-body-md text-text-3">6 semanas</p>
           </div>
         </div>
 

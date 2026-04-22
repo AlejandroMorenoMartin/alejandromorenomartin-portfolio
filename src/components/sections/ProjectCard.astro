@@ -1,7 +1,6 @@
 ---
 import type { Lang } from "@/i18n/utils";
 import { useTranslations } from "@/i18n/utils";
-import Kpi from "@/components/Kpi.astro";
 import Btn from "@/components/Btn.astro";
 
 interface Props {
@@ -45,19 +44,7 @@ const projects = t.work.projects;
               <p class="font-body text-body-md text-text-5 leading-relaxed">{project.summary}</p>
             </div>
 
-            <!-- 3. Info -->
-            <div class="card-metrics">
-              {project.metrics.map((m, mi) => (
-                <>
-                  <Kpi value={m.value} label={m.label} />
-                  {mi < project.metrics.length - 1 && (
-                    <div class="kpi-divider" aria-hidden="true" />
-                  )}
-                </>
-              ))}
-            </div>
-
-            <!-- 4. Botón -->
+            <!-- 3. Botón -->
             <div class="card-cta">
               <Btn href={`${workBase}/${project.slug}`} data-cta-index={i} {...(i === 0 ? { "data-default-focus": true } : {})}>{t.work.cta}</Btn>
             </div>
@@ -149,30 +136,6 @@ const projects = t.work.projects;
     -webkit-line-clamp: 3;
     -webkit-box-orient: vertical;
     overflow:           hidden;
-  }
-
-  .card-metrics {
-    display:     flex;
-    align-items: start;
-    gap:         1rem;
-  }
-
-  .kpi-divider {
-    display: none;
-  }
-
-  @media (min-width: 1280px) {
-    .card-metrics {
-      align-items: center;
-      gap:         1.5rem;
-    }
-    .kpi-divider {
-      display:     block;
-      width:       1px;
-      height:      2rem;
-      background:  var(--color-border-subtle);
-      flex-shrink: 0;
-    }
   }
 
   .card-cta {
