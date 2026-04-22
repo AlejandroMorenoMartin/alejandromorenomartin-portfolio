@@ -201,6 +201,7 @@
   .tag {
     @apply font-body;
     display:          inline-flex;
+    width:            fit-content;
     align-items:      center;
     font-size:        var(--fs-label-xs);
     color:            var(--color-text-6);
