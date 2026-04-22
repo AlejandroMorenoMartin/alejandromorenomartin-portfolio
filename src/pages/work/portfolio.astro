@@ -5,7 +5,6 @@ import Footer       from "@/components/Footer.astro";
 import Breadcrumb   from "@/components/Breadcrumb.astro";
 import SectionLabel from "@/components/SectionLabel.astro";
 import Btn          from "@/components/Btn.astro";
-import Toc          from "@/components/Toc.astro";
 
 const lang         = "es" as const;
 const slug         = "portfolio";
@@ -72,12 +71,12 @@ const nextProject = { slug: "senzo-studio", title: "Senzo Studio" };
   title="/alejandro-portfolio — Alejandro Moreno"
   description="Diseñé y desarrollé este portfolio como ejercicio completo de producto: sistema de diseño propio, arquitectura de información, navegación por teclado y despliegue en producción."
   lang={lang}
+  tocTitle="/alejandro-portfolio"
   canonicalURL={canonicalURL}
   alternateURL={alternateURL}
   alternateLang="en"
 >
   <Nav lang={lang} />
-  <Toc title="/alejandro-portfolio" />
 
   <main id="main-scroll" class="pt-32 pb-48 px-5 md:px-8">
     <div class="container-wide">

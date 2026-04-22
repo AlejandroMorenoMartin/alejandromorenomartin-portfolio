@@ -2,12 +2,14 @@
 import { ViewTransitions } from "astro:transitions";
 import Analytics from "@vercel/analytics/astro";
 import "@/styles/global.css";
+import Toc from "@/components/Toc.astro";
 import type { Lang } from "@/i18n/utils";
 
 interface Props {
   title:       string;
   description: string;
   lang:        Lang;
+  tocTitle?:   string;
   ogImage?:    string;
   canonicalURL?: string;
   alternateURL?: string;
@@ -18,7 +20,8 @@ const {
   title,
   description,
   lang,
-  ogImage       = "/og-es.png",
+  tocTitle,
+  ogImage       = "/og_image_es.png",
   canonicalURL  = Astro.url.href,
   alternateURL,
   alternateLang,
@@ -75,7 +78,7 @@ const jsonLd = {
     <meta name="twitter:image"       content={`${siteURL}${ogImage}`} />
 
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="/browser-icon.png" />
+    <link rel="icon" type="image/png" href="/alejandro-favicon-dark-primary.png" />
 
     <!-- JSON-LD -->
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
@@ -99,6 +102,7 @@ const jsonLd = {
     <div class="scroll-fade scroll-fade--top"    aria-hidden="true"></div>
     <div class="scroll-fade scroll-fade--bottom" aria-hidden="true"></div>
     <slot />
+    <Toc title={tocTitle} />
     <Analytics />
 
     <!-- Page title typewriter + content reveal -->
