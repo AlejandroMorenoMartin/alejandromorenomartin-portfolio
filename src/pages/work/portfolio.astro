@@ -84,11 +84,11 @@ const nextProject = { slug: "senzo-studio", title: "Senzo Studio" };
       <div class="mb-20">
         <p class="font-data text-label-sm text-primary-500 mb-4">Product Design · Desarrollo</p>
 
-        <h1 class="text-display-lg font-display font-bold leading-[1.05] mb-8">
+        <h1 class="text-display-lg font-display font-bold text-text-1 leading-[1.05] mb-8">
           /alejandro-portfolio
         </h1>
 
-        <p class="text-body-lg text-text-4 leading-relaxed mb-10">
+        <p class="text-body-lg text-text-3 leading-relaxed mb-10">
           Diseñé y desarrollé este portfolio como ejercicio completo de producto: sistema de diseño
           propio, arquitectura de información, navegación por teclado y despliegue en producción.
         </p>
@@ -127,12 +127,12 @@ const nextProject = { slug: "senzo-studio", title: "Senzo Studio" };
           ¿De dónde viene este proyecto?
         </h2>
         <div class="flex flex-col gap-5">
-          <p class="text-body-lg text-text-4 leading-relaxed">
+          <p class="text-body-lg text-text-3 leading-relaxed">
             Quería construir algo que demostrara no solo que sé diseñar, sino que entiendo cómo un
             producto se construye de principio a fin: desde los primeros tokens hasta el despliegue
             en producción.
           </p>
-          <p class="text-body-lg text-text-4 leading-relaxed">
+          <p class="text-body-lg text-text-3 leading-relaxed">
             Partí de cero — sin templates, sin librerías de componentes de terceros — porque esa
             restricción me obligaba a tomar decisiones conscientes en cada paso. Cada color, cada
             tipografía, cada margen tiene una razón.
@@ -152,7 +152,7 @@ const nextProject = { slug: "senzo-studio", title: "Senzo Studio" };
             "Construir un sistema de diseño reutilizable y coherente, sin dependencias de UI externas.",
             "Crear una experiencia que comunique quién soy a recruiters, diseñadores, desarrolladores y personas que lideran estos equipos.",
           ].map((item) => (
-            <li class="flex items-start gap-3 text-body-lg text-text-4">
+            <li class="flex items-start gap-3 text-body-lg text-text-3">
               <span class="w-1.5 h-1.5 mt-2.5 rounded-full bg-primary-500/40 flex-shrink-0" aria-hidden="true" />
               {item}
             </li>
@@ -165,7 +165,7 @@ const nextProject = { slug: "senzo-studio", title: "Senzo Studio" };
         <h2 class="text-display-md font-display font-bold text-text-2 mb-3">
           Sistema de diseño
         </h2>
-        <p class="text-body-lg text-text-4 leading-relaxed mb-10">
+        <p class="text-body-lg text-text-3 leading-relaxed mb-10">
           Construí el sistema desde los fundamentos: tokens de color, escala tipográfica y espaciado
           definidos como variables CSS, con Tailwind como capa de utilidades encima.
         </p>
@@ -259,14 +259,14 @@ const nextProject = { slug: "senzo-studio", title: "Senzo Studio" };
         <h2 class="text-display-md font-display font-bold text-text-2 mb-3">
           Stack técnico
         </h2>
-        <p class="text-body-lg text-text-4 leading-relaxed mb-8">
+        <p class="text-body-lg text-text-3 leading-relaxed mb-8">
           Cada herramienta tiene una razón de estar aquí.
         </p>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
           {stack.map((item) => (
             <div class="p-5 border border-[var(--color-border-subtle)] bg-surface-raised flex flex-col gap-2">
               <p class="font-data text-label-sm text-primary-500">{item.tool}</p>
-              <p class="text-body-md text-text-5 leading-relaxed">{item.reason}</p>
+              <p class="text-body-md text-text-4 leading-relaxed">{item.reason}</p>
             </div>
           ))}
         </div>
@@ -277,7 +277,7 @@ const nextProject = { slug: "senzo-studio", title: "Senzo Studio" };
         <h2 class="text-display-md font-display font-bold text-text-2 mb-3">
           Hacia dónde puede crecer
         </h2>
-        <p class="text-body-lg text-text-4 leading-relaxed mb-8">
+        <p class="text-body-lg text-text-3 leading-relaxed mb-8">
           Este portfolio es una v1. Estas son las líneas que abriría en una v2:
         </p>
         <ul class="flex flex-col gap-5">
@@ -289,8 +289,8 @@ const nextProject = { slug: "senzo-studio", title: "Senzo Studio" };
           ].map((item) => (
             <li class="flex items-start gap-3">
               <span class="w-1.5 h-1.5 mt-2.5 rounded-full bg-primary-500/40 flex-shrink-0" aria-hidden="true" />
-              <span class="text-body-lg text-text-4 leading-relaxed">
-                <strong class="font-semibold text-text-3">{item.title}</strong>
+              <span class="text-body-lg text-text-3 leading-relaxed">
+                <strong class="font-semibold text-text-2">{item.title}</strong>
                 {" — "}{item.body}
               </span>
             </li>
@@ -310,7 +310,7 @@ const nextProject = { slug: "senzo-studio", title: "Senzo Studio" };
             "Hacer diseño y desarrollo en el mismo proyecto elimina el teléfono roto entre disciplinas — y acelera el aprendizaje en ambas direcciones.",
             "Un portfolio nunca está terminado. La v1 existe para aprender qué necesita la v2.",
           ].map((item) => (
-            <li class="flex items-start gap-3 text-body-lg text-text-4">
+            <li class="flex items-start gap-3 text-body-lg text-text-3">
               <span class="w-1.5 h-1.5 mt-2.5 rounded-full bg-primary-500/40 flex-shrink-0" aria-hidden="true" />
               {item}
             </li>
@@ -335,9 +335,9 @@ const nextProject = { slug: "senzo-studio", title: "Senzo Studio" };
 
         <a
           href={`/work/${nextProject.slug}`}
-          class="group flex flex-col gap-1.5 p-5 border border-[var(--color-border-subtle)] bg-surface-raised
+          class="group flex flex-col items-end gap-1.5 p-5 border border-[var(--color-border-subtle)] bg-surface-raised
                  hover:border-primary-500/40 focus-visible:border-primary-500 active:bg-surface-overlay
-                 transition-colors duration-normal flex-1 items-end text-right"
+                 transition-colors duration-normal flex-1 text-right"
         >
           <span class="font-data text-label-xs text-text-6">Siguiente proyecto →</span>
           <span class="font-display text-body-md font-semibold text-text-3 group-hover:text-primary-500 transition-colors duration-normal">
