@@ -45,6 +45,16 @@ src/
 - Los colores los vincula automáticamente `global.css` por clase de tamaño — no añadir `text-text-X` explícito en párrafos normales
 - Jerarquía completa en `apps/.claude/rules/frontend.md`
 
+## Tablas
+
+Cabeceras `<th>`: usar siempre `class="subsection-label text-left font-normal"` — nunca `.tag` (es un chip, no una cabecera).
+Celdas `<td>`: `class="font-body text-label-xs"`.
+
+```html
+<th class="subsection-label text-left font-normal pb-3 pr-6">Columna</th>
+<td class="font-body text-label-xs py-3 pr-6">Valor</td>
+```
+
 ## Componentes obligatorios — usar siempre, sin excepciones
 
 - **Títulos de sección**: `<SectionLabel label="/nombre" />` — nunca un `<h2>` custom

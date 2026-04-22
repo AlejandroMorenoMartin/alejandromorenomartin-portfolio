@@ -12,16 +12,18 @@ const t        = useTranslations(lang);
 
 const allItems = [
   ...t.education.certifications.items.map((item) => ({
-    category:    t.education.table.certification,
-    title:       item.title,
-    institution: item.issuer,
-    year:        item.year,
+    category:       t.education.table.certification,
+    title:          item.title,
+    institution:    item.issuer,
+    institutionUrl: item.issuerUrl ?? null,
+    year:           item.year,
   })),
   ...t.education.degrees.items.map((item) => ({
-    category:    t.education.table.degree,
-    title:       item.title,
-    institution: item.institution,
-    year:        item.period.split("—")[1]?.trim() ?? item.period,
+    category:       t.education.table.degree,
+    title:          item.title,
+    institution:    item.institution,
+    institutionUrl: item.institutionUrl ?? null,
+    year:           item.period.split("—")[1]?.trim() ?? item.period,
   })),
 ].sort((a, b) => Number(b.year) - Number(a.year));
 ---
@@ -30,32 +32,44 @@ const allItems = [
   <div class="container-wide">
     <SectionLabel label={lang === "en" ? "/education" : "/educación"} />
 
-    <table class="edu-table">
-      <thead>
-        <tr class="edu-header-row">
-          <th class="tag text-left font-normal pb-3 pr-6">{t.education.table.category}</th>
-          <th class="tag text-left font-normal pb-3 pr-6">{t.education.table.name}</th>
-          <th class="tag text-left font-normal pb-3 pr-6">{t.education.table.institution}</th>
-          <th class="tag text-left font-normal pb-3">{t.education.table.year}</th>
-        </tr>
-      </thead>
-      <tbody>
-        {allItems.map((item) => (
-          <tr class="edu-row">
-            <td class="font-body text-label-xs py-3 pr-6">{item.category}</td>
-            <td class="font-display text-label-sm text-text-3 py-3 pr-6">{item.title}</td>
-            <td class="font-display text-label-sm italic py-3 pr-6">{item.institution}</td>
-            <td class="font-body text-label-xs py-3">{item.year}</td>
+    <div class="edu-scroll">
+      <table class="edu-table">
+        <thead>
+          <tr class="edu-header-row">
+            <th class="subsection-label text-left font-normal pb-3 pr-6">{t.education.table.category}</th>
+            <th class="subsection-label text-left font-normal pb-3 pr-6">{t.education.table.name}</th>
+            <th class="subsection-label text-left font-normal pb-3 pr-6">{t.education.table.institution}</th>
+            <th class="subsection-label text-left font-normal pb-3">{t.education.table.year}</th>
           </tr>
-        ))}
-      </tbody>
-    </table>
+        </thead>
+        <tbody>
+          {allItems.map((item) => (
+            <tr class="edu-row">
+              <td class="font-body text-label-xs py-3 pr-6">{item.category}</td>
+              <td class="font-body text-label-xs py-3 pr-6">{item.title}</td>
+              <td class="font-body text-label-xs py-3 pr-6">
+                {item.institutionUrl
+                  ? <a href={item.institutionUrl} target="_blank" rel="noopener noreferrer" class="link-external">{item.institution}</a>
+                  : item.institution}
+              </td>
+              <td class="font-body text-label-xs py-3">{item.year}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   </div>
 </section>
 
 <style>
+  .edu-scroll {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
   .edu-table {
     width:           100%;
+    min-width:       520px;
     border-collapse: collapse;
   }
 
