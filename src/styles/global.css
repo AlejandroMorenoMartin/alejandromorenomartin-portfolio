@@ -19,10 +19,10 @@
   --color-text-2: #dcdcdc;
   --color-text-3: #bebebe;
   --color-text-4: #a0a0a0;
-  --color-text-5: #898989;
-  --color-text-6: #727272;
-  --color-text-7: #5b5b5b;
-  --color-text-8: #4c4c4c;
+  --color-text-5: #787878;
+  --color-text-6: #616161;
+  --color-text-7: #4a4a4a;
+  --color-text-8: #3a3a3a;
 
   --shadow-sm:   0 1px 2px rgba(0,0,0,.30), 0 1px 4px rgba(228,167,17,.06);
   --shadow-md:   0 2px 8px rgba(0,0,0,.40), 0 4px 16px rgba(228,167,17,.10);
@@ -47,9 +47,9 @@
   --color-scrollbar:       var(--color-text-7);
   --color-scrollbar-hover: var(--color-text-6);
 
-  --page-gap:    3rem;
-  --section-gap: 2rem;
-  --card-gap:    2rem;
+  --page-gap:    2rem;
+  --section-gap: 1.5rem;
+  --card-gap:    1.5rem;
 
   /* ── Tipografía — escala mobile (base) ───────────────────── */
   --fs-display-lg: 1.625rem;  /* 26px */
@@ -60,8 +60,8 @@
   --fs-label-xs:   0.6875rem; /* 11px */
 }
 
-/* ── Tipografía — escala desktop (768px+) ─────────────────── */
-@media (min-width: 768px) {
+/* ── Tipografía + spacing — escala desktop (1280px+) ──────── */
+@media (min-width: 1280px) {
   :root {
     --fs-display-lg: 1.875rem;  /* 30px */
     --fs-display-md: 1.375rem;  /* 22px */
@@ -69,6 +69,10 @@
     --fs-body-md:    1rem;      /* 16px */
     --fs-label-sm:   0.875rem;  /* 14px */
     --fs-label-xs:   0.75rem;   /* 12px */
+
+    --page-gap:    3rem;
+    --section-gap: 2rem;
+    --card-gap:    2rem;
   }
 }
 
@@ -146,7 +150,7 @@
    Usar pt-12 pb-12 en todas las secciones de página. Nunca justify-center. */
 @layer utilities {
   .section-padding {
-    @apply px-8 pb-16;
+    @apply px-5 pb-12 md:px-8 md:pb-16;
     padding-top: var(--page-gap);
   }
 
@@ -289,11 +293,11 @@
   }
 
   /* Hover + Focused */
-  .btn:hover,
-  .btn:focus-visible,
-  .btn.is-active:hover,
-  .btn[aria-current="page"]:hover,
-  .btn[aria-selected="true"]:hover {
+  .btn:not(:disabled):not([disabled]):hover,
+  .btn:not(:disabled):not([disabled]):focus-visible,
+  .btn.is-active:not(:disabled):not([disabled]):hover,
+  .btn[aria-current="page"]:not(:disabled):not([disabled]):hover,
+  .btn[aria-selected="true"]:not(:disabled):not([disabled]):hover {
     outline:      none;
     background:   transparent;
     color:        var(--color-primary);
@@ -323,8 +327,7 @@
   /* Disabled */
   .btn:disabled,
   .btn[disabled] {
-    opacity:        0.25;
-    cursor:         not-allowed;
-    pointer-events: none;
+    opacity: 0.25;
+    cursor:  not-allowed;
   }
 }
