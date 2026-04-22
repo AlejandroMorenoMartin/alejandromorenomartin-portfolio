@@ -3,6 +3,7 @@ import type { Lang } from "@/i18n/utils";
 import { useTranslations } from "@/i18n/utils";
 import pkg from "../../package.json";
 import Btn from "@/components/Btn.astro";
+import LangSwitcher from "@/components/LangSwitcher.astro";
 
 interface Props {
   lang: Lang;
@@ -50,10 +51,10 @@ const alternatePath = (() => {
   }
 })();
 
-const switcherLabel = lang === "es" ? "EN" : "ES";
-
 function isActive(href: string): boolean {
   if (href === "/" || href === "/en") return pathname === href || pathname === href + "/";
+  if (href === "/proyectos") return pathname === href || pathname.startsWith("/work/");
+  if (href === "/en/work")   return pathname === href || pathname.startsWith("/en/work/");
   return pathname === href || pathname === href + "/";
 }
 ---
@@ -64,8 +65,8 @@ function isActive(href: string): boolean {
   style="background-image: none;"
   aria-label="Main navigation"
 >
-  <div class="px-8 md:px-0" style="max-width:1024px;margin-inline:auto;">
-    <nav class="flex items-center justify-between h-12">
+  <div class="px-5 md:px-8 container-wide">
+    <nav class="flex items-center justify-between py-4">
 
       <!-- Left: ASCII logo -->
       <span class="ascii-logo font-body">/alejandro-portfolio</span>
@@ -82,9 +83,8 @@ function isActive(href: string): boolean {
             </Btn>
           </li>
         ))}
-        <li class="lang-divider" aria-hidden="true"></li>
-        <li>
-          <Btn href={alternatePath} aria-label={`Switch to ${switcherLabel}`}>{switcherLabel}</Btn>
+        <li class="ml-4">
+          <LangSwitcher lang={lang} alternatePath={alternatePath} />
         </li>
       </ul>
 
@@ -114,7 +114,7 @@ function isActive(href: string): boolean {
   style="background-image: none;"
   aria-hidden="true"
 >
-  <nav class="flex-1 px-8 pt-8 overflow-y-auto">
+  <nav class="flex-1 px-5 pt-8 overflow-y-auto">
     <ul class="flex flex-col list-none m-0 p-0" role="list">
       {navLinks.filter(l => l.mobile).map(link => (
         <li>
@@ -127,27 +127,14 @@ function isActive(href: string): boolean {
           </a>
         </li>
       ))}
-      <li>
-        <a
-          href={alternatePath}
-          class="mobile-nav-link block py-5 font-display text-display-md font-bold"
-          aria-label={`Switch to ${switcherLabel}`}
-        >
-          /{switcherLabel.toLowerCase()}
-        </a>
+      <li class="py-5 border-b border-[var(--color-border-subtle)]">
+        <LangSwitcher lang={lang} alternatePath={alternatePath} />
       </li>
     </ul>
   </nav>
 </div>
 
 <style>
-  .lang-divider {
-    width:      1px;
-    height:     1rem;
-    background: var(--color-border-subtle);
-    flex-shrink: 0;
-  }
-
   .ascii-logo {
     font-size:      var(--fs-label-sm);
     color:          var(--color-text-4);
