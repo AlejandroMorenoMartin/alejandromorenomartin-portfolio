@@ -41,7 +41,24 @@ src/
 
 - Nav y footer: `text-body-md text-text-5` sin excepciones
 - Títulos de página: `text-display-md text-text-2 uppercase`
+- **Tipografía por defecto de cuerpo: `text-body-md`** — nunca `text-body-lg` para texto corriente
+- Los colores los vincula automáticamente `global.css` por clase de tamaño — no añadir `text-text-X` explícito en párrafos normales
 - Jerarquía completa en `apps/.claude/rules/frontend.md`
+
+## Componentes obligatorios — usar siempre, sin excepciones
+
+- **Títulos de sección**: `<SectionLabel label="/nombre" />` — nunca un `<h2>` custom
+- **Botones y enlaces de acción**: `<Btn href="...">texto</Btn>` — nunca `<a>` con clases custom de botón
+- **Puntos de lista**: `<span class="w-1 h-1 mt-2 rounded-full bg-text-4 flex-shrink-0" aria-hidden="true" />` — neutros, sin color primario
+
+## Páginas de detalle de proyecto (work/[slug])
+
+Patrón fijo — copiar de `src/pages/work/portfolio.astro`:
+- `<main class="pt-32 pb-48 px-5 md:px-8">` — igual que `[slug].astro`
+- Header: category label (`font-data text-label-sm text-primary-500`) → h1 → summary (`text-body-md`) → meta row → cover image
+- Secciones internas: `<section class="pt-12 pb-12">` + `<SectionLabel>`
+- Navegación entre proyectos: dos `<Btn href>` en un `<div class="pt-12 flex justify-between gap-4">`
+- Sin líneas divisoras entre secciones (`border-t`, `border-b`, `divider`)
 
 ## i18n
 
